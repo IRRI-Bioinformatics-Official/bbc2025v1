@@ -16,10 +16,8 @@ Module 1: Linux for Bioinformatics
 
 Module 2: NGS
 
-Module 3: Variant calling
+Module 3: GWAS
 
-Module 4: GWAS
-
-Module 5: PostGWAS
+Module 4: PostGWAS [module4_postgwas/postgwas.md]
 
 
