@@ -1,0 +1,2179 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=Generator content="Microsoft Word 14 (filtered)">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+@font-face
+	{font-family:Consolas;
+	panose-1:2 11 6 9 2 2 4 3 2 4;}
+@font-face
+	{font-family:"Roboto Mono";}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Arial","sans-serif";}
+h1
+	{margin-top:20.0pt;
+	margin-right:0cm;
+	margin-bottom:6.0pt;
+	margin-left:0cm;
+	line-height:115%;
+	page-break-after:avoid;
+	font-size:20.0pt;
+	font-family:"Arial","sans-serif";
+	font-weight:normal;}
+h2
+	{margin-top:18.0pt;
+	margin-right:0cm;
+	margin-bottom:6.0pt;
+	margin-left:0cm;
+	line-height:115%;
+	page-break-after:avoid;
+	font-size:16.0pt;
+	font-family:"Arial","sans-serif";
+	font-weight:normal;}
+h3
+	{margin-top:16.0pt;
+	margin-right:0cm;
+	margin-bottom:4.0pt;
+	margin-left:0cm;
+	line-height:115%;
+	page-break-after:avoid;
+	font-size:14.0pt;
+	font-family:"Arial","sans-serif";
+	color:#434343;
+	font-weight:normal;}
+h4
+	{margin-top:14.0pt;
+	margin-right:0cm;
+	margin-bottom:4.0pt;
+	margin-left:0cm;
+	line-height:115%;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";
+	color:#666666;
+	font-weight:normal;}
+h5
+	{margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:4.0pt;
+	margin-left:0cm;
+	line-height:115%;
+	page-break-after:avoid;
+	font-size:11.0pt;
+	font-family:"Arial","sans-serif";
+	color:#666666;
+	font-weight:normal;}
+h6
+	{margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:4.0pt;
+	margin-left:0cm;
+	line-height:115%;
+	page-break-after:avoid;
+	font-size:11.0pt;
+	font-family:"Arial","sans-serif";
+	color:#666666;
+	font-weight:normal;
+	font-style:italic;}
+p.MsoCommentText, li.MsoCommentText, div.MsoCommentText
+	{mso-style-link:"Comment Text Char";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:"Arial","sans-serif";}
+p.MsoTitle, li.MsoTitle, div.MsoTitle
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:3.0pt;
+	margin-left:0cm;
+	line-height:115%;
+	page-break-after:avoid;
+	font-size:26.0pt;
+	font-family:"Arial","sans-serif";}
+p.MsoSubtitle, li.MsoSubtitle, div.MsoSubtitle
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:16.0pt;
+	margin-left:0cm;
+	line-height:115%;
+	page-break-after:avoid;
+	font-size:15.0pt;
+	font-family:"Arial","sans-serif";
+	color:#666666;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;}
+p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
+	{mso-style-link:"Balloon Text Char";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:8.0pt;
+	font-family:"Tahoma","sans-serif";}
+span.CommentTextChar
+	{mso-style-name:"Comment Text Char";
+	mso-style-link:"Comment Text";}
+span.BalloonTextChar
+	{mso-style-name:"Balloon Text Char";
+	mso-style-link:"Balloon Text";
+	font-family:"Tahoma","sans-serif";}
+.MsoChpDefault
+	{font-family:"Arial","sans-serif";}
+.MsoPapDefault
+	{line-height:115%;}
+ /* Page Definitions */
+ @page WordSection1
+	{size:21.0cm 841.95pt;
+	margin:36.0pt 36.0pt 36.0pt 36.0pt;}
+div.WordSection1
+	{page:WordSection1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+
+</head>
+
+<body bgcolor=white lang=EN-PH link=blue vlink=purple>
+
+<div class=WordSection1>
+
+<p class=MsoTitle align=center style='text-align:center'><a name="_gjdgxs"></a><span
+lang=EN>Basic NGS Data Analysis</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<h1><a name="_30j0zll"></a><span lang=EN>Module Introduction</span></h1>
+
+<p class=MsoNormal><b><span lang=EN>&nbsp;</span></b></p>
+
+<p class=MsoNormal style='text-indent:36.0pt'><span lang=EN>In this module,
+you'll learn the basics of analyzing Next-Generation Sequencing (NGS) data.
+We'll start by looking at different NGS technologies and understanding the data
+they produce. Then, we'll examine how to spot Single Nucleotide Polymorphisms
+(SNPs) in resequencing data. We'll also cover how to make sure our data is good
+quality, filter out any errors, and do some basic number-crunching to
+understand what our SNP data is telling us.</span></p>
+
+<h1 align=center style='text-align:center'><a name="_1fob9te"></a><span
+lang=EN>Section 1. Variant calling </span></h1>
+
+<h2 style='text-align:justify;line-height:150%'><a name="_3znysh7"></a><span
+lang=EN>Learning Objectives:</span></h2>
+
+<ol style='margin-top:0cm' start=1 type=1>
+ <li class=MsoNormal style='text-align:justify'><span lang=EN style='font-size:
+     12.0pt;line-height:115%'>To develop proficiency in utilizing the Genome
+     Analysis Toolkit (GATK) workflow for variant calling</span></li>
+ <li class=MsoNormal style='text-align:justify'><span lang=EN style='font-size:
+     12.0pt;line-height:115%'>To understand the process of preparing raw data
+     to meet the specifications of the GATK workflow</span></li>
+ <li class=MsoNormal style='text-align:justify'><span lang=EN style='font-size:
+     12.0pt;line-height:115%'>Apply knowledge gained from GATK variant calling
+     workflow to effectively identify and characterize genetic variants,
+     including single nucleotide polymorphisms (SNPs) and small
+     insertions/deletions (indels)</span></li>
+</ol>
+
+<h2 style='text-align:justify'><a name="_2et92p0"></a><span lang=EN>&nbsp;</span></h2>
+
+<h2 style='text-align:justify'><span lang=EN>Subsection 1: Introduction</span></h2>
+
+<h3 style='text-align:justify'><a name="_tyjcwt"></a><span lang=EN>Tools</span></h3>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-align:justify;text-indent:
+-36.0pt'><span lang=EN style='font-size:18.0pt;line-height:115%;color:#595959'><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span>&#9679;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN style='font-size:12.0pt;line-height:115%'>BWA</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-align:justify;text-indent:
+-72.0pt'><span lang=EN style='font-size:14.0pt;line-height:115%;color:black'><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>&#9675;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN style='font-size:12.0pt;line-height:115%'>A
+software package for mapping low-divergent sequences against a large reference
+genome</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-align:justify;text-indent:
+-72.0pt'><span lang=EN style='font-size:14.0pt;line-height:115%;color:black'><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>&#9675;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN><a href="http://bio-bwa.sourceforge.net"><span
+style='font-size:12.0pt;line-height:115%;color:#1155CC'>http://bio-bwa.sourceforge.net</span></a></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-align:justify;text-indent:
+-36.0pt'><span lang=EN style='font-size:18.0pt;line-height:115%;color:#595959'><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span>&#9679;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN style='font-size:12.0pt;line-height:115%'>Genome
+Analysis Toolkit (GATK)</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-align:justify;text-indent:
+-72.0pt'><span lang=EN style='font-size:14.0pt;line-height:115%;color:black'><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>&#9675;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN style='font-size:12.0pt;line-height:115%'>Offers a
+wide variety of tools with primary focus on variant discovery and genotyping</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-align:justify;text-indent:
+-72.0pt'><span lang=EN style='font-size:14.0pt;line-height:115%;color:black'><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>&#9675;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN><a href="https://gatk.broadinstitute.org/hc/en-us"><span
+style='font-size:12.0pt;line-height:115%;color:#1155CC'>https://gatk.broadinstitute.org/hc/en-us</span></a></span><span
+lang=EN style='font-size:12.0pt;line-height:115%;color:#1155CC'> </span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-align:justify;text-indent:
+-36.0pt'><span lang=EN style='font-size:18.0pt;line-height:115%;color:#595959'><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span>&#9679;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN style='font-size:12.0pt;line-height:115%'>FastP</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-align:justify;text-indent:
+-72.0pt'><span lang=EN style='font-size:14.0pt;line-height:115%;color:black'><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>&#9675;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN style='font-size:12.0pt;line-height:115%'>A tool
+designed to provide fast all-in-one preprocessing for FastQ files</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-align:justify;text-indent:
+-72.0pt'><span lang=EN style='font-size:14.0pt;line-height:115%;color:black'><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>&#9675;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN><a href="https://github.com/OpenGene/fastp"><span
+style='font-size:12.0pt;line-height:115%;color:#1155CC'>https://github.com/OpenGene/fastp</span></a></span><span
+lang=EN style='font-size:12.0pt;line-height:115%'> </span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-align:justify;text-indent:
+-36.0pt'><span lang=EN style='font-size:18.0pt;line-height:115%;color:#595959'><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span>&#9679;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN style='font-size:12.0pt;line-height:115%'>FastQC</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-align:justify;text-indent:
+-72.0pt'><span lang=EN style='font-size:14.0pt;line-height:115%;color:black'><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>&#9675;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN style='font-size:12.0pt;line-height:115%'>A quality
+control tool for high throughput sequence data</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-align:justify;text-indent:
+-72.0pt'><span lang=EN style='font-size:14.0pt;line-height:115%;color:black'><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>&#9675;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN><a
+href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/"><span
+style='font-size:12.0pt;line-height:115%;color:#1155CC'>https://www.bioinformatics.babraham.ac.uk/projects/fastqc/</span></a></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-align:justify;text-indent:
+-36.0pt'><span lang=EN style='font-size:18.0pt;line-height:115%;color:#595959'><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span>&#9679;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN style='font-size:12.0pt;line-height:115%'>Picard</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-align:justify;text-indent:
+-72.0pt'><span lang=EN style='font-size:14.0pt;line-height:115%;color:black'><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>&#9675;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN style='font-size:12.0pt;line-height:115%'>A set of
+command line tools for manipulating high-throughput sequencing data</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-align:justify;text-indent:
+-72.0pt'><span lang=EN style='font-size:14.0pt;line-height:115%;color:black'><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>&#9675;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN><a href="http://broadinstitute.github.io/picard/"><span
+style='font-size:12.0pt;line-height:115%;color:#1155CC'>http://broadinstitute.github.io/picard/</span></a></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-align:justify;text-indent:
+-36.0pt'><span lang=EN style='font-size:18.0pt;line-height:115%;color:#595959'><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span>&#9679;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN style='font-size:12.0pt;line-height:115%'>SAMtools</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-align:justify;text-indent:
+-72.0pt'><span lang=EN style='font-size:14.0pt;line-height:115%;color:black'><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>&#9675;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN style='font-size:12.0pt;line-height:115%'>Tool that
+provides various utilities for manipulating alignments in the SAM and BAM
+formats</span></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:12.0pt;
+margin-left:72.0pt;text-align:justify;text-indent:-72.0pt'><span lang=EN
+style='font-size:14.0pt;line-height:115%;color:black'><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>&#9675;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN><a href="http://samtools.sourceforge.net"><span
+style='font-size:12.0pt;line-height:115%;color:#1155CC'>http://samtools.sourceforge.net</span></a></span></p>
+
+<p class=MsoNormal style='text-align:justify'><b><span lang=EN
+style='font-size:12.0pt;line-height:115%'>&nbsp;</span></b></p>
+
+<h3 style='text-align:justify'><a name="_3dy6vkm"></a><span lang=EN>Genome
+Analysis Toolkit (GATK)</span></h3>
+
+<p class=MsoNormal style='text-align:justify;line-height:150%'><b><span
+style='font-size:12.0pt;line-height:150%'><img border=0 width=624 height=88
+id=image4.png src="Basic%20NGS%20Data%20Analysis_rdp_files/image001.gif"></span></b></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;text-align:justify;text-indent:
+36.0pt'><span lang=EN style='font-size:12.0pt;line-height:115%'>GATK is a
+software package to analyze high-throughput sequencing data, developed by the
+Data Science and Data Engineering group at the Broad Institute. The current
+version (GATK4) includes more complex analysis such as copy number (CNV),
+structural variant (SV) and somatic variants. The current version of GATK also
+includes several utility functions for processing alignment files, VCF files and
+other complex processing workflows. </span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;text-align:justify;text-indent:
+36.0pt'><span lang=EN style='font-size:12.0pt;line-height:115%'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-align:justify'><b><span lang=EN
+style='font-size:12.0pt;line-height:115%'>&nbsp;</span></b></p>
+
+<h3 style='margin-bottom:12.0pt;text-align:justify;line-height:normal'><a
+name="_1t3h5sf"></a><span lang=EN>Input Files </span></h3>
+
+<ol style='margin-top:0cm' start=1 type=1>
+ <li class=MsoNormal style='text-align:justify'><b><span lang=EN
+     style='font-size:12.0pt;line-height:115%'>Raw reads</span></b></li>
+ <ol style='margin-top:0cm' start=1 type=a>
+  <li class=MsoNormal style='text-align:justify'><b><span lang=EN
+      style='font-size:12.0pt;line-height:115%'>Format: </span></b><span
+      lang=EN style='font-size:12.0pt;line-height:115%'>FASTQ (.fq, .fastq,
+      .fastq.gz)</span></li>
+  <li class=MsoNormal style='text-align:justify'><b><span lang=EN
+      style='font-size:12.0pt;line-height:115%'>FASTQ: </span></b><span
+      lang=EN style='font-size:12.0pt;line-height:115%'>Used to store both the
+      nucleotide sequence data and quality scores </span></li>
+  <ol style='margin-top:0cm' start=1 type=i>
+   <li class=MsoNormal style='text-align:justify'><b><span lang=EN
+       style='font-size:12.0pt;line-height:115%'>1st line:</span></b><span
+       lang=EN style='font-size:12.0pt;line-height:115%'>  Sequence identifier</span></li>
+   <li class=MsoNormal style='text-align:justify'><b><span lang=EN
+       style='font-size:12.0pt;line-height:115%'>2nd line: </span></b><span
+       lang=EN style='font-size:12.0pt;line-height:115%'>Sequence</span></li>
+   <li class=MsoNormal style='text-align:justify'><b><span lang=EN
+       style='font-size:12.0pt;line-height:115%'>3rd line: </span></b><span
+       lang=EN style='font-size:12.0pt;line-height:115%'>Quality sequence header 
+       (usually a '+' character)</span></li>
+   <li class=MsoNormal style='text-align:justify'><b><span lang=EN
+       style='font-size:12.0pt;line-height:115%'>4th line: </span></b><span
+       lang=EN style='font-size:12.0pt;line-height:115%'>Quality scores
+       corresponding to each base in the sequence</span></li>
+  </ol>
+ </ol>
+</ol>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;text-align:justify'><span
+lang=EN style='font-size:12.0pt;line-height:115%'>                       </span><span
+style='font-size:12.0pt;line-height:115%'><img border=0 width=506 height=219
+id=image8.png src="Basic%20NGS%20Data%20Analysis_rdp_files/image002.gif"></span><span
+style='font-size:12.0pt;line-height:115%'> </span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;text-align:justify'><span
+lang=EN style='font-size:12.0pt;line-height:115%'>&nbsp;</span></p>
+
+<ol style='margin-top:0cm' start=2 type=1>
+ <li class=MsoNormal style='text-align:justify'><b><span lang=EN
+     style='font-size:12.0pt;line-height:115%'>Reference </span></b></li>
+ <ol style='margin-top:0cm' start=1 type=a>
+  <li class=MsoNormal style='text-align:justify'><b><span lang=EN
+      style='font-size:12.0pt;line-height:115%'>Format: </span></b><span
+      lang=EN style='font-size:12.0pt;line-height:115%'>FASTA (.fasta, .fa,
+      .fsa)</span></li>
+  <li class=MsoNormal style='text-align:justify'><b><span lang=EN
+      style='font-size:12.0pt;line-height:115%'>FASTA: </span></b><span
+      lang=EN style='font-size:12.0pt;line-height:115%'>A text-based format for
+      representing collections of nucleotide or protein sequences. The file
+      consists of several blocks, each containing a header line and sequence
+      lines. Typically, each block contains a sequence of a whole chromosome or
+      a contig.</span></li>
+  <ol style='margin-top:0cm' start=1 type=i>
+   <li class=MsoNormal style='text-align:justify'><b><span lang=EN
+       style='font-size:12.0pt;line-height:115%'>Line 1: </span></b><span
+       lang=EN style='font-size:12.0pt;line-height:115%'>A header line starting
+       with a '&gt;' character, which contains information about the sequence.
+       In the variant calling pipeline this is where the sequence identifier
+       will be taken from.</span></li>
+   <li class=MsoNormal style='text-align:justify'><b><span lang=EN
+       style='font-size:12.0pt;line-height:115%'>Line 2: </span></b><span
+       lang=EN style='font-size:12.0pt;line-height:115%'>Sequence (can occupy
+       several lines)</span></li>
+  </ol>
+ </ol>
+</ol>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;text-align:justify'><span
+lang=EN style='font-size:12.0pt;line-height:115%'>                             
+</span><span style='font-size:12.0pt;line-height:115%'><img border=0 width=561
+height=234 id=image2.png
+src="Basic%20NGS%20Data%20Analysis_rdp_files/image003.gif"></span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;text-align:justify'><b><span
+lang=EN style='font-size:12.0pt;line-height:115%'>Intermediate Files</span></b></p>
+
+<ol style='margin-top:0cm' start=1 type=1>
+ <li class=MsoNormal style='text-align:justify'><b><span lang=EN
+     style='font-size:12.0pt;line-height:115%'>Sequence Alignment/Map Format
+     (SAM)</span></b></li>
+ <ol style='margin-top:0cm' start=1 type=a>
+  <li class=MsoNormal style='text-align:justify'><span lang=EN
+      style='font-size:12.0pt;line-height:115%'>Format for storing large
+      nucleotide sequence alignments</span></li>
+  <li class=MsoNormal style='text-align:justify'><span lang=EN
+      style='font-size:12.0pt;line-height:115%'>A TAB-delimited text format
+      consisting of a header section, which is optional, and an alignment
+      section</span></li>
+  <li class=MsoNormal style='text-align:justify;line-height:150%'><span
+      lang=EN style='font-size:12.0pt;line-height:150%'>Specification document:
+      </span><span lang=EN><a
+      href="https://samtools.github.io/hts-specs/SAMv1.pdf"><span
+      style='font-size:12.0pt;line-height:150%;color:#1155CC'>https://samtools.github.io/hts-specs/SAMv1.pdf</span></a></span><span
+      lang=EN style='font-size:12.0pt;line-height:150%'> </span></li>
+ </ol>
+</ol>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;text-align:justify'><span
+lang=EN style='font-size:12.0pt;line-height:115%'>                   </span><span
+style='font-size:12.0pt;line-height:115%'><img border=0 width=533 height=218
+id=image3.png src="Basic%20NGS%20Data%20Analysis_rdp_files/image004.gif"></span></p>
+
+<ol style='margin-top:0cm' start=2 type=1>
+ <li class=MsoNormal style='text-align:justify'><b><span lang=EN
+     style='font-size:12.0pt;line-height:115%'>Binary SAM files (BAM)</span></b></li>
+ <ol style='margin-top:0cm' start=1 type=a>
+  <li class=MsoNormal style='text-align:justify;line-height:normal'><span
+      lang=EN style='font-size:12.0pt'>Binary version of the SAM format</span></li>
+  <li class=MsoNormal style='text-align:justify;line-height:normal'><span
+      lang=EN style='font-size:12.0pt'>To view the file use: $ </span><span
+      lang=EN style='font-size:12.0pt;font-family:"Courier New"'>samtools <span
+      style='color:blue'>view</span><span style='color:#38761D'>
+      sample.sorted.bam</span></span></li>
+  <li class=MsoNormal style='text-align:justify;line-height:normal'><span
+      lang=EN style='font-size:12.0pt'>Manual: </span><span lang=EN><a
+      href="https://samtools.github.io/hts-specs/SAMv1.pdf"><span
+      style='font-size:12.0pt;color:#1155CC'>https://samtools.github.io/hts-specs/SAMv1.pdf</span></a></span><span
+      lang=EN style='font-size:12.0pt'> (Section 4)</span></li>
+ </ol>
+</ol>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;text-align:justify'><span
+style='position:absolute;z-index:251658238;left:0px;margin-left:80px;
+margin-top:13px;width:544px;height:59px'><img width=544 height=59
+src="Basic%20NGS%20Data%20Analysis_rdp_files/image005.gif"></span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;text-align:justify'><span
+lang=EN style='font-size:12.0pt;line-height:115%'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN style='font-size:
+12.0pt;line-height:115%'>&nbsp;</span></p>
+
+<ol style='margin-top:0cm' start=3 type=1>
+ <li class=MsoNormal style='text-align:justify'><b><span lang=EN
+     style='font-size:12.0pt;line-height:115%'>BAM Index files </span></b></li>
+ <ol style='margin-top:0cm' start=1 type=a>
+  <li class=MsoNormal style='text-align:justify'><span lang=EN
+      style='font-size:12.0pt;line-height:115%'>Samtools index – indexes
+      SAM/BAM/CRAM files</span></li>
+  <li class=MsoNormal style='margin-bottom:12.0pt;text-align:justify'><span
+      lang=EN style='font-size:12.0pt;line-height:115%'>Syntax: </span><span
+      lang=EN style='font-size:12.0pt;line-height:115%;font-family:"Courier New"'>samtools<span
+      style='color:blue'> index</span> [options]<span style='color:#38761D'>
+      BAMfile</span></span></li>
+ </ol>
+</ol>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;text-align:justify'><b><span
+lang=EN style='font-size:12.0pt;line-height:115%'>Output File</span></b></p>
+
+<ol style='margin-top:0cm' start=1 type=1>
+ <li class=MsoNormal style='text-align:justify'><b><span lang=EN
+     style='font-size:12.0pt;line-height:115%'>Variant Call Format </span></b></li>
+ <ol style='margin-top:0cm' start=1 type=a>
+  <li class=MsoNormal style='text-align:justify'><span lang=EN
+      style='font-size:12.0pt;line-height:115%'>Store the most prevalent types
+      of sequence variation, such as SNPs and small indels
+      (insertions/deletions)</span></li>
+  <li class=MsoNormal style='text-align:justify;line-height:150%'><span
+      lang=EN style='font-size:12.0pt;line-height:150%'>Manual: </span><span
+      lang=EN><a href="https://samtools.github.io/hts-specs/VCFv4.2.pdf"><span
+      style='font-size:12.0pt;line-height:150%;color:#1155CC'>https://samtools.github.io/hts-specs/VCFv4.2.pdf</span></a></span><span
+      lang=EN style='font-size:12.0pt;line-height:150%'> </span></li>
+ </ol>
+</ol>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:12.0pt;
+margin-left:72.0pt;text-align:justify'><span style='font-size:12.0pt;
+line-height:115%'><img border=0 width=614 height=180 id=image1.png
+src="Basic%20NGS%20Data%20Analysis_rdp_files/image006.gif"></span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;text-align:justify'><b><span
+lang=EN style='font-size:12.0pt;line-height:115%'>&nbsp;</span></b></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;text-align:justify'><b><span
+lang=EN style='font-size:12.0pt;line-height:115%'>Knowledge Check </span></b><span
+lang=EN><a href="https://forms.office.com/e/fi1cicNNZz"><span style='font-size:
+12.0pt;line-height:115%;color:#1155CC'>Link</span></a></span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;text-align:justify'><span
+lang=EN style='font-size:12.0pt;line-height:115%'>&nbsp;</span></p>
+
+<h2 style='margin-bottom:12.0pt;text-align:justify'><a name="_4d34og8"></a><span
+lang=EN>Subsection 2: Variant Calling Pipeline </span></h2>
+
+<p class=MsoNormal style='text-align:justify'><b><span lang=EN
+style='font-size:13.0pt;line-height:115%'>Description</span></b></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN style='font-size:
+12.0pt;line-height:115%'>This is a pipeline for variant calling based on best
+practices for GATK4</span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN style='font-size:
+12.0pt;line-height:115%'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-align:justify'><b><span lang=EN
+style='font-size:13.0pt;line-height:115%'>Requirements and Preparation </span></b></p>
+
+<ol style='margin-top:0cm' start=1 type=1>
+ <li class=MsoNormal style='text-align:justify'><span lang=EN style='font-size:
+     12.0pt;line-height:115%'>Ubuntu installation on your laptop/workstation</span></li>
+ <li class=MsoNormal style='text-align:justify'><span lang=EN style='font-size:
+     12.0pt;line-height:115%'>Installation of the necessary tools</span></li>
+ <ol style='margin-top:0cm' start=1 type=a>
+  <li class=MsoNormal style='text-align:justify'><span lang=EN
+      style='font-size:12.0pt;line-height:115%'>BWA, FastQC, FastP, GATK4,
+      Picard, Samtools</span></li>
+ </ol>
+ <li class=MsoNormal style='text-align:justify'><span lang=EN style='font-size:
+     12.0pt;line-height:115%'>Demo dataset</span></li>
+ <ol style='margin-top:0cm' start=1 type=a>
+  <li class=MsoNormal style='text-align:justify'><b><span lang=EN
+      style='font-size:12.0pt;line-height:115%'>Reference:</span></b><span
+      lang=EN style='font-size:12.0pt;line-height:115%'> Ref.fasta</span></li>
+  <li class=MsoNormal style='text-align:justify;line-height:150%'><b><span
+      lang=EN style='font-size:12.0pt;line-height:150%'>Data:</span></b><span
+      lang=EN style='font-size:12.0pt;line-height:150%'> sample-1_1.fq.gz 
+      sample-1_2.fq.gz</span></li>
+ </ol>
+</ol>
+
+<h3 style='margin-bottom:12.0pt;text-align:justify'><a name="_2s8eyo1"></a><span
+lang=EN>&nbsp;</span></h3>
+
+<h3 style='margin-bottom:12.0pt;text-align:justify'><span lang=EN>&nbsp;</span></h3>
+
+<h3 style='margin-bottom:12.0pt;text-align:justify'><span lang=EN>Workflow</span></h3>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;text-align:justify'><b><span
+lang=EN style='font-size:13.0pt;line-height:115%'>          </span></b></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:12.0pt;
+margin-left:72.0pt;text-align:justify;text-indent:36.0pt'><b><span
+style='font-size:12.0pt;line-height:115%'><img border=0 width=441 height=521
+id="Picture 9" src="Basic%20NGS%20Data%20Analysis_rdp_files/image007.gif"></span></b></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:12.0pt;
+margin-left:72.0pt;text-align:justify;text-indent:36.0pt'><b><span lang=EN
+style='font-size:12.0pt;line-height:115%'>&nbsp;</span></b></p>
+
+<ol style='margin-top:0cm' start=1 type=1>
+ <li class=MsoNormal style='text-align:justify;line-height:normal'><b><span
+     lang=EN> Preparation and data import</span></b></li>
+</ol>
+
+<table class=a border=1 cellspacing=0 cellpadding=0 width=668 style='margin-left:
+ 34.0pt;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=668 valign=top style='width:501.0pt;border:solid black 1.0pt;
+  background:#666666;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal style='text-align:justify;line-height:normal'><span
+  lang=EN style='font-family:"Courier New";color:white'>tar -xzvf sample.tar.gz</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='text-align:justify'><b><span lang=EN>&nbsp;</span></b></p>
+
+<ol style='margin-top:0cm' start=2 type=1>
+ <li class=MsoNormal style='text-align:justify;line-height:normal'><b><span
+     lang=EN>Create output directory </span></b></li>
+</ol>
+
+<table class=a0 border=1 cellspacing=0 cellpadding=0 width=669
+ style='margin-left:33.25pt;border-collapse:collapse;border:none'>
+ <tr style='height:31.65pt'>
+  <td width=669 valign=top style='width:501.75pt;border:solid black 1.0pt;
+  background:#666666;padding:5.0pt 5.0pt 5.0pt 5.0pt;height:31.65pt'>
+  <p class=MsoNormal style='text-align:justify;line-height:normal'><span
+  lang=EN style='font-family:"Courier New";color:white'>cd sample </span></p>
+  <p class=MsoNormal style='text-align:justify;line-height:normal'><span
+  lang=EN style='font-family:"Courier New";color:white'>mkdir Output</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-align:justify'><b><span
+lang=EN>&nbsp;</span></b></p>
+
+<ol style='margin-top:0cm' start=3 type=1>
+ <li class=MsoNormal style='text-align:justify;line-height:normal'><b><span
+     lang=EN>Indexing reference </span></b></li>
+ <ol style='margin-top:0cm' start=1 type=a>
+  <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Why:</span></b><span
+      lang=EN> Indexing improves the ability of tools to rapidly access random
+      locations of the file. It allows efficient retrieval of sequence data
+      from the FASTA file.</span></li>
+ </ol>
+</ol>
+
+<table class=a1 border=1 cellspacing=0 cellpadding=0 width=620
+ style='margin-left:67.0pt;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=620 valign=top style='width:465.0pt;border:solid black 1.0pt;
+  background:#666666;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal style='text-align:justify;line-height:normal'><span
+  lang=EN style='font-family:"Courier New";color:white'>bwa index Ref/Ref.fasta</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='text-align:justify'><b><span lang=EN
+style='font-family:"Courier New";color:white'>     </span></b></p>
+
+<table class=a2 border=1 cellspacing=0 cellpadding=0 width=620
+ style='margin-left:67.0pt;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=620 valign=top style='width:465.0pt;border:solid black 1.0pt;
+  background:#666666;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal style='text-align:justify'><span lang=EN style='font-family:
+  "Courier New";color:white'>samtools faidx Ref/Ref.fasta</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='text-align:justify'><b><span lang=EN>            </span></b></p>
+
+<table class=a3 border=1 cellspacing=0 cellpadding=0 width=621
+ style='margin-left:67.0pt;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=621 valign=top style='width:465.75pt;border:solid black 1.0pt;
+  background:#666666;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal style='text-align:justify'><span lang=EN style='font-family:
+  "Courier New";color:white'>java -jar $PICARD CreateSequenceDictionary
+  -REFERENCE Ref/Ref.fasta -OUTPUT Ref/Ref.dict</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='text-align:justify'><b><span lang=EN>&nbsp;</span></b></p>
+
+<ol style='margin-top:0cm' start=4 type=1>
+ <li class=MsoNormal style='text-align:justify;line-height:normal'><b><span
+     lang=EN>Perform quality control checks on the raw fastq data</span></b></li>
+ <ol style='margin-top:0cm' start=1 type=a>
+  <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Why: </span></b><span
+      lang=EN>to<b> </b>ensure that subsequent analyses are based on reliable
+      data</span></li>
+  <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Tool: </span></b><span
+      lang=EN>fastqc </span></li>
+  <ol style='margin-top:0cm' start=1 type=i>
+   <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Functionality:</span></b><span
+       lang=EN> perform quality control checks on raw sequencing data</span></li>
+   <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Syntax: </span></b><i><span
+       lang=EN style='font-family:"Courier New";color:blue'>fastqc</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'> </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#38761D'>&lt;read1&gt;</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'> </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#38761D'>&lt;read2&gt;</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'> </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#38761D'>&lt;..
+       seqfileN&gt;</span></i></li>
+  </ol>
+ </ol>
+</ol>
+
+<table class=a4 border=1 cellspacing=0 cellpadding=0 width=568
+ style='margin-left:102.25pt;border-collapse:collapse;border:none'>
+ <tr style='height:22.2pt'>
+  <td width=568 valign=top style='width:426.0pt;border:solid black 1.0pt;
+  background:#666666;padding:5.0pt 5.0pt 5.0pt 5.0pt;height:22.2pt'>
+  <p class=MsoNormal style='text-align:justify;line-height:normal'><span
+  lang=EN style='font-family:"Courier New";color:white'>fastqc
+  Data/sample-1_1.fq.gz Data/sample-1_2.fq.gz</span></p>
+  </td>
+ </tr>
+</table>
+
+<ol style='margin-top:0cm' start=4 type=1>
+ <ol style='margin-top:0cm' start=2 type=a>
+  <ol style='margin-top:0cm' start=3 type=i>
+   <li class=MsoNormal style='margin-top:10.0pt;text-align:justify'><b><span
+       lang=EN>Output:<i> </i></span></b><i><span lang=EN>FastQC Report -</span></i><span
+       lang=EN> identify potential issues such as adapter contamination,
+       overrepresented sequences, and base quality distribution. </span></li>
+   <li class=MsoNormal style='margin-top:10.0pt;text-align:justify;line-height:
+       150%'><b><span lang=EN>Sample result:</span></b></li>
+  </ol>
+ </ol>
+</ol>
+
+<p class=MsoNormal style='text-align:justify;line-height:150%'><span lang=EN>                                     
+</span><img border=0 width=339 height=275 id=image5.png
+src="Basic%20NGS%20Data%20Analysis_rdp_files/image008.gif"></p>
+
+<ol style='margin-top:0cm' start=4 type=1>
+ <ol style='margin-top:0cm' start=2 type=a>
+  <ol style='margin-top:0cm' start=5 type=i>
+   <li class=MsoNormal style='text-align:justify'><span lang=EN>Visit <a
+       href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/"><span
+       style='color:#1155CC'>https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/</span></a>
+       for more details </span></li>
+  </ol>
+ </ol>
+ <li class=MsoNormal style='text-align:justify;line-height:normal'><b><span
+     lang=EN>Cleaning of reads </span></b></li>
+ <ol style='margin-top:0cm' start=1 type=a>
+  <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Tool: </span></b><span
+      lang=EN>Fastp</span></li>
+  <ol style='margin-top:0cm' start=1 type=i>
+   <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Functionality:
+       </span></b><span lang=EN>a fast all-in-one preprocessing tool for
+       removing adapters, filtering, and trimming raw sequencing data</span></li>
+   <li class=MsoNormal style='margin-bottom:10.0pt;text-align:justify'><b><span
+       lang=EN>Syntax: </span></b><i><span lang=EN style='font-family:"Courier New";
+       color:blue'>fastp</span></i><i><span lang=EN style='font-family:"Courier New";
+       color:#595959'> -i</span></i><i><span lang=EN style='font-family:"Courier New";
+       color:#38761D'> &lt;read1&gt;</span></i><i><span lang=EN
+       style='font-family:"Courier New";color:#595959'> -I</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#38761D'> &lt;read2&gt; </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'>-o</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#38761D'> </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#B45F06'>&lt;read1-cleaned&gt;</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#38761D'> </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'>-O </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#B45F06'>&lt;read2-cleaned&gt;</span></i></li>
+  </ol>
+ </ol>
+</ol>
+
+<table class=a5 border=1 cellspacing=0 cellpadding=0 width=575
+ style='margin-left:100.75pt;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=575 valign=top style='width:431.25pt;border:solid black 1.0pt;
+  background:#666666;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal style='text-align:justify;line-height:normal'><span
+  lang=EN style='font-family:"Courier New";color:white'>fastp -i Data/<i>sample-1_1.fq.gz</i>
+  -I Data/<i>sample-1_2.fq.gz </i>-o</span></p>
+  <p class=MsoNormal style='text-align:justify;line-height:normal'><span
+  lang=EN style='font-family:"Courier New";color:white'>Data/<i>sample-1_1-cleaned.fq.gz</i>
+  -O Data/<i>sample-1_2-cleaned.fq.gz</i></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='text-align:justify'><b><span lang=EN>&nbsp;</span></b></p>
+
+<ol style='margin-top:0cm' start=5 type=1>
+ <ol style='margin-top:0cm' start=1 type=a>
+  <ol style='margin-top:0cm' start=3 type=i>
+   <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Output: </span></b><span
+       lang=EN>Cleaned reads - high-quality, trimmed reads free of adapters and
+       low-quality bases, ready for alignment</span></li>
+  </ol>
+ </ol>
+</ol>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:108.0pt;text-align:justify'><span
+lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-align:justify'><b><span lang=EN>&nbsp;</span></b></p>
+
+<ol style='margin-top:0cm' start=6 type=1>
+ <li class=MsoNormal style='text-align:justify;line-height:normal'><b><span
+     lang=EN>Alignment </span></b></li>
+ <ol style='margin-top:0cm' start=1 type=a>
+  <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Why: </span></b><span
+      lang=EN>To determine the genomic locations of the reads, which is fundamental
+      for downstream analyses such as variant calling, gene expression
+      analysis, and structural variation detection</span></li>
+  <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Tool: </span></b><span
+      lang=EN>bwa mem</span></li>
+  <ol style='margin-top:0cm' start=1 type=i>
+   <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Functionality:
+       </span></b><span lang=EN>Align sequencing reads to a reference genome to
+       determine their origin and location</span></li>
+   <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Syntax: </span></b><i><span
+       lang=EN style='font-family:"Courier New";color:blue'>bwa mem </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#CC4125'>&lt;arguments&gt;</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'> </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#38761D'>&lt;path_ref.fasta&gt;
+       &lt;path_read1.fq.gz&gt; &lt;path_read2.fq.gz&gt; </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'>&gt; </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#B45F06'>&lt;path_output.sam&gt;</span></i></li>
+  </ol>
+ </ol>
+</ol>
+
+<p class=MsoNormal style='margin-left:108.0pt;text-align:justify'><i><span
+lang=EN style='font-family:"Courier New";color:#B45F06'>&nbsp;</span></i></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-align:justify'><i><span
+lang=EN style='font-family:"Courier New";color:#B45F06'>     </span></i><i><span
+lang=EN style='font-size:8.0pt;line-height:115%;font-family:"Courier New";
+color:#CC4125'>Arg:</span></i></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:36.0pt'><i><span
+lang=EN style='font-size:8.0pt;line-height:115%;font-family:"Courier New";
+color:#CC4125'> -M            mark shorter split hits as secondary </span></i></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:12.0pt;
+margin-left:72.0pt;text-indent:36.0pt'><i><span lang=EN style='font-size:8.0pt;
+line-height:115%;font-family:"Courier New";color:#CC4125'> -t INT        number
+of threads </span></i></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:12.0pt;
+margin-left:72.0pt;text-indent:36.0pt'><i><span lang=EN style='font-size:8.0pt;
+line-height:115%;font-family:"Courier New"'>Type man bwa mem (to view manual
+page)</span></i></p>
+
+<table class=a6 border=1 cellspacing=0 cellpadding=0 width=569
+ style='margin-left:104.5pt;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=569 valign=top style='width:426.75pt;border:solid black 1.0pt;
+  background:#666666;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal style='text-align:justify'><span lang=EN style='font-family:
+  "Courier New";color:white'>bwa mem -M -t 8 Ref/Ref.fasta
+  Data/sample-1_1-cleaned.fq.gz Data/sample-1_2-cleaned.fq.gz &gt;
+  Output/sample.sam</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-left:108.0pt;text-align:justify'><b><span
+lang=EN> </span></b></p>
+
+<ol style='margin-top:0cm' start=6 type=1>
+ <ol style='margin-top:0cm' start=2 type=a>
+  <ol style='margin-top:0cm' start=3 type=i>
+   <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Output: </span></b><span
+       lang=EN>Sequence alignment data / alignment output (SAM format).</span></li>
+  </ol>
+ </ol>
+</ol>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN>&nbsp;</span></p>
+
+<ol style='margin-top:0cm' start=7 type=1>
+ <li class=MsoNormal style='text-align:justify;line-height:normal'><b><span
+     lang=EN>Sorting </span></b></li>
+ <ol style='margin-top:0cm' start=1 type=a>
+  <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Why: </span></b><span
+      lang=EN>1) enable faster access to specific genomic regions and improve
+      the performance of subsequent tools, 2) To save disk space; faster
+      manipulation of files (faster to read)</span></li>
+  <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Tool: </span></b><span
+      lang=EN>SortSam</span></li>
+  <ol style='margin-top:0cm' start=1 type=i>
+   <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Functionality:
+       </span></b><span lang=EN>Sorts a SAM or BAM file</span></li>
+   <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Syntax: </span></b><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'>java -jar $GATK </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:blue'>SortSam</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'> --INPUT </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#38761D'>input.bam</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'> --OUTPUT </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#B45F06'>file.sorted.bam</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'> -SORT_ORDER </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#CC4125'>coordinate</span></i></li>
+  </ol>
+ </ol>
+</ol>
+
+<p class=MsoNormal style='text-align:justify'><i><span lang=EN
+style='font-family:"Courier New";color:#CC4125'>                </span></i><i><span
+lang=EN style='font-size:8.0pt;line-height:115%;font-family:"Courier New";
+color:#CC4125'>Arg: </span></i></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:36.0pt;line-height:
+normal'><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#CC4125'>--INPUT,-I &lt;File&gt;             Input BAM or SAM file to
+sort.  Required</span></i></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:36.0pt;line-height:
+normal'><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#CC4125'>--OUTPUT,-O &lt;File&gt;            Sorted BAM or SAM output
+file.  Required</span></i></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:36.0pt;line-height:
+normal'><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#CC4125'>--SORT_ORDER,-SO &lt;SortOrder&gt;  Sort order of output file.</span></i></p>
+
+<p class=MsoNormal style='margin-left:108.0pt;text-indent:36.0pt;line-height:
+normal'><b><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#CC4125'>coordinate </span></i></b><i><span lang=EN style='font-size:
+8.0pt;font-family:"Courier New";color:#CC4125'>          <b>Sorts primarily
+according to the SEQ and POS fields of </b></span></i></p>
+
+<p class=MsoNormal style='margin-left:216.0pt;text-indent:36.0pt;line-height:
+normal'><b><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#CC4125'>the record</span></i></b></p>
+
+<p class=MsoNormal style='margin-left:108.0pt;text-indent:36.0pt;line-height:
+normal'><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#DD7E6B'>duplicate            Sorts the reads so that duplicates reads
+are adjacent</span></i></p>
+
+<p class=MsoNormal style='margin-left:108.0pt;text-indent:36.0pt;line-height:
+normal'><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#DD7E6B'>queryname            Sorts according to the readname</span></i></p>
+
+<p class=MsoNormal style='text-align:justify;line-height:normal'><b><span
+lang=EN>&nbsp;</span></b></p>
+
+<table class=a7 border=1 cellspacing=0 cellpadding=0 width=575
+ style='margin-left:103.75pt;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=575 valign=top style='width:431.0pt;border:solid black 1.0pt;
+  background:#666666;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal style='text-align:justify'><span lang=EN style='font-family:
+  "Courier New";color:white'>java -jar $GATK SortSam --INPUT Output/sample.sam
+  --OUTPUT Output/sample.sorted.bam -SORT_ORDER coordinate</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='text-align:justify;line-height:normal'><i><span
+lang=EN style='font-family:"Courier New";color:#CC4125'>&nbsp;</span></i></p>
+
+<ol style='margin-top:0cm' start=7 type=1>
+ <ol style='margin-top:0cm' start=2 type=a>
+  <ol style='margin-top:0cm' start=3 type=i>
+   <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Output: </span></b><span
+       lang=EN>Sorted aligned reads, which are essential for downstream
+       processing steps and variant calling (.sorted.bam file)</span></li>
+  </ol>
+ </ol>
+</ol>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-align:justify'><b><span lang=EN>&nbsp;</span></b></p>
+
+<ol style='margin-top:0cm' start=8 type=1>
+ <li class=MsoNormal style='text-align:justify;line-height:normal'><b><span
+     lang=EN>Fixing pairs</span></b></li>
+ <ol style='margin-top:0cm' start=1 type=a>
+  <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Why: </span></b><span
+      lang=EN>To ensure the accuracy and reliability of subsequent analyses by
+      correctly aligning and orienting reads relative to each other</span></li>
+  <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Tool: </span></b><span
+      lang=EN>FixMateInformation</span></li>
+  <ol style='margin-top:0cm' start=1 type=i>
+   <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Functionality:
+       </span></b><span lang=EN>Ensures that all mate-pair information is in
+       sync between each read and its mate pair</span></li>
+   <li class=MsoNormal><b><span lang=EN>Syntax: </span></b><i><span lang=EN
+       style='font-family:"Courier New";color:#595959'>java -jar $GATK </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:blue'>FixMateInformation</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'> --INPUT </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#38761D'>file.sorted.bam</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'> --OUTPUT </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#B45F06'>file.fxmt.bam</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'> --CREATE_INDEX </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#CC4125'>TRUE </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'>--VALIDATION_STRINGENCY</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#CC4125'> LENIENT</span></i></li>
+  </ol>
+ </ol>
+</ol>
+
+<p class=MsoNormal style='margin-left:72.0pt'><i><span lang=EN
+style='font-family:"Courier New";color:#CC4125'>     </span></i><i><span
+lang=EN style='font-size:8.0pt;line-height:115%;font-family:"Courier New";
+color:#CC4125'>Arg: </span></i></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:36.0pt;line-height:
+normal'><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#CC4125'>--INPUT,-I &lt;File&gt;             The input files to check and
+fix. Required</span></i></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:36.0pt;line-height:
+normal'><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#CC4125'>--OUTPUT,-O &lt;File&gt;            The output file to write
+to.  Required</span></i></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:36.0pt;line-height:
+normal'><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#CC4125'>--CREATE_INDEX       &lt;Boolean&gt;     Whether to create an
+index when writing VCF or </span></i></p>
+
+<p class=MsoNormal style='margin-left:252.0pt;line-height:normal'><i><span
+lang=EN style='font-size:8.0pt;font-family:"Courier New";color:#CC4125'>coordinate
+Sorted BAM output. Default value: false. Possible values:  {true, false}</span></i></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:36.0pt;line-height:
+normal'><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#CC4125'>--VALIDATION_STRINGENCY &lt;ValidationStringency&gt;         </span></i></p>
+
+<p class=MsoNormal style='margin-left:252.0pt;line-height:normal'><i><span
+lang=EN style='font-size:8.0pt;font-family:"Courier New";color:#CC4125'>Validation
+stringency for all SAM files read by this program. Default value: STRICT. Possible
+values: {STRICT, LENIENT, SILENT}</span></i></p>
+
+<p class=MsoNormal style='margin-left:144.0pt;line-height:normal'><i><span
+lang=EN style='font-size:8.0pt;font-family:"Courier New";color:#DD7E6B'>STRICT 
+             Do the right thing, throw an exception if something </span></i></p>
+
+<p class=MsoNormal style='margin-left:216.0pt;text-indent:36.0pt;line-height:
+normal'><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#DD7E6B'>looks wrong.</span></i></p>
+
+<p class=MsoNormal style='margin-left:108.0pt;text-indent:36.0pt;line-height:
+normal'><b><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#CC4125'>LENIENT                    Emit warnings but keep going if
+possible.</span></i></b></p>
+
+<p class=MsoNormal style='margin-left:108.0pt;text-indent:36.0pt;line-height:
+normal'><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#DD7E6B'>SILENT               Like LENIENT, only don't emit warning
+messages.</span></i></p>
+
+<p class=MsoNormal style='margin-left:72.0pt'><span lang=EN style='font-family:
+"Courier New";color:#CC4125'>     </span></p>
+
+<table class=a8 border=1 cellspacing=0 cellpadding=0 width=564
+ style='margin-left:104.5pt;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=564 valign=top style='width:423.0pt;border:solid black 1.0pt;
+  background:#666666;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:white'>java
+  -jar $GATK  FixMateInformation --INPUT Output/sample.sorted.bam --OUTPUT
+  Output/sample.fxmt.bam --CREATE_INDEX TRUE --VALIDATION_STRINGENCY LENIENT</span></p>
+  </td>
+ </tr>
+</table>
+
+<ol style='margin-top:0cm' start=8 type=1>
+ <ol style='margin-top:0cm' start=2 type=a>
+  <ol style='margin-top:0cm' start=3 type=i>
+   <li class=MsoNormal style='margin-top:10.0pt;text-align:justify;line-height:
+       150%'><b><span lang=EN>Output:</span></b><span lang=EN> Correctly paired
+       reads with accurate mate information (.fxmt.bam file)</span></li>
+  </ol>
+ </ol>
+ <li class=MsoNormal style='text-align:justify;line-height:normal'><b><span
+     lang=EN>Add read groups </span></b></li>
+ <ol style='margin-top:0cm' start=1 type=a>
+  <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Why: </span></b><span
+      lang=EN>This tool is needed by subsequent GATK tools to ensure accurate
+      interpretation and comparison of sequencing data. To read more about
+      &quot;read groups&quot;, please see this <a
+      href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890671-Read-groups"><span
+      style='color:#1155CC'>link</span></a></span></li>
+  <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Tool: </span></b><span
+      lang=EN>AddOrReplaceReadGroups</span></li>
+  <ol style='margin-top:0cm' start=1 type=i>
+   <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Functionality:
+       </span></b><span lang=EN>Add or replace read group information in the
+       alignment file (provides essential metadata about the sequencing
+       experiment)</span></li>
+   <li class=MsoNormal style='text-align:justify;line-height:normal'><b><span
+       lang=EN>Syntax: </span></b><i><span lang=EN style='font-family:"Courier New";
+       color:#595959'>java -jar $GATK </span></i><i><span lang=EN
+       style='font-family:"Courier New";color:blue'>AddOrReplaceReadGroups</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'> --INPUT </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#38761D'>file.fxmt.bam</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'> --OUTPUT </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#B45F06'>file.addrep.bam </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#666666'>--RGID </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#CC4125'>run100</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#666666'> --RGPU </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#CC4125'>unit1</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#666666'> --RGLB </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#CC4125'>lib1</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#666666'> -PL </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#CC4125'>Illumina</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#666666'> -SM </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#CC4125'>sample</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#666666'> -CN </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#CC4125'>CN</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#666666'>
+       --VALIDATION_STRINGENCY </span></i><i><span lang=EN style='font-family:
+       "Courier New";color:#CC4125'>LENIENT</span></i><i><span lang=EN
+       style='font-family:"Courier New";color:#666666'> --CREATE_INDEX </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#CC4125'>TRUE</span></i></li>
+  </ol>
+ </ol>
+</ol>
+
+<p class=MsoNormal style='text-align:justify'><i><span lang=EN
+style='font-family:"Courier New";color:#CC4125'>                </span></i><i><span
+lang=EN style='font-size:8.0pt;line-height:115%;font-family:"Courier New";
+color:#CC4125'>Arg: </span></i></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:36.0pt;line-height:
+normal'><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#CC4125'>--INPUT,-I &lt;String&gt;           Input file (BAM or SAM or a
+GA4GH url).  Required.</span></i></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:36.0pt;line-height:
+normal'><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#CC4125'>--OUTPUT,-O &lt;File&gt;            Output file (BAM or SAM). 
+Required.</span></i></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:36.0pt;line-height:
+normal'><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#CC4125'>--RGLB,-LB &lt;String&gt;           Read-Group library 
+Required.</span></i></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:36.0pt;line-height:
+normal'><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#CC4125'>--RGPL,-PL &lt;String&gt;           Read-Group platform (e.g.
+ILLUMINA, SOLID)  Required.</span></i></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:36.0pt;line-height:
+normal'><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#CC4125'>--RGPU,-PU &lt;String&gt;           Read-Group platform unit
+(eg. run barcode)  Required.</span></i></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:36.0pt;line-height:
+normal'><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#CC4125'>--RGSM,-SM &lt;String&gt;           Read-Group sample name 
+Required.</span></i></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:36.0pt;line-height:
+normal'><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#CC4125'>--RGCN,-CN &lt;String&gt;           Read-Group sequencing center
+name  Default value: null.</span></i></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:36.0pt;line-height:
+normal'><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#CC4125'>--RGID,-ID &lt;String&gt;           Read-Group ID  Default
+value: 1.</span></i></p>
+
+<p class=MsoNormal style='text-align:justify'><i><span lang=EN
+style='font-family:"Courier New";color:#CC4125'>                </span></i></p>
+
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0 width=581
+ style='margin-left:91.0pt;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=581 valign=top style='width:435.75pt;border:solid black 1.0pt;
+  background:#666666;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal style='text-align:justify'><span lang=EN style='font-family:
+  "Courier New";color:white'>java -jar $GATK AddOrReplaceReadGroups --INPUT
+  Output/sample.fxmt.bam --OUTPUT Output/sample.addrep.bam --RGID run100 --RGPU
+  unit1 --RGLB lib1 -PL Illumina -SM sample -CN CN --VALIDATION_STRINGENCY
+  LENIENT --CREATE_INDEX TRUE </span></p>
+  </td>
+ </tr>
+</table>
+
+<ol style='margin-top:0cm' start=9 type=1>
+ <ol style='margin-top:0cm' start=2 type=a>
+  <ol style='margin-top:0cm' start=3 type=i>
+   <li class=MsoNormal style='margin-top:10.0pt;text-align:justify;line-height:
+       normal'><b><span lang=EN>Output: </span></b><span lang=EN>Aligned reads
+       with updated read group information (.addrep.bam)</span></li>
+  </ol>
+ </ol>
+</ol>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-align:justify;line-height:
+normal'><b><span lang=EN>&nbsp;</span></b></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-align:justify;line-height:
+normal'><b><span lang=EN>&nbsp;</span></b></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-align:justify;line-height:
+normal'><b><span lang=EN>&nbsp;</span></b></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-align:justify;line-height:
+normal'><b><span lang=EN>&nbsp;</span></b></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-align:justify;line-height:
+normal'><b><span lang=EN>&nbsp;</span></b></p>
+
+<ol style='margin-top:0cm' start=10 type=1>
+ <li class=MsoNormal style='text-align:justify;line-height:normal'><b><span
+     lang=EN>Mark duplicate reads </span></b></li>
+ <ol style='margin-top:0cm' start=1 type=a>
+  <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Why: </span></b><span
+      lang=EN>Some of the reads in FASTQ files may be duplicates, created
+      during library preparation or during sequencing. Usually this represents
+      only a small amount of reads Still, to avoid bias and inaccuracies in
+      calling variants it is necessary to run this tool that marks the reads
+      that are likely duplicates.</span></li>
+  <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Tool: </span></b><span
+      lang=EN>MarkDuplicates</span></li>
+  <ol style='margin-top:0cm' start=1 type=i>
+   <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Functionality:
+       </span></b><span lang=EN>Identify and mark duplicate reads</span></li>
+   <li class=MsoNormal><b><span lang=EN>Syntax: </span></b><i><span lang=EN
+       style='font-family:"Courier New";color:#595959'>java -jar $GATK </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:blue'>MarkDuplicates</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'> --INPUT </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#38761D'>file.addrep.bam</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'> --OUTPUT </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#B45F06'>file.mkdup.bam</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'> --CREATE_INDEX </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#CC4125'>TRUE </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'>--VALIDATION_STRINGENCY</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#CC4125'> LENIENT </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'>--METRICS_FILE
+       Output/</span></i><i><span lang=EN style='font-family:"Courier New";
+       color:#B45F06'>sample.mkdup.metrics</span></i><i><span lang=EN
+       style='font-family:"Courier New";color:#595959'>
+       --MAX_FILE_HANDLES_FOR_READ_ENDS_MAP </span></i><i><span lang=EN
+       style='font-family:"Courier New";color:red'>1000</span></i></li>
+  </ol>
+ </ol>
+</ol>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:36.0pt'><i><span
+lang=EN style='font-size:8.0pt;line-height:115%;font-family:"Courier New";
+color:#CC4125'>Arg: </span></i></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:36.0pt'><i><span
+lang=EN style='font-size:8.0pt;line-height:115%;font-family:"Courier New";
+color:#CC4125'>--INPUT,-I &lt;File&gt;             One or more input SAM or BAM
+files to analyze. Must be </span></i></p>
+
+<p class=MsoNormal style='margin-left:216.0pt;text-indent:36.0pt'><i><span
+lang=EN style='font-size:8.0pt;line-height:115%;font-family:"Courier New";
+color:#CC4125'>coordinate sorted.</span></i></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:36.0pt'><i><span
+lang=EN style='font-size:8.0pt;line-height:115%;font-family:"Courier New";
+color:#CC4125'>--OUTPUT,-O &lt;File&gt;            The output file to write
+marked records to.  Required.</span></i></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:36.0pt'><i><span
+lang=EN style='font-size:8.0pt;line-height:115%;font-family:"Courier New";
+color:#CC4125'>--METRICS_FILE,-M &lt;File&gt;      File to write duplication
+metrics to. Required.</span></i></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:36.0pt'><i><span
+lang=EN style='font-size:8.0pt;line-height:115%;font-family:"Courier New";
+color:#CC4125'>--MAX_FILE_HANDLES_FOR_READ_ENDS_MAP,-MAX_FILE_HANDLES
+&lt;Integer&gt;     </span></i></p>
+
+<p class=MsoNormal><i><span lang=EN style='font-size:8.0pt;line-height:115%;
+font-family:"Courier New";color:#CC4125'>                                                Maximum
+number of file handles to keep open when </span></i></p>
+
+<p class=MsoNormal style='margin-left:216.0pt;text-indent:36.0pt;line-height:
+150%'><i><span lang=EN style='font-size:8.0pt;line-height:150%;font-family:
+"Courier New";color:#CC4125'>spilling read ends to disk.</span></i></p>
+
+<table class=a9 border=1 cellspacing=0 cellpadding=0 width=563
+ style='margin-left:109.0pt;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=563 valign=top style='width:422.25pt;border:solid black 1.0pt;
+  background:#666666;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal><span lang=EN style='font-family:"Courier New";color:white'>java
+  -jar $GATK MarkDuplicates --INPUT Output/sample.fxmt.bam --OUTPUT
+  Output/sample.mkdup.bam --VALIDATION_STRINGENCY LENIENT --CREATE_INDEX TRUE
+  --METRICS_FILE Output/sample.mkdup.metrics
+  --MAX_FILE_HANDLES_FOR_READ_ENDS_MAP 1000</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='line-height:normal'><i><span lang=EN
+style='font-family:"Courier New";color:red'>&nbsp;</span></i></p>
+
+<ol style='margin-top:0cm' start=10 type=1>
+ <ol style='margin-top:0cm' start=2 type=a>
+  <ol style='margin-top:0cm' start=3 type=i>
+   <li class=MsoNormal style='text-align:justify;line-height:normal'><b><span
+       lang=EN>Output: </span></b><span lang=EN>A duplicate-marked alignment
+       file (.mkdup.bam) and a duplication metrics file (.metrics). </span></li>
+  </ol>
+ </ol>
+</ol>
+
+<p class=MsoNormal style='margin-left:108.0pt;text-align:justify;line-height:
+normal'><span lang=EN>&nbsp;</span></p>
+
+<ol style='margin-top:0cm' start=11 type=1>
+ <li class=MsoNormal style='text-align:justify;line-height:normal'><b><span
+     lang=EN>Variant Calling </span></b></li>
+ <ol style='margin-top:0cm' start=1 type=a>
+  <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Tool: </span></b><span
+      lang=EN>HaplotypeCaller</span></li>
+  <ol style='margin-top:0cm' start=1 type=i>
+   <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Functionality:</span></b><span
+       lang=EN> Call SNPs and indels </span></li>
+   <li class=MsoNormal style='text-align:justify'><b><span lang=EN>Syntax: </span></b><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'>java -jar $GATK </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:blue'>HaplotypeCaller</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'> -R </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#38761D'>Ref.fasta </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'>-I </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#38761D'>file.mkdup.bam</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#B45F06'> </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'>-O </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#B45F06'>file.g.vcf</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'> -ERC </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:red'>GVCF </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'>--bam-output </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#B45F06'>file.bamout.bam</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'> --showHidden </span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#CC4125'>true</span></i><i><span
+       lang=EN style='font-family:"Courier New";color:#595959'> </span></i></li>
+  </ol>
+ </ol>
+</ol>
+
+<p class=MsoNormal style='text-align:justify'><i><span lang=EN
+style='font-family:"Courier New";color:#595959'>                </span></i><i><span
+lang=EN style='font-size:8.0pt;line-height:115%;font-family:"Courier New";
+color:#CC4125'>Arg: </span></i></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:36.0pt;line-height:
+normal'><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#CC4125'>--input,-I &lt;GATKPath&gt;         BAM/SAM/CRAM file containing
+reads  This argument must </span></i></p>
+
+<p class=MsoNormal style='margin-left:216.0pt;text-indent:36.0pt;line-height:
+normal'><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#CC4125'>Be specified at least once.Required.</span></i></p>
+
+<p class=MsoNormal style='margin-left:108.0pt;line-height:normal'><i><span
+lang=EN style='font-size:8.0pt;font-family:"Courier New";color:#CC4125'>--output,-O
+&lt;GATKPath&gt;        File to which variants should be written  Required.</span></i></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:36.0pt;line-height:
+normal'><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#CC4125'>--reference,-R &lt;GATKPath&gt;     Reference sequence file 
+Required.</span></i></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:36.0pt;line-height:
+normal'><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#CC4125'>--emit-ref-confidence,-ERC &lt;ReferenceConfidenceMode&gt;</span></i></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;line-height:normal'><i><span
+lang=EN style='font-size:8.0pt;font-family:"Courier New";color:#CC4125'>                             
+           Mode for emitting reference confidence scores. Default </span></i></p>
+
+<p class=MsoNormal style='margin-left:216.0pt;text-indent:36.0pt;line-height:
+normal'><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#CC4125'>value: NONE. Possible values: {NONE, BP_RESOLUTION,GVCF}</span></i></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:36.0pt;line-height:
+normal'><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#CC4125'>--showHidden,-showHidden &lt;Boolean&gt;</span></i></p>
+
+<p class=MsoNormal style='line-height:normal'><i><span lang=EN
+style='font-size:8.0pt;font-family:"Courier New";color:#CC4125'>                                    
+                  Display hidden arguments  Default value: false. Possible </span></i></p>
+
+<p class=MsoNormal style='margin-left:216.0pt;text-indent:36.0pt;line-height:
+normal'><i><span lang=EN style='font-size:8.0pt;font-family:"Courier New";
+color:#CC4125'>values:{true, false}</span></i></p>
+
+<table class=ab border=1 cellspacing=0 cellpadding=0 width=569
+ style='margin-left:100.75pt;border-collapse:collapse;border:none'>
+ <tr style='height:107.25pt'>
+  <td width=569 valign=top style='width:426.75pt;border:solid black 1.0pt;
+  background:#666666;padding:5.0pt 5.0pt 5.0pt 5.0pt;height:107.25pt'>
+  <p class=MsoNormal style='text-align:justify'><span lang=EN style='font-family:
+  "Courier New";color:white'>java -jar $GATK HaplotypeCaller \</span></p>
+  <p class=MsoNormal style='text-align:justify'><span lang=EN style='font-family:
+  "Courier New";color:white'>    -R Ref/Ref.fasta \</span></p>
+  <p class=MsoNormal style='text-align:justify'><span lang=EN style='font-family:
+  "Courier New";color:white'>    -I Output/sample.mkdup.bam \</span></p>
+  <p class=MsoNormal style='text-align:justify'><span lang=EN style='font-family:
+  "Courier New";color:white'>    -O Output/sample.g.vcf \</span></p>
+  <p class=MsoNormal style='text-align:justify'><span lang=EN style='font-family:
+  "Courier New";color:white'>    -ERC GVCF \</span></p>
+  <p class=MsoNormal style='text-align:justify'><span lang=EN style='font-family:
+  "Courier New";color:white'>    --bam-output Output/sample.bamout.bam  \</span></p>
+  <p class=MsoNormal style='text-align:justify'><span lang=EN style='font-family:
+  "Courier New";color:white'>    --showHidden true</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='text-align:justify'><i><span lang=EN
+style='font-family:"Courier New";color:#595959'>&nbsp;</span></i></p>
+
+<ol style='margin-top:0cm' start=11 type=1>
+ <ol style='margin-top:0cm' start=1 type=a>
+  <ol style='margin-top:0cm' start=3 type=i>
+   <li class=MsoNormal style='margin-bottom:12.0pt;text-align:justify'><b><span
+       lang=EN>Output: </span></b><span lang=EN>A set of raw variant calls,
+       including SNPs and indels (gVCF file)</span></li>
+  </ol>
+ </ol>
+</ol>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;text-align:justify'><b><span
+lang=EN style='font-size:12.0pt;line-height:115%'>Knowledge Check </span></b><span
+lang=EN><a href="https://forms.office.com/e/Q3KdRFaTsb"><span style='font-size:
+12.0pt;line-height:115%'>Link</span></a></span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;text-align:justify'><span
+lang=EN style='font-size:12.0pt;line-height:115%'>&nbsp;</span></p>
+
+<h1 align=center style='text-align:center'><a name="_17dp8vu"></a><span
+lang=EN>Section 2. Exploring VCF data with BCFtools</span></h1>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>(and also BAM data with samtools etc)</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>Input data for this module </span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt'><span
+lang=EN>&#9679;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN>a VCF file</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-18.0pt'><span
+lang=EN>&#9675;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN>geno-250kb</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt'><span
+lang=EN>&#9679;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN>a gVCF file</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-18.0pt'><span
+lang=EN>&#9675;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN>sample1-50kb.g.vcf</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt'><span
+lang=EN>&#9679;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN>a BAM file</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-18.0pt'><span
+lang=EN>&#9675;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN>kanin-4.sorted.bam</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>Outputs: general stats outputs, tables and
+plots</span></p>
+
+<p class=MsoNormal><a name="_3rdcrjn"></a><span lang=EN>&nbsp;</span></p>
+
+<h2><a name="_26in1rg"></a><span lang=EN>Subsection 1: Getting to know the
+tools</span></h2>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>Installing BCFtools - please follow the
+documentation.</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>To get help directly within the terminal, you
+can run the command without arguments:</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>bcftools  # with no arguments:  general info
+and list of commands</span></p>
+
+<p class=MsoNormal><span lang=EN>bcftools -h</span></p>
+
+<p class=MsoNormal><span lang=EN>bcftools &lt;command&gt; # with no arguments -
+help on the given command, e.g.</span></p>
+
+<p class=MsoNormal><span lang=EN>bcftools view</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>Most used commands:</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>Getting information from the VCF:</span></p>
+
+<p class=MsoNormal><span lang=EN>bcftools   view         VCF/BCF conversion,
+view, subset and filter VCF/BCF files</span></p>
+
+<p class=MsoNormal><span lang=EN>bcftools  query        transform VCF/BCF into
+user-defined formats</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>Adding information to VCF:</span></p>
+
+<p class=MsoNormal><span lang=EN>bcftools   annotate     annotate and edit
+VCF/BCF files. E.g. add variant IDs.</span></p>
+
+<p class=MsoNormal><span lang=EN>bcftools   csq          call variation
+consequences (like snpEff)</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>Manipulating VCF files:</span></p>
+
+<p class=MsoNormal><span lang=EN>bcftools  isec         intersections of
+VCF/BCF files - May be used to do VCF merging efficiently</span></p>
+
+<p class=MsoNormal><span lang=EN>bcftools   concat       concatenate VCF/BCF
+files from the same set of samples. Usually used in SNP calling pipeline.</span></p>
+
+<p class=MsoNormal><span lang=EN>bcftools  merge        merge VCF/BCF files
+files from non-overlapping sample sets</span></p>
+
+<p class=MsoNormal><span lang=EN>bcftools   norm         left-align and
+normalize indels</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>Other commands:</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>bcftools   convqert      convert VCF/BCF files
+to different formats and back</span></p>
+
+<p class=MsoNormal><span lang=EN>bcftools    clea       user-defined plugins
+(new commands for more specific tasks)</span></p>
+
+<p class=MsoNormal><span lang=EN>bcftools   reheader     modify VCF/BCF header,
+change sample names</span></p>
+
+<p class=MsoNormal><span lang=EN>bcftools   sort         sort VCF/BCF file</span></p>
+
+<p class=MsoNormal><span lang=EN>bcftools   index     Needed for random access
+into VCF file</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<h2><a name="_lnxbz9"></a><span lang=EN>Subsection 2: Exploring VCF files</span></h2>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<h3><a name="_35nkun2"></a><span lang=EN>Initial getting to know the data</span></h3>
+
+<p class=MsoNormal><span lang=EN>So, you got a fresh VCF file from the variant
+calling pipeline.</span></p>
+
+<p class=MsoNormal><span lang=EN>It may be a gVCF file or a simple VCF file.</span></p>
+
+<p class=MsoNormal><span lang=EN>(Question: what is the difference?)</span></p>
+
+<p class=MsoNormal><span lang=EN>The input data folder has both a GVCF and a
+VCF file.</span></p>
+
+<p class=MsoNormal><span lang=EN>Let's see what is inside these files.</span></p>
+
+<h3><a name="_1ksv4uv"></a><span lang=EN>VCF header</span></h3>
+
+<p class=MsoNormal><span lang=EN>A lot of information about how the VCF was
+produced and what kind of information may be found in it, is located in the
+header.</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>To see the header you may run </span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:Consolas'>bcftools view
+--header-only input.vcf.gz</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>Based on the information in the header, please
+do the following exercise</span></p>
+
+<h3><a name="_44sinio"></a><span lang=EN>Hands-on exercise. </span></h3>
+
+<p class=MsoNormal><span lang=EN>For both input VCF files, extract the headers
+and answer the questions:</span></p>
+
+<ol style='margin-top:0cm' start=1 type=1>
+ <li class=MsoNormal><span lang=EN>Find which commands produced the original
+     VCF file (GATKCommandLine)</span></li>
+ <li class=MsoNormal><span lang=EN>Find which commands were applied to the
+     original VCF file to create the current file</span></li>
+ <li class=MsoNormal><span lang=EN>Find names of chromosomes or contigs that
+     are present in this (g)VCF</span></li>
+ <li class=MsoNormal><span lang=EN>Does this VCF contain InbreedingCoefficient
+     metrics?</span></li>
+ <li class=MsoNormal><span lang=EN>Does this VCF contain QD metrics? What is
+     its type (number, string, etc)</span></li>
+</ol>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN>&nbsp;</span></p>
+
+<h3><a name="_2jxsxqh"></a><span lang=EN>Overall stats</span></h3>
+
+<p class=MsoNormal><span lang=EN>To get an overall report containing many basic
+statistics, run bcftools stats</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:Consolas'>bcftools stats
+input.vcf.gz &gt; stats.txt</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<h3><a name="_z337ya"></a><span lang=EN>Exercise:</span></h3>
+
+<p class=MsoNormal><span lang=EN>Based on the stats file, find out how many of
+the following are in the file:</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt'><span
+lang=EN>&#9679;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN>SNPs</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt'><span
+lang=EN>&#9679;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN>indels</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt'><span
+lang=EN>&#9679;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN>multiallelic SNPs</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt'><span
+lang=EN>&#9679;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN>multi-nucleotide polymorphisms (MNPs)</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt'><span
+lang=EN>&#9679;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN>reference-only variants (not SNPs)</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt'><span
+lang=EN>&#9679;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN>Ts/Tv ratio</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt'><span
+lang=EN>&#9679;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN>Number of SNPs with allele frequency between 0 and
+0.01</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<h2><a name="_3j2qqm3"></a><span lang=EN>Subsection 3. BCFtools query command</span></h2>
+
+<p class=MsoNormal><span lang=EN>The main element in the structure of the
+command is the query string (or format string) that specifies what information
+you want to get. For each record in the VCF the query string will be evaluated
+and added as a row in the output</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>bcftools query</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:Consolas'>bcftools query -f
+'%CHROM\t%POS\t%REF\t%ALT[\t%SAMPLE=%GT]\n' file.vcf.gz</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:Consolas'>&nbsp;</span></p>
+
+<h3><a name="_1y810tw"></a><span lang=EN>Extract variant QC metrics (bcftools
+query)</span></h3>
+
+<p class=MsoNormal><span lang=EN>To get various QC metrics, include the names
+of the metrics with the % sign prefix into the query string. </span></p>
+
+<p class=MsoNormal><span lang=EN>There are some metrics, like read depth DP, 
+that are applicable to both variant as a whole or to each sample. To
+distinguish between these, use prefixes INFO and FORMAT</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:Consolas'>INFO/DP</span><span
+lang=EN>: depth across all samples, is placed into the INFO column</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:Consolas'>FORMAT/DP</span><span
+lang=EN>: depth at each individual sample genotype call, is mentioned in the
+FORMAT column, the actual information is located in the genotype matrix.</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>E.g. some variant level QC metrics </span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:Consolas'>bcftools query -f
+'%CHROM\t%POS\t%REF\t%ALT\t%QUAL\t%QD\t%INFO/DP\n' file.vcf.gz &gt;
+variant-DP.txt</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>( For comparison, here is an example of read
+depths of each sample:</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:Consolas'>bcftools query -f
+'%CHROM\t%POS\t%REF\t%ALT[\t%SAMPLE=%FORMAT/DP]\n' file.vcf.gz</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:Consolas'>)</span></p>
+
+<h3><a name="_4i7ojhp"></a><span lang=EN>Extract variant genotype matrix as a
+table (bcftools query)</span></h3>
+
+<p class=MsoNormal><span lang=EN>Let us create a file by first putting row
+names, then dumping all the genotype calls:</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:Consolas'>bcftools query -f 'CHROM\tPOS\tREF\tALT[\t%SAMPLE]\n'
+file.vcf.gz | head -n 1 &gt; out.txt</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:12.0pt;line-height:115%;
+font-family:Consolas'>bcftools query -f '%CHROM\t%POS\t%REF\t%ALT[\t%GT]\n'
+file.vcf.gz &gt;&gt; out.txt</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>Note in the first command we don't use %
+except in the %SAMPLE - thus, only sample names will be interpolated into the
+string.</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<h2><a name="_2xcytpi"></a><span lang=EN>Subsection 4. Exploring alignment
+(BAM) files</span></h2>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>We will use SAMtools software to retrieve
+basic information about the alignment data from BAM files.</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>In order to make sense of some of the
+following, it would help to be familiar with SAM file structure, which you can
+read about in <a href="https://samtools.github.io/hts-specs/SAMv1.pdf"><span
+style='color:#1155CC'>SAM format specifications</span></a> . See also the <a
+href="https://en.wikipedia.org/wiki/SAM_(file_format)"><span style='color:#1155CC'>SAM
+format wiki pag</span></a>e for easier reading.</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>The following SAMtools commands will be used:</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>samtools index</span></p>
+
+<p class=MsoNormal><span lang=EN>samtools view</span></p>
+
+<p class=MsoNormal><span lang=EN>samtools tview</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>samtools stats</span></p>
+
+<p class=MsoNormal><span lang=EN>samtools flags</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<h3><a name="_1ci93xb"></a><span lang=EN>View header and alignments</span></h3>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>To view header :</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>In older versions of samtools</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Roboto Mono";color:#188038'>samtools
+view -h</span><span lang=EN>  kanin-4.sorted.bam | less</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>In the newest versions:</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Roboto Mono";color:#188038'>samtools
+head</span><span lang=EN>  kanin-4.sorted.bam</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<h3><a name="_3whwml4"></a><span lang=EN>View alignments in Excel </span></h3>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>To view alignments in a more familiar
+environment of MS Excel,  you may use samtools view and save the result as a
+TSV file, which you can then view in Excel by importing as a tab separated
+file.</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:Consolas'>echo
+&quot;QUERYNAME,FLAG,REFNAME,POS,MAPQ,CIGAR,RNEXT,POSNEXT,TLEN,SEQ,QUAL&quot; |
+tr &quot;,&quot; &quot;\t&quot;   &gt; aln.tsv</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:Consolas'>samtools view kanin-4.sorted.bam | head -n 20  <b>&gt;&gt;</b>
+aln.tsv  </span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>Note: changing tabs to commas in the whole
+file using the &quot;tr&quot; command might not be a very good idea, since the
+base quality string may contain commas.</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:13.5pt;line-height:115%;
+color:#F2F2F2'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<h2><a name="_2bn6wsx"></a><span lang=EN>Subsection 5. Understanding alignment
+metadata</span></h2>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>A lot of information about alignment of a read
+pair  to reference is contained in the &quot;flags&quot; column.</span></p>
+
+<p class=MsoNormal><span lang=EN>Each &quot;flag&quot; is a boolean (true or
+false) value encoded in a bit of the flags byte.</span></p>
+
+<p class=MsoNormal><span lang=EN>See <a
+href="https://en.wikipedia.org/wiki/SAM_(file_format)#Bitwise_flags"><span
+style='color:#1155CC'>https://en.wikipedia.org/wiki/SAM_(file_format)#Bitwise_flags</span></a>
+</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>To easily retrieve the flags pertaining to a
+certain read alignment, e.g.</span></p>
+
+<p class=MsoNormal><span lang=EN>the first read in the input BAM file is</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>```</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:9.0pt;line-height:115%;
+font-family:Consolas'>FCD0R2NACXX:7:2105:6385:19577#CCACATTC_24       163    
+Chr7    272768  0       83M     =       273143  458    
+AGTTGTTTCCTCCCGCCGTGGCCCACGCTTTATCCGCACTGCGCGGAAGCGTGTTGTTGGTTCTTCCACCGTGTTCCGTTTCC 
+BFHHHHJJIJIJJJIJJJGHJJJIIIIIJJJIIIIJIJJJJGHEDD@BDDDB@BDDDDDDDDDDDDCCDDDDDDDDDDDDDCD 
+NM:i:1  MD:Z:5C77       MC:Z:83M        AS:i:78 XS:i:78</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:9.0pt;line-height:115%;
+font-family:Consolas'>```</span></p>
+
+<p class=MsoNormal><span lang=EN>Its flag column shows value 163. </span></p>
+
+<p class=MsoNormal><span lang=EN>Run the following:</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:Consolas'>samtools flags
+163</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>The result:</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:Consolas'>0xa3  163   PAIRED,PROPER_PAIR,MREVERSE,READ2</span></p>
+
+<p class=MsoNormal><span lang=EN>To understand meanings of these abbreviations,
+start with running samtools flags without arguments</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:"Roboto Mono";color:#188038'>samtools flags</span><span lang=EN
+style='font-size:10.0pt;line-height:115%;font-family:Consolas'>          </span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:Consolas'>                                                          
+</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:Consolas'>About: Convert between textual and numeric flag
+representation</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:Consolas'>Usage: samtools flags FLAGS...</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:Consolas'>Each FLAGS argument is either an INT (in
+decimal/hexadecimal/octal) representing</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:Consolas'>a combination of the following numeric flag values, or a
+comma-separated string</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:Consolas'>NAME,...,NAME representing a combination of the following
+flag names:</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:Consolas'>   0x1     1  PAIRED         paired-end /
+multiple-segment sequencing technology</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:Consolas'>   0x2     2  PROPER_PAIR    each segment properly
+aligned according to aligner</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:Consolas'>   0x4     4  UNMAP          segment unmapped</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:Consolas'>   0x8     8  MUNMAP         next segment in the template
+unmapped</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:Consolas'>  0x10    16  REVERSE        SEQ is reverse complemented</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:Consolas'>  0x20    32  MREVERSE       SEQ of next segment in
+template is rev.complemented</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:Consolas'>  0x40    64  READ1          the first segment in the
+template</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:Consolas'>  0x80   128  READ2          the last segment in the
+template</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:Consolas'> 0x100   256  SECONDARY      secondary alignment</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:Consolas'> 0x200   512  QCFAIL         not passing quality controls
+or other filters</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:Consolas'> 0x400  1024  DUP            PCR or optical duplicate</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:Consolas'> 0x800  2048  SUPPLEMENTARY  supplementary alignment</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:10.0pt;line-height:115%;
+font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>The next read is</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:9.0pt;line-height:115%;
+font-family:Consolas'>FCD0R2NACXX:7:2105:6385:19577#CCACATTC_24       83     
+Chr7    273143  0       83M     =       272768  -458   
+TCGGCGTAGCTCTGTGACTTGTCCACACCCATTGTATCAGGTGTTTTTATGATTTGAAAAATCCAGTTTATGCCTAGTGTGTG 
+BDDDBDEEEEEFFFDFFFHHHHJIHHHJJIJGIJJJJJJJJJJJJJJJJJJJJJJJJJJJIIJJJJJJIJJJJJJJJHHHHHF 
+NM:i:1  MD:Z:30G52 </span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>with the flag 83</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>% samtools flags
+83                                                                  0:34:29</span></p>
+
+<p class=MsoNormal><span lang=EN>0x53    83        PAIRED,PROPER_PAIR,REVERSE,READ1</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<h3><a name="_qsh70q"></a><span lang=EN>Exercise:</span></h3>
+
+<p class=MsoNormal><span lang=EN>Identify and explain the meaning of the flags
+of </span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt'><span
+lang=EN>1)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></span><span
+lang=EN>the 3rd and 4th records in the file</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt'><span
+lang=EN>2)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></span><span
+lang=EN>the 5th and 6th records in the file</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<h2><a name="_3as4poj"></a><span lang=EN>Subsection 6. Interactive text viewer
+(tview)</span></h2>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>First, make sure the file is indexed</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Roboto Mono";color:#188038'>samtools
+index kanin-4.sorted.bam</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>Then</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Roboto Mono";color:#188038'>samtools
+tview kanin-4.sorted.bam -p Chr7:6011011</span></p>
+
+<p class=MsoNormal><span lang=EN style='font-family:"Roboto Mono";color:#188038'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>(No need to pipe to </span><span lang=EN
+style='font-family:"Roboto Mono";color:#188038'>less</span><span lang=EN>
+command!)</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>For a more feature-full experience, use a GUI
+alignment viewer such as IGV.</span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt;text-align:justify'><span
+lang=EN style='font-size:12.0pt;line-height:115%'>&nbsp;</span></p>
+
+<h1><a name="_1pxezwc"></a><span lang=EN>Module Summary</span></h1>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><i><span lang=EN>“Understanding the genetic basis of
+diversity through the discovery of Single Nucleotide Polymorphisms (SNPs) via
+variant calling is a fundamental step in gene discovery. By identifying and analyzing
+SNPs, researchers can uncover genetic variations that contribute to differences
+in traits. This knowledge is critical for pinpointing specific genes associated
+with those traits, facilitating advancements in fields such as genetics,
+breeding, and biotechnology.”</span></i></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>In this module, you have gained an
+understanding of the Variant Calling workflow. You have explored the essential
+tools and software used for variant discovery, including FASTQC, BWA, Picard,
+SamTools, and GATK. You have also had the opportunity to perform variant
+calling, and you have learned how to analyze and interpret the resulting data
+files, such as VCF and BAM files.</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt'><span
+lang=EN>&#9679;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN>Single Nucleotide Polymorphisms (SNPs) and
+Insertions/Deletions (InDels) are crucial for analyzing rice diversity, establishing
+population structure, and identifying genes associated with important traits.</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt'><span
+lang=EN>&#9679;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN>The variant calling workflow is essential for
+identifying variants in a diverse rice population. It is important to become
+proficient with software tools such as BWA, SamTools, GATK, and BCFTools for
+effective variant calling.</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt'><span
+lang=EN>&#9679;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN>Exploring BAM and VCF output files is crucial for
+understanding and interpreting variant data.</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<h1><a name="_49x2ik5"></a><span lang=EN>References</span></h1>
+
+<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN>Slatko BE, Gardner AF, Ausubel FM. Overview of
+Next-Generation Sequencing Technologies. Curr Protoc Mol Biol. 2018
+Apr;122(1):e59. doi: 10.1002/cpmb.59. PMID: 29851291; PMCID: PMC6020069. <a
+href="https://doi.org/10.1002/cpmb.59"><span style='color:#1155CC'>https://doi.org/10.1002/cpmb.59</span></a>
+</span></p>
+
+</div>
+
+</body>
+
+</html>
