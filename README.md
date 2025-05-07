@@ -18,6 +18,6 @@ Module 2: NGS
 
 Module 3: GWAS
 
-Module 4: PostGWAS [module4_postgwas/postgwas.md]
+[Module 4: PostGWAS](module4_postgwas/postgwas.md)
 
 
