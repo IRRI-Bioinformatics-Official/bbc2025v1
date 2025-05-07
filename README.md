@@ -9,6 +9,13 @@ This is README.md
 <iframe src="https://calendar.google.com/calendar/embed?src=yourcalendarID&ctz=YourTimeZone" 
         style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 
-Links.
+
+Links:
+
+Module 1: Linux for Bioinformatics
+Module 2: NGS
+Module 3: Variant calling
+Module 4: GWAS
+Module 5: PostGWAS
 
 
