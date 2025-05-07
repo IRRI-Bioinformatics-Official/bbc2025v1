@@ -14,9 +14,9 @@ Links:
 
 Module 1: Linux for Bioinformatics
 
-Module 2: NGS
+[Module 2: NGS](module2_ngs/ngs.md)
 
-Module 3: GWAS
+[Module 3: GWAS](module3_gwas/gwas.md)
 
 [Module 4: PostGWAS](module4_postgwas/postgwas.md)
 
