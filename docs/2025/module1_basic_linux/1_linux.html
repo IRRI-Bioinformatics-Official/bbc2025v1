@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Basic Linux Course</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      display: flex;
+
+    }
+    html, body {
+      height: 100%;
+      overflow: auto;
+      overscroll-behavior: contain;
+    }
+
+    /* Floating Table of Contents */
+    #toc {
+      position: fixed;
+      top: 0px;
+      left: 20px;
+      width: 200px;
+      background-color: #f8f9fa;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+    #toc h2 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    #toc ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    #toc ul li {
+      margin: 0.5rem 0;
+    }
+    #toc ul li a {
+      text-decoration: none;
+      color: #007bff;
+    }
+    #toc ul li a:hover {
+      text-decoration: underline;
+    }
+    /* Main content styling */
+    main {
+      margin-left: 240px; /* Adjusted for TOC width */
+      padding: 2rem;
+      flex-grow: 1;
+    }
+    h1, h2 {
+      color: #2c3e50;
+    }
+    section {
+      margin-bottom: 2rem;
+      
+    }
+  </style>
+</head>
+<body>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const tocLinks = document.querySelectorAll('#toc a[data-target]');
+      tocLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('data-target');
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    });
+  </script>
+  <!-- Floating Table of Contents -->
+  <div id="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+      <li><a href="#" data-target="course-overview">Course Overview</a></li>
+      <li><a href="#" data-target="course-objectives">Course Objectives</a></li>
+      <li><a href="#" data-target="operating-system">Operating Systems</a></li>
+    </ul>
+  </div>
+
+  
+  <!-- Main Content -->
+  <main>
+   
+    <section id="operating-system">
+        <h2>Operating System</h2>
+        <p><strong>Commonly known as “OS”</strong></p>
+        <p>An operating system is a software that manages a computer's hardware and software resources, providing common services for computer programs. It acts as an intermediary between users and the computer hardware, facilitating tasks such as memory management, process scheduling, and input/output operations. The OS is the first program that loads when you start your computer, enabling the system to function effectively. </p>
+        <p><strong>Most common operating systems include:</strong></p>
+        <ul>
+          <li><strong>Windows:</strong> Windows 10, Windows 8, Windows 7, Windows XP, Windows Vista</li>
+          <li><strong>macOS:</strong> Mojave, High Sierra, Sierra</li>
+          <li><strong>Linux:</strong> Red Hat, Fedora, SUSE, Ubuntu, openSUSE, Slackware, Gentoo</li>
+          <li><strong>Android OS</strong></li>
+          <li><strong>iOS</strong></li>
+        </ul>
+
+        <h2>UNIX OS</h2>
+        <p><strong>Stable, Multi-Tasking, Multi-User Operating System:</strong> UNIX is a robust operating system that supports multiple users and multitasking capabilities, making it ideal for various computing environments.</p>
+        <p><strong>Origin:</strong> Originally developed by AT&T’s Bell Labs in the mid-1960s, UNIX has been foundational in the evolution of modern operating systems.</p>
+        <p><strong>Open Standard:</strong> UNIX is an open standard owned and managed by The Open Group, ensuring consistency and interoperability across different implementations. Learn more at <a href="https://www.opengroup.org/membership/forums/platform/unix" target="_blank">The Open Group</a>.</p>
+        <p><strong>Variants:</strong> UNIX has several variants maintained by different companies, including:</p>
+        <ul>
+          <li><strong>MacOS</strong></li>
+          <li><strong>Solaris</strong></li>
+          <li><strong>AIX</strong></li>
+          <li><strong>HP-UX</strong></li>
+          <li><strong>BSD</strong></li>
+        </ul>
+        <p><strong>Linux Kernel:</strong> The Linux kernel was derived from UNIX, inheriting many of its design principles and features.</p>
+        
+        <h2>LINUX</h2>
+            <p><strong>Unix-like Operating System Family:</strong> Linux is a family of Unix-like operating systems built under the model of free and open-source software development and distribution. It is one of the most prominent examples of open source development and free software; its underlying source code is available for anyone to use, modify, and redistribute freely.</p>
+            <p><strong>First Released by Linus Torvalds in 1991:</strong> While still a student at the University of Helsinki, Linus Torvalds started developing Linux to create a system similar to MINIX, a UNIX operating system. In 1991, he released version 0.02; Version 1.0 of the Linux kernel, the core of the operating system, was released in 1994.</p>
+            <p><strong>Open-Source:</strong> Linux is open-source, meaning it is free to obtain and modify. The source code of Linux may be used, modified, and distributed commercially or non-commercially by anyone under the terms of its respective licenses, such as the GNU General Public License (GPL).</p>
+            <p><strong>Dominance in Supercomputing:</strong> Linux is the predominant operating system for servers and is also used on all of the world's 500 fastest supercomputers. As measured by the TOP500 list, which uses HPL to measure computational power.</p>
+    </section>
+    
+  </main>
+
+</body>
+</html>

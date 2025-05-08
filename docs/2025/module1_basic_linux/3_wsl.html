@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Basic Linux Course</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      display: flex;
+
+    }
+    html, body {
+      height: 100%;
+      overflow: auto;
+      overscroll-behavior: contain;
+    }
+
+    /* Floating Table of Contents */
+    #toc {
+      position: fixed;
+      top: 0px;
+      left: 20px;
+      width: 200px;
+      background-color: #f8f9fa;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+    #toc h2 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    #toc ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    #toc ul li {
+      margin: 0.5rem 0;
+    }
+    #toc ul li a {
+      text-decoration: none;
+      color: #007bff;
+    }
+    #toc ul li a:hover {
+      text-decoration: underline;
+    }
+    /* Main content styling */
+    main {
+      margin-left: 240px; /* Adjusted for TOC width */
+      padding: 2rem;
+      flex-grow: 1;
+    }
+    h1, h2 {
+      color: #2c3e50;
+    }
+    section {
+      margin-bottom: 2rem;
+      
+    }
+  </style>
+</head>
+<body>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const tocLinks = document.querySelectorAll('#toc a[data-target]');
+      tocLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('data-target');
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    });
+  </script>
+  <!-- Floating Table of Contents -->
+  <div id="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+      <li><a href="#" data-target="course-overview">Course Overview</a></li>
+      <li><a href="#" data-target="course-objectives">Course Objectives</a></li>
+      <li><a href="#" data-target="operating-system">Operating Systems</a></li>
+    </ul>
+  </div>
+
+  
+  <!-- Main Content -->
+  <main>
+   
+
+    <section id="wsl">
+      <h2>Windows Subsystem for Linux (WSL) 
+      </h2>
+      <p>WSL is a compatibility layer that enables users to operate a complete GNU/Linux environment seamlessly on a Windows system, eliminating the need for dual-boot setups. With WSL, users can execute Linux command-line utilities and applications directly within Windows.
+      </p>
+    </section>
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Basic Linux Course</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      display: flex;
+
+    }
+    html, body {
+      height: 100%;
+      overflow: auto;
+      overscroll-behavior: contain;
+    }
+
+    /* Floating Table of Contents */
+    #toc {
+      position: fixed;
+      top: 0px;
+      left: 20px;
+      width: 200px;
+      background-color: #f8f9fa;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+    #toc h2 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    #toc ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    #toc ul li {
+      margin: 0.5rem 0;
+    }
+    #toc ul li a {
+      text-decoration: none;
+      color: #007bff;
+    }
+    #toc ul li a:hover {
+      text-decoration: underline;
+    }
+    /* Main content styling */
+    main {
+      margin-left: 240px; /* Adjusted for TOC width */
+      padding: 2rem;
+      flex-grow: 1;
+    }
+    h1, h2 {
+      color: #2c3e50;
+    }
+    section {
+      margin-bottom: 2rem;
+      
+    }
+  </style>
+</head>
+<body>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const tocLinks = document.querySelectorAll('#toc a[data-target]');
+      tocLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('data-target');
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    });
+  </script>
+  <!-- Floating Table of Contents -->
+  <div id="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+      <li><a href="#" data-target="shell-expansion">Shell Expansion</a></li>
+      <li><a href="#" data-target="shell-scripting">Shell Scripting</a></li>
+      <li><a href="#" data-target="environment-variables">Environment Variables</a></li>
+      <li><a href="#" data-target="bashrc-bash_profile">.bashrc</a></li>
+      <li><a href="#" data-target="linux-tips">Other Tips</a></li>
+      
+    </ul>
+  </div>
+
+  
+  <!-- Main Content -->
+  <main>
+   
+
+    <section >
+      <h1>Linux Shell 
+      </h1>
+    </section>
+    <section id="shell-expansion">
+      <h2>Shell Expansion</h2>
+      <p>
+        In the Bash shell, expansion refers to the process by which the shell interprets and transforms input before executing commands. Understanding these expansions is crucial for effective shell scripting and command-line usage.
+      </p>
+      <h3>Types of Shell Expansion</h3>
+      <ol>
+        <li>
+          <strong>Brace Expansion:</strong> Generates arbitrary strings. For example:
+          <pre><code>echo file{1..3}.txt</code></pre>
+          Output:
+          <pre><code>file1.txt file2.txt file3.txt</code></pre>
+        </li>
+        <li>
+          <strong>Tilde Expansion:</strong> Replaces the tilde (~) with the path to the home directory. For example:
+          <pre><code>cd ~</code></pre>
+          Changes to the current user's home directory.
+        </li>
+        <li>
+          <strong>Parameter and Variable Expansion:</strong> Replaces variables with their values. For example:
+          <pre><code>echo $HOME</code></pre>
+          Outputs the path of the home directory.
+        </li>
+        <li>
+          <strong>Command Substitution:</strong> Replaces a command with its output. For example:
+          <pre><code>echo "Today is $(date)"</code></pre>
+          Might output:
+          <pre><code>Today is Thu May 8 14:58:57 PHT 2025</code></pre>
+        </li>
+        <li>
+          <strong>Arithmetic Expansion:</strong> Evaluates arithmetic expressions. For example:
+          <pre><code>echo $((3 + 2))</code></pre>
+          Outputs:
+          <pre><code>5</code></pre>
+        </li>
+        <li>
+          <strong>Word Splitting:</strong> Splits the result of expansions into separate words based on the Internal Field Separator (IFS). For example:
+          <pre><code>list="one two three"
+    for word in $list; do
+      echo "$word"
+    done</code></pre>
+          Outputs:
+          <pre><code>one
+    two
+    three</code></pre>
+        </li>
+        <li>
+          <strong>Filename Expansion (Globbing):</strong> Expands wildcard patterns to match filenames. For example:
+          <pre><code>ls *.txt</code></pre>
+          Lists all files ending with .txt in the current directory.
+        </li>
+      </ol>
+      <h3>Order of Expansion</h3>
+      <p>
+        The shell performs expansions in the following order:
+      </p>
+      <ol>
+        <li>Brace Expansion</li>
+        <li>Tilde Expansion</li>
+        <li>Parameter and Variable Expansion</li>
+        <li>Command Substitution</li>
+        <li>Arithmetic Expansion</li>
+        <li>Word Splitting</li>
+        <li>Filename Expansion</li>
+      </ol>
+      <p>
+        Understanding this order is essential, as the output of one expansion can be the input for the next.
+      </p>
+    </section>
+
+    <section id="shell-scripting">
+      <h2>Shell Scripting</h2>
+      <p>
+        Shell scripting allows you to automate tasks by writing a series of commands in a text file, known as a script. To execute a shell script, you need to ensure it has the appropriate permissions and then run it using the terminal.
+      </p>
+      <h3>Creating a Shell Script</h3>
+      <ol>
+        <li>Create a new file with a <code>.sh</code> extension. For example:
+          <pre><code>nano myscript.sh</code></pre>
+        </li>
+        <li>Add the shebang line at the top to specify the interpreter:
+          <pre><code>#!/bin/bash</code></pre>
+        </li>
+        <li>Write your desired commands below the shebang line. For example:
+          <pre><code>#!/bin/bash
+    echo "Hello, World!"</code></pre>
+        </li>
+        <li>Save and exit the editor (in nano, press <code>Ctrl+O</code> to save and <code>Ctrl+X</code> to exit).</li>
+      </ol>
+      <h3>Changing File Permissions to Execute</h3>
+      <p>
+        Before running the script, you need to make it executable. Use the <code>chmod</code> command:
+      </p>
+      <pre><code>chmod +x myscript.sh</code></pre>
+      <p>
+        This command grants execute permission to the script, allowing it to be run as a program.
+      </p>
+      <h3>Running the Script</h3>
+      <p>
+        To execute the script, use one of the following methods:
+      </p>
+      <ul>
+        <li>Run the script from the current directory:
+          <pre><code>./myscript.sh</code></pre>
+        </li>
+        <li>Specify the full path to the script:
+          <pre><code>/path/to/myscript.sh</code></pre>
+        </li>
+        <li>Use the <code>bash</code> command to run the script (execute permission not required in this case):
+          <pre><code>bash myscript.sh</code></pre>
+        </li>
+      </ul>
+      <p>
+        Ensure that the script is located in a directory included in your system's <code>PATH</code> environment variable if you wish to run it without specifying the path.
+      </p>
+    </section>
+    <section id="environment-variables">
+      <h2>Environment Variables</h2>
+      <p>
+        Environment variables are key-value pairs that influence the behavior of processes and applications on a system. They store configuration settings, such as file locations or user preferences, and facilitate communication between different parts of the operating system.
+      </p>
+      <h3>Viewing Environment Variables</h3>
+      <ul>
+        <li>Display all environment variables:
+          <pre><code>printenv</code></pre>
+        </li>
+        <li>Display a specific variable:
+          <pre><code>echo $VARIABLE_NAME</code></pre>
+        </li>
+      </ul>
+      <h3>Setting Environment Variables</h3>
+      <ul>
+        <li>Temporarily set a variable for the current session:
+          <pre><code>export VARIABLE_NAME="value"</code></pre>
+        </li>
+        <li>To make a variable available to child processes:
+          <pre><code>export VARIABLE_NAME="value"</code></pre>
+        </li>
+      </ul>
+      <h3>Unsetting Environment Variables</h3>
+      <ul>
+        <li>Remove a variable from the current session:
+          <pre><code>unset VARIABLE_NAME</code></pre>
+        </li>
+      </ul>
+      <h3>Persistent Environment Variables</h3>
+      <p>
+        To retain environment variables across sessions, define them in configuration files:
+      </p>
+      <ul>
+        <li>User-specific variables (affect only the current user):
+          <ul>
+            <li><code>~/.bashrc</code>: Loaded for interactive non-login shells.</li>
+            <li><code>~/.bash_profile</code>: Loaded for login shells.</li>
+          </ul>
+          Add the export statement to one of these files:
+          <pre><code>export VARIABLE_NAME="value"</code></pre>
+          Then, apply the changes:
+          <pre><code>source ~/.bashrc</code></pre>
+        </li>
+        <li>System-wide variables (affect all users):
+          <ul>
+            <li><code>/etc/environment</code>: Suitable for simple variable assignments.</li>
+            <li><code>/etc/profile</code> or scripts in <code>/etc/profile.d/</code>: Used for more complex configurations.</li>
+          </ul>
+          Example of adding a variable to <code>/etc/environment</code>:
+          <pre><code>sudo nano /etc/environment
+    # Add the line:
+    VARIABLE_NAME="value"</code></pre>
+          After editing, apply the changes:
+          <pre><code>source /etc/environment</code></pre>
+        </li>
+      </ul>
+      <h3>Common Environment Variables</h3>
+      <ul>
+        <li><code>PATH</code>: Directories where the system looks for executable files.</li>
+        <li><code>HOME</code>: The current user's home directory.</li>
+        <li><code>LANG</code>: Defines the system's language and locale settings.</li>
+        <li><code>USER</code>: The name of the current user.</li>
+      </ul>
+      <h3>Best Practices</h3>
+      <ul>
+        <li>Use clear and descriptive names for custom environment variables.</li>
+        <li>Be cautious when modifying system-wide configuration files; incorrect settings can affect all users.</li>
+        <li>Always back up configuration files before making changes.</li>
+      </ul>
+    </section>
+    <section id="bashrc-bash_profile">
+      <h2>Shell Configuration Files: <code>.bashrc</code> and <code>.bash_profile</code></h2>
+      <p>
+        In the Bash shell, configuration files like <code>.bashrc</code> and <code>.bash_profile</code> are used to set up the environment and customize shell behavior. Understanding the differences between these files is essential for effective shell configuration.
+      </p>
+      <h3><code>.bashrc</code></h3>
+      <ul>
+        <li><strong>Purpose:</strong> Configures the shell for interactive non-login sessions.</li>
+        <li><strong>Execution:</strong> Automatically executed when a new terminal window is opened or when a new Bash shell is started without logging in.</li>
+        <li><strong>Common Uses:</strong>
+          <ul>
+            <li>Defining aliases (e.g., <code>alias ll='ls -la'</code>).</li>
+            <li>Setting shell options and functions.</li>
+            <li>Customizing the shell prompt (<code>PS1</code>).</li>
+            <li>Configuring shell history behavior.</li>
+          </ul>
+        </li>
+      </ul>
+      <h3><code>.bash_profile</code></h3>
+      <ul>
+        <li><strong>Purpose:</strong> Configures the shell for interactive login sessions.</li>
+        <li><strong>Execution:</strong> Automatically executed when logging into the system via console, SSH, or when starting a login shell.</li>
+        <li><strong>Common Uses:</strong>
+          <ul>
+            <li>Setting environment variables (e.g., <code>PATH</code>, <code>LANG</code>).</li>
+            <li>Starting user-specific services or applications.</li>
+            <li>Ensuring that <code>.bashrc</code> is sourced for login shells.</li>
+          </ul>
+        </li>
+      </ul>
+      <h3>Best Practice: Source <code>.bashrc</code> from <code>.bash_profile</code></h3>
+      <p>
+        To maintain consistency across login and non-login shells, it's common to source <code>.bashrc</code> from within <code>.bash_profile</code>:
+      </p>
+      <pre><code>if [ -f ~/.bashrc ]; then
+      . ~/.bashrc
+    fi</code></pre>
+      <p>
+        This ensures that the configurations in <code>.bashrc</code> are applied in all interactive sessions.
+      </p>
+      <h3>Exercise: Inspect Your <code>.bashrc</code> File</h3>
+      <p>
+        To view your current <code>.bashrc</code> configurations, use the following command:
+      </p>
+      <pre><code>less ~/.bashrc</code></pre>
+      <p>
+        This will display the contents of your <code>.bashrc</code> file, allowing you to review and understand the customizations applied to your shell environment.
+      </p>
+    </section>
+    <section id="linux-tips">
+      <h2>Essential Linux Tips</h2>
+      <h3>Understanding the <code>$PATH</code> Variable</h3>
+      <p>
+        The <code>$PATH</code> variable is a colon-delimited list of directories that the shell searches through when you enter a command. The directories are checked in the order they're listed, so if multiple directories contain executables with the same name, the first one found is executed :contentReference[oaicite:0]{index=0}.
+      </p>
+      <h3>Viewing Hidden Files</h3>
+      <p>
+        To view hidden files (those starting with a dot, e.g., <code>.bashrc</code>), use the <code>-a</code> option with the <code>ls</code> command:
+      </p>
+      <pre><code>ls -a</code></pre>
+      <p>
+        This will display all files, including hidden ones, in the current directory.
+      </p>
+      <h3>Handling Filenames with Spaces</h3>
+      <p>
+        Filenames with spaces can be tricky in the terminal. To handle them:
+      </p>
+      <ul>
+        <li>Enclose the filename in quotes:
+          <pre><code>cd "My Folder"</code></pre>
+        </li>
+        <li>Escape each space with a backslash:
+          <pre><code>cd My\ Folder</code></pre>
+        </li>
+      </ul>
+      <p>
+        Alternatively, you can use tab completion to automatically escape spaces.
+      </p>
+      <h3>Clearing the Terminal Screen</h3>
+      <p>
+        To clear the terminal screen, you can use the <code>clear</code> command:
+      </p>
+      <pre><code>clear</code></pre>
+      <p>
+        For a more thorough reset, use:
+      </p>
+      <pre><code>reset</code></pre>
+      <p>
+        This command reinitializes the terminal, clearing the screen and resetting settings :contentReference[oaicite:1]{index=1}.
+      </p>
+      <h3>Using <code>sudo</code> for Elevated Privileges</h3>
+      <p>
+        The <code>sudo</code> command allows you to run commands with elevated privileges, typically as the root user. This is useful for administrative tasks like installing software or modifying system configurations :contentReference[oaicite:2]{index=2}.
+      </p>
+      <p>
+        To use <code>sudo</code>, prefix your command with it:
+      </p>
+      <pre><code>sudo command</code></pre>
+      <p>
+        You'll be prompted to enter your password to confirm your identity.
+      </p>
+    </section>
+    
+    
+    
+    
+    
+  </main>
+
+</body>
+</html>

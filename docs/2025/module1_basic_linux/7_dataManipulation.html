@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Basic Linux Course</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      display: flex;
+
+    }
+    html, body {
+      height: 100%;
+      overflow: auto;
+      overscroll-behavior: contain;
+    }
+
+    /* Floating Table of Contents */
+    #toc {
+      position: fixed;
+      top: 0px;
+      left: 20px;
+      width: 200px;
+      background-color: #f8f9fa;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+    #toc h2 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    #toc ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    #toc ul li {
+      margin: 0.5rem 0;
+    }
+    #toc ul li a {
+      text-decoration: none;
+      color: #007bff;
+    }
+    #toc ul li a:hover {
+      text-decoration: underline;
+    }
+    /* Main content styling */
+    main {
+      margin-left: 240px; /* Adjusted for TOC width */
+      padding: 2rem;
+      flex-grow: 1;
+    }
+    h1, h2 {
+      color: #2c3e50;
+    }
+    section {
+      margin-bottom: 2rem;
+      
+    }
+  </style>
+</head>
+<body>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const tocLinks = document.querySelectorAll('#toc a[data-target]');
+      tocLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('data-target');
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    });
+  </script>
+  <!-- Floating Table of Contents -->
+  <div id="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+      <li><a href="#" data-target="bioinformatics-file-formats">Bioinformatics File Formats</a></li>
+      <li><a href="#" data-target="bash-manipulation">Bash Manipulation for Bioinformatics</a></li>
+      <li><a href="#" data-target="bash-text-manipulation">Bash Text Manipulation for Bioinformatics</a></li>
+      <li><a href="#" data-target="pattern-matching">Pattern Matching in Bash</a></li>
+    </ul>
+  </div>
+
+  
+  <!-- Main Content -->
+  <main>
+   
+
+    <section >
+      <h1>Data Manipulation</h1>
+    </section>
+
+    <section id="bioinformatics-file-formats">
+      <h2>Bioinformatics File Formats</h2>
+      <p>Bioinformatics relies on various file formats to store and exchange biological data. Below is an overview of some commonly used formats:</p>
+    
+      <dl>
+        <dt><strong>FASTQ</strong></dt>
+        <dd>A format for storing raw sequencing reads, typically compressed as <code>fastq.gz</code>. Each entry includes a sequence identifier, nucleotide sequence, a plus sign separator, and a quality score line. Essential for next-generation sequencing data analysis.</dd>
+    
+        <dt><strong>FASTA</strong></dt>
+        <dd>A text-based format for representing nucleotide or peptide sequences. Each sequence begins with a header line starting with '>', followed by the sequence identifier and the sequence itself. Widely used for sequence alignment and database searches.</dd>
+    
+        <dt><strong>Multi-FASTA</strong></dt>
+        <dd>Similar to FASTA but contains multiple sequences within a single file. Each sequence is separated by a header line, allowing for batch processing of sequences.</dd>
+    
+        <dt><strong>GFF3 (General Feature Format Version 3)</strong></dt>
+        <dd>A format for describing genes and other features of DNA, RNA, and protein sequences. Each line represents a feature with fields for sequence name, source, type, start, end, and attributes. Important for annotating genomic features and gene structures.</dd>
+    
+        <dt><strong>SAM (Sequence Alignment/Map)</strong></dt>
+        <dd>A text format for storing sequence alignment data. It includes a header section and an alignment section, with each alignment represented by a line containing various fields such as sequence name, position, mapping quality, and CIGAR string. SAM files are often compressed into BAM files for storage efficiency.</dd>
+    
+        <dt><strong>VCF (Variant Call Format)</strong></dt>
+        <dd>A text file format for storing gene sequence variations, such as single nucleotide polymorphisms (SNPs) and insertions/deletions (InDels). Each line represents a variant, including information such as chromosome, position, and genotype. Crucial for genomic studies, particularly in identifying genetic variations.</dd>
+      </dl>
+    </section>
+    <section id="bash-manipulation">
+      <h2>Bash Manipulation for Bioinformatics</h2>
+      <p>Bash scripting is a powerful tool for processing and manipulating bioinformatics files. Below are common tasks and corresponding Bash commands:</p>
+    
+      <h3>1. Extract FASTA Header Lines</h3>
+      <p>To extract header lines (lines starting with '>') from a FASTA file:</p>
+      <pre><code>grep "^>" mydata.fasta > headers.txt</code></pre>
+      <p>This command filters lines beginning with '>', which are the headers in a FASTA file, and saves them to <code>headers.txt</code>.</p>
+    
+      <h3>2. Count FASTA Header Lines</h3>
+      <p>To count the number of header lines in a FASTA file:</p>
+      <pre><code>grep -c "^>" mydata.fasta</code></pre>
+      <p>This command counts the number of lines starting with '>', indicating the number of sequences in the FASTA file.</p>
+    
+      <h3>3. Save Header Lines to a File</h3>
+      <p>To save header lines to a file:</p>
+      <pre><code>grep "^>" mydata.fasta > headers.txt</code></pre>
+      <p>This command extracts header lines and writes them to <code>headers.txt</code>.</p>
+    
+      <h3>4. Split Multi-FASTA into Individual Files</h3>
+      <p>To split a multi-sequence FASTA file into individual files named after the sequence identifiers:</p>
+      <pre><code>awk '/^>/{if (seq) print seq > filename; filename=$1; seq=""; next} {seq = seq $0} END{print seq > filename}' mydata.fasta</code></pre>
+      <p>This <code>awk</code> script processes the FASTA file, creating separate files for each sequence, named after the sequence header.</p>
+    
+      <h3>5. Combine Multiple FASTA Files into One</h3>
+      <p>To concatenate multiple FASTA files into a single file:</p>
+      <pre><code>cat seq1.fasta seq2.fasta seq3.fasta > combined.fasta</code></pre>
+      <p>This command combines the contents of <code>seq1.fasta</code>, <code>seq2.fasta</code>, and <code>seq3.fasta</code> into <code>combined.fasta</code>.</p>
+    
+      <h3>6. Extract Gene Information from GFF3</h3>
+      <p>To extract gene information (e.g., gene ID and function) from a GFF3 file:</p>
+      <pre><code>awk '$3 == "gene" {print $9}' mydata.gff3 | cut -d ';' -f1 > gene_info.txt</code></pre>
+      <p>This command filters lines where the feature type is 'gene', extracts the ninth column (attributes), and then extracts the gene ID, saving it to <code>gene_info.txt</code>.</p>
+    
+      <h3>7. Count Genes in GFF3</h3>
+      <p>To count the number of genes in a GFF3 file:</p>
+      <pre><code>awk '$3 == "gene" {count++} END {print count}' mydata.gff3</code></pre>
+      <p>This command counts the number of lines where the feature type is 'gene'.</p>
+    
+      <h3>8. Skip VCF Metadata</h3>
+      <p>To skip metadata lines (lines starting with '#') in a VCF file:</p>
+      <pre><code>grep -v "^#" mydata.vcf > data.vcf</code></pre>
+      <p>This command filters out lines starting with '#', which are metadata, and writes the remaining data to <code>data.vcf</code>.</p>
+    
+      <h3>9. Filter VCF Based on Quality</h3>
+      <p>To filter variants in a VCF file based on quality (e.g., quality score > 30):</p>
+      <pre><code>awk '$6 > 30' mydata.vcf > filtered.vcf</code></pre>
+      <p>This command filters lines where the quality score (column 6) is greater than 30 and writes them to <code>filtered.vcf</code>.</p>
+    </section>
+    <section id="bash-text-manipulation">
+      <h2>Bash Text Manipulation for Bioinformatics</h2>
+      <p>Efficient text processing is essential in bioinformatics for tasks like extracting sequence data, filtering annotations, and transforming file formats. Below is an overview of key Bash commands and their applications:</p>
+    
+      <h3>1. <code>tr</code> – Translate or Delete Characters</h3>
+      <p>Use <code>tr</code> to replace or remove characters in a stream of text.</p>
+      <pre><code>cat mydata.fq.gz | tr 'A' 'T' > modified.fq.gz</code></pre>
+      <p>This command replaces all occurrences of 'A' with 'T' in the FASTQ file.</p>
+    
+      <h3>2. <code>cut</code> – Remove Sections from Each Line</h3>
+      <p><code>cut</code> is useful for extracting specific columns from a file.</p>
+      <pre><code>cut -f1,3 mydata.gff3 > selected_columns.txt</code></pre>
+      <p>This command extracts the first and third columns from a GFF3 file.</p>
+    
+      <h3>3. <code>paste</code> – Merge Lines of Files</h3>
+      <p><code>paste</code> combines corresponding lines from multiple files.</p>
+      <pre><code>paste seq1.fasta seq2.fasta > combined_sequences.fasta</code></pre>
+      <p>This command merges sequences from two FASTA files into one.</p>
+    
+      <h3>4. <code>grep</code> – Search for Specific Text</h3>
+      <p><code>grep</code> searches for patterns within files.</p>
+      <pre><code>grep "^>" mydata.fasta > headers.txt</code></pre>
+      <p>This command extracts header lines from a FASTA file.</p>
+    
+      <h3>5. <code>sed</code> – Stream Editor for Filtering and Transforming Text</h3>
+      <p><code>sed</code> allows for text transformations on an input stream.</p>
+      <pre><code>sed 's/old_sequence/new_sequence/g' mydata.fasta > updated.fasta</code></pre>
+      <p>This command replaces all occurrences of 'old_sequence' with 'new_sequence' in a FASTA file.</p>
+    
+      <h3>6. <code>awk</code> – Pattern Scanning and Processing Language</h3>
+      <p><code>awk</code> is a powerful tool for pattern scanning and processing.</p>
+      <pre><code>awk '$3 == "gene" {print $9}' mydata.gff3 > gene_info.txt</code></pre>
+      <p>This command extracts the ninth column (gene information) from lines where the third column is 'gene' in a GFF3 file.</p>
+    
+      <h3>7. Combining <code>grep</code> and <code>awk</code></h3>
+      <p>While it's possible to combine <code>grep</code> and <code>awk</code>, it's often more efficient to use <code>awk</code> alone, as it can perform both searching and processing tasks. For example:</p>
+      <pre><code>awk '$3 == "gene" {print $9}' mydata.gff3 > gene_info.txt</code></pre>
+      <p>This command achieves the same result as using <code>grep</code> followed by <code>awk</code>, but more efficiently.</p>
+    
+      <p>For more detailed information on combining <code>grep</code> and <code>awk</code>, refer to the article "Using grep With awk" on Baeldung: <a href="https://www.baeldung.com/linux/grep-awk-combine">https://www.baeldung.com/linux/grep-awk-combine</a></p>
+    </section>
+    <section id="pattern-matching">
+      <h2>Pattern Matching in Bash</h2>
+      <h3>Globbing (Wildcard Expansion)</h3>
+      <p>Globbing is used by the shell to match filenames or paths. It utilizes wildcard characters like:</p>
+      <ul>
+        <li><code>*</code>: Matches any sequence of characters (including none).</li>
+        <li><code>?</code>: Matches exactly one character.</li>
+        <li><code>[abc]</code>: Matches any one of the characters 'a', 'b', or 'c'.</li>
+        <li><code>[a-z]</code>: Matches any lowercase letter.</li>
+      </ul>
+      <p><strong>Example:</strong> <code>ls *.txt</code> will list all .txt files in the current directory.</p>
+    
+      <h3>Regular Expressions (Regex)</h3>
+      <p>Regular expressions are used for pattern matching within text streams, such as with <code>grep</code>, <code>sed</code>, or <code>awk</code>.</p>
+      <ul>
+        <li><code>.</code>: Matches any single character.</li>
+        <li><code>*</code>: Matches zero or more of the preceding element.</li>
+        <li><code>^</code>: Anchors the match at the start of the line.</li>
+        <li><code>$</code>: Anchors the match at the end of the line.</li>
+        <li><code>[]</code>: Matches any one of the enclosed characters.</li>
+      </ul>
+      <p><strong>Example:</strong> <code>grep "^G" myfile.txt</code> will find lines in <code>myfile.txt</code> that start with 'G'.</p>
+    
+      <h3>Differences Between Globbing and Regex</h3>
+      <table>
+        <tr><th>Feature</th><th>Globbing</th><th>Regular Expressions</th></tr>
+        <tr><td>Used By</td><td>Shell (e.g., Bash)</td><td>Utilities like <code>grep</code>, <code>sed</code>, <code>awk</code></td></tr>
+        <tr><td>Primary Use</td><td>Filename matching</td><td>Text pattern matching</td></tr>
+        <tr><td>Complexity</td><td>Simple</td><td>More complex and powerful</td></tr>
+        <tr><td>Syntax</td><td><code>*</code>, <code>?</code>, <code>[]</code></td><td><code>.*</code>, <code>^</code>, <code>$</code>, <code>[]</code>, <code>()</code></td></tr>
+        <tr><td>Example</td><td><code>*.txt</code></td><td><code>^.*\.txt$</code></td></tr>
+      </table>
+    
+      <h3>Practical Examples</h3>
+      <ul>
+        <li><strong>Extracting FASTA Header Lines:</strong> <code>grep "^>" mydata.fasta > headers.txt</code></li>
+        <li><strong>Counting FASTA Header Lines:</strong> <code>grep -c "^>" mydata.fasta</code></li>
+        <li><strong>Splitting a Multi-FASTA File:</strong> <code>awk '/^>/{if (seq) print seq > filename; filename=$1; seq=""; next} {seq = seq $0} END{print seq > filename}' mydata.fasta</code></li>
+      </ul>
+    </section>
+    
+    
+    
+    
+    
+
+
+  </main>
+
+</body>
+</html>
