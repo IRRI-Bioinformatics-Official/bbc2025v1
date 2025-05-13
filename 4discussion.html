@@ -11,54 +11,28 @@
 	href="/bbc2025v1/assets/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Raleway:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+
 <style>
-body {
-	font-family: Arial, sans-serif;
-	margin: 20px;
-	line-height: 1.6;
-}
-
-h2, h3 {
-	color: #2c3e50;
-}
-
-ul {
-	list-style-type: disc;
-	margin-left: 20px;
-}
-
-table {
-	width: 100%;
-	border-collapse: collapse;
-	margin-top: 20px;
-}
-
-table, th, td {
-	border: 1px solid #bdc3c7;
-}
-
-th, td {
-	padding: 10px;
-	text-align: left;
-}
-
-th {
-	background-color: #ecf0f1;
-}
-
-tr:nth-child(even) {
+.question-box {
+	border: 1px solid #ccc;
+	border-left: 5px solid #007BFF;
+	padding: 15px;
+	margin: 20px auto;
+	max-width: 700px;
 	background-color: #f9f9f9;
 }
 
-a {
-	color: #2980b9;
-	text-decoration: none;
+.question-box h2 {
+	margin-top: 0;
 }
 
-a:hover {
-	text-decoration: underline;
+.question-meta {
+	font-size: 0.9em;
+	color: #555;
+	margin-bottom: 10px;
 }
 </style>
+
 </head>
 
 <body>
@@ -72,22 +46,24 @@ a:hover {
 	<header class="pt-5">
 		<div class="container pt-4 pt-xl-5">
 			<div id="announcements" class="announcement-box">
-			<script src="https://giscus.app/client.js"
-				        data-repo="RBI-Bioinformatics/bbc2025v1"
-				        data-repo-id="R_kgDOOiJfPw"
-				        data-category="Announcements"
-				        data-category-id="DIC_kwDOOiJfP84CqFlv"
-				        data-mapping="pathname"
-				        data-strict="0"
-				        data-reactions-enabled="1"
-				        data-emit-metadata="0"
-				        data-input-position="bottom"
-				        data-theme="light"
-				        data-lang="en"
-				        crossorigin="anonymous"
-				        async>
-				</script>
+				<div class="question-box">
+					<h2>📘 Module 1: Any questions for module1?
+						data?</h2>
+					<div class="question-meta">Posted by: lhbarboza · May 13, 2025</div>
+					<p>For those working through Module 1, please share your
+						approach or questions about formatting the input dataset for SNP
+						processing. Should it be in VCF, CSV, or another format?</p>
 				</div>
+				<script src="https://giscus.app/client.js"
+					data-repo="RBI-Bioinformatics/bbc2025v1"
+					data-repo-id="R_kgDOOiJfPw" data-category="Announcements"
+					data-category-id="DIC_kwDOOiJfP84CqFlv" data-mapping="pathname"
+					data-strict="0" data-reactions-enabled="1" data-emit-metadata="0"
+					data-input-position="bottom" data-theme="light" data-lang="en"
+					crossorigin="anonymous" async>
+					
+				</script>
+			</div>
 		</div>
 	</header>
 	<footer>
