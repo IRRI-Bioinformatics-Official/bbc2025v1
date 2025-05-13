@@ -6,7 +6,7 @@ This is README.md
 
 [Schedule](schedules/schedule.html)
 
-<iframe src="https://calendar.google.com/calendar/embed?src=yourcalendarID&ctz=YourTimeZone" 
+<iframe src="https://cgiar-my.sharepoint.com/:w:/r/personal/l_h_barboza_cgiar_org/Documents/myTestDocs.docx?d=w1bdc93a4f8204ae08d18d0410deb145d&csf=1&web=1&e=2qRHgE" 
         style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 
 
