@@ -7,5 +7,5 @@ thead,tbody,tfoot,tr,td,th {
     border-width: 0
 }
  .table{
-     --bs-table-border-color: transparent;
+    border: 0
  }
