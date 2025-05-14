@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Linux for Bioinformatics – Day 1 Cheat Sheet</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      background: #f9f9f9;
+    }
+    h1, h2 {
+      color: #2c3e50;
+    }
+    section {
+      background: #fff;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    code {
+      background: #f4f4f4;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 0.6rem;
+    }
+    th {
+      background-color: #2c3e50;
+      color: #fff;
+    }
+    .timeblock {
+      font-weight: bold;
+      color: #00695c;
+    }
+    .small {
+      font-size: 0.9em;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🧬 Linux for Bioinformatics – Day 1 Cheat Sheet</h1>
+<p><strong>Goal:</strong> Use essential Linux terminal commands to navigate, manage files, and explore bioinformatics data.</p>
+
+
+<section>
+  <h2>🔧 Essential Commands</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Command</th>
+        <th>Description</th>
+        <th>Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><code>pwd</code></td><td>Show current directory</td><td><code>/home/user/project</code></td></tr>
+      <tr><td><code>ls</code></td><td>List contents</td><td><code>ls -l</code></td></tr>
+      <tr><td><code>cd</code></td><td>Change directory</td><td><code>cd data/</code></td></tr>
+      <tr><td><code>mkdir</code></td><td>Create a directory</td><td><code>mkdir results</code></td></tr>
+      <tr><td><code>touch</code></td><td>Create a blank file</td><td><code>touch notes.txt</code></td></tr>
+      <tr><td><code>cp</code></td><td>Copy files</td><td><code>cp file.txt backup/</code></td></tr>
+      <tr><td><code>mv</code></td><td>Move or rename</td><td><code>mv data.txt old_data.txt</code></td></tr>
+      <tr><td><code>rm</code></td><td>Delete file</td><td><code>rm junk.txt</code></td></tr>
+      <tr><td><code>cat</code></td><td>View content</td><td><code>cat report.txt</code></td></tr>
+      <tr><td><code>less</code></td><td>View paged file</td><td><code>less large.tsv</code></td></tr>
+      <tr><td><code>head</code></td><td>First lines</td><td><code>head data.tsv</code></td></tr>
+      <tr><td><code>tail</code></td><td>Last lines</td><td><code>tail logs.txt</code></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>🗜️ Handling Compressed Files</h2>
+  <p>Bioinformatics files often come compressed. These commands will help you unpack and inspect them:</p>
+  <table>
+    <thead>
+      <tr><th>Command</th><th>Description</th><th>Example</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>unzip</code></td><td>Extract a .zip file</td><td><code>unzip dataset.zip</code></td></tr>
+      <tr><td><code>tar -xvf</code></td><td>Extract .tar archive</td><td><code>tar -xvf archive.tar</code></td></tr>
+      <tr><td><code>tar -xzvf</code></td><td>Extract .tar.gz file</td><td><code>tar -xzvf genome.tar.gz</code></td></tr>
+      <tr><td><code>gunzip</code></td><td>Unzip a .gz file</td><td><code>gunzip reads.fastq.gz</code></td></tr>
+    </tbody>
+  </table>
+
+  <h3>🧪 Activity Idea</h3>
+  <ul>
+    <li>Extract a given file: <code>tar -xzvf data.tar.gz</code></li>
+    <li>List the contents: <code>ls</code></li>
+    <li>View a text file inside: <code>less data/info.txt</code></li>
+    <li>Bonus: Compress a folder: <code>tar -czvf newpack.tar.gz foldername/</code></li>
+  </ul>
+</section>
+
+<section>
+  <h2>📘 Practice Examples</h2>
+  <ul>
+    <li>Create folder and files: <code>mkdir project && cd project && touch sample.txt</code></li>
+    <li>Copy file: <code>cp sample.txt backup.txt</code></li>
+    <li>Move file: <code>mv backup.txt archive/</code></li>
+    <li>View file: <code>less sample.txt</code></li>
+    <li>Extract data: <code>tar -xzvf dataset.tar.gz</code></li>
+  </ul>
+</section>
+
+<section>
+  <h2>📝 Pro Tips</h2>
+  <ul>
+    <li>Use <code>Tab</code> to auto-complete file/folder names.</li>
+    <li>Use <code>history</code> to see previous commands.</li>
+    <li>Use <code>Ctrl + C</code> to cancel a command.</li>
+    <li>Absolute paths start with <code>/</code>, relative ones don’t.</li>
+    <li>Use <code>man tar</code> or <code>man unzip</code> to see command help.</li>
+  </ul>
+</section>
+
+</body>
+</html>
