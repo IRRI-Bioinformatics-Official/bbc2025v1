@@ -8,8 +8,7 @@ The general objective of the training is to:
 
 - Provide participants with the necessary **bioinformatics** skills for data manipulation, analysis, and the use of genomics-related bioinformatics software.
 - Specifically, the course will focus on:
-  - Training participants to use the **Linux** operating system.
-  - Performing **Linux operations** effectively.
+  - Training participants to use the **Linux** operating system. Performing **Linux operations** effectively.
   - Gaining hands-on experience with **bioinformatics** tools and techniques.
 
 ## Format
