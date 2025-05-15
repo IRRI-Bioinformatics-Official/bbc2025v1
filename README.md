@@ -1,23 +1,63 @@
-# Basic Bioinformatics Course 
+# Training Overview
 
-Basic Bioinformatics Course 2025 version 1
+Welcome to the **UPLB-IRRI Internship/Training: Basic Bioinformatics Course** under the UPLB and IRRI partnership. This training is designed to equip participants with the basic bioinformatics skills necessary for performing bioinformatics analysis.
 
-This is README.md 
+## Objective
 
-[Schedule](schedules/schedule.html)
+The general objective of the training is to:
 
-<iframe src="https://cgiar-my.sharepoint.com/:w:/r/personal/l_h_barboza_cgiar_org/Documents/myTestDocs.docx?d=w1bdc93a4f8204ae08d18d0410deb145d&csf=1&web=1&e=2qRHgE" 
-        style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+- Provide participants with the necessary **bioinformatics** skills for data manipulation, analysis, and the use of genomics-related bioinformatics software.
+- Specifically, the course will focus on:
+  - Training participants to use the **Linux** operating system.
+  - Performing **Linux operations** effectively.
+  - Gaining hands-on experience with **bioinformatics** tools and techniques.
 
+## Format
 
-Links:
+This is a **hybrid training setup**.
 
-Module 1: Linux for Bioinformatics
+---
 
-[Module 2: NGS](module2_ngs/ngs.md)
+# Course Outline
 
-[Module 3: GWAS](module3_gwas/gwas.md)
+## Training 1: Sequence to Variants
 
-[Module 4: PostGWAS](module4_postgwas/postgwas.md)
+### Module 1: Introduction and Fundamentals
+**Objective**: To introduce the Linux operating system and basic shell commands to equip students for command-line data analysis.
 
+- Introduction to Linux
+- Using WSL on Windows and installation guide
+- Linux file system, hard and soft links, working directory
+- Concept of shell, Linux processes, Environment variables, PATH variables, Shell expansion, Scripts
+- Using Bash to manipulate common data formats (FASTA, SAM, VCF)
 
+### Module 2: NGS Data Analysis for Genotyping Purposes
+**Objective**: To introduce the GATK workflow for variant calling and apply it to identify and characterize genetic variants in rice.
+
+- Introduction to Second Generation Sequencing
+- Variant Calling Pipeline
+- Exploring VCF data, filtering, and basic statistics
+
+---
+
+## Training 2: GWAS and Post-GWAS
+
+### Module 3: Basic GWAS Tutorial and Introduction to Internship Special Project
+**Objective**: Introduction to GWAS methodology and acquiring practical skills in GWAS analysis of rice datasets.
+
+- Population Structure and Rice Diversity
+- Introduction to GWAS
+- Interpreting GWAS outputs: Manhattan and QQ plots
+- Hands-on: Population structure
+- Hands-on: GWAS using TASSEL
+
+### Module 4: Post-GWAS using Rice SNP-Seek, Rice Galaxy, and RicePilaf. Introduction to Special Project
+**Objective**: Learn practical skills in interpreting GWAS output, integrating with other omics data, and identification of candidate genes.
+
+- Significance threshold. Effective number of independent tests
+- Linkage disequilibrium clumping
+- Interrogating genomic regions with SNP-Seek and CropGalaxy
+- Post-GWAS analysis using RicePilaf
+
+### Module 5: Special Project
+**Objective**: To process, analyze, and interpret datasets using the skillsets learned from the training.
