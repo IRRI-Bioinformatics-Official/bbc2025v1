@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Basic Linux Course</title>
 <style>
 body {
@@ -150,7 +152,33 @@ strong {
   }
 }
 
+
+
 </style>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toc = document.getElementById("toc");
+    const toggleBtn = document.getElementById("toggleToc");
+
+    function checkScreenWidth() {
+      if (window.innerWidth <= 768) {
+        toggleBtn.style.display = 'block';
+        toc.style.display = 'none';
+      } else {
+        toggleBtn.style.display = 'none';
+        toc.style.display = 'block';
+      }
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      toc.style.display = (toc.style.display === 'none') ? 'block' : 'none';
+    });
+
+    window.addEventListener("resize", checkScreenWidth);
+    checkScreenWidth();
+  });
+</script>
+
 </head>
 <body>
 	<script>
@@ -196,6 +224,8 @@ strong {
 
 	<!-- Main Content -->
 	<main style="margin-bottom: 100px;">
+		<button id="toggleToc" style="display: none;">☰ Table of Contents</button>
+		
 		<section id="overview">
 			<h2>🧭 Training Overview: Linux Basics, Filesystem, and Shell
 				Navigation</h2>
