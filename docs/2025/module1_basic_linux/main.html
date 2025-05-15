@@ -20,7 +20,6 @@
         
         /* Style the iframe to take up the full viewport */
         iframe {
-          height: 80vh; /* 100% of viewport height */
           border: none;  /* Removes default border */
           display: block; /* Removes inline display */
         }
@@ -38,16 +37,14 @@
 
     
     
-    <div class="container pt-4 pt-xl-5" style="max-width: 1200px !important;">
-        <section height="100%">
-            <div class="container py-4 py-xl-5" height="100%">
+    <div class="container pt-4 pt-xl-5" style="height:100%">
+        <section style="height:100%">
+            <div class="container py-4 py-xl-5" style="height:100%">
                 <iframe
                 src="day1.html"
                 title="Introduction Module"
-                width="1900px"
-                height="1000px"
                 scrolling="yes"
-                style="border: none;overflow: auto;"
+                style="border: none;overflow: auto;height:100%"
                 ></iframe>
             </div>
         </section>
