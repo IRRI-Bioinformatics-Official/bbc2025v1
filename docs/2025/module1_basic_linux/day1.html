@@ -112,6 +112,44 @@ li {
 strong {
 	color: #2c3e50;
 }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  #toc {
+    position: static;
+    width: auto;
+    box-shadow: none;
+    margin: 1rem;
+  }
+
+  main {
+    margin-left: 0;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #toc h2 {
+    font-size: 1rem;
+  }
+
+  #toc ul li {
+    font-size: 0.85rem;
+  }
+
+  section {
+    padding: 1rem;
+  }
+
+  pre, code {
+    font-size: 0.85em;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -932,22 +970,7 @@ strong {
 		</section>
 		</br> </br> </br>
 	</main>
-	<footer>
-		<div class="container py-4 py-lg-5" style="padding: 0px !important;">
-			<hr>
-			<div
-				class="text-muted d-flex justify-content-between align-items-center pt-3"
-				style="text-align: center; padding: 0px !important;">
-				<p class="mb-0" style="text-align: center; width: 100%;">
-					<strong>2025 IRRI&nbsp;Bioinformatics Team</strong>
-				</p>
-			</div>
-		</div>
-	</footer>
-	</br>
-	</br>
-	</br>
-
+	
 
 </body>
 </html>
