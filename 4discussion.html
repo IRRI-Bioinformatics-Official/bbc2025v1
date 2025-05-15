@@ -45,7 +45,7 @@ header {
 
 .tab.active {
 	background-color: rgb(253, 216, 53);
-    color: black;
+	color: black;
 }
 
 .tab:hover {
@@ -144,62 +144,72 @@ footer {
 </head>
 
 <body>
+	<div id="nav-placeholder"></div>
 
-	<header>
-		<h1>Welcome to the Forum</h1>
-	</header>
+	<script>
+		$(function() {
+			$("#nav-placeholder").load("/bbc2025v1/nav.html");
+		});
+	</script>
 
-	<!-- Tab navigation -->
-	<div class="tabs">
-		<div class="tab active" id="announcements-tab">Announcements</div>
-		<div class="tab" id="discussions-tab">Forum Discussions</div>
-	</div>
+	<div class="container pt-4 pt-xl-5"
+		style="max-width: 1200px !important;">
+		<header>
+			<h1>Welcome to the Forum</h1>
+		</header>
 
-	<!-- Announcements Section (Initially shown) -->
-	<div id="announcements-content">
-		<div class="announcement">
-			<p>
-				<strong>URGENT:</strong> The forum will undergo maintenance on May
-				20th, 2025, from 2:00 AM to 4:00 AM. Please plan accordingly.
-			</p>
-			<p class="date">
-				<em>Posted on: May 15th, 2025</em>
-			</p>
+		<!-- Tab navigation -->
+		<div class="tabs">
+			<div class="tab active" id="announcements-tab">Announcements</div>
+			<div class="tab" id="discussions-tab">Forum Discussions</div>
 		</div>
 
-		<!-- Collapsible Old Announcements -->
-		<div class="announcement collapsed">
-			<p>
-				<strong>ANNOUNCEMENT:</strong> Scheduled update to the forum
-				interface will happen on June 1st, 2025.
-			</p>
-			<p class="date">
-				<em>Posted on: April 30th, 2025</em>
-			</p>
-			<div class="announcement-content">
-				<p>We will be making some major changes to the forum's
-					interface. Please stay tuned for updates.</p>
+		<!-- Announcements Section (Initially shown) -->
+		<div id="announcements-content">
+			<div class="announcement">
+				<p>
+					<strong>URGENT:</strong> The forum will undergo maintenance on May
+					20th, 2025, from 2:00 AM to 4:00 AM. Please plan accordingly.
+				</p>
+				<p class="date">
+					<em>Posted on: May 15th, 2025</em>
+				</p>
 			</div>
-			<button class="collapse-btn">Show More</button>
-		</div>
-	</div>
 
-	<!-- Forum Discussions Section (Initially hidden) -->
-	<div id="discussions-content" style="display: none;">
-		<div class="container">
-			<h2>Forum Topics</h2>
-			<ul class="forum-list">
-				<li><a href="module1_discussion.html">Module 1:
-						Introduction and Fundamentals Discussion</a></li>
-				<li><a href="topic2.html">Module 2: NGS data analysis for
-						genotyping purposes</a></li>
-				<li><a href="topic3.html">Module 3: Basic GWAS tutorial and
-						Introduction to Internship Special Project</a></li>
-				<li><a href="topic4.html">Module 4: Post-GWAS using Rice
-						SNP-Seek, Rice Galaxy, and RicePilaf. Introduction to special
-						project</a></li>
-				<li><a href="topic5.html">Module 5: Special Project</a></li>
-			</ul>
+			<!-- Collapsible Old Announcements -->
+			<div class="announcement collapsed">
+				<p>
+					<strong>ANNOUNCEMENT:</strong> Scheduled update to the forum
+					interface will happen on June 1st, 2025.
+				</p>
+				<p class="date">
+					<em>Posted on: April 30th, 2025</em>
+				</p>
+				<div class="announcement-content">
+					<p>We will be making some major changes to the forum's
+						interface. Please stay tuned for updates.</p>
+				</div>
+				<button class="collapse-btn">Show More</button>
+			</div>
+		</div>
+
+		<!-- Forum Discussions Section (Initially hidden) -->
+		<div id="discussions-content" style="display: none;">
+			<div class="container">
+				<h2>Forum Topics</h2>
+				<ul class="forum-list">
+					<li><a href="module1_discussion.html">Module 1:
+							Introduction and Fundamentals Discussion</a></li>
+					<li><a href="topic2.html">Module 2: NGS data analysis for
+							genotyping purposes</a></li>
+					<li><a href="topic3.html">Module 3: Basic GWAS tutorial
+							and Introduction to Internship Special Project</a></li>
+					<li><a href="topic4.html">Module 4: Post-GWAS using Rice
+							SNP-Seek, Rice Galaxy, and RicePilaf. Introduction to special
+							project</a></li>
+					<li><a href="topic5.html">Module 5: Special Project</a></li>
+				</ul>
+			</div>
 		</div>
 	</div>
 
