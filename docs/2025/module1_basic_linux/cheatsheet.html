@@ -81,6 +81,70 @@
   </table>
 </section>
 
+<section id="text-tools-cheatsheet">
+  <h2>📝 Quick Cheat Sheet – <code>cat</code>, <code>grep</code>, <code>awk</code>, <code>sed</code></h2>
+
+  <table style="width:100%; border-collapse:collapse;" border="1" cellpadding="6">
+    <thead style="background:#f2f2f2;">
+      <tr>
+        <th>Tool & Syntax</th>
+        <th>What It Does</th>
+        <th>Common Examples</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong><code>cat file</code></strong></td>
+        <td>Print entire file to the terminal; concatenate multiple files.</td>
+        <td>
+          <code>cat seq1.fasta seq2.fasta &gt; all.fasta</code><br />
+          <code>cat -n file.txt</code> (show line numbers)
+        </td>
+      </tr>
+
+      <tr>
+        <td><strong><code>grep "pattern" file</code></strong></td>
+        <td>Search lines matching a text/regex pattern.</td>
+        <td>
+          <code>grep -i "brca1" genes.tsv</code> (ignore case)<br />
+          <code>grep -v "^#" vcf.vcf</code> (exclude metadata)<br />
+          <code>grep -c "^&gt;" fasta.fa</code> (count FASTA headers)
+        </td>
+      </tr>
+
+      <tr>
+        <td><strong><code>awk 'condition {action}' file</code></strong></td>
+        <td>Column‑wise filtering, printing, math.</td>
+        <td>
+          <code>awk '{print $1,$3}' data.tsv</code> (print cols 1 & 3)<br />
+          <code>awk '$6&gt;30' variants.vcf</code> (Q score &gt; 30)<br />
+          <code>awk 'BEGIN{FS=";"} $1~/gene/' ann.txt</code>
+        </td>
+      </tr>
+
+      <tr>
+        <td><strong><code>sed 's/find/replace/' file</code></strong></td>
+        <td>Stream editor: substitute, delete, select lines.</td>
+        <td>
+          <code>sed 's/chr/Chr/g' gff3</code> (global replace)<br />
+          <code>sed -n '1,5p' file</code> (show lines 1‑5)<br />
+          <code>sed '/^#/d' vcf.vcf</code> (delete comment lines)
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:1.2em;">⚡ Rapid Combos</h3>
+  <ul>
+    <li><code>grep "gene" file | wc -l</code> – count matching lines.</li>
+    <li><code>awk '$3==\"gene\"' gff3 | cut -f9</code> – extract gene attributes.</li>
+    <li><code>cat *.fa | grep &quot;^&gt;&quot;</code> – list all FASTA headers across files.</li>
+  </ul>
+
+  <p style="font-size:0.9em; color:#666;">Tip: chain these tools with pipes (<code>|</code>) to build powerful one‑liners for large bioinformatics datasets.</p>
+</section>
+
+
 <section>
   <h2>🗜️ Handling Compressed Files</h2>
   <p>Bioinformatics files often come compressed. These commands will help you unpack and inspect them:</p>
