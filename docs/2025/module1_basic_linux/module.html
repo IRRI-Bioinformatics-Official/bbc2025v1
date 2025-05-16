@@ -92,6 +92,11 @@ code {
 	background-color: #ededed;
 	padding: 2px 5px;
 	border-radius: 3px;
+	display: block;
+}
+
+.codeCopy{
+	width: 100%;
 }
 
 ul {
@@ -116,44 +121,74 @@ strong {
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
-  body {
-    flex-direction: column;
-  }
-
-  #toc {
-    position: static;
-    width: auto;
-    box-shadow: none;
-    margin: 1rem;
-  }
-
-  main {
-    margin-left: 0;
-    padding: 1rem;
-  }
+@media ( max-width : 768px) {
+	body {
+		flex-direction: column;
+	}
+	#toc {
+		position: static;
+		width: auto;
+		box-shadow: none;
+		margin: 1rem;
+	}
+	main {
+		margin-left: 0;
+		padding: 1rem;
+	}
 }
 
-@media (max-width: 480px) {
-  #toc h2 {
-    font-size: 1rem;
-  }
-
-  #toc ul li {
-    font-size: 0.85rem;
-  }
-
-  section {
-    padding: 1rem;
-  }
-
-  pre, code {
-    font-size: 0.85em;
-  }
+@media ( max-width : 480px) {
+	#toc h2 {
+		font-size: 1rem;
+	}
+	#toc ul li {
+		font-size: 0.85rem;
+	}
+	section {
+		padding: 1rem;
+	}
+	pre, code {
+		font-size: 0.85em;
+	}
 }
 
+.output-box {
+	border: 1px solid #ccc;
+	padding: 10px;
+	margin: 10px;
+	width: 300px;
+	overflow-x: auto;
+}
 
+#copy-btn {
+	margin-top: 10px;
+	cursor: pointer;
+	position: absolute;
+	top: 10px; /* Position the button at the top */
+	right: 10px; /* Position the button at the right */
+	border: 0px;
+	background: #369136;
+	padding: 5px; border-radius : 5px; color : white; background : #369136;
+	padding : 5px; border-radius : 5px; padding : 5px;
+	border-radius: 5px;
+	color: white;
+	background: #369136;
+	padding: 5px;
+	border-radius: 5px;
+	padding: 5px;
+	border-radius: 5px;
+}
 
+#copy-btn:hover {
+	background-color: #45a049;
+}
+
+.code_div {
+	width: 100%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 5px;
+}
 </style>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
@@ -176,8 +211,33 @@ strong {
 
     window.addEventListener("resize", checkScreenWidth);
     checkScreenWidth();
+    
+    const copyButtons = document.querySelectorAll('.copy-btn');
+    
+    copyButtons.forEach(button => {
+        button.addEventListener("click", function() {
+            // Find the associated command text (inside the <code> tag)
+            const commandText = button.previousElementSibling.innerText;
+
+            // Create a temporary input to copy the command text
+            const tempInput = document.createElement("input");
+            tempInput.value = commandText;
+            document.body.appendChild(tempInput);
+
+            // Select the text and copy it
+            tempInput.select();
+            document.execCommand("copy");
+
+            // Remove the temporary input
+            document.body.removeChild(tempInput);
+
+            button.textContent = "Copied";
+        });
+    });
   });
 </script>
+
+
 
 </head>
 <body>
@@ -215,17 +275,16 @@ strong {
 			<li><a href="#" data-target="compressed">VII. Handling
 					Compressed File</a></li>
 			<li><a href="#" data-target="quiz">VIII. Activity</a></li>
-			<li><a
-				href="main_c.html"
-				target="blank">IX. Cheat Sheet</a></li>
+			<li><a href="main_c.html" target="blank">IX. Cheat Sheet</a></li>
 		</ul>
 	</div>
 
 
 	<!-- Main Content -->
-	<main style="margin-bottom: 100px;margin-top:20px;">
-		<button id="toggleToc" style="display: none;">☰ Table of Contents</button>
-		
+	<main style="margin-bottom: 100px; margin-top: 20px;">
+		<button id="toggleToc" style="display: none;">☰ Table of
+			Contents</button>
+
 		<section id="overview">
 			<h2>🧭 Training Overview: Linux Basics, Filesystem, and Shell
 				Navigation</h2>
@@ -385,38 +444,42 @@ strong {
 
 			<h3>1. Key Commands</h3>
 			<ul>
-				<li><strong><code>pwd</code> (Print Working
-						Directory):</strong> This command shows the <strong>current
-						directory</strong> you are in. <pre>
-						<code>pwd</code>
-					</pre> Example output: <pre>
-						<code>/home/user/Documents</code>
-					</pre></li>
+				<li><strong> Print Working Directory: </strong> This command
+					shows the <strong>current directory</strong> you are in.
 
-				<li><strong><code>ls</code> (List):</strong> This command lists
-					all files and directories in the <strong>current directory</strong>.
-					<pre>
+					<div class="code_div">
+						<code>pwd</code>
+						<button class="copy-btn">Copy</button>
+					</div> Example output: <code>/home/user/Documents</code></li>
+
+				<li><strong>List:</strong> This command lists all files and
+					directories in the <strong>current directory</strong>.
+					<div class="code_div">
 						<code>ls</code>
-					</pre> Example output: <pre>
-						<code>Documents  Pictures  Downloads  Music</code>
-					</pre>
+						<button class="copy-btn">Copy</button>
+					</div> Example output: <code>Documents Pictures Downloads Music</code>
+
+						<br/>
 					<ul>
-						<li>Use <code>ls -l</code> to show detailed information about
-							files.
+						<li>Use
+							<div class="code_div">
+								<code>ls -l</code>
+								<button class="copy-btn">Copy</button>
+							</div> to show detailed information about files.
 						</li>
-						<li>Use <code>ls -a</code> to show hidden files (files
-							starting with a dot).
+						<li>Use
+							<div class="code_div">
+								<code>ls -a</code>
+								<button class="copy-btn">Copy</button>
+							</div> to show hidden files (files starting with a dot).
 						</li>
 					</ul></li>
 
-				<li><strong><code>cd</code> (Change Directory):</strong> This
-					command allows you to <strong>move into a different
-						directory</strong>. <pre>
-						<code>cd Documents</code>
-					</pre> This will move you into the <strong>Documents</strong> directory
-					(if it exists in the current directory).
+				<li><strong>Change Directory:</strong> This command allows you
+					to <strong>move into a different directory</strong>. <code>cd
+						Documents</code> (if it exists in the current directory).
 					<ul>
-						<li>To go up one level, use <code>cd ..</code>.
+						<li>To go up one level, use <code>cd Documents</code>
 						</li>
 					</ul></li>
 			</ul>
@@ -428,18 +491,14 @@ strong {
 			</p>
 			<ul>
 				<li><strong>Absolute Path:</strong> This is the full path to a
-					file or directory, starting from the root directory (<code>/</code>).
-					<pre>
-						<code>/home/user/Documents</code>
-					</pre> The absolute path always starts from the root (<code>/</code>), so
-					it is a <strong>complete reference</strong> to the file or
-					directory location.</li>
+					file or directory, starting from the root directory <code>/</code>
+					Example output: <code>/home/user/Documents</code> it is a <strong>complete
+						reference</strong> to the file or directory location.</li>
 
 				<li><strong>Relative Path:</strong> This refers to a location <strong>relative
-						to the current directory</strong>. <pre>
-						<code>cd Documents</code>
-					</pre> If you're currently in the <code>/home/user/</code> directory,
-					this will take you to <code>/home/user/Documents</code>.
+						to the current directory</strong>. <code>cd Documents</code> If you're
+					currently in the <code>/home/user/</code> directory, this will take
+					you to <code>/home/user/Documents</code>.
 					<ul>
 						<li>Use <code>cd ..</code> to move to the parent directory.
 						</li>
@@ -460,9 +519,8 @@ strong {
 			<ul>
 				<li><strong><code>pwd</code></strong> (Print Working
 					Directory): If you're currently in the <code>/home/user/</code>
-					directory, typing <code>pwd</code> will display: <pre>
-						<code>/home/user</code>
-					</pre></li>
+					directory, typing <code>pwd</code> will display: <code>/home/user</code>
+				</li>
 
 				<li><strong><code>ls</code></strong> (List Contents): To list
 					the contents of <code>/home/user/</code>, type: <pre>
@@ -1000,7 +1058,7 @@ strong {
 		</section>
 		</br> </br> </br>
 	</main>
-	
+
 
 </body>
 </html>
