@@ -32,6 +32,8 @@ html, body {
 	border-radius: 8px;
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 	z-index: 1000;
+	max-height: 100vh; /* Restrict height to the viewport */
+	overflow-y: auto; /* Enable vertical scroll */
 }
 
 #toc h2 {
@@ -171,83 +173,6 @@ strong {
 	padding: 5px;
 	border-radius: 5px;
 	color: white;
-	background: #369136;
-	padding: 5px;
-	border-radius: 5px;
-	padding: 5px;
-	border-radius: 5px;
-	color: white;
-	background: #369136;
-	padding: 5px;
-	border-radius: 5px;
-	padding: 5px;
-	border-radius: 5px;
-	color: white;
-	background: #369136;
-	padding: 5px;
-	border-radius: 5px;
-	padding: 5px;
-	border-radius: 5px;
-	color: white;
-	background: #369136;
-	padding: 5px;
-	border-radius: 5px;
-	padding: 5px;
-	background: #369136;
-	padding: 5px;
-	border-radius: 5px;
-	padding: 5px;
-	border-radius: 5px;
-	color: white;
-	background: #369136;
-	padding: 5px;
-	border-radius: 5px;
-	padding: 5px;
-	padding: 5px;
-	border-radius: 5px;
-	padding: 5px;
-	border-radius: 5px;
-	color: white;
-	background: #369136;
-	padding: 5px;
-	border-radius: 5px;
-	padding: 5px;
-	border-radius: 5px;
-	padding: 5px;
-	border-radius: 5px;
-	color: white;
-	background: #369136;
-	padding: 5px;
-	border-radius: 5px;
-	padding: 5px;
-	padding: 5px;
-	border-radius: 5px;
-	color: white;
-	background: #369136;
-	padding: 5px;
-	border-radius: 5px;
-	padding: 5px;
-	border-radius: 5px;
-	color: white;
-	background: #369136;
-	padding: 5px;
-	border-radius: 5px;
-	padding: 5px;
-	color: white;
-	background: #369136;
-	padding: 5px;
-	border-radius: 5px;
-	padding: 5px;
-	background: #369136;
-	padding: 5px;
-	border-radius: 5px;
-	padding: 5px;
-	padding: 5px;
-	border-radius: 5px;
-	padding: 5px;
-	border-radius: 5px;
-	padding: 5px;
-	padding: 5px;
 }
 
 #copy-btn:hover {
@@ -259,6 +184,11 @@ strong {
 	margin-top: 10px;
 	margin-bottom: 10px;
 	padding: 5px;
+}
+
+.codeStyle {
+	width: 100%;
+	display: block;
 }
 </style>
 <script>
@@ -343,7 +273,7 @@ strong {
 					Navigation</a></li>
 			<li><a href="#" data-target="filemanagement">V. File
 					Management</a></li>
-			<li><a href="#" data-target="linkx-linux">VI. Hard and Soft
+			<li><a href="#" data-target="links-linux">VI. Hard and Soft
 					Links</a></li>
 			<li><a href="#" data-target="viewing">VII. Viewing Files</a></li>
 			<li><a href="#" data-target="compressed">VIII. Handling
@@ -625,14 +555,14 @@ strong {
 			<h3>📘 Basic Command Syntax</h3>
 			<p>Most Linux commands follow a simple structure:</p>
 			<pre>
-    <code>[command] [options] [arguments]</code>
-  </pre>
+				<code>[command] [options] [arguments]</code>
+			</pre>
 			<p>
 				<strong>Example:</strong>
 			</p>
 			<pre>
-    <code>ls -l /home/user</code>
-  </pre>
+				<code>ls -l /home/user</code>
+			</pre>
 			<p>
 				This runs the
 				<code>ls</code>
@@ -682,21 +612,20 @@ strong {
 					shows the <strong>current directory</strong> you are in.
 
 					<div class="code_div">
-						<code>pwd</code>
+						<code class="codeStyle">pwd</code>
 						<button class="copy-btn">Copy</button>
 					</div> Example output: <code>/home/user/Documents</code></li>
 
 				<li><strong>List:</strong> This command lists all files and
 					directories in the <strong>current directory</strong>.
 					<div class="code_div">
-						<code>ls</code>
+						<code class="codeStyle">ls</code>
 						<button class="copy-btn">Copy</button>
 					</div> Example output: <code>Documents Pictures Downloads Music</code> <br />
 					<ul>
 						<li>Use
-						<li>Use
 							<div class="code_div">
-								<code>ls -a</code>
+								<code class="codeStyle">ls -a</code>
 								<button class="copy-btn">Copy</button>
 							</div> to show hidden files (files starting with a dot).
 
@@ -737,72 +666,94 @@ strong {
 			<p>Let’s assume your file structure looks like this:</p>
 			<pre>
 				<code>
-/home/user/
-  ├── Documents/
-  ├── Music/
-  └── Pictures/
+  /Users/
+	├──lhbarboza/
+		  ├── Documents/
+		  ├── Music/
+		  └── Pictures/
     </code>
 			</pre>
 
-			<ul>
+			<ol>
 				<li><strong><code>pwd</code></strong> (Print Working
 					Directory): If you're currently in the <code>/home/user/</code>
-					directory, typing <code>pwd</code> will display: <code>/home/user</code>
-				</li>
+					directory, typing
+
+					<div class="code_div">
+						<code class="codeStyle">pwd</code>
+						<button class="copy-btn">Copy</button>
+					</div> will display: <code>/Users/lhbarboza</code></li>
 
 				<li><strong><code>ls</code></strong> (List Contents): To list
-					the contents of <code>/home/user/</code>, type: <pre>
-						<code>ls</code>
-					</pre> Output: <pre>
-						<code>Documents  Music  Pictures</code>
-					</pre></li>
+					the contents of <code>/home/user/</code>, type:
+					<div class="code_div">
+						<code class="codeStyle">ls</code>
+						<button class="copy-btn">Copy</button>
+					</div> Output: <code>Documents Music Pictures</code></li>
 
 				<li><strong><code>cd</code></strong> (Change Directory): To
-					move into the <code>Documents</code> directory, type: <pre>
-						<code>cd Documents</code>
-					</pre></li>
+					move into the <code>Documents</code> directory, type:
+					<div class="code_div">
+						<code class="codeStyle">cd Documents</code>
+						<button class="copy-btn">Copy</button>
+					</div></li>
 
 				<li><strong><code>pwd</code> again:</strong> After changing
-					into the <code>Documents</code> directory, typing <code>pwd</code>
-					again will display: <pre>
+					into the <code>Documents</code> directory, typing 
+					<div class="code_div">
+						<code class="codeStyle">pwd</code>
+						<button class="copy-btn">Copy</button>
+					</div>
+					again will display: 
 						<code>/home/user/Documents</code>
-					</pre></li>
+					</li>
 
 				<li><strong>Absolute Path Example:</strong> To go to the <code>Music</code>
-					directory from anywhere, you can use the absolute path: <pre>
-						<code>cd /home/user/Music</code>
-					</pre></li>
+					directory from anywhere, you can use the absolute path: 
+					<div class="code_div">
+						<code class="codeStyle">cd /home/user/Music</code>
+						<button class="copy-btn">Copy</button>
+					</div></li>
 
 				<li><strong>Relative Path Example:</strong> If you're in the <code>Documents</code>
 					directory and want to move up one level to <code>/home/user/</code>,
-					use: <pre>
-						<code>cd ..</code>
-					</pre></li>
-			</ul>
-
+					use: <div class="code_div">
+						<code class="codeStyle">cd ..</code>
+						<button class="copy-btn">Copy</button>
+					</div></li>
+			</ol>
 			<h3>4. Activity: Navigate to a Folder and Explore Its Contents</h3>
 			<p>Let’s practice navigating the file system!</p>
 			<ol>
-				<li><strong>Navigate to a folder:</strong> - Open your terminal
-					(WSL/Linux/macOS). - Use the <code>pwd</code> command to check your
-					current directory. - Use <code>ls</code> to list the contents. -
-					Move into a subdirectory using <code>
+				<li><strong>Navigate to a folder:</strong> <br/>
+				- Open your terminal
+					(WSL/Linux/macOS). <br/>
+				- Use the <code>pwd</code> command to check your
+					current directory. <br/>
+				- Use <code>ls</code> to list the contents. 
+				- Move into a subdirectory using 
+				<code>
 						cd
 						<folder_name>
-					</code>. - Try using both absolute and relative paths.</li>
+					</code>.<br/> 
+				- Try using both absolute and relative paths.</li>
 
-				<li><strong>Explore directory contents:</strong> - Use <code>ls
-						-l</code> to list files with details (permissions, file size, etc.). -
-					Use <code>ls -a</code> to show hidden files. - Use <code>cd
-						..</code> to go up one level in the directory.</li>
+				<li><strong>Explore directory contents:</strong> <br/>
+				- Use <code>ls -l</code> to list files with details (permissions, file size, etc.). <br/>
+				- Use <code>ls -a</code> to show hidden files. <br/>
+				- Use <code>cd ..</code> to go up one level in the directory.
+				</li>
 
-				<li><strong>Create a new file and directory:</strong> - Create
-					a new directory with: <pre>
-						<code>mkdir NewFolder</code>
-					</pre> - Create a new file with: <pre>
-						<code>touch newfile.txt</code>
-					</pre> - List the contents with <code>ls</code> to confirm the changes.</li>
+				<li><strong>Create a new file and directory:</strong> <br/>
+				- Create a new directory with: 
+				<pre><code>mkdir NewFolder</code></pre> 
+				- Create a new file with: 
+				<pre><code>touch newfile.txt</code></pre> 
+				- List the contents with <code>ls</code> to confirm the changes.
+				</li>
 			</ol>
+			
+
 		</section>
 		<section id="filemanagement">
 			<h2>File Management in Linux (via WSL, Linux, or macOS)</h2>
@@ -813,40 +764,39 @@ strong {
 			<h3>1. Key File Management Commands</h3>
 			<ul>
 				<li><strong><code>mkdir</code> (Make Directory):</strong> This
-					command allows you to create a new directory (folder). <pre>
-						<code>mkdir project_folder</code>
-					</pre> Example output: (No output is returned on success, but the
+					command allows you to create a new directory (folder). 
+					<pre><code>mkdir project_folder</code></pre> 
+					Example output: (No output is returned on success, but the
 					directory is created.)</li>
 
 				<li><strong><code>touch</code> (Create Empty File):</strong>
 					This command is used to create an empty file. It can also be used
-					to update the timestamp of an existing file. <pre>
-						<code>touch newfile.txt</code>
-					</pre> Example output: (No output is returned on success, but the file is
+					to update the timestamp of an existing file. 
+					<pre><code>touch newfile.txt</code></pre> 
+					Example output: (No output is returned on success, but the file is
 					created.)</li>
 
 				<li><strong><code>cp</code> (Copy Files/Directories):</strong>
-					This command is used to copy files or directories. <pre>
-						<code>cp file1.txt file2.txt</code>
-					</pre> This copies `file1.txt` to `file2.txt`. <pre>
-						<code>cp -r folder1 folder2</code>
-					</pre> The `-r` option is used to copy directories recursively.</li>
+					This command is used to copy files or directories. 
+					<pre><code>cp file1.txt file2.txt</code></pre> 
+					This copies `file1.txt` to `file2.txt`. 
+					<pre><code>cp -r folder1 folder2</code></pre> 
+					The `-r` option is used to copy directories recursively.</li>
 
 				<li><strong><code>mv</code> (Move/Rename
 						Files/Directories):</strong> This command moves or renames files and
-					directories. <pre>
-						<code>mv oldname.txt newname.txt</code>
-					</pre> Example: This renames `oldname.txt` to `newname.txt`. <pre>
-						<code>mv file1.txt /path/to/destination/</code>
-					</pre> This moves `file1.txt` to a new directory.</li>
+					directories. <pre><code>mv oldname.txt newname.txt</code></pre> 
+					Example: This renames `oldname.txt` to `newname.txt`. 
+					<pre><code>mv file1.txt /path/to/destination/</code></pre> 
+					This moves `file1.txt` to a new directory.</li>
 
 				<li><strong><code>rm</code> (Remove/Delete
 						Files/Directories):</strong> This command is used to remove files or
-					directories. <pre>
-						<code>rm file1.txt</code>
-					</pre> This deletes `file1.txt`. Be cautious as this is permanent. <pre>
-						<code>rm -r folder1</code>
-					</pre> The `-r` option allows you to remove directories and their
+					directories. 
+					<pre><code>rm file1.txt</code></pre> 
+					This deletes `file1.txt`. Be cautious as this is permanent. 
+					<pre><code>rm -r folder1</code></pre> 
+					The `-r` option allows you to remove directories and their
 					contents recursively.</li>
 			</ul>
 
@@ -856,22 +806,22 @@ strong {
 
 			<ul>
 				<li><strong>Creating a new project directory:</strong> Use <code>mkdir</code>
-					to create a new directory for your project: <pre>
-						<code>mkdir my_project</code>
-					</pre> This will create a directory called `my_project`.</li>
+					to create a new directory for your project: 
+					<pre><code>mkdir my_project</code></pre> 
+					This will create a directory called `my_project`.</li>
 
 				<li><strong>Creating subdirectories:</strong> You can create
 					multiple directories within your project folder to keep files
-					organized: <pre>
-						<code>mkdir my_project/input my_project/output my_project/scripts</code>
-					</pre> This will create three subdirectories within `my_project` for
+					organized: 
+					<pre><code>mkdir my_project/input my_project/output my_project/scripts</code></pre> 
+					This will create three subdirectories within `my_project` for
 					organizing input data, output files, and scripts.</li>
 
 				<li><strong>Creating files inside directories:</strong> Once
 					you've set up your directories, you can create files in them using
-					the <code>touch</code> command: <pre>
-						<code>touch my_project/input/data.txt my_project/scripts/analysis.py</code>
-					</pre> This will create two files: one in the `input` folder (`data.txt`)
+					the <code>touch</code> command: 
+					<pre><code>touch my_project/input/data.txt my_project/scripts/analysis.py</code></pre> 
+					This will create two files: one in the `input` folder (`data.txt`)
 					and another in the `scripts` folder (`analysis.py`).</li>
 			</ul>
 
@@ -879,72 +829,93 @@ strong {
 			<p>Let's walk through creating a project folder and organizing
 				files:</p>
 			<ul>
-				<li><strong>Create the project folder:</strong> <pre>
-						<code>mkdir my_bioinformatics_project</code>
-					</pre> This creates the main folder for your project.</li>
+				<li><strong>Create the project folder:</strong> 
+				<div class="code_div">
+						<code class="codeStyle">mkdir my_bioinformatics_project</code>
+						<button class="copy-btn">Copy</button>
+					</div>
+				This creates the main folder for your project.</li>
 
-				<li><strong>Create subdirectories:</strong> <pre>
-						<code>mkdir my_bioinformatics_project/data my_bioinformatics_project/results my_bioinformatics_project/scripts</code>
-					</pre> This organizes your project into folders for data, results, and
+				<li><strong>Create subdirectories:</strong> 
+				<div class="code_div">
+						<code class="codeStyle">mkdir my_bioinformatics_project/data my_bioinformatics_project/results my_bioinformatics_project/scripts</code>
+						<button class="copy-btn">Copy</button>
+					</div>
+				This organizes your project into folders for data, results, and
 					scripts.</li>
 
-				<li><strong>Create files:</strong> <pre>
-						<code>touch my_bioinformatics_project/data/input_file.txt</code>
-					</pre> <pre>
-						<code>touch my_bioinformatics_project/scripts/preprocessing.sh</code>
-					</pre> These files are created inside the appropriate directories.</li>
+				<li><strong>Create files:</strong> 
+				<div class="code_div">
+						<code class="codeStyle">touch my_bioinformatics_project/data/input_file.txt</code>
+						<button class="copy-btn">Copy</button>
+					</div>
+					<div class="code_div">
+						<code class="codeStyle">touch my_bioinformatics_project/scripts/preprocessing.sh</code>
+						<button class="copy-btn">Copy</button>
+					</div>
+				These files are created inside the appropriate directories.</li>
 
-				<li><strong>Copy files into the project folder:</strong> <pre>
-						<code>cp /path/to/external/input_file.txt my_bioinformatics_project/data/</code>
-					</pre> This copies an existing file into the `data` directory.</li>
+				<li><strong>Copy files into the project folder:</strong> 
+				<div class="code_div">
+						<code class="codeStyle">cp /path/to/external/input_file.txt my_bioinformatics_project/data/</code>
+						<button class="copy-btn">Copy</button>
+					</div>
+				This copies an existing file into the `data` directory.</li>
 
 				<li><strong>Move files:</strong> If you want to reorganize, use
-					<code>mv</code>: <pre>
-						<code>mv my_bioinformatics_project/scripts/preprocessing.sh my_bioinformatics_project/scripts/analysis.sh</code>
-					</pre> This renames the `preprocessing.sh` file to `analysis.sh`.</li>
+					<code>mv</code>: 
+					<div class="code_div">
+						<code class="codeStyle">mv my_bioinformatics_project/scripts/preprocessing.sh my_bioinformatics_project/scripts/analysis.sh</code>
+						<button class="copy-btn">Copy</button>
+					</div>
+					This renames the `preprocessing.sh` file to `analysis.sh`.</li>
 
 				<li><strong>Delete unnecessary files:</strong> If a file is no
-					longer needed, use <code>rm</code> to remove it: <pre>
-						<code>rm my_bioinformatics_project/data/old_data.txt</code>
-					</pre> This removes the old data file from your project.</li>
+					longer needed, use <code>rm</code> to remove it: 
+					<div class="code_div">
+						<code class="codeStyle">rm my_bioinformatics_project/data/old_data.txt</code>
+						<button class="copy-btn">Copy</button>
+					</div>
+					This removes the old data file from your project.</li>
 			</ul>
 
 			<h3>4. Activity: Set Up a Project Folder with Dummy Files</h3>
 			<p>Let’s practice by setting up a project folder and organizing
 				it!</p>
 			<ol>
-				<li><strong>Create the project directory:</strong> - Open your
-					terminal (WSL/Linux/macOS). - Run the following command: <pre>
-						<code>mkdir bioinformatics_project</code>
-					</pre></li>
+				<li><strong>Create the project directory:</strong> <br/>
+				- Open your terminal (WSL/Linux/macOS). <br/>
+				- Run the following command: 
+					<pre><code>mkdir bioinformatics_project</code></pre>
+				</li>
 
 				<li><strong>Create subdirectories for data, scripts,
-						and results:</strong> - Create the following directories: <pre>
-						<code>mkdir bioinformatics_project/data bioinformatics_project/scripts bioinformatics_project/results</code>
-					</pre></li>
+						and results:</strong> <br/>
+						- Create the following directories: 
+						<pre><code>mkdir bioinformatics_project/data bioinformatics_project/scripts bioinformatics_project/results</code></pre>
+						</li>
 
-				<li><strong>Create some files:</strong> - Use the <code>touch</code>
-					command to create dummy files: <pre>
-						<code>touch bioinformatics_project/data/input_file.txt</code>
-					</pre> <pre>
-						<code>touch bioinformatics_project/scripts/analysis.sh</code>
-					</pre></li>
+				<li><strong>Create some files:</strong> <br/>
+				- Use the <code>touch</code>command to create dummy files: 
+				<pre><code>touch bioinformatics_project/data/input_file.txt</code></pre>
+				<pre><code>touch bioinformatics_project/scripts/analysis.sh</code></pre>
+				</li>
 
-				<li><strong>Copy a file into the project:</strong> - If you
-					have an existing file (e.g., <code>sample_data.txt</code>), copy it
-					into the project folder: <pre>
-						<code>cp sample_data.txt bioinformatics_project/data/</code>
-					</pre></li>
+				<li><strong>Copy a file into the project:</strong> <br/>
+				- If you have an existing file (e.g., <code>sample_data.txt</code>), copy it
+					into the project folder: 
+					<pre><code>cp sample_data.txt bioinformatics_project/data/</code></pre>
+					</li>
 
-				<li><strong>Rename a file:</strong> - Rename the file
-					`analysis.sh` to `preprocessing.sh`: <pre>
-						<code>mv bioinformatics_project/scripts/analysis.sh bioinformatics_project/scripts/preprocessing.sh</code>
-					</pre></li>
+				<li><strong>Rename a file:</strong> <br/>
+				- Rename the file analysis.sh` to `preprocessing.sh`: 
+				<pre><code>mv bioinformatics_project/scripts/analysis.sh bioinformatics_project/scripts/preprocessing.sh</code></pre>
+				</li>
 
-				<li><strong>Delete unnecessary files:</strong> - If there are
-					files you no longer need, delete them with <code>rm</code>: <pre>
-						<code>rm bioinformatics_project/data/old_file.txt</code>
-					</pre></li>
+				<li><strong>Delete unnecessary files:</strong> <br/>
+				- If there are files you no longer need, delete them with <code>rm</code>: 
+				<pre><code>rm bioinformatics_project/data/old_file.txt</code></pre>
+				</li>
 			</ol>
 		</section>
 		<section id="links-linux">
@@ -970,9 +941,7 @@ strong {
 			<p>
 				<strong>Example command to create a hard link:</strong>
 			</p>
-			<pre>
-				<code>ln original_file.txt hard_link.txt</code>
-			</pre>
+			<pre><code>ln original_file.txt hard_link.txt</code></pre>
 
 			<h3>🪢 Soft (Symbolic) Links</h3>
 			<ul>
@@ -986,9 +955,7 @@ strong {
 			<p>
 				<strong>Example command to create a soft link:</strong>
 			</p>
-			<pre>
-				<code>ln -s /path/to/original_file.txt soft_link.txt</code>
-			</pre>
+			<pre><code>ln -s /path/to/original_file.txt soft_link.txt</code></pre>
 
 			<h3>🧪 Activity Suggestion</h3>
 			<p>
@@ -1010,11 +977,10 @@ strong {
 				<li><strong><code>cat</code> (Concatenate and View
 						File Contents):</strong> The <code>cat</code> command is used to display
 					the contents of a file directly in the terminal. It's best used for
-					small files, as it prints the entire file at once. <pre>
-						<code>cat filename.txt</code>
-					</pre> Example output: <pre>
-						<code>Welcome to bioinformatics training.</code>
-					</pre>
+					small files, as it prints the entire file at once. 
+					<pre><code>cat filename.txt</code></pre>
+					Example output: 
+					<pre><code>Welcome to bioinformatics training.</code></pre>
 					<p>
 						<strong>Warning:</strong> Avoid using
 						<code>cat</code>
@@ -1024,9 +990,9 @@ strong {
 				<li><strong><code>less</code> (View File
 						Page-by-Page):</strong> The <code>less</code> command is useful for viewing
 					large files, as it allows you to scroll through the file one page
-					at a time. <pre>
-						<code>less filename.txt</code>
-					</pre> You can navigate using:
+					at a time. 
+					<pre><code>less filename.txt</code></pre> 
+					You can navigate using:
 					<ul>
 						<li><code>Space</code>: Scroll down one page</li>
 						<li><code>Up/Down Arrow</code>: Move one line up/down</li>
@@ -1036,24 +1002,24 @@ strong {
 				<li><strong><code>head</code> (View the First Few
 						Lines of a File):</strong> The <code>head</code> command shows the first 10
 					lines of a file by default. It’s useful when you want to quickly
-					check the beginning of a large file. <pre>
-						<code>head filename.txt</code>
-					</pre> To view a specific number of lines, use the <code>-n</code>
-					option: <pre>
-						<code>head -n 20 filename.txt</code>
-					</pre> This shows the first 20 lines of the file.</li>
+					check the beginning of a large file. 
+					<pre><code>head filename.txt</code></pre>
+					To view a specific number of lines, use the <code>-n</code>
+					option: 
+					<pre><code>head -n 20 filename.txt</code></pre> 
+					This shows the first 20 lines of the file.</li>
 
 				<li><strong><code>tail</code> (View the Last Few Lines
 						of a File):</strong> The <code>tail</code> command is the opposite of <code>head</code>;
 					it shows the last 10 lines of a file by default. It’s useful for
 					monitoring log files or large datasets where the latest information
-					is more relevant. <pre>
-						<code>tail filename.txt</code>
-					</pre> To view the last few lines or monitor a file in real-time, use: <pre>
-						<code>tail -n 20 filename.txt</code>
-					</pre> This shows the last 20 lines of the file. <pre>
-						<code>tail -f filename.txt</code>
-					</pre> The <code>-f</code> option allows you to follow a file in
+					is more relevant. 
+					<pre><code>tail filename.txt</code></pre> 
+					To view the last few lines or monitor a file in real-time, use: 
+					<pre><code>tail -n 20 filename.txt</code></pre> 
+					This shows the last 20 lines of the file. 
+					<pre><code>tail -f filename.txt</code></pre> 
+					The <code>-f</code> option allows you to follow a file in
 					real-time (useful for logs).</li>
 			</ul>
 
@@ -1080,30 +1046,45 @@ strong {
 
 			<ul>
 				<li><strong>View a small file using <code>cat</code>:
-				</strong> For a small file, simply use: <pre>
-						<code>cat small_file.txt</code>
-					</pre> This will display the entire contents of `small_file.txt` at once.
+				</strong> For a small file, simply use: 
+					<div class="code_div">
+						<code class="codeStyle">cat small_file.txt</code>
+						<button class="copy-btn">Copy</button>
+					</div>
+					This will display the entire contents of `small_file.txt` at once.
 				</li>
 
 				<li><strong>View a large file using <code>less</code>:
-				</strong> If the file is large, use: <pre>
-						<code>less large_file.txt</code>
-					</pre> This will allow you to scroll through the content one page at a
+				</strong> If the file is large, use: 
+					<div class="code_div">
+						<code class="codeStyle">less large_file.txt</code>
+						<button class="copy-btn">Copy</button>
+					</div>
+					This will allow you to scroll through the content one page at a
 					time, making it much easier to navigate large files.</li>
 
 				<li><strong>View the first few lines of a file using <code>head</code>:
-				</strong> If you only want to check the beginning of the file, use: <pre>
-						<code>head large_file.txt</code>
-					</pre> This will show the first 10 lines by default.</li>
+				</strong> If you only want to check the beginning of the file, use: 
+					<div class="code_div">
+						<code class="codeStyle">head large_file.txt</code>
+						<button class="copy-btn">Copy</button>
+					</div>
+					This will show the first 10 lines by default.</li>
 
 				<li><strong>View the last few lines of a file using <code>tail</code>:
 				</strong> To quickly check the end of a file (e.g., for logs or recent data),
-					use: <pre>
-						<code>tail large_file.txt</code>
-					</pre> To monitor the file in real-time (for example, a log file that
-					updates constantly), use: <pre>
-						<code>tail -f large_file.txt</code>
-					</pre></li>
+					use: 
+					<div class="code_div">
+						<code class="codeStyle">tail large_file.txt</code>
+						<button class="copy-btn">Copy</button>
+					</div>
+					To monitor the file in real-time (for example, a log file that
+					updates constantly), use: 
+					<div class="code_div">
+						<code class="codeStyle">tail -f large_file.txt</code>
+						<button class="copy-btn">Copy</button>
+					</div>
+				</li>
 			</ul>
 
 			<h3>4. Activity: Open a `.txt` or `.tsv` File with Each Tool</h3>
@@ -1111,31 +1092,32 @@ strong {
 				understand their usage and functionality.</p>
 			<ol>
 				<li><strong>Open a small `.txt` file with <code>cat</code>:
-				</strong> - Open a terminal and run: <pre>
-						<code>cat small_file.txt</code>
-					</pre> - Verify that the entire file is printed to the terminal.</li>
+				</strong> <br/>
+				- Open a terminal and run: 
+				<pre><code>cat small_file.txt</code></pre> 
+				- Verify that the entire file is printed to the terminal.</li>
 
 				<li><strong>Open a large `.txt` file with <code>less</code>:
-				</strong> - Use <code>less</code> to view a large file: <pre>
-						<code>less large_file.txt</code>
-					</pre> - Scroll through the file using the <code>Space</code> key and
-					quit by pressing <code>q</code>.</li>
+				</strong> <br/>
+				- Use <code>less</code> to view a large file: 
+				<pre><code>less large_file.txt</code></pre> 
+				- Scroll through the file using the <code>Space</code> key and 
+				quit by pressing <code>q</code>.</li>
 
 				<li><strong>Open the first 20 lines of a file with <code>head</code>:
-				</strong> - Run the following to view the first 20 lines of a file: <pre>
-						<code>head -n 20 large_file.txt</code>
-					</pre></li>
+				</strong><br/> - Run the following to view the first 20 lines of a file: 
+				<pre><code>head -n 20 large_file.txt</code></pre>
+				</li>
 
 				<li><strong>Open the last 20 lines of a file with <code>tail</code>:
-				</strong> - View the last 20 lines of the file: <pre>
-						<code>tail -n 20 large_file.txt</code>
-					</pre></li>
+				</strong> <br/>- View the last 20 lines of the file: 
+				<pre><code>tail -n 20 large_file.txt</code></pre></li>
 
 				<li><strong>Monitor a log file with <code>tail
 							-f</code>:
-				</strong> - If you have a log file, use: <pre>
-						<code>tail -f log_file.txt</code>
-					</pre> - This will allow you to see updates to the log file in real-time.
+				</strong> <br/> - If you have a log file, use: 
+				<pre><code>tail -f log_file.txt</code></pre> 
+				- This will allow you to see updates to the log file in real-time.
 				</li>
 			</ol>
 
@@ -1364,9 +1346,7 @@ strong {
 				<code>cat</code>
 				command is used to display the contents of a file in the terminal.
 			</p>
-			<pre>
-				<code>cat mydata.txt</code>
-			</pre>
+			<pre><code>cat mydata.txt</code></pre>
 			<p>Useful for quickly viewing short files or combining multiple
 				files.</p>
 
@@ -1380,9 +1360,7 @@ strong {
 				<code>grep</code>
 				command searches for lines that match a pattern.
 			</p>
-			<pre>
-				<code>grep "gene" mydata.txt</code>
-			</pre>
+			<pre><code>grep "gene" mydata.txt</code></pre>
 			<p>Use it to find specific terms (like gene names) in large
 				files.</p>
 			<ul>
@@ -1402,9 +1380,7 @@ strong {
 				command is used to extract specific fields (columns) from each line
 				of a text file.
 			</p>
-			<pre>
-				<code>cut -f1 mydata.tsv</code>
-			</pre>
+			<pre><code>cut -f1 mydata.tsv</code></pre>
 			<p>Extracts the first tab-delimited field. Useful for
 				column-based data such as VCF or CSV/TSV files.</p>
 			<ul>
@@ -1422,9 +1398,7 @@ strong {
 				<code>tr</code>
 				command replaces or deletes characters in a stream.
 			</p>
-			<pre>
-				<code>cat seq.txt | tr 'a-z' 'A-Z'</code>
-			</pre>
+			<pre><code>cat seq.txt | tr 'a-z' 'A-Z'</code></pre>
 			<p>Converts lowercase letters to uppercase. Works well with
 				pipes.</p>
 			<ul>
@@ -1442,13 +1416,9 @@ strong {
 				is a powerful tool for analyzing text files with column-based data
 				(like TSV or CSV).
 			</p>
-			<pre>
-				<code>awk '{print $1}' mydata.txt</code>
-			</pre>
+			<pre><code>awk '{print $1}' mydata.txt</code></pre>
 			<p>Prints the first column of each line.</p>
-			<pre>
-				<code>awk '$3 == "gene" {print $0}' annotations.gff</code>
-			</pre>
+			<pre><code>awk '$3 == "gene" {print $0}' annotations.gff</code></pre>
 			<p>Filters lines where the third column equals "gene".</p>
 
 			<h3>
@@ -1460,9 +1430,7 @@ strong {
 				<code>sed</code>
 				is used to find and replace text in files or streams.
 			</p>
-			<pre>
-				<code>sed 's/old/new/' file.txt</code>
-			</pre>
+			<pre><code>sed 's/old/new/' file.txt</code></pre>
 			<p>Replaces the first instance of "old" with "new" in each line.</p>
 			<ul>
 				<li><code>s/old/new/g</code>: Replace all instances in each
@@ -1572,9 +1540,7 @@ strong {
 			</ul>
 			<h3>Output Redirection</h3>
 			<p>Redirect the output of a command to a file:</p>
-			<pre>
-				<code>ls > file_list.txt</code>
-			</pre>
+			<pre><code>ls > file_list.txt</code></pre>
 			<p>
 				This command writes the output of
 				<code>ls</code>
@@ -1583,9 +1549,7 @@ strong {
 				, overwriting the file if it exists.
 			</p>
 			<p>Append the output to the end of a file without overwriting:</p>
-			<pre>
-				<code>ls >> file_list.txt</code>
-			</pre>
+			<pre><code>ls >> file_list.txt</code></pre>
 			<p>
 				This command adds the output of
 				<code>ls</code>
@@ -1595,9 +1559,7 @@ strong {
 			</p>
 			<h3>Input Redirection</h3>
 			<p>Use a file as input to a command:</p>
-			<pre>
-				<code>wc -l < file_list.txt</code>
-			</pre>
+			<pre><code>wc -l < file_list.txt</code></pre>
 			<p>
 				This command counts the number of lines in
 				<code>file_list.txt</code>
@@ -1605,9 +1567,7 @@ strong {
 			</p>
 			<h3>Pipes</h3>
 			<p>Use the output of one command as the input to another:</p>
-			<pre>
-				<code>ls | head -3 > file.txt</code>
-			</pre>
+			<pre><code>ls | head -3 > file.txt</code></pre>
 			<p>
 				This command lists files, takes the first three lines, and writes
 				them to
@@ -1627,9 +1587,7 @@ strong {
 			<p>
 				<strong>ps</strong>: Displays a snapshot of current processes.
 			</p>
-			<pre>
-				<code>ps aux</code>
-			</pre>
+			<pre><code>ps aux</code></pre>
 			<p>This command lists all running processes with detailed
 				information.</p>
 
@@ -1637,23 +1595,14 @@ strong {
 				<strong>top</strong>: Provides a real-time, dynamic view of system
 				processes.
 			</p>
-			<pre>
-				<code>top</code>
-			</pre>
+			<pre><code>top</code></pre>
 			<p>Press 'k' to kill a process, then enter the PID.</p>
 
 			<h3>Managing Processes</h3>
 			<p>
 				<strong>kill</strong>: Terminates a process by sending a signal.
 			</p>
-			<pre>
-				<code>kill -9 <PID>
-				
-				
-				
-				
-				</code>
-			</pre>
+			<pre><code>kill -9 <PID></code></pre>
 			<p>
 				Use
 				<code>-9</code>
@@ -1663,14 +1612,7 @@ strong {
 			<p>
 				<strong>killall</strong>: Terminates processes by name.
 			</p>
-			<pre>
-				<code>killall <process_name>
-				
-				
-				
-				
-				</code>
-			</pre>
+			<pre><code>killall <process_name></code></pre>
 			<p>This command is useful when you know the process name but not
 				the PID.</p>
 
@@ -1678,14 +1620,7 @@ strong {
 			<p>
 				<strong>nice</strong>: Starts a process with a specified priority.
 			</p>
-			<pre>
-				<code>nice -n 10 <command>
-				
-				
-				
-				
-				</code>
-			</pre>
+			<pre><code>nice -n 10 <command></code></pre>
 			<p>Values range from -20 (highest priority) to 19 (lowest
 				priority).</p>
 
@@ -1693,14 +1628,7 @@ strong {
 				<strong>renice</strong>: Changes the priority of an already running
 				process.
 			</p>
-			<pre>
-				<code>renice -n 10 -p <PID>
-				
-				
-				
-				
-				</code>
-			</pre>
+			<pre><code>renice -n 10 -p <PID></code></pre>
 			<p>Adjust the priority of a process identified by its PID.</p>
 		</section>
 		<section id="linux-job-control">
@@ -1755,9 +1683,7 @@ strong {
 			<h3>Example</h3>
 			<p>Consider the following example where a job is created and
 				managed:</p>
-			<pre>
-				<code>cat file.txt | tr 'a-z' 'A-Z' > output.txt</code>
-			</pre>
+			<pre><code>cat file.txt | tr 'a-z' 'A-Z' > output.txt</code></pre>
 			<p>
 				This command creates two processes:
 				<code>cat</code>
@@ -1873,47 +1799,43 @@ strong {
 			<h3>Types of Shell Expansion</h3>
 			<ol>
 				<li><strong>Brace Expansion:</strong> Generates arbitrary
-					strings. For example: <pre>
-						<code>echo file{1..3}.txt</code>
-					</pre> Output: <pre>
-						<code>file1.txt file2.txt file3.txt</code>
-					</pre></li>
+					strings. For example: 
+					<pre><code>echo file{1..3}.txt</code></pre>
+					Output: <pre><code>file1.txt file2.txt file3.txt</code></pre>
+					</li>
 				<li><strong>Tilde Expansion:</strong> Replaces the tilde (~)
-					with the path to the home directory. For example: <pre>
-						<code>cd ~</code>
-					</pre> Changes to the current user's home directory.</li>
+					with the path to the home directory. For example: 
+					<pre><code>cd ~</code></pre> 
+					Changes to the current user's home directory.</li>
 				<li><strong>Parameter and Variable Expansion:</strong> Replaces
-					variables with their values. For example: <pre>
-						<code>echo $HOME</code>
-					</pre> Outputs the path of the home directory.</li>
+					variables with their values. For example: 
+					<pre><code>echo $HOME</code></pre> 
+					Outputs the path of the home directory.</li>
 				<li><strong>Command Substitution:</strong> Replaces a command
-					with its output. For example: <pre>
-						<code>echo "Today is $(date)"</code>
-					</pre> Might output: <pre>
-						<code>Today is Thu May 8 14:58:57 PHT 2025</code>
-					</pre></li>
+					with its output. For example: 
+					<pre><code>echo "Today is $(date)"</code></pre>
+					Might output: 
+					<pre><code>Today is Thu May 8 14:58:57 PHT 2025</code></pre>
+					</li>
 				<li><strong>Arithmetic Expansion:</strong> Evaluates arithmetic
-					expressions. For example: <pre>
-						<code>echo $((3 + 2))</code>
-					</pre> Outputs: <pre>
-						<code>5</code>
-					</pre></li>
+					expressions. For example: <pre><code>echo $((3 + 2))</code></pre> 
+					Outputs: <pre><code>5</code></pre>
+					</li>
 				<li><strong>Word Splitting:</strong> Splits the result of
 					expansions into separate words based on the Internal Field
-					Separator (IFS). For example: <pre>
-						<code>list="one two three"
+					Separator (IFS). For example: 
+					<pre><code>list="one two three"
     for word in $list; do
       echo "$word"
-    done</code>
-					</pre> Outputs: <pre>
-						<code>one
-    two
-    three</code>
-					</pre></li>
+    done</code></pre> Outputs: 
+    <pre>
+<code>one
+two
+three</code></pre></li>
 				<li><strong>Filename Expansion (Globbing):</strong> Expands
-					wildcard patterns to match filenames. For example: <pre>
-						<code>ls *.txt</code>
-					</pre> Lists all files ending with .txt in the current directory.</li>
+					wildcard patterns to match filenames. For example: 
+					<pre><code>ls *.txt</code></pre> 
+					Lists all files ending with .txt in the current directory.</li>
 			</ol>
 			<h3>Order of Expansion</h3>
 			<p>The shell performs expansions in the following order:</p>
@@ -1939,20 +1861,17 @@ strong {
 			<h3>Creating a Shell Script</h3>
 			<ol>
 				<li>Create a new file with a <code>.sh</code> extension. For
-					example: <pre>
-						<code>nano myscript.sh</code>
-					</pre>
+					example: 
+					<pre><code>nano myscript.sh</code></pre>
 				</li>
 				<li>Add the shebang line at the top to specify the interpreter:
-					<pre>
-						<code>#!/bin/bash</code>
-					</pre>
+					<pre><code>#!/bin/bash</code></pre>
 				</li>
 				<li>Write your desired commands below the shebang line. For
-					example: <pre>
-						<code>#!/bin/bash
-    echo "Hello, World!"</code>
-					</pre>
+					example: 
+					<pre>
+<code>#!/bin/bash
+echo "Hello, World!"</code></pre>
 				</li>
 				<li>Save and exit the editor (in nano, press <code>Ctrl+O</code>
 					to save and <code>Ctrl+X</code> to exit).
@@ -1964,26 +1883,21 @@ strong {
 				<code>chmod</code>
 				command:
 			</p>
-			<pre>
-				<code>chmod +x myscript.sh</code>
-			</pre>
+			<pre><code>chmod +x myscript.sh</code></pre>
 			<p>This command grants execute permission to the script, allowing
 				it to be run as a program.</p>
 			<h3>Running the Script</h3>
 			<p>To execute the script, use one of the following methods:</p>
 			<ul>
-				<li>Run the script from the current directory: <pre>
-						<code>./myscript.sh</code>
-					</pre>
+				<li>Run the script from the current directory: 
+				<pre><code>./myscript.sh</code></pre>
 				</li>
-				<li>Specify the full path to the script: <pre>
-						<code>/path/to/myscript.sh</code>
-					</pre>
+				<li>Specify the full path to the script: 
+				<pre><code>/path/to/myscript.sh</code></pre>
 				</li>
 				<li>Use the <code>bash</code> command to run the script
-					(execute permission not required in this case): <pre>
-						<code>bash myscript.sh</code>
-					</pre>
+					(execute permission not required in this case): 
+					<pre><code>bash myscript.sh</code></pre>
 				</li>
 			</ul>
 			<p>
@@ -2004,31 +1918,26 @@ strong {
 				operating system.</p>
 			<h3>Viewing Environment Variables</h3>
 			<ul>
-				<li>Display all environment variables: <pre>
-						<code>printenv</code>
-					</pre>
+				<li>Display all environment variables: 
+				<pre><code>printenv</code></pre>
 				</li>
-				<li>Display a specific variable: <pre>
-						<code>echo $VARIABLE_NAME</code>
-					</pre>
+				<li>Display a specific variable: 
+				<pre><code>echo $VARIABLE_NAME</code></pre>
 				</li>
 			</ul>
 			<h3>Setting Environment Variables</h3>
 			<ul>
-				<li>Temporarily set a variable for the current session: <pre>
-						<code>export VARIABLE_NAME="value"</code>
-					</pre>
+				<li>Temporarily set a variable for the current session: 
+				<pre><code>export VARIABLE_NAME="value"</code></pre>
 				</li>
-				<li>To make a variable available to child processes: <pre>
-						<code>export VARIABLE_NAME="value"</code>
-					</pre>
+				<li>To make a variable available to child processes: 
+				<pre><code>export VARIABLE_NAME="value"</code></pre>
 				</li>
 			</ul>
 			<h3>Unsetting Environment Variables</h3>
 			<ul>
-				<li>Remove a variable from the current session: <pre>
-						<code>unset VARIABLE_NAME</code>
-					</pre>
+				<li>Remove a variable from the current session: 
+				<pre><code>unset VARIABLE_NAME</code></pre>
 				</li>
 			</ul>
 			<h3>Persistent Environment Variables</h3>
@@ -2040,11 +1949,9 @@ strong {
 						<li><code>~/.bashrc</code>: Loaded for interactive non-login
 							shells.</li>
 						<li><code>~/.bash_profile</code>: Loaded for login shells.</li>
-					</ul> Add the export statement to one of these files: <pre>
-						<code>export VARIABLE_NAME="value"</code>
-					</pre> Then, apply the changes: <pre>
-						<code>source ~/.bashrc</code>
-					</pre>
+					</ul> Add the export statement to one of these files: 
+					<pre><code>export VARIABLE_NAME="value"</code></pre> Then, apply the changes: 
+					<pre><code>source ~/.bashrc</code></pre>
 				</li>
 				<li>System-wide variables (affect all users):
 					<ul>
@@ -2052,13 +1959,11 @@ strong {
 							variable assignments.</li>
 						<li><code>/etc/profile</code> or scripts in <code>/etc/profile.d/</code>:
 							Used for more complex configurations.</li>
-					</ul> Example of adding a variable to <code>/etc/environment</code>: <pre>
-						<code>sudo nano /etc/environment
-    # Add the line:
-    VARIABLE_NAME="value"</code>
-					</pre> After editing, apply the changes: <pre>
-						<code>source /etc/environment</code>
-					</pre>
+					</ul> Example of adding a variable to <code>/etc/environment</code>: 
+<pre><code>sudo nano /etc/environment 
+# Add the line:
+VARIABLE_NAME="value"</code></pre> After editing, apply the changes: 
+					<pre><code>source /etc/environment</code></pre>
 				</li>
 			</ul>
 			<h3>Common Environment Variables</h3>
@@ -2148,10 +2053,9 @@ strong {
 				:
 			</p>
 			<pre>
-				<code>if [ -f ~/.bashrc ]; then
+<code>if [ -f ~/.bashrc ]; then
       . ~/.bashrc
-    fi</code>
-			</pre>
+fi</code></pre>
 			<p>
 				This ensures that the configurations in
 				<code>.bashrc</code>
@@ -2167,9 +2071,7 @@ strong {
 				<code>.bashrc</code>
 				configurations, use the following command:
 			</p>
-			<pre>
-				<code>less ~/.bashrc</code>
-			</pre>
+			<pre><code>less ~/.bashrc</code></pre>
 			<p>
 				This will display the contents of your
 				<code>.bashrc</code>
@@ -2203,22 +2105,18 @@ strong {
 				<code>ls</code>
 				command:
 			</p>
-			<pre>
-				<code>ls -a</code>
-			</pre>
+			<pre><code>ls -a</code></pre>
 			<p>This will display all files, including hidden ones, in the
 				current directory.</p>
 			<h3>Handling Filenames with Spaces</h3>
 			<p>Filenames with spaces can be tricky in the terminal. To handle
 				them:</p>
 			<ul>
-				<li>Enclose the filename in quotes: <pre>
-						<code>cd "My Folder"</code>
-					</pre>
+				<li>Enclose the filename in quotes: 
+				<pre><code>cd "My Folder"</code></pre>
 				</li>
-				<li>Escape each space with a backslash: <pre>
-						<code>cd My\ Folder</code>
-					</pre>
+				<li>Escape each space with a backslash: 
+				<pre><code>cd My\ Folder</code></pre>
 				</li>
 			</ul>
 			<p>Alternatively, you can use tab completion to automatically
@@ -2229,13 +2127,9 @@ strong {
 				<code>clear</code>
 				command:
 			</p>
-			<pre>
-				<code>clear</code>
-			</pre>
+			<pre><code>clear</code></pre>
 			<p>For a more thorough reset, use:</p>
-			<pre>
-				<code>reset</code>
-			</pre>
+			<pre><code>reset</code></pre>
 			<p>This command reinitializes the terminal, clearing the screen
 				and resetting settings :contentReference[oaicite:1]{index=1}.</p>
 			<h3>
@@ -2256,9 +2150,7 @@ strong {
 				<code>sudo</code>
 				, prefix your command with it:
 			</p>
-			<pre>
-				<code>sudo command</code>
-			</pre>
+			<pre><code>sudo command</code></pre>
 			<p>You'll be prompted to enter your password to confirm your
 				identity.</p>
 		</section>
@@ -2285,9 +2177,7 @@ strong {
 
 
 			<h3>📦 Task 0: Extract the training archive</h3>
-			<pre>
-				<code>unzip bio_training.zip</code>
-			</pre>
+			<pre><code>unzip bio_training.zip</code></pre>
 			<p>
 				<strong>Q1:</strong> Did the folder
 				<code>bio_training/</code>
@@ -2299,9 +2189,7 @@ strong {
 			</p>
 
 			<h3>🔍 Task 1: Navigate to a folder</h3>
-			<pre>
-				<code>cd /bio_training/projectA/data</code>
-			</pre>
+			<pre><code>cd /bio_training/projectA/data</code></pre>
 			<p>
 				<strong>Q1:</strong> What are the names of the files in this
 				directory? Use
@@ -2314,9 +2202,7 @@ strong {
 			</p>
 
 			<h3>📄 Task 2: View a file</h3>
-			<pre>
-				<code>cat exp1.tsv</code>
-			</pre>
+			<pre><code>cat exp1.tsv</code></pre>
 			<p>
 				<strong>Q1:</strong> What is the content of the file? Can you spot
 				the gene with the highest expression?
@@ -2327,9 +2213,7 @@ strong {
 			</p>
 
 			<h3>📂 Task 3: Count number of files in a directory</h3>
-			<pre>
-				<code>ls | wc -l</code>
-			</pre>
+			<pre><code>ls | wc -l</code></pre>
 			<p>
 				<strong>Q1:</strong> How many items (files and folders) are listed?
 			</p>
@@ -2339,9 +2223,7 @@ strong {
 			</p>
 
 			<h3>📜 Task 4: Check logs</h3>
-			<pre>
-				<code>tail -n 1 ../results/error.log</code>
-			</pre>
+			<pre><code>tail -n 1 ../results/error.log</code></pre>
 			<p>
 				<strong>Q1:</strong> What does the last line of the error log say?
 			</p>
@@ -2351,9 +2233,7 @@ strong {
 			</p>
 
 			<h3>🔍 Task 5: Search metadata</h3>
-			<pre>
-				<code>grep FAIL ../../projectB/metadata/samples.tsv</code>
-			</pre>
+			<pre><code>grep FAIL ../../projectB/metadata/samples.tsv</code></pre>
 			<p>
 				<strong>Q1:</strong> Which samples failed the quality check?
 			</p>
@@ -2363,9 +2243,7 @@ strong {
 			</p>
 
 			<h3>🔢 Task 6: Count lines in a log file</h3>
-			<pre>
-				<code>wc -l ../../projectB/logs/pipeline.log</code>
-			</pre>
+			<pre><code>wc -l ../../projectB/logs/pipeline.log</code></pre>
 			<p>
 				<strong>Q1:</strong> How many lines are in the log file?
 			</p>
@@ -2375,9 +2253,7 @@ strong {
 			</p>
 
 			<h3>📁 Task 7: Create a new folder and file</h3>
-			<pre>
-				<code>mkdir analysis && touch analysis/summary.txt</code>
-			</pre>
+			<pre><code>mkdir analysis && touch analysis/summary.txt</code></pre>
 			<p>
 				<strong>Q1:</strong> What command would show the full absolute path
 				of the new file?
