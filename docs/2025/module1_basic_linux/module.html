@@ -11,6 +11,7 @@ body {
 	margin: 0;
 	padding: 0;
 	line-height: 1.6;
+	font-size: 15px;
 	display: flex;
 	margin-bottom: 100px;
 }
@@ -190,6 +191,19 @@ strong {
 	width: 100%;
 	display: block;
 }
+
+.aligned-list li {
+  list-style: none;
+  margin: 4px 0;
+}
+
+.aligned-list a {
+  display: inline-block;
+  min-width: 240px; /* adjust as needed */
+  padding-left: 1em;
+  text-indent: -1em;
+  white-space: nowrap;
+}
 </style>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
@@ -260,7 +274,7 @@ strong {
 	<!-- Floating Table of Contents -->
 	<div id="toc">
 		<h2>Table of Contents:</h2>
-		<ul>
+		<ul class="aligned-list">
 			<li><a href="#" data-target="overview">i. Overview</a></li>
 			<li><a href="#" data-target="os">I. Operating Systems</a></li>
 			<li><a href="#" data-target="why-linux">II. Linux for
@@ -278,7 +292,7 @@ strong {
 			<li><a href="#" data-target="viewing">VII. Viewing Files</a></li>
 			<li><a href="#" data-target="compressed">VIII. Handling
 					Compressed Files</a></li>
-			<li><a href="#" data-target="bioinformatics-ile-formats">IX.
+			<li><a href="#" data-target="bioinformatics-file-formats">IX.
 					Bioinformatics File Formats</a></li>
 			<li><a href="#" data-target="pattern-matching">X. Pattern
 					Matching in Bash</a></li>
@@ -331,6 +345,27 @@ strong {
 		</section>
 
 		<section id="os">
+			<h2>What is an Operating System?</h2>
+			  <p>
+			    An <strong>Operating System (OS)</strong> is the main software that runs your computer or phone. 
+			    It controls everything — apps, files, memory, and devices like your mouse or keyboard.
+			  </p>
+			
+			  <h3>🧩 What Does It Do?</h3>
+			  <ul>
+			    <li><strong>Runs Programs</strong><br>
+			      Lets you open and use apps like browsers, games, or Word.
+			    </li>
+			    <li><strong>Manages Memory</strong><br>
+			      Shares the computer’s memory (RAM) between programs so they don’t crash.
+			    </li>
+			    <li><strong>Stores Files</strong><br>
+			      Helps you save, open, and organize files in folders.
+			    </li>
+			    <li><strong>Controls Devices</strong><br>
+			      Makes the keyboard, mouse, speakers, and printer work.
+			    </li>
+			  </ul>
 			<h2>Understanding Operating Systems for Bioinformatics</h2>
 			<p>
 				When working with bioinformatics tools, it's essential to understand
@@ -554,15 +589,11 @@ strong {
 
 			<h3>📘 Basic Command Syntax</h3>
 			<p>Most Linux commands follow a simple structure:</p>
-			<pre>
-				<code>[command] [options] [arguments]</code>
-			</pre>
+			<pre><code>[command] [options] [arguments]</code></pre>
 			<p>
 				<strong>Example:</strong>
 			</p>
-			<pre>
-				<code>ls -l /home/user</code>
-			</pre>
+			<pre><code>ls -l /home/user</code></pre>
 			<p>
 				This runs the
 				<code>ls</code>
