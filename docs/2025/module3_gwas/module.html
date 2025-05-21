@@ -203,6 +203,7 @@ strong {
 			<li><a href="#" data-target="overview">I. Overview</a></li>
 			<li><a href="#" data-target="intro">II. Introduction</a></li>
 			<li><a href="#" data-target="data-prep">III. GWAS Data Preparation</a></li>
+			<li><a href="#" data-target="tassel">IV. TASSEL GWAS Workflow</a></li>
 			<!-- <li><a href="#" data-target="os">I. Operating Systems</a></li>
 			<li><a href="#" data-target="why-linux">II. Why Linux is
 					Important in Bioinformatics</a></li>
@@ -230,8 +231,7 @@ strong {
 		<button id="toggleToc" style="display: none;">☰ Table of Contents</button>
 		
 		<section id="overview">
-			<h1 style="text-align: center !important; font-size:150%">Genome-wide Association Studies (GWAS)</h1>
-
+			<h1 style="text-align: center !important; font-size:175%">Genome-wide Association Studies (GWAS)</h1>
 		<!--	<h3>🎯 Topic</h3>
 			<p>Linux Basics, Filesystem, and Shell Navigation</p>
 
@@ -351,7 +351,7 @@ strong {
 			</p>
 		</section>
 		<section id="data-prep">
-			<h2>GWAS Data preparation.</h2>
+			<h2>GWAS Data preparation</h2>
 			<p>
 			In order to understand the principles behind the data preparation best practices, we need to understand how the genotype datasets are created.
 			</p>
@@ -375,7 +375,7 @@ strong {
 				<li>Missing Data: High missing call rates reduce reliability; imputation may be used cautiously.</li>
 				<li>Hardy-Weinberg Equilibrium (HWE): Adjustments are necessary for inbred or partially selfing species.</li>
 			</ul>
-			<h3>Phenotype Data Preparatio</h3>
+			<h3>Phenotype Data Preparation</h3>
 			<ul>
 				<li>Adjust raw phenotype data, identify and handle outliers.</li>
 				<li>Ensure phenotype normality for standard modeling assumptions, though models with covariates do not require normality of the phenotype itself.</li>
@@ -387,6 +387,33 @@ strong {
 					<li>Strong LD leads to wider association peaks and can obscure causal variants.</li>
 					<li>Imputation methods can leverage LD to infer missing genotypes or untyped variants.</li>
 				</ul>
+			</p>
+			<h3>Peak Analysis</h3>
+			<ul>
+				<li>Analyzing haplotype groupings in regions with significant association peaks to understand the underlying genetic architecture.</li>
+			</ul>
+		</section>
+		
+		<section id="tassel">
+			<h1 style="text-align: center !important; font-size:175%">Introduction to TASSEL GWAS Workflow</h1>
+			<h3>Overview</h3>
+			<p>In this hands-on module you will conduct a basic GWAS workflow in TASSEL, from loading and examining input data, running the necessary analyses, to creating Manhattan and QQ plots.
+				In this workflow we use one of the simplest models implemented in TASSEL (general linear model).  Later we will discuss how this workflow can be improved to meet various challenges.
+			</p>
+			<h3>Loading Data</h3>
+			<p>
+			For GWAS analysis you need, at a minimum, the following types of inputs:
+			<br>
+			Inputs:
+				<ul>
+					<li>A genotype file in PED/MAP, VCF, or HapMap format</li>
+					<li>A phenotype file formatted for TASSEL</li>
+				</ul>
+				
+			</p>
+			<p>
+			For this exercise, we will use the following files (see the Dataset folder for the module):
+				
 			</p>
 		</section>
 
