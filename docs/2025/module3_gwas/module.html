@@ -230,7 +230,7 @@ strong {
 		<button id="toggleToc" style="display: none;">☰ Table of Contents</button>
 		
 		<section id="overview">
-			<h1 style="text-align: center !important; font-size:200%">Genome-wide Association Studies (GWAS)</h1>
+			<h1 style="text-align: center !important; font-size:150%">Genome-wide Association Studies (GWAS)</h1>
 
 		<!--	<h3>🎯 Topic</h3>
 			<p>Linux Basics, Filesystem, and Shell Navigation</p>
@@ -364,6 +364,30 @@ strong {
 				</ul>
 			</p>
 			<h3>SNP Filtering</h3>
+			<ul>
+				<li>Minor Allele Frequency (MAF) thresholds are typically set at
+					<ul>
+						<li>maf > 0.05 for n=300 and below</li>
+						<li>maf > 0.01 for n >1000 and above</li>
+						<li>one may exercise some freedom here</li>
+					</ul>
+				</li>	
+				<li>Missing Data: High missing call rates reduce reliability; imputation may be used cautiously.</li>
+				<li>Hardy-Weinberg Equilibrium (HWE): Adjustments are necessary for inbred or partially selfing species.</li>
+			</ul>
+			<h3>Phenotype Data Preparatio</h3>
+			<ul>
+				<li>Adjust raw phenotype data, identify and handle outliers.</li>
+				<li>Ensure phenotype normality for standard modeling assumptions, though models with covariates do not require normality of the phenotype itself.</li>
+			</ul>
+			<h3>Linkage Disequilibrium (LD) in GWAS</h3>
+			<p>
+			LD allows for the detection of non genotyped variants and influences the association signals:
+				<ul>
+					<li>Strong LD leads to wider association peaks and can obscure causal variants.</li>
+					<li>Imputation methods can leverage LD to infer missing genotypes or untyped variants.</li>
+				</ul>
+			</p>
 		</section>
 
 		<!--  
