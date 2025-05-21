@@ -202,6 +202,7 @@ strong {
 		<ul>
 			<li><a href="#" data-target="overview">I. Overview</a></li>
 			<li><a href="#" data-target="intro">II. Introduction</a></li>
+			<li><a href="#" data-target="data-prep">III. GWAS Data Preparation</a></li>
 			<!-- <li><a href="#" data-target="os">I. Operating Systems</a></li>
 			<li><a href="#" data-target="why-linux">II. Why Linux is
 					Important in Bioinformatics</a></li>
@@ -229,7 +230,7 @@ strong {
 		<button id="toggleToc" style="display: none;">☰ Table of Contents</button>
 		
 		<section id="overview">
-			<h1 style="text-align: center !important;">Genome-wide Association Studies (GWAS)</h1>
+			<h1 style="text-align: center !important; font-size:200px">Genome-wide Association Studies (GWAS)</h1>
 
 		<!--	<h3>🎯 Topic</h3>
 			<p>Linux Basics, Filesystem, and Shell Navigation</p>
@@ -307,6 +308,62 @@ strong {
 				<li>Multiple SNP: Using multiple SNPs simultaneously.<br>Several methods have been developed (e.g. FarmCPU, BLINK etc) that produce a multiple-SNP final model.</li>
 				<li>Whole-genome: Incorporating all SNPs.<br>As we noted above, such a problem does not have a solution within the ordinary linear regression model (ordinary least squares). However, there are many penalized regression methods that allow more variables than observations and are applied to GWAS datasets.</li>
 			</ol>
+			<h3>Testing for association in a single-Marker GWAS</h3>
+			<p>
+				How do we test association between phenotype and genotype (single SNP)? 
+				There are many statistical tests developed for testing association or non-independence.
+				First, let us understand what variables we are dealing with.
+				<br>
+				In diploid species, a biallelic SNP genotype can look like this
+				<ul style="text-align: center;">
+					<li>Sample1 AA</li>
+					<li>Sample2 GG</li>
+					<li>Sample3 AG</li>
+					<li>...</li>
+					<li>Sample400 AA</li>
+				</ul>
+				In this example the SNP has two alleles, A and G, and because the organism is diploid, the genotypes contain two alleles.
+				Thus, the genotypes are AA, AG, and GG. (We don't distinguish between AG and GA).
+				<br>
+				Most of the SNPs are biallelic (have only two alleles). In this course we deal with diploid species only (rice).
+				There are wild relatives of rice that are tetraploid, and the theory would be slightly different for those species.
+				<br>
+				A biallelic SNP genotype is a categorical variable with 3 levels:
+					<ul>
+						<li>- homozygous reference</li>
+						<li>- heterozygous</li>
+						<li>- homozygous alternate allele</li>
+					</ul>
+				These levels can be coded numerically as 0,1,2.
+				<br>
+				On the phenotype side, there are different types of phenotypes. 
+				Some are quantitative (plant height, cm; weight, g; days to flowering);
+				Some are categorical: resistant vs susceptible, tolerant  vs intolerant; seed color can be white, red, or purple. 
+				Depending on how we model both phenotype and genotype, we can select various association tests.
+				There are
+					<ul>
+						<li>E.g. for binary traits we can employ: a chi-squared test or use  logistic regression.</li>
+						<li>For continuous traits: t-test, linear regression.</li>
+					</ul>
+				Below we assume quantitative phenotype.
+				<br>
+				For a biallelic SNP genotype (AA, Aa, aa), the encoding is 0, 1, 2 based on the number of minor alleles.	
+			</p>
+		</section>
+		<section id="data-prep">
+			<h2>GWAS Data preparation.</h2>
+			<p>
+			In order to understand the principles behind the data preparation best practices, we need to understand how the genotype datasets are created.
+			</p>
+			<h3>Dense Genotype Datasets</h3>
+			<p>
+			Diversity panels genotyped with whole-genome sequencing often exhibit:
+				<ul>
+					<li>A large number of SNPs, many of which are rare.</li>
+					<li>Extensive LD between SNPs, influenced by evolutionary patterns such as bottlenecks, selection, and population stratification.</li>
+				</ul>
+			</p>
+			<h3>SNP Filtering</h3>
 		</section>
 
 		<!--  
