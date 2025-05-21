@@ -272,7 +272,41 @@ strong {
 					<p style="text-align: center;">	Pheno=𝑓(Geno)+𝑒 </p> <br>
 				where 𝑒  represents the noise or error from non-genetic factors. To proceed anywhere, we need to make some simplifying assumptions.	
 			</p>
-			
+			<h3>Common Assumptions</h3>
+			<p>
+				<ol>
+					<li>The trait is influenced by a few variants with significant effects, or</li>
+					<li>The trait is influenced by many variants, each with a small effect.</li>
+				</ol>
+
+
+				These effects are typically assumed to be additive and independent, leading to a linear model:
+					<p style="text-align: center;"> Y = + SNP1 *1+ SNP2*2 +  + SNPM*M </p> <br>
+				where Y is the phenotype, mu is the phenotype mean, M is the number of SNPs or genetic markers in the model,
+				SNP_1 to SNP_M are encoded genotype values for each SNP (more on this later,
+				in the simplest case these are 0-1 variables), and beta_1 to beta_M are corresponding effects.
+			</p>
+			<h3>Issues with simple linear models</h3>
+			<p>
+				The trouble with the model above is that in a typical situation the number of samples is much  less than the number of SNPs.
+				This implies that the model lacks a unique solution, making SNP effects indeterminable.
+				There are several ways out of this. The most typical way is trying to test a single SNP at a time, scanning all the SNPs in the genome in turn.
+			</p>
+			<h3>Single-SNP GWAS</h3>
+			<p>
+			The typical procedure is to test each SNP for association with the phenotype:
+				<ul>
+					<li>Detects considerable effects on the trait.</li>
+					<li>Focuses on identifying regions affecting the phenotype rather than creating a comprehensive model.</li>
+					<li>Relies on linkage disequilibrium (LD) to capture variants not in the dataset.</li>
+				</ul>
+			</p>
+			<h3>Models for Genotype-Phenotype Association</h3>
+			<ol>
+				<li>Single-SNP: Testing each SNP individually.<br>This is the most typical approach.</li>
+				<li>Multiple SNP: Using multiple SNPs simultaneously.<br>Several methods have been developed (e.g. FarmCPU, BLINK etc) that produce a multiple-SNP final model.</li>
+				<li>Whole-genome: Incorporating all SNPs.<br>As we noted above, such a problem does not have a solution within the ordinary linear regression model (ordinary least squares). However, there are many penalized regression methods that allow more variables than observations and are applied to GWAS datasets.</li>
+			</ol>
 		</section>
 
 		<!--  
