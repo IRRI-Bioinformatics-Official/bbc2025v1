@@ -50,7 +50,8 @@ This is a **hybrid training setup**.
 - Hands-on: Population structure
 - Hands-on: GWAS using TASSEL
 
-### Module 4: Post-GWAS using Rice SNP-Seek, Rice Galaxy, and RicePilaf. Introduction to Special Project
+### Module 4: Post-GWAS using Rice SNP-Seek, Rice Galaxy, and RicePilaf.
+### Introduction to Special Project
 **Objective**: Learn practical skills in interpreting GWAS output, integrating with other omics data, and identification of candidate genes.
 
 - Significance threshold. Effective number of independent tests
