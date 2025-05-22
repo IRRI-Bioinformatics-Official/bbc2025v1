@@ -442,9 +442,9 @@ strong {
 			<h3>Loaded SNP data</h3>
 			<ul>
 				<li>Once the genotype (SNP) data is loaded, you will see a summary of the dataset on the left side, which looks as follows:</li>
-				<img border="0" width="309" height="154" src="m3files/Picture5.png" v:shapes="_x0000_i1034">
+				<img border="0" width="309" height="164" src="m3files/Picture5.png" v:shapes="_x0000_i1034">
 				<li>The graphical genotype view will show a portion of your genotype data.</li>
-				<img border="0" width="467" height="323" src="m3files/Picture6.png" v:shapes="_x0000_i1034">
+				<img border="0" width="767" height="350" src="m3files/Picture6.png" v:shapes="_x0000_i1034">
 				<br>	
 			You may scroll up and down to change the visible samples, and use the slider to change the genomic region.
 			The dropdown currently showing "MajorMinorAllele" shows the coloring scheme. The default scheme shown here colors the genotype calls as follows:
@@ -463,7 +463,7 @@ strong {
 				<li>File -> Open As -> Phenotype (scroll the options list down)</li>
 				<img border="0" width="263" height="134" src="m3files/Picture7.png" v:shapes="_x0000_i1034">
 				<li>Choose a phenotype file. Upon loading, the data panel will look like</li>
-				<img border="0" width="238" height="67" src="m3files/Picture8.png" v:shapes="_x0000_i1034">
+				<img border="0" width="263" height="167" src="m3files/Picture8.png" v:shapes="_x0000_i1034">
 			</ul>	
 			</p>
 		</section>
@@ -482,21 +482,52 @@ strong {
 						<li>Select the intersect dataset (geno+pheno).</li>
 						<li>Click <span style="font-family: Courier New;">Analysis -> Association -> GLM</span>.</li>
 						<li>Leave the default choices and proceed.</li>
-						<br>
 						<img border="0" width="468" height="210" src="m3files/Picture9.png" v:shapes="_x0000_i1034">
 						<br>
 						<img border="0" width="468" height="191" src="m3files/Picture10.png" v:shapes="_x0000_i1034">
 						<br>
 						<li>Leave the default choices and proceed.</li>
+						<img border="0" width="338" height="167" src="m3files/Picture11.png" v:shapes="_x0000_i1034">
 						<br>
-						<img border="0" width="238" height="67" src="m3files/Picture11.png" v:shapes="_x0000_i1034">
 						<li>Finding Results Table</li>
 						<img border="0" width="468" height="191" src="m3files/Picture12.png" v:shapes="_x0000_i1034">
 					</ol>
-
-					
 				</li>
 			</ol>
+			<strong>Note on file saving</strong>
+			<ol>
+				<li>In the GLM setup screen, you may check the "Save to file" checkbox and choose the output file location. 
+					Note that there are two output tables: Statistics file (this will contain p-values) and Effects file (this will hold estimated SNP effects).</li>
+				<li>lternatively, after the computation finished within TASSEL, use <span style="font-family: Courier New;">File-> Save as</span>.</li>
+				<img border="0" width="268" height="323" src="m3files/Picture13.png" v:shapes="_x0000_i1034">
+			</ol>
+			<strong>Results table can be sorted by columns</strong>
+			Find variants with smallest p-value - click on column header of the (p) column
+			<br>
+			Notable columns:
+			<ul>
+				<li>
+					p, add_p, dom_p (p-values of the three genotype models)
+					<ul>
+						<li>add_p holds the p-value from the most common genotype association model (additive)</li>
+						<li>dom_p: dominance model (both heterozygous and HOM ALT calls assumed to have  the same effect).</li>
+					</u>
+
+				</li>
+				<li>marker R squared
+					<ul>
+						<li>This is a common population-weighted measure of SNP effect. It generally does not replicate across different populations.</li>
+					</ul>
+				</li>
+				<li>minorObs</li>
+				<img border="0" width="468" height="65" src="m3files/Picture14.png" v:shapes="_x0000_i1034">
+				<li>Note the frequencies of these SNPs (last column: # minor Obs) and marker R2</li>
+				<img border="0" width="101" height="132" src="m3files/Picture15.png" v:shapes="_x0000_i1034">
+				<li>Don't forget this is a basic model that completely ignores population structure.
+				Before digging deep into the table, let's visualize results and do a simple QC using a Q-Q plot.</li>		
+			</ul>
+			
+
 			</p>
 			
 		</section>
