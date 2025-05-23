@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Basic NGS Data Analysis: Hands-on</title>
+<style>
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	line-height: 1.6;
+	display: flex;
+	margin-bottom: 100px;
+}
+
+html, body {
+	height: 100%;
+	overflow: auto;
+	overscroll-behavior: contain;
+}
+
+/* Floating Table of Contents */
+#toc {
+	position: fixed;
+	top: 0px;
+	left: 20px;
+	width: 200px;
+	background-color: #f8f9fa;
+	padding: 1rem;
+	border-radius: 8px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	z-index: 1000;
+
+  max-height: 100vh; /* Restrict height to the viewport */
+	overflow-y: auto; /* Enable vertical scroll */
+}
+
+#toc h2 {
+	font-size: 1.2rem;
+	margin-bottom: 1rem;
+}
+
+#toc ul {
+	list-style-type: none;
+	font-size: .9rem;
+	padding: 0;
+}
+
+#toc ul li {
+	margin: 0.5rem 0;
+}
+
+#toc ul li a {
+	text-decoration: none;
+	color: #007bff;
+}
+
+#toc ul li a:hover {
+	text-decoration: underline;
+}
+/* Main content styling */
+main {
+	margin-left: 240px; /* Adjusted for TOC width */
+	padding: 2rem;
+	flex-grow: 1;
+}
+
+h1, h2 {
+	color: #2c3e50;
+}
+
+section {
+	margin-bottom: 2rem;
+	max-width: 800px;
+	padding: 20px;
+	background-color: white;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+pre, code {
+	background-color: #ededed;
+	color: #312f2f;
+	padding: 5px 10px;
+	border-radius: 4px;
+	font-size: .9em;
+	font-family: Consolas, monospace;
+	overflow-x: auto;
+}
+
+code {
+	font-size: 1em;
+	background-color: #ededed;
+	padding: 2px 5px;
+	border-radius: 3px;
+}
+
+ul {
+	list-style-type: none;
+	padding-left: 20px;
+}
+
+ul li {
+	margin-bottom: 10px;
+}
+
+ol {
+	padding-left: 20px;
+}
+
+li {
+	margin-bottom: 10px;
+}
+
+strong {
+	color: #2c3e50;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  #toc {
+    position: static;
+    width: auto;
+    box-shadow: none;
+    margin: 1rem;
+  }
+
+  main {
+    margin-left: 0;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #toc h2 {
+    font-size: 1rem;
+  }
+
+  #toc ul li {
+    font-size: 0.85rem;
+  }
+
+  section {
+    padding: 1rem;
+  }
+
+  pre, code {
+    font-size: 0.85em;
+  }
+}
+
+
+
+</style>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toc = document.getElementById("toc");
+    const toggleBtn = document.getElementById("toggleToc");
+
+    function checkScreenWidth() {
+      if (window.innerWidth <= 768) {
+        toggleBtn.style.display = 'block';
+        toc.style.display = 'none';
+      } else {
+        toggleBtn.style.display = 'none';
+        toc.style.display = 'block';
+      }
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      toc.style.display = (toc.style.display === 'none') ? 'block' : 'none';
+    });
+
+    window.addEventListener("resize", checkScreenWidth);
+    checkScreenWidth();
+  });
+</script>
+
+
+</head>
+<body>
+	<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const tocLinks = document.querySelectorAll('#toc a[data-target]');
+      tocLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('data-target');
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    });
+  </script>
+	<!-- Floating Table of Contents -->
+	<div id="toc">
+		<h2>Outline:</h2>
+		<ul>
+<ul>
+
+  <li>
+    <a href="#" onclick="toggleSection('workflows-sub')">Workflow</a>
+    <ul id="workflows-sub" style="display: none; margin-left: 15px;">
+      <li><a href="#S6">Pipeline</a></li>
+
+      <li>
+        <a href="#" onclick="toggleSection('prep-sub')">Preparation and Data Import</a>
+        <ul id="prep-sub" style="display: none; margin-left: 15px;">
+          <li><a href="#S1">Data Preparation</a></li>
+		      <li><a href="#S2">Create Output Directory</a></li>
+        </ul>
+      </li>      
+
+      <li>
+        <a href="#" onclick="toggleSection('ref-read-sub')">Reference Data Preparation</a>
+        <ul id="ref-read-sub" style="display: none; margin-left: 15px;">
+              <li><a href="#S17">bwa index</a></li>
+              <li><a href="#S18">samtools faidx</a></li>
+              <li><a href="#S19">picard CreateSequenceDictionary</a></li>
+        </ul>
+      </li>
+      
+      <li>
+        <a href="#" onclick="toggleSection('raw-read-sub')">Raw Read Preparation</a>
+        <ul id="raw-read-sub" style="display: none; margin-left: 15px;">
+          <li><a href="#S9">Quality Check</a></li>
+		      <li><a href="#S10">Cleaning of reads</a></li>
+        </ul>
+      </li>
+
+	  	<li><a href="#S11">Alignment</a></li>
+		<li><a href="#S12">SortSam</a></li>
+		<li><a href="#S13">Fix mate info</a></li>
+		<li><a href="#S14">Add read group information</a></li>
+		<li><a href="#S15">Mark Duplicates</a></li>
+		<li><a href="#S16">Variant Calling</a></li>
+    </ul>
+  </li>
+</ul>
+
+
+<script>
+  function toggleSection(id) {
+    const section = document.getElementById(id);
+    if (section.style.display === "none") {
+      section.style.display = "block";
+    } else {
+      section.style.display = "none";
+    }
+  }
+</script>
+
+			
+			<li><a
+				href="https://drive.google.com/file/d/13-6c0lKjxG-rGj_HTqmlNe76S8Q5kQJ6/view?usp=sharing"
+				target="blank">Cheat Sheet</a></li>
+		</ul>
+	</div> 
+
+
+	<!-- Main Content -->
+	<main style="margin-bottom: 100px;margin-top:20px;">
+		<button id="toggleToc" style="display: none;">☰ Table of Contents</button>
+		
+		<section id="overview">
+			<h1 style="text-align:center; font-size:200%" >Basic NGS Data Analysis </h1> 
+      <h2 style="text-align:center;">Hands-on</h2>
+		</section>	
+
+ 	<!-- Variant Calling -->   
+		<section id="S6">
+			<h3>Variant Calling Pipeline </h3> 
+			<h4 style="margin-bottom: 1px !important;">Description</h4>
+			<p style="margin-top: 5px !important;">This is a pipeline for variant calling based on best practices for GATK4</p>
+			<h4 style="margin-bottom: 1px !important;">Requirements and Preparation </h4>
+			<ol style="margin-top: 5px !important;">
+				<li>Ubuntu installation on your laptop/workstation</li>
+				<li>Installation of the necessary tools</li>
+					<ol type="a">
+						<li>BWA, FastP, FastQC, GATK4, Picard, Samtools</li>
+					</ol>
+				<li>Demo dataset</li>
+					<ol type="a">
+						<li><strong>Reference:</strong><code>Ref.fasta</code></li>
+						<li><strong>Data:</strong><code>sample-1_1.fq.gz  sample-1_2.fq.gz</code></li>
+					</ol>
+			</ol>
+    
+      			<h4 style="margin-bottom: 10px !important;">Pipeline</h4>
+		      	<p style="margin-top: 30px !important;"><img src="m2files/workflow.png" width="500" height="600"></p>
+		</section>
+			
+    <section>
+			<h4 style="font-size:110%">Data Preparation and Import</h4>	
+      <ol>
+        <li id="S1"><b>Unpack the sample dataset archive.</b></li>
+          <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 85%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                    tar -xzvf sample.tar.gz
+                </td>
+                </tr>
+               </table>
+              </li>
+              <li><p><i>Extracts the <code>sample.tar.gz</code> archive</i></p></li>              
+            </ul>
+        </details>
+          <details>
+            <summary><b>Output</b></summary>
+            <ul><li><img src="m2files/o1.png" width="650" height="110"></li>
+           
+
+    <style>
+        .box {
+            background-color: #f0f0f0; /* Set the background color */
+            padding: 1px; /* Add some space around the text */
+            width: 645px; /* Control the width of the box */
+            font-family: monospace; /* Use a monospace font for the tree structure */
+            white-space: pre-wrap; /* Ensure that the text wraps */
+            border: 1px solid #ccc; /* Optional: Add a border around the box */
+            margin: 1px; /* Optional: Add margin around the box */
+        }
+    </style>
+
+
+<li>   <div class="box">
+          sample
+          ├── Data
+          │   ├── sample-1_1.fq.gz
+          │   └── sample-1_2.fq.gz
+          └── Ref
+              └── Ref.fasta
+
+          3 directories, 3 files
+    </div></li></ul>
+        </details>
+        <br>
+        <li id="S2"><b>Create <code>Output</code> directory.</b></li>
+          
+          <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 85%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                    cd sample 
+                </td>
+                 <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                    mkdir Output
+                </td>                     
+                </tr>
+                </tr>         
+               </table>
+              </li>
+              <li><p><i>Changes the current directory to <code style="font-family: Courier, monospace;">sample</code> and creates a new directory named <code style="font-family: Courier, monospace;">Output</code><br> inside it.</i></p></li>              
+            </ul>
+        </details>
+        <details>
+            <summary><b>Output</b></summary>
+            <ul><li><img src="m2files/o2.png" width="650" height="115"></li>
+        </details>
+      </ol>    
+    </section>
+
+    <!--REFERENCE DATA PREPARATION-->
+		<section id="S8">
+			<h4 style="font-size:110%">Reference Data Preparation (Indexing)</h4>	
+      <ol>
+
+         <!--BWA INDEX-->       
+        <li><h4 id="S17" style="font-size:109%; margin-bottom: 5px !important;">BWA Index</h4></li>
+
+          <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 85%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                    bwa index Ref/Ref.fasta
+                </td>
+                </tr>
+               </table>
+              </li>
+              <li><p><i>Indexes the <code style="font-family: Courier, monospace;">Ref.fasta</code> file using the BWA tool</i></p></li>              
+            </ul>
+        </details>
+
+        <details>
+            <summary><b>Output</b></summary>
+            <ul>
+              <li><strong>Files:</strong></li>
+                <code>Ref.fasta.bwt</code><br>
+                <code>Ref.fasta.pac</code><br>
+                <code>Ref.fasta.ann</code><br>
+                <code>Ref.fasta.amb</code><br>
+                <code>Ref.fasta.sa</code><br>
+                <p>
+
+                </p>
+              <li><img src="m2files/o3.png" width="650" height="130"></li>
+        </details>
+
+        <!--SAMTOOLS FAIDX-->
+        <li><h4 id="S18" style="font-size:109%; margin-bottom: 5px !important;">Samtools faidx</h4></li>
+
+           <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 85%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                    samtools faidx Ref/Ref.fasta
+                </td>
+                </tr>
+               </table>
+              </li>
+              <li><p><i>Indexes the <code style="font-family: Courier, monospace;">Ref.fasta</code> file using samtools</i></p></li>              
+            </ul>
+        </details>
+
+        <details>
+            <summary><b>Output</b></summary>
+            <ul>
+              <li><strong>File: </strong><code>Ref.fasta.fai</code></li>
+              <li><img src="m2files/o4.png" width="650" height="138"></li>
+        </details>
+
+        <!--PICARD CREEATESEQUENCEDICTIONARY--> 
+        <li><h4 id="S19" style="font-size:109%; margin-bottom: 5px !important;">Picard CreateSequenceDictionary</h4></li>
+
+        <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 85%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                    java -jar $PICARD CreateSequenceDictionary -REFERENCE Ref/Ref.fasta -OUTPUT Ref/Ref.dict
+                </td>
+                </tr>
+               </table>
+              </li>
+              <li><p><i>Creates a sequence dictionary for <code style="font-family: Courier, monospace;">Ref.fasta</code></i></p></li>              
+            </ul>
+        </details>
+
+        <details>
+            <summary><b>Output</b></summary>
+            <ul>
+              <li><strong>File: </strong><code>Ref.dict</code></li>
+              <li><img src="m2files/o5.png" width="650" height="165"></li>
+        </details>
+      </ol>  
+			</section>
+
+      <!--RAW READ PREPARATION-->    
+			<section >	
+        <h4 style="font-size:110%;">Raw Read Preparation</h4>
+				<ol>
+        <!--Quality Check-->
+				<li><h4 id="S9">Quality Check</h4></li>
+
+        <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 85%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                    fastqc Data/sample-1_1.fq.gz Data/sample-1_2.fq.gz
+                </td>
+                </tr>
+               </table>
+              </li>
+              <li><p><i>Runs FastQC analysis on files <code style="font-family: Courier, monospace;">sample-1_1.fq.gz</code> and <code style="font-family: Courier, monospace;">sample-1_2.fq.gz</code></i></p></li>              
+            </ul>
+        </details>
+
+        <details>
+            <summary><b>Output</b></summary>
+            <ul>
+              <li><strong>File: </strong><code>FastQC reports</code></li>
+              <li><img src="m2files/o6.png" width="650" height="140"></li>
+        </details>
+
+        <!--Cleaning of Reads-->
+				<li><h4 id="S10" style="font-size:109%">Cleaning</h4></li>
+
+        <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 85%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                    fastp -i Data/sample-1_1.fq.gz -I Data/sample-1_2.fq.gz -o Data/sample-1_1-cleaned.fq.gz -O Data/sample-1_2-cleaned.fq.gz
+                </td>
+                </tr>
+               </table>
+              </li>
+              <li><p><i>Clean reads <code style="font-family: Courier, monospace;">sample-1_1.fq.gz</code> and <code style="font-family: Courier, monospace;">sample-1_2.fq.gz</code></i></p></li>              
+            </ul>
+        </details>
+
+        <details>
+            <summary><b>Output</b></summary>
+            <ul>
+              <li><strong>File: </strong><code>*-cleaned.fq.gz</code></li>
+              <li><img src="m2files/o7.png" width="650" height="155"></li>
+        </details>
+
+        </ol> 
+      </section>	
+
+      <!--ALIGNMENT-->
+			<section id="S11">
+				<h4 id="S9" style="font-size:110%">Alignment to Reference Genome</h4>
+
+        <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 85%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                    bwa mem -t 8 Ref/Ref.fasta Data/sample-1_1-cleaned.fq.gz Data/sample-1_2-cleaned.fq.gz > Output/sample.sam
+                </td>
+                </tr>
+               </table>
+              </li>
+              <li><p><i>Align cleaned reads <code style="font-family: Courier, monospace;">sample-1_1-cleaned.fq.gz</code> and <code style="font-family: Courier, monospace;">sample-1_2-cleaned.fq.gz</code><br>
+              to a reference genome <code style="font-family: Courier, monospace;">Ref.fasta</code></i></p></li>              
+            </ul>
+        </details>
+
+        <details>
+            <summary><b>Output</b></summary>
+            <ul>
+              <li><strong>File: </strong><code>sample.sam</code></li>
+              <li><img src="m2files/o8.png" width="650" height="50"></li>
+        </details>
+			</section>
+
+      <!--Sorting of reads-->
+			<section id="S12"> 
+			<h4 style="font-size:110%">Sorting</h4>	
+				<p style="font-size:108%"><b>Tool:</b><a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037594291-SortSam-Picard" target="_blank"><strong>SortSam</strong></a></p>
+
+        <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 85%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                    java -jar $GATK SortSam --INPUT Output/sample.sam --OUTPUT Output/sample.sorted.bam -SORT_ORDER coordinate
+                </td>
+                </tr>
+               </table>
+              </li>
+              <li><p><i>Sorts <code style="font-family: Courier, monospace;">sample.sam</code> file by coordinate.</i></p></li>              
+            </ul>
+        </details>
+
+        <details>
+            <summary><b>Output</b></summary>
+            <ul>
+              <li><strong>File: </strong><code>sample.sorted.bam</code></li>
+              <li><img src="m2files/o9.png" width="650" height="60"></li>
+        </details>
+        
+			</section>
+
+
+      <!--Fixmateinformation-->
+			<section id="S13">
+			<h4 style="font-size:110%">Fix mate information</h4>	
+			<p style="font-size:108%"><b>Tool:</b><a href="https://gatk.broadinstitute.org/hc/en-us/articles/4405451362843-FixMateInformation-Picard" target="_blank"><strong>FixMateInformation</strong></a></p>
+
+        <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 85%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                    java -jar $GATK  FixMateInformation --INPUT Output/sample.sorted.bam --OUTPUT Output/sample.fxmt.bam --CREATE_INDEX TRUE --VALIDATION_STRINGENCY LENIENT
+                </td>
+                </tr>
+               </table>
+              </li>
+              <li><p><i>Fixes mate information in a sorted BAM file <code style="font-family: Courier, monospace;">sample.sorted.bam</code> .</i></p></li>              
+            </ul>
+        </details>
+
+        <details>
+            <summary><b>Output</b></summary>
+            <ul>
+              <li><strong>Files: </strong></li>
+              <code>sample.fxmt.bam</code><br>
+              <code>sample.fxmt.bai</code><br>
+              <br>
+              <li><img src="m2files/o10.png" width="650" height="80"></li>
+        </details>
+
+      </section>
+
+      <!--ADD READ GROUP INFO-->
+			<section id="S14">
+			<h4 style="font-size:110%">Add Read Group Information</h4>	
+			<p style="font-size:108%"><b>Tool:</b><a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037226472-AddOrReplaceReadGroups-Picard" target="_blank"><strong>AddOrReplaceReadGroups</strong></a></p>
+
+        <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 85%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                    java -jar $GATK AddOrReplaceReadGroups --INPUT Output/sample.fxmt.bam --OUTPUT Output/sample.addrep.bam --RGID run100 --RGPU unit1 --RGLB lib1 -PL Illumina -SM sample -CN CN --VALIDATION_STRINGENCY LENIENT --CREATE_INDEX TRUE
+                </td>
+                </tr>
+               </table>
+              </li>
+              <li><p><i>Adds read group information in <code style="font-family: Courier, monospace;">sample.fxmt.bam</code> file.</i></p></li>              
+            </ul>
+        </details>
+
+        <details>
+            <summary><b>Output</b></summary>
+            <ul>
+              <li><strong>Files: </strong></li>
+              <code>sample.addrep.bam</code><br>
+              <code>sample.addrep.bai</code><br>
+              <br>
+              <li><img src="m2files/o11.png" width="650" height="130"></li>
+        </details>      
+
+			</section>
+
+			<!--MARK DUPLICATES-->
+		  <section id="S15">
+		  <h4 style="font-size:110%">Mark Duplicates</h4>		 
+		  <p style="font-size:108%"><b>Tool:</b><a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037052812-MarkDuplicates-Picard" target="_blank"><strong>MarkDuplicates</strong></a></p>
+
+        <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 85%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                    java -jar $GATK MarkDuplicates --INPUT Output/sample.addrep.bam --OUTPUT Output/sample.mkdup.bam --VALIDATION_STRINGENCY LENIENT --CREATE_INDEX TRUE --METRICS_FILE Output/sample.mkdup.metrics --MAX_FILE_HANDLES_FOR_READ_ENDS_MAP 1000
+                </td>
+                </tr>
+               </table>
+              </li>
+              <li><p><i>Identifies and marks duplicate reads in <code style="font-family: Courier, monospace;">sample.addrep.bam</code> file.</i></p></li>              
+            </ul>
+        </details>
+
+        <details>
+            <summary><b>Output</b></summary>
+            <ul>
+              <li><strong>Files: </strong></li>
+              <code>sample.mkdup.bam</code><br>
+              <code>sample.mkdup.bai</code><br>
+              <code>sample.mkdup.metrics</code><br>
+              <br>
+              <li><img src="m2files/o12.png" width="650" height="160"></li>
+        </details>  
+    
+		  </section>
+
+      <!--VARIANT CALLING-->
+  		<section id="S16">
+	  	<h4 style="font-size:110%">Variant Calling</h4>
+		  <p style="font-size:108%"><b>Tool:</b><a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037225632-HaplotypeCaller" target="_blank"><strong>HaplotypeCaller</strong></a></p>
+
+        <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 85%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                    java -jar $GATK HaplotypeCaller \ <br>
+                    -R Ref/Ref.fasta \ <br>
+                    -I Output/sample.mkdup.bam \ <br>
+                    -O Output/sample.g.vcf \ <br>
+                    -ERC GVCF \ <br>
+                    --bam-output Output/sample.bamout.bam \<br>
+                    --showHidden true
+                </td>
+                </tr>
+               </table>
+              </li>
+              <li><p><i>Performs variant calling on a BAM file  <code style="font-family: Courier, monospace;">sample.mkdup.bam</code> against a reference genome <br>
+              <code>Ref.fasta</code></i></p></li>              
+            </ul>
+        </details>
+
+        <details>
+            <summary><b>Output</b></summary>
+            <ul>
+              <li><strong>Files: </strong></li>
+              <code>sample.g.vcf</code><br>
+              <code>sample.g.vcf.idx</code><br>
+              <code>sample.bamout.bam</code><br>
+              <code>sample.bamout.bai</code><br>
+              <br>              
+              <li><img src="m2files/o13.png" width="650" height="210"></li>
+        </details> 
+
+		</section>										
+
+		</br> </br> </br>
+	</main>
+	
+
+</body>
+</html>
