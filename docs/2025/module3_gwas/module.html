@@ -206,6 +206,7 @@ strong {
 			<li><a href="#" data-target="tassel">IV. TASSEL GWAS Workflow</a></li>
 			<li><a href="#" data-target="basic-gwas">V. Basic GWAS</a></li>
 			<li><a href="#" data-target="vs">VI. Visualizing Results</a></li>
+			<li><a href="#" data-target="stats">VII. Assessing Statistical Validity of GWAS</a></li>
 			<!-- <li><a href="#" data-target="os">I. Operating Systems</a></li>
 			<li><a href="#" data-target="why-linux">II. Why Linux is
 					Important in Bioinformatics</a></li>
@@ -543,8 +544,84 @@ strong {
 		</section>
 		
 		<section id="vs">
-			<h2>Visualizing Results</h2>
-			
+			<h3>Visualizing Results</h3>
+			<p>
+			Manhattan Plot:
+			<br>
+			<img border="0" width="258" height="114" src="m3files/Picture20.png" v:shapes="_x0000_i1034">
+			<br>
+			<img border="0" width="468" height="210" src="m3files/Picture21.png" v:shapes="_x0000_i1034">
+			<ul>
+				<li>X-axis: Physical position</li>
+				<li>Y-axis: log10-scaled P-value</li>
+				<li>Zooming: Use brush select</li>
+			</ul>
+			Manhattan Plot, zoomed in
+			<br>
+			<img border="0" width="468" height="294" src="m3files/Picture22.png" v:shapes="_x0000_i1034">
+			<br>
+			<center>End of Chr 1 and beginning of Chr 2</center>
+			<ul>
+				<li>Zoom in using brush</li>
+				<li>Hover to see the info</li>
+				<li>Right-click on a plot to access Properties menu</li>
+			</ul>
+			<strong>For better plots,  learn to plot in R!</strong>
+			</p>
+		</section>
+
+		<section id="stats">
+			<h3>Assessing Statistical Validity of GWAS</h3>
+			<p>
+			<strong>Q-Q Plot</strong>
+			<ul>
+				<li>(Quantile-Quantile Plot)</li>
+				<li>Expected vs Observed -log10 (pvalues)</li>
+			</ul>
+			<strong>Goals:</strong>
+			<ul>
+				<li>To see if non-significant p-values are distributed as expected
+					<ul>
+						<li>checking validity of the null model</li>
+					</ul>
+				</li>
+				<li>To see if most significant p-values are indeed significant
+					<ul>
+						<li>Only makes sense if the 1st is true</li>
+					</ul>
+				</li>
+			</ul>	
+			</p>
+
+			<h2>Creating Q-Q Plot:</h2>
+			<ul>
+				<li>Results -> QQ plot</li>
+				<li>QQ plot options: just use the default</li>
+				<img border="0" width="255" height="148" src="m3files/Picture23.png" v:shapes="_x0000_i1034">
+				<li>To inspect irregularities more carefully, you may increase number of points later</li>
+				<li>This affects density of points, rendering time, and file size</li>
+				<img border="0" width="246" height="78" src="m3files/Picture24.png" v:shapes="_x0000_i1034">
+			</ul>
+			<h3>QQ plot – basic GLM</h3>
+			<ul>
+				<img border="0" width="468" height="290" src="m3files/Picture25.png" v:shapes="_x0000_i1034">
+				<li>Each point is a SNP</li>
+				<li>Y coordinate is –log10(p-value)</li>
+				<li>X coordinates are "expected" -log10(p-values),
+					<ul>
+						<li>"theoretical quantiles"</li>
+					</ul>
+				</li>
+				<li>Model QC:
+					<ul>
+						<li>Note that points go above diagonal right at the beginning (0,0), almost no points seem to be near diagonal.
+							Thus, the assumption that most SNPs have no effect + null model are wrong.</li>
+					</ul>
+				</li>
+				<img border="0" width="468" height="280" src="m3files/Picture26.png" v:shapes="_x0000_i1034">
+				<li></li>
+				<li></li>
+			</ul>
 		</section>
 		<!--  
 		<section id="os">
