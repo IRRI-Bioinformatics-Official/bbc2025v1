@@ -204,7 +204,8 @@ strong {
 			<li><a href="#" data-target="intro">II. Introduction</a></li>
 			<li><a href="#" data-target="data-prep">III. GWAS Data Preparation</a></li>
 			<li><a href="#" data-target="tassel">IV. TASSEL GWAS Workflow</a></li>
-			<li><a href="#" data-target="tassel">V. Basic GWAS</a></li>
+			<li><a href="#" data-target="basic-gwas">V. Basic GWAS</a></li>
+			<li><a href="#" data-target="vs">VI. Visualizing Results</a></li>
 			<!-- <li><a href="#" data-target="os">I. Operating Systems</a></li>
 			<li><a href="#" data-target="why-linux">II. Why Linux is
 					Important in Bioinformatics</a></li>
@@ -355,7 +356,7 @@ strong {
 			</p>
 		</section>
 		<section id="data-prep">
-			<h2>GWAS Data preparation</h2>
+			<h2>GWAS Data Preparation</h2>
 			<p>
 			In order to understand the principles behind the data preparation best practices, we need to understand how the genotype datasets are created.
 			</p>
@@ -399,11 +400,6 @@ strong {
 		</section>
 		
 		<section id="tassel">
-			<h1 style="text-align: center !important; font-size:175%">Introduction to TASSEL GWAS Workflow</h1>
-			<h3>Overview</h3>
-			<p>In this hands-on module you will conduct a basic GWAS workflow in TASSEL, from loading and examining input data, running the necessary analyses, to creating Manhattan and QQ plots.
-				In this workflow we use one of the simplest models implemented in TASSEL (general linear model).  Later we will discuss how this workflow can be improved to meet various challenges.
-			</p>
 			<h3>Loading Data</h3>
 			<p>
 			For GWAS analysis you need, at a minimum, the following types of inputs:
@@ -530,9 +526,21 @@ strong {
 				<li>Don't forget this is a basic model that completely ignores population structure.
 				Before digging deep into the table, let's visualize results and do a simple QC using a Q-Q plot.</li>		
 			</ul>
-			
-
+			<h3>Log10 scaling of p-values</h3>
+			Smaller P values are more significant, and we care about the smallest rather than those around 1.
+			<br>
+			It is difficult to compare small values directly, and we need to use a transformation.
+			<br>
+			In GWAS a standard transformation is –log10(p) : minus base 10 logarithm of p-value
+			<br>
+			<img border="0" width="325" height="167" src="m3files/Picture19.png" v:shapes="_x0000_i1034">
+			<br>
+			This is often called "Phred scaling".
 			</p>
+		</section>
+		
+		<section id="vs">
+			<h2>Visualizing Results</h2>
 			
 		</section>
 		<!--  
