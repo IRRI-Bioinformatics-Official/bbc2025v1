@@ -207,6 +207,7 @@ strong {
 			<li><a href="#" data-target="basic-gwas">V. Basic GWAS</a></li>
 			<li><a href="#" data-target="vs">VI. Visualizing Results</a></li>
 			<li><a href="#" data-target="stats">VII. Assessing Statistical Validity of GWAS</a></li>
+			<li><a href="#" data-target="summary">VIII. Module Summary</a></li>
 			<!-- <li><a href="#" data-target="os">I. Operating Systems</a></li>
 			<li><a href="#" data-target="why-linux">II. Why Linux is
 					Important in Bioinformatics</a></li>
@@ -221,10 +222,11 @@ strong {
 			<li><a href="#" data-target="compressed">VII. Handling
 					Compressed File</a></li>
 			<li><a href="#" data-target="quiz">VIII. Activity</a></li>
-			 -->
+			 
 			<li><a
 				href="main_c.html"
 				target="blank">IX. Cheat Sheet</a></li>
+			-->
 		</ul>
 	</div>
 
@@ -620,8 +622,46 @@ strong {
 					</ul>
 				</li>
 				<img border="0" width="468" height="280" src="m3files/Picture26.png" v:shapes="_x0000_i1034">
-				<li></li>
-				<li></li>
+				<li>Zoom in by "brushing"</li>
+				<li>Zoom in near 0</li>
+				<li>More clearly see deviation from the diagonal</li>
+			</ul>
+			<strong>Important notes about QQ plot</strong>
+			<ul>
+				<li>Properties of log10 scaling:
+					<ul>
+						<li>The interval from 0 to 1 on x- axis contains SNPs with expected p-values from 1 to 0.1 -I.e. 90% of SNPs</li>
+						<li>From 0 to 0.301 - half of all SNPs</li>
+					</ul>
+				</li>
+				<li>The deviation from diagonal at the median point is related to the technique called "Genomic control"</li>
+				<img border="0" width="468" height="342" src="m3files/Picture27.png" v:shapes="_x0000_i1034">
+				<br>
+				<li>With no subsetting of points</li>
+				<li>Properties of log10 scaling:
+					<ul>
+						<li>The interval from 0 to 1 on x- axis contains SNPs with expected p-values from 1 to 0.1 -I.e. 90% of SNPs</li>
+						<li>From 0 to 0.301 - half of all SNPs ( 10^(-0.301) = ?  )</li>
+					</ul>
+				</li>
+			</ul>
+		</section>
+		<section id="summary">
+			<h2>Module Summary</h2>
+			<p font-style: italic;>
+				Deciphering the genetic foundation of complex traits through Genome-Wide Association Studies (GWAS) is a pivotal aspect of modern genetics.
+				By scanning the genome for Single Nucleotide Polymorphisms (SNPs) that are associated with particular traits, researchers can identify genetic variations that influence these traits.
+				This process is essential for discovering specific genes linked to traits, enabling significant progress in gene discovery and plant breeding.
+			</p>
+			<p>
+				In this module, you have developed a comprehensive understanding of Genome-Wide Association Studies (GWAS).
+				You have learned the fundamental concepts behind GWAS and explored how to identify genetic associations with complex traits.
+				Additionally, you have gained hands-on experience with essential GWAS tools, such as TASSEL, enabling you to analyze and interpret genetic data effectively.
+			</p>
+			<ul list-style-type: square;>
+				<li>Genome-wide Association Studies discovers the connections between a trait or phenotype and the genotype following the concept of P = G + E + (GxE).</li>
+				<li>Familiarity with the input files such as the SNP data and phenotype data and tools such as TASSEL is necessary to perform GWAS</li>
+				<li>It is imperative to understand the concept of p-values, manhattan plot and QQ plot to analyze and draw conclusions from the results of GWAS</li>
 			</ul>
 		</section>
 		<!--  
