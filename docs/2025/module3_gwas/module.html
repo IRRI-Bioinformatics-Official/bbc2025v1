@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <title>GWAS</title>
 <style>
@@ -152,6 +153,11 @@ strong {
   }
 }
 
+table {align-self: center;}
+td,tr { border: 1px ;
+	 background:#ededed; 
+	 text-align: center;
+	 padding-right: 2px;}
 
 
 </style>
@@ -259,7 +265,10 @@ strong {
 			<h3>Fundamental concepts of GWAS</h3>
 			<p>Genome-Wide Association Studies (GWAS)  are methods used to identify genetic variants associated with a trait of interest  by scanning markers across large  sets of individual genomes,
 				to determine if any genetic variations are associated with a specific disease or trait.
-				<br>
+				</p>
+				
+
+			<p>
 				Overall GWAS procedure:
 				<ol>
 					<li>Select the GWAS panel - a collection of accessions that can be thought of as a sample from a population (or represent diverse gene pool)</li>
@@ -272,13 +281,14 @@ strong {
 				We will briefly touch step 1 in the end when discussing the power of GWAS.
 			</p>
 
-			<h3>Goal</h3>
+			<h4>Goal</h4>
 			<p>
 				Our goal is to understand the relationship between genotype and phenotype. <br> Phenotype can most generally be modeled as:<br>
 					<p style="text-align: center;">	Pheno=𝑓(Geno)+𝑒 </p> <br>
 				where 𝑒  represents the noise or error from non-genetic factors. To proceed anywhere, we need to make some simplifying assumptions.	
 			</p>
 			<h3>Common Assumptions</h3>
+			Very often, one of the following assumptions is made:
 			<p>
 				<ol>
 					<li>The trait is influenced by a few variants with significant effects, or</li>
@@ -286,16 +296,24 @@ strong {
 				</ol>
 
 
-				These effects are typically assumed to be additive and independent, leading to a linear model:
-					<p style="text-align: center;"> Y = + SNP1 *1+ SNP2*2 +  + SNPM*M </p> <br>
-				where Y is the phenotype, mu is the phenotype mean, M is the number of SNPs or genetic markers in the model,
-				SNP_1 to SNP_M are encoded genotype values for each SNP (more on this later,
-				in the simplest case these are 0-1 variables), and beta_1 to beta_M are corresponding effects.
+				
+				Moreover, these effects are typically assumed to be additive and independent.
+				
+				This leads to a linear model:
+					<p style="text-align: center;"> 
+						 \(Y = \mu + SNP_1 * b_1 + SNP_2 * b_2 +  + SNP_M * b_M \)
+				   </p> <br>
+				where Y is the phenotype, 
+				\(\mu \) is the phenotype mean, 
+				M is the number of SNPs (or any genetic markers) in the model,
+				\( SNP_1, ..., SNP_M \) are encoded genotype values for each SNP (more on this later,
+				in the simplest case these are 0-1 variables), and b_1 to b_M are corresponding SNP effects.
 			</p>
 			<h3>Issues with simple linear models</h3>
 			<p>
 				The trouble with the model above is that in a typical situation the number of samples is much  less than the number of SNPs.
 				This implies that the model lacks a unique solution, making SNP effects indeterminable.
+				<br>
 				There are several ways out of this. The most typical way is trying to test a single SNP at a time, scanning all the SNPs in the genome in turn.
 			</p>
 			<h3>Single-SNP GWAS</h3>
@@ -313,34 +331,123 @@ strong {
 				<li>Multiple SNP: Using multiple SNPs simultaneously.<br>Several methods have been developed (e.g. FarmCPU, BLINK etc) that produce a multiple-SNP final model.</li>
 				<li>Whole-genome: Incorporating all SNPs.<br>As we noted above, such a problem does not have a solution within the ordinary linear regression model (ordinary least squares). However, there are many penalized regression methods that allow more variables than observations and are applied to GWAS datasets.</li>
 			</ol>
-			<h3>Testing for association in a single-Marker GWAS</h3>
+			<h3>Testing for association in a single-marker GWAS</h3>
 			<p>
 				How do we test association between phenotype and genotype (single SNP)? 
 				There are many statistical tests developed for testing association or non-independence.
 				First, let us understand what variables we are dealing with.
-				<br>
-				<br>
-				In diploid species, a biallelic SNP genotype can look like this
-				<ul>
-					<li>Sample1 AA</li>
-					<li>Sample2 GG</li>
-					<li>Sample3 AG</li>
-					<li>...</li>
-					<li>Sample400 AA</li>
-				</ul>
-				In this example the SNP has two alleles, A and G, and because the organism is diploid, the genotypes contain two alleles.
+			</p>
+			<br>
+			Async task: read about core concepts like  <a href="https://en.wikipedia.org/wiki/Ploidy">ploidy</a>, zygosity, allele. 	 
+			
+
+			<h4>Single-Nucleotide Polymorphisms (SNPs)</h4>
+			
+
+
+			<p>
+			   Let us recall that a <em>Single-Nucleotide Polymorphism (SNP) </em> is a genetic variant arising as 
+			   a mutation of one base (A,C,G,T) at a certain position in the genome into another base. 
+			   For example, there could have been a mutation on Chromosome 1 at position 1278 that changed G to A.  
+			   Both the original base and the new base are <i>alleles</i> of the SNP. 
+			   The original base is the <em>ancestral</em> allele, and the new base is the <em>derived</em> allele of the SNP.
+			   
+			   
+			   
+			   
+			   
+			
+			</p>
+			
+			<p>
+
+				In diploid species, a biallelic SNP genotype across a sample of 400 individuals  can look like this
+				<table align = "center">
+					<thead>
+						<tr>
+							<th>Sample</th>
+							<th>Genotype</th>
+						  </tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Sample1</td>
+							<td>A/A</td>
+						</tr>
+						<tr>
+							<td>Sample2</td>
+							<td>G/G</td>
+						</tr>
+						<tr>
+							<td>Sample3</td>
+							<td>A/G</td>
+						</tr>
+						<tr>
+							<td>...</td>
+							<td>...</td>
+						</tr>
+						<tr>
+							<td>Sample400</td>
+							<td>A/A</td>
+						</tr>
+					</tbody>
+				</table>
+
+
+				In this example the SNP has two alleles, A and G, and because the organism is diploid, each individual genotype is a combination of two alleles taken with replacement from the set of possible alleles.
 				Thus, the genotypes are AA, AG, and GG. (We don't distinguish between AG and GA).
 				<br>
 				Most of the SNPs are biallelic (have only two alleles). In this course we deal with diploid species only (rice).
 				There are wild relatives of rice that are tetraploid, and the theory would be slightly different for those species.
 				<br>
-				A biallelic SNP genotype is a categorical variable with 3 levels:
+			</p>
+			<p>
+				A biallelic SNP genotype could be thought of as a categorical variable with 3 levels:
 					<ul>
 						<li>homozygous reference</li>
 						<li>heterozygous</li>
 						<li>homozygous alternate allele</li>
 					</ul>
 				These levels can be coded numerically as 0,1,2.
+
+				Thus, in the previous example, if we assume that G is the reference allele, and A is the alternate allele, our encoding would look like:
+				<table align = "center">
+					<caption>Reference allele: G. Alternate allele: A</caption>
+					<thead>
+						<tr>
+							<th>Sample</th>
+							<th>Genotype</th>
+							<th>Encoded genotype</th>
+						  </tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Sample1</td>
+							<td>A/A</td>
+							<td>2</td>
+						</tr>
+						<tr>
+							<td>Sample2</td>
+							<td>G/G</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<td>Sample3</td>
+							<td>A/G</td>
+							<td>1</td>
+						</tr>
+						<tr>
+							<td>...</td>
+							<td>...</td>
+							<td>...</td>
+						</tr>
+						<tr>
+							<td>Sample400</td>
+							<td>A/A</td>
+							<td>2</td>
+						</tr>
+					</tbody>
+				</table>
 				<br>
 				<br>
 				On the phenotype side, there are different types of phenotypes. 
