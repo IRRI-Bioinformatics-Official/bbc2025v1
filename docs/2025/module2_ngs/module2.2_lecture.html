@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Exploring VCF data</title>
+<style>
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	line-height: 1.6;
+	display: flex;
+	margin-bottom: 100px;
+}
+
+
+
+html, body {
+	height: 100%;
+	overflow: auto;
+	overscroll-behavior: contain;
+}
+
+/* Floating Table of Contents */
+#toc {
+	position: fixed;
+	top: 0px;
+	left: 20px;
+	width: 200px;
+	background-color: #f8f9fa;
+	padding: 1rem;
+	border-radius: 8px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	z-index: 1000;
+
+  max-height: 100vh; /* Restrict height to the viewport */
+	overflow-y: auto; /* Enable vertical scroll */
+}
+
+#toc h2 {
+	font-size: 1.2rem;
+	margin-bottom: 1rem;
+}
+
+#toc ul {
+	list-style-type: none;
+	font-size: .9rem;
+	padding: 0;
+}
+
+#toc ul li {
+	margin: 0.5rem 0;
+}
+
+#toc ul li a {
+	text-decoration: none;
+	color: #007bff;
+}
+
+#toc ul li a:hover {
+	text-decoration: underline;
+}
+/* Main content styling */
+main {
+	margin-left: 240px; /* Adjusted for TOC width */
+	padding: 2rem;
+	flex-grow: 1;
+}
+
+h1, h2 {
+	color: #2c3e50;
+}
+
+section {
+	margin-bottom: 2rem;
+	max-width: 800px;
+	padding: 20px;
+	background-color: white;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#copy-btn {
+	margin-top: 10px;
+	cursor: pointer;
+	position: absolute;
+	top: 10px; /* Position the button at the top */
+	right: 10px; /* Position the button at the right */
+	border: 0px;
+	background: #369136;
+	padding: 5px;
+	border-radius: 5px;
+	color: white;
+}
+
+#copy-btn:hover {
+	background-color: #45a049;
+}
+
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+        th, td {
+      padding: 5px 10px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f0f3f5;
+      color: #2c3e50;
+    }
+
+
+pre, code {
+	background-color: #ededed;
+	color: #312f2f;
+	padding: 5px 10px;
+	border-radius: 4px;
+	font-size: .9em;
+	font-family: Consolas, monospace;
+	overflow-x: auto;
+}
+
+
+code {
+	font-size: 1em;
+	background-color: #ededed;
+	padding: 2px 5px;
+	border-radius: 3px;
+}
+
+ul {
+	list-style-type: none;
+	padding-left: 20px;
+}
+
+ul li {
+	margin-bottom: 10px;
+}
+
+ol {
+	padding-left: 20px;
+}
+
+li {
+	margin-bottom: 10px;
+}
+
+strong {
+	color: #2c3e50;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  #toc {
+    position: static;
+    width: auto;
+    box-shadow: none;
+    margin: 1rem;
+  }
+
+  main {
+    margin-left: 0;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #toc h2 {
+    font-size: 1rem;
+  }
+
+  #toc ul li {
+    font-size: 0.85rem;
+  }
+
+  section {
+    padding: 1rem;
+  }
+
+  pre, code {
+    font-size: 0.85em;
+  }
+}
+
+</style>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toc = document.getElementById("toc");
+    const toggleBtn = document.getElementById("toggleToc");
+
+    function checkScreenWidth() {
+      if (window.innerWidth <= 768) {
+        toggleBtn.style.display = 'block';
+        toc.style.display = 'none';
+      } else {
+        toggleBtn.style.display = 'none';
+        toc.style.display = 'block';
+      }
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      toc.style.display = (toc.style.display === 'none') ? 'block' : 'none';
+    });
+
+    window.addEventListener("resize", checkScreenWidth);
+    checkScreenWidth();
+
+    const copyButtons = document.querySelectorAll('.copy-btn');
+    
+    copyButtons.forEach(button => {
+        button.addEventListener("click", function() {
+            // Find the associated command text (inside the <code> tag)
+            const commandText = button.previousElementSibling.innerText;
+
+            // Create a temporary input to copy the command text
+            const tempInput = document.createElement("input");
+            tempInput.value = commandText;
+            document.body.appendChild(tempInput);
+
+            // Select the text and copy it
+            tempInput.select();
+            document.execCommand("copy");
+
+            // Remove the temporary input
+            document.body.removeChild(tempInput);
+
+            button.textContent = "Copied";
+        });
+    });
+  });
+</script>
+
+
+</head>
+<body>
+	<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const tocLinks = document.querySelectorAll('#toc a[data-target]');
+      tocLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('data-target');
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    });
+  </script>
+
+	<!-- Floating Table of Contents -->
+	<div id="toc">
+		<h2>Outline:</h2>
+		<ul>
+<ul>
+
+  <li>
+      <li><a href="#S0">Motivation</a></li>
+
+      <li>
+        <a href="#" onclick="toggleSection('VCFfilestructure')">VCF File</a>
+        <ul id="VCFfilestructure" style="display: none; margin-left: 15px;">
+          <li><a href="#S1">Structure</a></li>
+          <li><a href="#S2">Header Section</a></li>
+		      <li><a href="#S3">Data Section</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="#" onclick="toggleSection('Annot')">QC Annotations</a>
+        <ul id="Annot" style="display: none; margin-left: 15px;">
+          <li><a href="#S4">Overview</a></li>
+          <li><a href="#S5">QUAL</a></li>
+		      <li><a href="#S6">Read Depth</a></li>
+          <li><a href="#S7">Quality-by-Depth</a></li>
+          <li><a href="#S8">MQ and MQ0</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="#" onclick="toggleSection('AFannot')">Allele Frequency Annotations</a>
+        <ul id="AFannot" style="display: none; margin-left: 15px;">
+          <li><a href="#S9">AN, AC, AF</a></li>
+          <li><a href="#S10">Filtering</a></li>
+        </ul>
+      </li>
+
+      <li><a href="#S11">Base Calling Errors</a></li>
+      <li><a href="#S12">Alignment Errors</a></li>
+
+      <li>
+        <a href="#" onclick="toggleSection('het')">Heterozygosity</a>
+        <ul id="het" style="display: none; margin-left: 15px;">
+          <li><a href="#S13">Overview</a></li>
+          <li><a href="#S14">AF vs heterozygosity</a></li>
+          <li><a href="#S15">SNP heterozygosity</a></li>
+          <li><a href="#S16">Filtering</a></li>
+        </ul>
+      </li>
+
+      <li><a href="#S17">Hardy-Weinberg</a></li>
+      <li><a href="#S18">Take-away</a></li>      
+
+  </li>
+</ul>
+
+
+<script>
+  function toggleSection(id) {
+    const section = document.getElementById(id);
+    if (section.style.display === "none") {
+      section.style.display = "block";
+    } else {
+      section.style.display = "none";
+    }
+  }
+</script>
+	</div> 
+
+
+	<!-- Main Content -->
+	<main style="margin-bottom: 100px;margin-top:20px;">
+		<button id="toggleToc" style="display: none;">☰ Table of Contents</button>
+		
+		<section id="overview">
+			<h1 style="text-align:center; font-size:200%" >Exploring VCF data</h1>
+
+	  </section>	
+
+ 
+<section id="S0">
+	<h4 style="font-size:120%">Motivation</h4>	
+  <ul style="list-style: disc;">
+    <li>Variant callers output both true and false variants
+      <ul style="list-style: disc;"><li>Base calling errors, alignment errors, contamination...</li></ul>
+    </li>
+    <li>Balance between sensitivity and precision</li>
+    <li>The needs of applications may require different preference between precision or sensitivity</li>
+    <li>Multi-sample analysis allows to increase the proportion of true positives without sacrificing sensitivity.</li>
+    <li>Population genetics principles applicable to your set of samples can further increase the accuracy</li>
+  </ul>
+</section>    
+		
+    <!--VCF File Structure-->
+    <section id="S1">
+			<h4 style="font-size:120%">VCF File: <strong>Structure</strong></h4>	
+      <ul style="list-style: disc;">
+        <li>GATK provides various annotations to help users filter the variants</li>
+        <li>We will first recall the details of VCF format and then go over the annotations</li>
+      </ul>
+
+      <br>Here is an example VCF, colored using bioSyntax tool.
+      <br><img src="m2files/vcfcolored.png" width="100%" height="auto">
+      <br><strong>Lines 1-29</strong> make up the <code>Header Section</code>, <strong>Lines 30 and below</strong> comprise the <code>Data section</code>
+        <ul style="list-style: disc;">
+          <li><strong>Line 1 </strong>shows VCF version</li>
+          <li><strong>Line 2 </strong>has a single definition of filters (values in the FILTER column). In this example there is only one filter value <code>PASS</code></li>
+          <li><strong>Line 3 to 7 </strong>Definition of Genotype information fields</li>
+          <li><strong>Line 8</strong>the command used to create file</li>
+          <li><strong>Line 9 to 26 </strong>define <code>INFO</code> annotations. The <code>INFO</code> column is usually where all quality related annotations are located. There are quite a few annotations here, we will only use 2 or 3 of these in this presentation</li>
+          <li><strong>Line 27 </strong>lists reference genome contigs names and lengths. In this example there is only one contig. <strong>In real rice datasets you will have 12 lines</strong>, one for each chromosome</li>
+        </ul>
+        Finally in the bottom we see <strong>data section</strong> (only variant related columns, because the INFO column takes a lot of horizontal space). 
+        The actual sample genotype data are in columns starting from the 10th (not shown here). 
+      <br>
+      <br><h4 style="font-size:120%"  id="S2">VCF File: <strong>Section</strong></h4>	
+      VCF file consists of two parts: <strong>header</strong> and <strong>data</strong> section. 
+      <br><img src="m2files/vcfstructure.png" width="auto" height="300">
+      <br>
+      
+      <br>
+      <ul style="list-style:circle;">
+        <li>
+        <h3>Header Section</h3>
+        <p style="margin-top: 5px !important;">The Header contains:
+          <ul style="list-style: disc;">
+            <li>VCF Version</li>
+            <li>Commands used to create file</li>
+            <li>Definitions of annotations</li>
+            <li>Names and lengths of contigs/chromosomes</li>
+            <li>Last line: column names for data matrix</li>
+          </ul></li>
+          </p> 
+        <br>
+        <li>
+        <h3 id="S3">Data Section</h3>
+        <p>Each data row contains genotype call data defined by the formatting string located in <code>FORMAT</code> column
+          <ul style="list-style: disc; text-align: justify;">
+            <li>Example below: <code>GT:AD:DP:GQ:PL</code> means that each data point consists of 5 values separated by colon(:), namely: <code>: GT: genotype</code>, <code>AD: allele depth</code>… etc.</li>
+                <b>GT - Genotype (Numerical encoding)</b>
+                <ul>
+                  <li><code>0</code> - reference allele, <code>1</code>- first alt allele, <code>2</code>-second alt allele, etc</li>
+                  <li><code>0/1</code> - unphased , <code>0|1</code> - phased heterozygote</li>
+                  <li><code>1/1 </code>homozygous variant (based on 1st alternate allele)</li>
+                </ul>
+            <li>The format can be different for each variant (different rows may have different strings in the FORMAT column), but consistent across samples (i.e. within the row)</li> 
+            <li><strong>Example</strong> - look at the first non-missing genotype call</li>
+            <img src="m2files/gt.png" width="100%" height="auto">
+              <ul>
+                <li>
+                  <code>GT=0/0</code> (homozygous ref)<br>
+                  <code>AD=4,0</code> (4 reads support REF, 0 reads support ALT<br>
+                  <code>DP=4</code><br>
+                  <code>GQ=3</code><br>
+                  <code>PL = 0,3,45</code>(phred-scaled odds , lower is better)
+                </li>
+              </ul>
+          </ul>
+        </p> 
+        </li>
+      </ul>
+    </section>
+
+    <!--QC Annotations-->
+    <section id="S4">
+    <h4 style="font-size:120%">QC Annotations</h4>	
+    <ul style="list-style: disc;">
+      <li><strong>Genotype Call Level</strong> <i> (for each sample at each variant)</i></li>
+        <ul style="list-style: circle;">
+          <li><code>GQ</code> : genotype quality</li>
+          <li><code>PL</code> : genotype likelihood</li>
+          <li><code>AD</code> :  allele depth <i>(number of reads supporting each allele)</i></li>
+          <li>See <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035531392-Difference-between-QUAL-and-GQ-annotations-in-germline-variant-calling" target="_blank">link</a>
+            for a more detailed explanation of differences between <code>QUAL</code> and <code>GQ</code></li>
+        </ul>
+        <br>
+      <li><strong>Variant Level</strong></li>
+        <ul style="list-style: circle;">
+          <li><code>QUAL</code></li>
+          <li><code>FILTER</code></li>
+          <li><code>INFO</code> : <code>DP</code>, <code>QD</code>, <code>AN</code>, <code>AC</code>, <code>AF</code></li>
+        </ul>
+    </ul>
+    </section>
+
+    <!--QUAL-->
+    <section id="S5">
+    <h4 style="font-size:120%">QUAL</h4>	
+
+      <p>QUAL is usually defined as: <strong>Phred-scaled probability of having no variant at this position</strong>
+      <br><br>
+
+      <code>higher QUAL = lower prob of no variant = higher prob of real variant</code>
+      </p>
+      <br>
+
+          <table>
+        <thead>
+            <tr>
+                <th>QUAL</th>
+                <th>P(no variant)</th>
+                <th>-logP</th>
+            </tr>
+        </thead>
+        <tbody >
+            <tr>
+                <td>10</td>
+                <td>0.1</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>20</td>
+                <td>0.01</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>30</td>
+                <td>0.001</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>40</td>
+                <td>0.0001</td>
+                <td>4</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+      <p><strong>Phred scaled means take log10 and multiply by -10:</strong></p>
+      <code><strong>QUAL</strong> = (−log P(no variant)) * 10</code>
+
+    <br><br><br>
+    <strong>Question</strong>: How bad/good is <code>QUAL=30</code>?
+    <ul>
+      <li>- In 100,000 variants with QUAL=30, expect 0.001*100,000 = 100 false positives</li>
+    </ul>
+    </section>
+
+    <section id="S6">
+    <h4 style="font-size:120%">Read Depth (DP)</h4>	
+
+      <p>
+        <ul>
+          <li>DP within INFO column <code>(INFO/DP)</code> : Read depth of coverage for this position across all samples</li>
+          <img src="m2files/DP.png" width="100%" height="auto">
+
+          <li><strong>DP within each genotype call</strong> - read depth for that genotype only example: </li>
+          <br><pre><b>FORMAT          Sample1            Sample2            Sample3</b>
+GT:AD:DP      0/0:12,0 :12        0/1:6,4:10       1/1:0,33:33</pre>
+        </ul>
+        <br>
+        <strong>Note</strong> : <i>DP shows depth <b>AFTER</b> filtering by UG or HC algorithm. It is not the same as BAM read depth.</i>
+      </p>
+    </section>
+    
+    <!--Quality-by-Depth-->
+    <section id="S7">
+    <h4 style="font-size:120%">Quality-by-Depth (QD)</h4>	
+
+      <p>
+        <ul style="list-style-type: disc;">
+          <li>Quality-by-depth or QUAL-by-depth</li>
+          <li>Motivation:</li>
+            <ul style="list-style-type: circle;">
+              <li>higher DP leads to higher QUAL</li> 
+              <li>thus, to assess quality regardless of depth, need to normalise it. Relevant for high coverage data</li>
+            </ul>
+          <li>QD uses only the reads supporting the ALT allele (so, it’s not simply QUAL/DP)</li>
+            <ul style="list-style-type: circle;">
+              <li>For exact definition see <a href="https://gatk.broadinstitute.org/hc/en-us/articles/5257827326747-QualByDepth" target="_blank">GATK documentation</a></li>
+            </ul>
+          <li>QD distribution is usually bimodal (smaller QD peak from heterozygous calls, larger QD peak from homozygous alt calls)</li>
+          <li>GATK filtering recommendation: <code>QD > 2</code></li>
+        </ul>
+      </p>     
+    </section>
+
+    <!--MQ and MQ0-->
+    <section id="S8">
+    <h4 style="font-size:120%">MQ and MQ0</h4>	
+      
+      <ul style="list-style: disc;">
+        <li><strong>MQ: Mapping quality</strong></li>
+          <ul style="list-style: circle;">
+            <li>Defined in VCF header as: <code>##INFO=<ID=MQ,Number=1,Type=Float,Description="RMS Mapping Quality"></code></li>
+            <li>Each read has a mapping quality - confidence that alignment is good</li>
+            <li>MQ is an average of mapping quality across all reads supporting the variant 
+              <br><code>(actual average measure: Root Mean Square)</code></li>
+          </ul>
+        <br>
+        <li><strong>MQ0: number of reads with mapping quality 0</strong></li>
+          <ul style="list-style: circle;">
+            <li>Many reads with MQ=0 signify a region that is hard to align - perhaps should not trust </li>
+          </ul>
+      </ul>
+      <br>
+      <p><strong>Recommended minimum <code>MQ = 40</code></strong></p>
+    </section>
+
+    <!--Allele Frequency Annotations-->
+    <section id="S9">
+    <h4 style="font-size:120%">Allele Frequency Annotations</h4>
+    <h4 style="font-size:110%">AN, AC, AF</h4>
+      <ul>
+        <li><strong>AN</strong></li>
+          <ul style="list-style: circle;">
+            <li>Total number of chromosomes with called allele</li>
+            <li>Number of non-missing genotypes times ploidy</li>
+          </ul>
+          <br>
+        <li><code><strong>AC</strong></code></li>
+          <ul style="list-style: circle;">
+            <li>Number of chromosomes carrying ALT allele in case of several ALT alleles (multiallelic SNP)</li>
+            <li>The counts will be separated by comma <code>“,”</code></li>
+          </ul>
+          <br>
+        <li><code><strong>AF</strong></code></li>
+          <ul style="list-style: circle;">
+            <li>Allele Frequency</li>
+            <li>Proportion of chromosomes carrying ALT allele = <code>AC/AN</code></li>
+          </ul>        
+      </ul>
+
+      <br>
+      <p>
+        <ul style="list-style: disc;"">
+          <li>These quantities can also be extracted from simpler formats like <code>HapMap</code> and <code>PLINK</code> </li>
+          <li>VCF also has some related quantities with prefix MLE (maximum likelihood estimate): <code>MLEAC</code>, <code>MLEAF</code>. <strong>We will not use these.</strong></li>
+        </ul>
+      </p>
+    </section>
+
+    <!--Filtering on AF-->
+    <section id="S10">
+    <h4 style="font-size:120%">Filtering on Allele Frequency</h4>
+
+      <ul style="list-style: disc;">
+        <li>Filtering on allele frequency is perhaps most popular type of filtering. You may see recommendations like 
+          <br><code style="text-align: center;">filter all alleles with frequency < 1% or 5%</code></li><br>
+        <li>While this is helpful in most cases, there are some considerations to keep in mind</li>
+      </ul>
+    </section>
+
+
+    <!--Base Calling Errors-->
+    <section id="S11">
+    <h4 style="font-size:120%">Base Calling Errors</h4>
+
+      <ul style="list-style: disc; text-align: justify;">
+        <li>Sequencing (base calling) errors are very rare events, and thus are mostly found as singleton SNPs (i.e. appear only in a single sample).</li>
+          <ul style="list-style: circle;">
+            <li>However, base calling errors will typically appear in only one read covering a position, and GATK tries to detect these.. The variant quality (QUAL and GQ) will typically reflect this and filtering based on GATK annotations should deal with most of these.</li>
+            <li>On the other hand, based on population genetics we expect an abundance of singleton SNPs in every diverse sample.( Highest number across all frequency bins).</li>
+            <li>With data produced by modern NGS* instruments, most singleton SNPs are actually true SNPs.</li>
+          </ul>
+          <br>
+        <li>Depending on analysis needed, one may wish to retain even rarest SNPs, after filtering based on GATK annotations only (no allele frequency filtering).</li>
+      </ul>
+    </section>
+
+    <!--Alignment Errors-->
+    <section id="S12">
+    <h4 style="font-size:120%">Alignment Errors</h4>
+      <ul style="list-style: disc; text-align: justify;">
+        <li>Plant genomes are complicated:</li>
+          <ul style="list-style: circle;">
+            <li>Ubiquitous repeats</li>
+            <li>Traces of ancient WGD (whole genome duplication)</li>
+            <li>Divergence in terms of structural variants. Sample genome may have large deletions, insertions, translocations, or inversions, compared to the reference genome</li>
+          </ul>
+          <br>
+        <li>As a result, read mapping is imperfect. Reads originating from one place in the genome may be mapped to another</li>
+        <li>This is most common source of false variants. These come from a real biological signal (correctly sequenced read), but are not positioned correctly</li>
+          <ul style="list-style: circle;">
+            <li>sometimes can hinder genotyping a true variant (one can have both true and false genotype at the same position)</li>
+          </ul>
+        <li>The same alignment error can be affecting multiple samples, and the resulting false SNPs may have high allele frequency.</li>
+      </ul>
+    </section>
+
+    <!--Heterozygosity-->
+    <section id="S13">
+    <h4 style="font-size:120%">Heterozygosity</h4>
+      <ul style="list-style: disc;">
+        <li>For an inbred species, the expected amount of heterozygotes at a given SNP position is less than for randomly mating population, and is given by a (modified) Hardy-Weinberg formula</li>
+          <ul>
+            <li><code>Expected prop. of het. = 2p(1-p)(1-F)</code> 
+              <br><br>where:
+              <code><br>F is the inbreeding coefficient</code>
+              <code> <br>p is the allele frequency.</code></li>
+          </ul>
+          <br>
+        <li><code>F</code> can be estimated from genome-wide data. GATK in multi-sample genotyping mode also provides estimates of <code>F (InbreedingCoef)</code>. </li>
+      </ul>
+      
+    <br><br>
+    <h4 id="S14" style="font-size:110%">Allele frequency vs heterozygosity in 3K data</h4>
+
+    <strong><p>Figure 1</p></strong>
+    <img src="m2files/AF1.png" width="100%" height="auto">
+    <ul style="list-style: disc;">
+      <li>Observe that the distribution is quite far from random mating expectation (red curve)</li>
+      <li><code>Y axis</code>: proportion of heterozygous calls 
+        <br> <code>X axis</code>: allele frequency</li>
+    </ul>
+
+    <br><br>
+    <strong><p>Figure 2</p></strong>
+    <img src="m2files/AF2.png" width="100%" height="auto">
+    <ul style="list-style: disc;">
+      <li>Same figure with repeat region SNPs colored blue</li>
+      <li>Higher heterozygosity SNPs tend to concentrate in repeat regions</li>
+    </ul>
+
+    <br><br>
+    <strong><p>Figure 3</p></strong>
+    <img src="m2files/AF3.png" width="100%" height="auto">
+    <ul style="list-style: disc;">
+      <li>Same plot with log axis for Y. It is seen more clearly that SNPs in non-repetitive regions are at the small heterozygosity proportionSame figure with repeat region SNPs colored blue</li>
+    </ul>    
+
+    <br><br>
+    <h4 id="S15" style="font-size:110%">SNP heterozygosity along genome</h4>
+
+    <strong><p>Figure 1</p></strong>
+    <img src="m2files/snpH.png" width="100%" height="auto">
+    <ul style="list-style: disc;">
+      <li>Shown is the beginning of <code>Chr9</code></li>
+      <li>Highly heterozygous SNPs are clustered (red), consistent with their potential origin in duplications</li>
+      <li>They are quite ubiquitous, can explain a large proportion of raw SNPs that are filtered</li>
+    </ul>
+
+
+    <br><br>
+    <h4 id="S16" style="font-size:110%">Filtering: <strong>based on heterozygosity</strong></h4>
+    <ul style="list-style: disc;">
+      <li>Initial filtering using QD annotation deals with many alignment errors</li>
+      <li>If <code>InbreedingCoef</code> is available, it may be used, otherwise we can estimate it</li>
+    </ul>
+    
+    <br><br>
+    <h4 style="font-size:110%">Filtering: <strong>based on Hardy-Weinberg</strong></h4>
+    <ul style="list-style: disc;">
+      <li><code>Question:</code> "Some tools (e.g. PLINK) have a built-in filtering based on testing Hardy-Weinberg expectation. Can we use that filtering when we analyse rice data"?</li>
+        <ul>
+          <li><strong>Short Answer:</strong> No</li>
+          <li>The built-in HWE test does not account for inbreeding, thus it is inappropriate for rice.</li>
+        </ul>
+    </ul>
+    </section>
+
+    <!--Hardy-Weinberg-->
+    <section id="S17">
+    <h4 style="font-size:120%">Why the <strong>standard</strong> Hardy-Weinberg can be inappropriate</h4>
+        <img src="m2files/HW.png" width="100%" height="auto">
+   
+       <ul style="list-style: disc;">
+        <li><code>Y axis</code>: test statistics(high values result in filtering out)
+          <br><code>X axis</code>: proportion of het calls.</li>
+        <li>If you use standard HW filtering, you lose a lot of good SNPs. Need to use modified HW filtering</li>
+      </ul>  
+    
+      <br>
+    <h4 style="font-size:120%"><strong>Modified</strong> Hardy-Weinberg</h4>
+      <ul>
+        <li>Expected proportion of heterozygous calls under standard  HW: </li>
+          <ul>
+            <pre>H_exp = 2p(1-p)</pre>
+          </ul>
+        
+          <li>When there is inbreeding, the expected proportion of hets is given by the following formula</li>
+          <ul>
+            <pre>H_exp = 2p(1-p)(1-F)</pre>
+            <br><code>F</code> = inbreeding coefficient
+            <br><code>F > 0.95</code> for rice
+          </ul>          
+      </ul>  
+    </section>
+
+    <!--Take-away-->
+    <section id="S18">
+    <h4 style="font-size:120%">Take-away</h4>
+
+      <ul style="list-style: disc; text-align: justify;">
+        <li>Variant callers output both true and false variants due to various errors (base calling errors, alignment errors, contamination) and filtering helps to overcome those errors.</li>
+        <li>Different analyses may require different filtering procedures. Allele frequency filtering is good for some analyses (GWAS), but could potentially lead to bias in other analysis (divergence)</li>
+        <li>Using population genetics principles can help design filtering that fits your data</li>
+        <li>For inbred species, filtering based on heterozygosity/inbreeding coefficient is appropriate (and built-in tools based on HW filtering for human data are not appropriate)</li>
+      </ul>
+    </section>
+
+
+
+
+
+
+
+
+		</br> </br> </br>
+	</main>
+	
+
+</body>
+</html>
