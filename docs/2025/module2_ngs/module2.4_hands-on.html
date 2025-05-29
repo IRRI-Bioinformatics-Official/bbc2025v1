@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Exploring VCF data: Hands-on</title>
+<style>
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	line-height: 1.6;
+	display: flex;
+	margin-bottom: 100px;
+}
+
+html, body {
+	height: 100%;
+	overflow: auto;
+	overscroll-behavior: contain;
+}
+
+/* Floating Table of Contents */
+#toc {
+	position: fixed;
+	top: 0px;
+	left: 20px;
+	width: 200px;
+	background-color: #f8f9fa;
+	padding: 1rem;
+	border-radius: 8px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	z-index: 1000;
+
+  max-height: 100vh; /* Restrict height to the viewport */
+	overflow-y: auto; /* Enable vertical scroll */
+}
+
+#toc h2 {
+	font-size: 1.2rem;
+	margin-bottom: 1rem;
+}
+
+#toc ul {
+	list-style-type: none;
+	font-size: .9rem;
+	padding: 0;
+}
+
+#toc ul li {
+	margin: 0.5rem 0;
+}
+
+#toc ul li a {
+	text-decoration: none;
+	color: #007bff;
+}
+
+#toc ul li a:hover {
+	text-decoration: underline;
+}
+/* Main content styling */
+main {
+	margin-left: 240px; /* Adjusted for TOC width */
+	padding: 2rem;
+	flex-grow: 1;
+}
+
+h1, h2 {
+	color: #2c3e50;
+}
+
+section {
+	margin-bottom: 2rem;
+	max-width: 800px;
+	padding: 20px;
+	background-color: white;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#copy-btn {
+	margin-top: 10px;
+	cursor: pointer;
+	position: absolute;
+	top: 10px; /* Position the button at the top */
+	right: 10px; /* Position the button at the right */
+	border: 0px;
+	background: #369136;
+	padding: 5px;
+	border-radius: 5px;
+	color: white;
+}
+
+#copy-btn:hover {
+	background-color: #45a049;
+}
+
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+        th, td {
+      padding: 5px 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f0f3f5;
+      color: #2c3e50;
+    }
+
+
+pre, code {
+	background-color: #ededed;
+	color: #312f2f;
+	padding: 5px 10px;
+	border-radius: 4px;
+	font-size: .9em;
+	font-family: Consolas, monospace;
+	overflow-x: auto;
+}
+
+
+code {
+	font-size: 1em;
+	background-color: #ededed;
+	padding: 2px 5px;
+	border-radius: 3px;
+}
+
+ul {
+	list-style-type: none;
+	padding-left: 20px;
+}
+
+ul li {
+	margin-bottom: 10px;
+}
+
+ol {
+	padding-left: 20px;
+}
+
+li {
+	margin-bottom: 10px;
+}
+
+strong {
+	color: #2c3e50;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  #toc {
+    position: static;
+    width: auto;
+    box-shadow: none;
+    margin: 1rem;
+  }
+
+  main {
+    margin-left: 0;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #toc h2 {
+    font-size: 1rem;
+  }
+
+  #toc ul li {
+    font-size: 0.85rem;
+  }
+
+  section {
+    padding: 1rem;
+  }
+
+  pre, code {
+    font-size: 0.85em;
+  }
+}
+
+</style>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toc = document.getElementById("toc");
+    const toggleBtn = document.getElementById("toggleToc");
+
+    function checkScreenWidth() {
+      if (window.innerWidth <= 768) {
+        toggleBtn.style.display = 'block';
+        toc.style.display = 'none';
+      } else {
+        toggleBtn.style.display = 'none';
+        toc.style.display = 'block';
+      }
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      toc.style.display = (toc.style.display === 'none') ? 'block' : 'none';
+    });
+
+    window.addEventListener("resize", checkScreenWidth);
+    checkScreenWidth();
+
+    const copyButtons = document.querySelectorAll('.copy-btn');
+    
+    copyButtons.forEach(button => {
+        button.addEventListener("click", function() {
+            // Find the associated command text (inside the <code> tag)
+            const commandText = button.previousElementSibling.innerText;
+
+            // Create a temporary input to copy the command text
+            const tempInput = document.createElement("input");
+            tempInput.value = commandText;
+            document.body.appendChild(tempInput);
+
+            // Select the text and copy it
+            tempInput.select();
+            document.execCommand("copy");
+
+            // Remove the temporary input
+            document.body.removeChild(tempInput);
+
+            button.textContent = "Copied";
+        });
+    });
+  });
+</script>
+
+
+</head>
+<body>
+	<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const tocLinks = document.querySelectorAll('#toc a[data-target]');
+      tocLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('data-target');
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    });
+  </script>
+
+	<!-- Floating Table of Contents -->
+	<div id="toc">
+		<h2>Outline:</h2>
+		<ul>
+<ul>
+
+  <li>
+      <li><a href="#S0">Files</a></li>
+      <li><a href="#S1">BCFTools</a></li>
+      <li><a href="#S2">Exploring VCF</a></li>
+      <li><a href="#S3">BCFTools Query</a></li>
+      <li><a href="#S4">Exploring BAM files</a></li>
+      <li><a href="#S5">Understanding Alignment Metadata</a></li>
+      <li><a href="#S6">Interactive Text Viewer</a></li>
+      <li><a href="#S7">Module Summary</a></li>
+      <li><a href="#S8">References</a></li>
+  </li>
+</ul>
+
+
+<script>
+  function toggleSection(id) {
+    const section = document.getElementById(id);
+    if (section.style.display === "none") {
+      section.style.display = "block";
+    } else {
+      section.style.display = "none";
+    }
+  }
+</script>
+	</div> 
+
+
+	<!-- Main Content -->
+	<main style="margin-bottom: 100px;margin-top:20px;">
+		<button id="toggleToc" style="display: none;">☰ Table of Contents</button>
+		
+		<section id="overview">
+			<h1 style="text-align:center; font-size:200%" >Exploring VCF data</h1>
+      <h3 style="text-align:center;"><i>Hands-on</i></h3> 
+	  </section>	
+
+ 	<!-- Setup -->   
+		<!--<section id="S0">
+			<h3>Input Files</h3>
+        <p><ol>
+          <li><strong>VCF file:</strong> <code>geno-250kb.vcf.gz</code></li>
+          <li><strong>gVCF file:</strong><code>sample1-50kb.g.vcf</code></li>
+          <li><strong>BAM file:</strong><code>kanin-4.sorted.bam</code></li>
+        </ol></p>
+
+      <h3>Output Files</h3>
+        <p><ol>
+          <li>General stats outputs</li>
+          <li>Tables</li>
+          <li>Plots</li>
+        </ol></p>      
+		</section>-->
+ 
+<section id="S0">
+	<h4 style="font-size:120%">Input and Output Files</h4>	
+  <h4>Input Files</h4>
+  <table>
+    <thead>
+      <tr>
+        <th>File Type</th>
+        <th>File Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>VCF</strong></td>
+        <td><a href="input/geno-250kb.vcf.gz"><code>geno-250kb.vcf.gz</code></a></td>
+      </tr>
+      <tr>
+        <td><strong>gVCF</strong></td>
+        <td><a href="input/sample1-50kb.g.vcf"><code>sample1-50kb.g.vcf</code></a></td>
+      </tr>
+      <tr>
+        <td><strong>BAM</strong></td>
+        <td><a href="input/kanin-4.sorted.bam"><code>kanin-4.sorted.bam</code></a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br><br>
+  <h4>Output Files</h4>
+  <table>
+    <thead>
+      <tr>
+        <th>Output Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Statistics</strong></td>
+        <td>General summary metrics and counts</td>
+      </tr>
+      <tr>
+        <td><strong>Tables</strong></td>
+        <td>Structured result tables for further analysis</td>
+      </tr>
+      <tr>
+        <td><strong>Plots</strong></td>
+        <td>Visual representations such as charts and graphs</td>
+      </tr>
+    </tbody>
+  </table>
+</section>    
+		
+    <!--Subsection 1: Getting to know the tools-->
+    <section id="S1">
+			<h4 style="font-size:120%">Getting to know the tool</h4>	
+      <p>Installing <strong>BCFtools</strong> - <i>please follow the <a href="https://irri-bioinformatics-official.github.io/bbc2025v1/5software.html" target="_blank">Software Installation Guide</a></i></p>  
+      <ol type="i">
+          <li>To get help directly within the terminal, you can run the command without arguments:</li>
+           <p><strong>Usage:</strong> <code>bcftools [--version|--version-only] [--help] [command] [argument]</code></p> 
+            <ul>
+              <li><code>bcftools  #</code></li>
+              <li><code>bcftools -h</code></li>
+              <li><code>bcftools view</code></li>
+            </ul>
+          
+          <li>Most used commands:</li>
+            <ul>
+              <li><code>bcftools  # </code>:<i> with no arguments</i>: general info and list of commands</li>
+              <li><code>bcftools query</code>: transform VCF/BCF into user-defined formats</li>
+              <li><code>bcftools view</code>: VCF/BCF conversion, view, subset and filter VCF/BCF files</li>
+            </ul>
+
+          <p style="margin-top: 20px !important; margin-bottom: 5px !important;">
+            <i><strong>* Adding information to VCF</strong></i>
+              <ul>
+                <li><code>bcftools annotate</code>: annotate and edit VCF/BCF files. E.g. add variant IDs</li>
+                <li><code>bcftools csq</code>: call variation consequences (like snpEff)</li>
+              </ul>
+          </p>
+           
+          <p style="margin-top: 20px !important; margin-bottom: 5px !important;">         
+            <i><strong>* Manipulating VCF files</strong></i>
+             <ul>
+                <li><code>bcftools isec</code>: convert VCF/BCF files to different formats and back</li>
+                <li><code>bcftools reheader</code>: modify VCF/BCF header, change sample names</li>
+                <li><code>bcftools sort</code>: sort VCF/BCF file</li>
+                <li><code>bcftools index</code>: needed for random access into VCF file</li>
+            </ul>  
+          </p>          
+        </ol>
+    </section>
+
+    <!--Subsection 2: Exploring VCF Files-->
+    <section id="S2">
+		<h4 style="font-size:120%">Initial getting to know the data</h4>	
+      <p>So, you got a fresh VCF file from the variant calling pipeline. It may be a <code>gVCF</code> file or a simple <code>VCF</code> file.</p>
+      <p><strong>Question</strong>: What is the difference?</p>
+      
+      <ul style="list-style-type:disc;"><li><i>The input data folder has both a <code>gVCF</code> and a <code>VCF</code> file. Let's see what is inside these files.</i></li></ul>
+
+    <h5 style="font-size:120%">VCF Header</h5>	
+      <p>A lot of information about how the VCF was produced and what kind of information may be found in it, is located in the header. To see the header you may run:</p>
+
+              <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                  <td style="padding: 10px; border: 1px solid #ccc;">
+                    <div class="code_div"></div>
+				          	  <code class="codeStyle">bcftools view --header-only geno-250kb.vcf.gz</code>
+			          	  </div>                       
+                  </td>
+                </tr>         
+              </table>
+              <button class="copy-btn">Copy</button> 
+
+      <br><br>
+      <p>Based on the information in the header, please do the following exercise.</p>
+      
+        <h5 style="font-size:100%; margin-bottom: 5px !important;">Hands-on exercise</h5>	
+        <p>For both input VCF files, extract the headers and answer the questions:</p>
+        <ol type="1">
+          <li>Find which commands produced the original VCF file (GATKCommandLine).</li>
+          <li>Find which commands were applied to the original VCF file to create the current file.</li>
+          <li>Find names of chromosomes or contigs that are present in this (g)VCF.</li>
+          <li>Does this VCF contain InbreedingCoefficient metrics?</li>
+          <li>Does this VCF contain QD metrics? What is its type (number, string, etc)?</li>
+        </ol>
+    
+    <h5 style="font-size:100%; margin-bottom: 5px !important;">Overall Stats</h5>
+    <p>To get an overall report containing many basic statistics, run bcftools stats</p>
+
+              <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                  <td style="padding: 10px; border: 1px solid #ccc;">
+                    <div class="code_div"></div>
+				          	  <code class="codeStyle">bcftools stats geno-250kb.vcf.gz > stats.txt</code>
+			          	  </div>                       
+                  </td>
+                </tr>         
+              </table>
+              <button class="copy-btn">Copy</button>       
+         
+        <h5 style="font-size:100%; margin-bottom: 5px !important;">Exercise</h5>	
+        <p>Based on the stats file, find out how many of the following are in the file:</p>
+          <ul style="list-style:disc;">
+            <li>SNPs</li>
+            <li>indels</li>
+            <li>multiallelic SNPS</li>
+            <li>multi-nucleotide polymorphisms (MNPs)</li>
+            <li>reference-only variants (not SNPs)</li>
+            <li>Ts/Tv ratio</li>
+            <li>Number of SNPs with allele frequency between 0 and 0.01</li>
+          </ul>
+    </section>
+
+    <!--Subsection3: BCFTools Quesry Command-->
+    <section id="S3">
+    <h4 style="font-size:120%;">BCFtools query command</h4>
+    <p style="text-align: justify;">The main element in the structure of the command is the query string (or format string) that specifies what information you want to get. 
+      For each record in the VCF the query string will be evaluated and added as a row in the output</p>
+        <!--<ul><li><code>bcftools query -f '%CHROM\t%POS\t%REF\t%ALT[\t%SAMPLE=%GT]\n' file.vcf.gz</code></li></ul>-->
+
+      	<table style="width: 100%; border-collapse: collapse; margin-bottom: 5px;">
+        <tr>
+          <td style="font-family: Courier, monospace; background-color: #f0f0f0; padding: 12px; border: 1px solid #ccc;">
+            <span style="color: #6d23f562;">bcftools query</span> 
+            <span style="color: #F5A623;">-f</span>
+            <span style="color: #1d5361;">'%CHROM\t%POS\t%REF\t%ALT[\t%SAMPLE=%GT]\n'</span>
+            <span style="color:#4A90E2;">file.vcf.gz</span>
+          </td>
+        </tr>
+      </table>        
+
+
+        <h5 style="font-size:100%; margin-bottom: 5px !important;">Extract variant QC metrics</h5>
+        <p style="text-align: justify;">To get various QC metrics, include the names of the metrics with the <code>%</code> sign prefix into the query string. 
+          There are some metrics, like read depth <code>DP</code>,  that are applicable to both variant as a whole or to each sample. 
+          To distinguish between these, use prefixes <code>INFO</code> and <code>FORMAT</code> 
+          <ul style="list-style:disc;">
+           <li><code>INFO/DP</code>: depth across all samples, is placed into the INFO column</li>
+           <li><code>FORMAT/DP</code>: depth at each individual sample genotype call, is mentioned in the FORMAT column, the actual information is located in the genotype matrix</li>
+          </ul>
+        </p>
+        
+        <p><br><i><strong>Example: some variant level QC metrics</strong></i></p>
+          <code>bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%QUAL\t%QD\t%INFO/DP\n' file.vcf.gz > variant-DP.txt</code>
+          <!--<table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+            <tr>
+              <td style="padding: 10px; border: 1px solid #ccc;">
+                <div class="code_div"></div>
+				          <code class="codeStyle">bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%QUAL\t%QD\t%INFO/DP\n' file.vcf.gz> variant-DP.txt</code>
+			          </div>                       
+              </td>
+            </tr>         
+          </table>
+          <button class="copy-btn">Copy</button> -->
+          
+        <br><br>
+        <p><i><strong>For comparison, here is an example of read depths of each sample:</strong></i></p>
+          <code>bcftools query -f '%CHROM\t%POS\t%REF\t%ALT[\t%SAMPLE=%FORMAT/DP]\n' file.vcf.gz</code>
+                <!--<table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                  <tr>
+                    <td style="padding: 10px; border: 1px solid #ccc;">
+                      <div class="code_div"></div>
+				          	    <code class="codeStyle">bcftools query -f '%CHROM\t%POS\t%REF\t%ALT[\t%SAMPLE=%FORMAT/DP]\n' file.vcf.gz</code>
+			          	    </div>                       
+                    </td>
+                  </tr>         
+                </table>
+                <button class="copy-btn">Copy</button> -->
+
+        <br><br> 
+        <h5 style="font-size:100%; margin-bottom: 5px !important;">Extract variant genotype matrix as a table </h5>   
+        <p>Let us create a file by first putting row names, then dumping all the genotype calls:</p>       
+
+                <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                  <tr>
+                    <td style="padding: 10px; border: 1px solid #ccc;">
+                      <div class="code_div"></div>
+				          	    <code class="codeStyle">bcftools query -f 'CHROM\tPOS\tREF\tALT[\t%SAMPLE]\n' geno-250kb.vcf.gz | head -n 1 > out.txt</code>
+			          	    </div>                       
+                    </td>
+                  </tr>         
+                </table>
+                <button class="copy-btn">Copy</button> 
+
+                <br><br>
+
+                <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                  <tr>
+                    <td style="padding: 10px; border: 1px solid #ccc;">
+                      <div class="code_div"></div>
+				          	    <code class="codeStyle">bcftools query -f '%CHROM\t%POS\t%REF\t%ALT[\t%GT]\n' geno-250kb.vcf.gz >> out.txt</code>
+			          	    </div>                       
+                    </td>
+                  </tr>         
+                </table>
+                <button class="copy-btn">Copy</button>                 
+        
+        <br><br>        
+        <p><i>Note in the first command we don't use <code>%</code> except in the <code>%SAMPLE</code> - thus, only sample names will be interpolated into the string.</i></p>
+    </section>
+
+    <!--Exploring alignment (BAM) files-->
+    <section id="S4">
+    <h4 style="font-size:120%">Exploring alignment (BAM) files</h4> 
+      <p style="text-align: justify;">We will use SAMtools software to retrieve basic information about the alignment data from BAM files.
+        In order to make sense of some of the following, it would help to be familiar with SAM file structure, which you can read about in <a href="https://samtools.github.io/hts-specs/SAMv1.pdf" target="_blank">SAM format specifications</a>. 
+        See also the <a href="https://en.wikipedia.org/wiki/SAM_(file_format)" target="_blank">SAM format wiki page</a> for easier reading.
+        <br><br>The following SAMtools commands will be used:
+          <ul>
+            <code>samtools index</code>
+            <br><code>samtools view</code>
+            <br><code>samtools tview</code>
+            <br><code>samtools stats</code>
+            <br><code>samtools flags</code>
+          </ul>
+      
+      <h5 style="font-size:100%; margin-bottom: 5px !important;">View header and alignments</h5>  
+      <p>To view header:
+        <ul>
+          <li><i>In older versions of samtools</i></li>
+
+                <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+				          	<code class="codeStyle">samtools view -h  kanin-4.sorted.bam | less</code>
+			          	</div>                       
+                </td>
+                </tr>         
+               </table>
+                <button class="copy-btn">Copy</button>       
+
+          <br><br>
+          <li><i>In the newest versions</i></li>
+                <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+				          	<code class="codeStyle">samtools head  kanin-4.sorted.bam</code>
+			          	</div>                       
+                </td>
+                </tr>         
+               </table>
+                <button class="copy-btn">Copy</button> 
+        </ul>
+      </p>
+      <br>
+      <p>To view alignments in a more familiar environment of MS Excel,  you may use <code>samtools view</code> and save the result as a <strong>TSV</strong> file, which you can then view in Excel by importing as a tab separated file</p>
+
+              <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+				          	<code class="codeStyle">echo "QUERYNAME,FLAG,REFNAME,POS,MAPQ,CIGAR,RNEXT,POSNEXT,TLEN,SEQ,QUAL" | tr "," "\t"   > aln.tsv</code>
+			          	</div>                       
+                </td>
+                </tr>         
+               </table>
+                <button class="copy-btn">Copy</button>    
+                
+                <br><br>
+                <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+				          	<code class="codeStyle">samtools view kanin-4.sorted.bam | head -n 20  >> aln.tsv</code>
+			          	</div>                       
+                </td>
+                </tr>         
+               </table>
+                <button class="copy-btn">Copy</button>                 
+        <br><br>
+        <p><i><strong>Note:</strong> changing tabs to commas in the whole file using the <code>tr</code> command might not be a very good idea, since the base quality string may contain commas.</i></p>
+    </section>
+
+    <!--Understanding alignment metadata-->
+    <section id="S5">
+    <h4 style="font-size:120%">Understanding Alignment Metadata</h4> 
+      <p>A lot of information about alignment of a read pair  to reference is contained in the <strong>flags</strong> column.
+        Each <strong>flags</strong> is a boolean <code>true or false</code> value encoded in a bit of the flags byte.
+        See <a href="https://en.wikipedia.org/wiki/SAM_(file_format)#Bitwise_flags" target="_blank">Bitwise flags</a></p>
+        <p>
+        To easily retrieve the flags pertaining to a certain read alignment, <i>e.g. the first read in the input BAM file is</i>
+        <pre>FCD0R2NACXX:7:2105:6385:19577#CCACATTC_24       163     Chr7    272768  0       83M     =       273143  458     AGTTGTTTCCTCCCGCCGTGGCCCACGCTTTATCCGCACTGCGCGGAAGCGTGTTGTTGGTTCTTCCACCGTGTTCCGTTTCC  BFHHHHJJIJIJJJIJJJGHJJJIIIIIJJJIIIIJIJJJJGHEDD@BDDDB@BDDDDDDDDDDDDCCDDDDDDDDDDDDDCD  NM:i:1  MD:Z:5C77       MC:Z:83M        AS:i:78 XS:i:78</pre>
+        </p>
+        Its flag column shows value <code><b>163</b></code>
+          <ul>
+              <li>
+                <p>Run the following:</p>
+                <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+				          	<code class="codeStyle">samtools flags 163</code>
+			          	</div>                       
+                </td>
+                </tr>         
+               </table>
+                <button class="copy-btn">Copy</button>   
+              </li>
+            <br>
+            <li>The result: <code><b>0xa3	163	PAIRED,PROPER_PAIR,MREVERSE,READ2</code></b></li>
+          </ul>  
+          <br>
+        
+          <p>To understand meanings of these abbreviations, start with running samtools flags without arguments 
+
+                <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+				          	<code class="codeStyle">samtools flags</code>
+			          	</div>                       
+                </td>
+                </tr>         
+               </table>
+                <button class="copy-btn">Copy</button> 
+                <br><br>  
+
+          <pre>About: Convert between textual and numeric flag representation
+Usage: samtools flags FLAGS...
+
+Each FLAGS argument is either an INT (in decimal/hexadecimal/octal) representing
+a combination of the following numeric flag values, or a comma-separated string
+NAME,...,NAME representing a combination of the following flag names:
+
+   0x1     1  PAIRED         paired-end / multiple-segment sequencing technology
+   0x2     2  PROPER_PAIR    each segment properly aligned according to aligner
+   0x4     4  UNMAP          segment unmapped
+   0x8     8  MUNMAP         next segment in the template unmapped
+  0x10    16  REVERSE        SEQ is reverse complemented
+  0x20    32  MREVERSE       SEQ of next segment in template is rev.complemented
+  0x40    64  READ1          the first segment in the template
+  0x80   128  READ2          the last segment in the template
+ 0x100   256  SECONDARY      secondary alignment
+ 0x200   512  QCFAIL         not passing quality controls or other filters
+ 0x400  1024  DUP            PCR or optical duplicate
+ 0x800  2048  SUPPLEMENTARY  supplementary alignment</pre>
+
+
+            <br>The next read is
+            <pre>FCD0R2NACXX:7:2105:6385:19577#CCACATTC_24       83      Chr7    273143  0       83M     =       272768  -458    TCGGCGTAGCTCTGTGACTTGTCCACACCCATTGTATCAGGTGTTTTTATGATTTGAAAAATCCAGTTTATGCCTAGTGTGTG  BDDDBDEEEEEFFFDFFFHHHHJIHHHJJIJGIJJJJJJJJJJJJJJJJJJJJJJJJJJJIIJJJJJJIJJJJJJJJHHHHHF  NM:i:1  MD:Z:30G52 </pre>
+            with the flag <code><b>83</b></code>
+          
+            <br><br>
+
+          <ul>
+              <li>
+                <p>Run the following:</p>
+                <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+				          	<code class="codeStyle">samtools flags 83</code>
+			          	</div>                       
+                </td>
+                </tr>         
+               </table>
+                <button class="copy-btn">Copy</button>   
+              </li>
+            <br>
+            <li>The result: <code><b>0x53    83      PAIRED,PROPER_PAIR,REVERSE,READ1</code></b></li>
+          </ul>            
+    </section>
+
+    <!--Interactive text viewer (tview)-->
+    <section id="S6">
+    <h4 style="font-size:120%">Interactive text Viewer</h4>
+    <p>First, make sure the file is indexed 
+ 
+                <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+				          	<code class="codeStyle">samtools index kanin-4.sorted.bam</code>
+			          	</div>                       
+                </td>
+                </tr>         
+               </table>
+                <button class="copy-btn">Copy</button>       
+      
+    <br><br>Then  <i>(No need to pipe to less command!)</i>
+
+                <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+				          	<code class="codeStyle">samtools tview kanin-4.sorted.bam -p Chr7:6011011</code>
+			          	</div>                       
+                </td>
+                </tr>         
+               </table>
+                <button class="copy-btn">Copy</button>    
+    </p> 
+    <br>
+    <p><i>For a more feature-full experience, use a GUI alignment viewer such as IGV.</i></p>
+    </section>
+
+    <!--Module Summary-->
+    <section id="S7"> 
+    <h4 style="font-size:120%">Module Summary</h4>
+    <p style="text-align: justify;">Understanding the genetic basis of diversity through the discovery of Single Nucleotide Polymorphisms (SNPs) via variant calling is a fundamental step in gene discovery. 
+      By identifying and analyzing SNPs, researchers can uncover genetic variations that contribute to differences in traits. This knowledge is critical for pinpointing specific 
+      genes associated with those traits, facilitating advancements in fields such as genetics, breeding, and biotechnology.
+
+      In this module, you have gained an understanding of the Variant Calling workflow. You have explored the essential tools and software used for variant discovery, including 
+      FASTQC, BWA, Picard, SamTools, and GATK. You have also had the opportunity to perform variant calling, and you have learned how to analyze and interpret the resulting data files, such as VCF and BAM files.
+
+        <ul style="list-style: disc; text-align: justify;">
+          <li>Single Nucleotide Polymorphisms (SNPs) and Insertions/Deletions (InDels) are crucial for analyzing rice diversity, establishing population structure, and identifying genes associated with important traits.</li>
+          <li>The variant calling workflow is essential for identifying variants in a diverse rice population. It is important to become proficient with software tools such as BWA, SamTools, GATK, and BCFTools for effective variant calling.</li>
+          <li>Exploring BAM and VCF output files is crucial for understanding and interpreting variant data.</li>
+        </ul>
+    </p>
+    </section>
+
+    <section id="S8">
+      <h4 style="font-size:120%">References</h4>
+      <p>Slatko BE, Gardner AF, Ausubel FM. Overview of Next-Generation Sequencing Technologies. Curr Protoc Mol Biol. 2018 Apr;122(1):e59. doi: 10.1002/cpmb.59. PMID: 29851291; PMCID: PMC6020069. https://doi.org/10.1002/cpmb.59</p>
+    </section>
+							
+
+		</br> </br> </br>
+	</main>
+	
+
+</body>
+</html>
