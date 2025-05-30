@@ -289,7 +289,7 @@ strong {
           <li><a href="#S5">QUAL</a></li>
 		      <li><a href="#S6">Read Depth</a></li>
           <li><a href="#S7">Quality-by-Depth</a></li>
-          <li><a href="#S8">MQ and MQ0</a></li>
+          <li><a href="#S8"> and 0</a></li>
         </ul>
       </li>
 
@@ -552,7 +552,7 @@ GT:AD:DP      0/0:12,0 :12        0/1:6,4:10       1/1:0,33:33</pre>
       <ul style="list-style: disc;">
         <li><strong>MQ: Mapping quality</strong></li>
           <ul style="list-style: circle;">
-            <li>Defined in VCF header as: <code>##INFO=<ID=MQ,Number=1,Type=Float,Description="RMS Mapping Quality"></code></li>
+            <li>Defined in VCF header as: <code>##INFO=(ID=MQ,Number=1,Type=Float,Description="RMS Mapping Quality")</code></li>
             <li>Each read has a mapping quality - confidence that alignment is good</li>
             <li>MQ is an average of mapping quality across all reads supporting the variant 
               <br><code>(actual average measure: Root Mean Square)</code></li>
