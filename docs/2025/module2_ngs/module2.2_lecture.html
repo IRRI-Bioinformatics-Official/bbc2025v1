@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+	
 <title>Exploring VCF data</title>
 <style>
 body {
@@ -731,12 +732,16 @@ GT:AD:DP      0/0:12,0 :12        0/1:6,4:10       1/1:0,33:33</pre>
       <ul>
         <li>Expected proportion of heterozygous calls under standard  HW: </li>
           <ul>
-            <pre>H_exp = 2p(1-p)</pre>
+          <p style="text-align: center;"> 
+            \(Hexp = 2p(1-p)\)
+	   </p> <br>	
           </ul>
         
           <li>When there is inbreeding, the expected proportion of hets is given by the following formula</li>
           <ul>
-            <pre>H_exp = 2p(1-p)(1-F)</pre>
+          <p style="text-align: center;"> 
+            \(Hexp = 2p(1-p)(1-F)\)
+	   </p> <br>
             <br><code>F</code> = inbreeding coefficient
             <br><code>F > 0.95</code> for rice
           </ul>          
