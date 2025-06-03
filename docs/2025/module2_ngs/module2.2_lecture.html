@@ -661,8 +661,8 @@ GT:AD:DP      0/0:12,0 :12        0/1:6,4:10       1/1:0,33:33</pre>
 	          </p>    		    
 		    
               <br><br>where:
-              <code><br>F is the inbreeding coefficient</code>
-              <code> <br>p is the allele frequency.</code></li>
+	      <code><br>F is the inbreeding coefficient</code>
+              <code> <br>p is the allele frequency</code></li>
           </ul>
           <br>
         <li><code>F</code> can be estimated from genome-wide data. GATK in multi-sample genotyping mode also provides estimates of <code>F (InbreedingCoef)</code>. </li>
@@ -674,7 +674,7 @@ GT:AD:DP      0/0:12,0 :12        0/1:6,4:10       1/1:0,33:33</pre>
     <strong><p>Figure 1</p></strong>
     <img src="m2files/AF1.png" width="100%" height="auto">
     <ul style="list-style: disc;">
-      <li>Observe that the distribution is quite far from random mating expectation (red curve)</li>
+      <li>Observe that the distribution is quite far from random mating expectation (<span style="color:#7e0404;">red curve</span>)</li>
       <li><code>Y axis</code>: proportion of heterozygous calls 
         <br> <code>X axis</code>: allele frequency</li>
     </ul>
@@ -730,8 +730,8 @@ GT:AD:DP      0/0:12,0 :12        0/1:6,4:10       1/1:0,33:33</pre>
         <img src="m2files/HW.png" width="100%" height="auto">
    
        <ul style="list-style: disc;">
-        <li><code>Y axis</code>: test statistics(high values result in filtering out)
-          <br><code>X axis</code>: proportion of het calls.</li>
+        <li><code>Y axis</code>: test statistics (high values result in filtering out)
+          <br><code>X axis</code>: proportion of het calls</li>
         <li>If you use standard HW filtering, you lose a lot of good SNPs. Need to use modified HW filtering</li>
       </ul>  
     
