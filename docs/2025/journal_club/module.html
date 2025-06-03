@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PostGWAS module</title>
+<style>
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	line-height: 1.6;
+	display: flex;
+	margin-bottom: 100px;
+}
+
+html, body {
+	height: 100%;
+	overflow: auto;
+	overscroll-behavior: contain;
+}
+
+/* Floating Table of Contents */
+#toc {
+	position: fixed;
+	top: 0px;
+	left: 20px;
+	width: 200px;
+	background-color: #f8f9fa;
+	padding: 1rem;
+	border-radius: 8px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	z-index: 1000;
+}
+
+#toc h2 {
+	font-size: 1.2rem;
+	margin-bottom: 1rem;
+}
+
+#toc ul {
+	list-style-type: none;
+	font-size: .9rem;
+	padding: 0;
+}
+
+#toc ul li {
+	margin: 0.5rem 0;
+}
+
+#toc ul li a {
+	text-decoration: none;
+	color: #007bff;
+}
+
+#toc ul li a:hover {
+	text-decoration: underline;
+}
+/* Main content styling */
+main {
+	margin-left: 240px; /* Adjusted for TOC width */
+	padding: 2rem;
+	flex-grow: 1;
+}
+
+h1, h2 {
+	color: #2c3e50;
+}
+
+section {
+	margin-bottom: 2rem;
+	max-width: 800px;
+	padding: 20px;
+	background-color: white;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+pre, code {
+	background-color: #ededed;
+	color: #312f2f;
+	padding: 5px 10px;
+	border-radius: 4px;
+	font-size: .9em;
+	font-family: Consolas, monospace;
+	overflow-x: auto;
+}
+
+code {
+	font-size: 1em;
+	background-color: #ededed;
+	padding: 2px 5px;
+	border-radius: 3px;
+}
+
+ul {
+	list-style-type: none;
+	padding-left: 20px;
+}
+
+ul li {
+	margin-bottom: 10px;
+}
+
+ol {
+	padding-left: 20px;
+}
+
+li {
+	margin-bottom: 10px;
+}
+
+strong {
+	color: #2c3e50;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  #toc {
+    position: static;
+    width: auto;
+    box-shadow: none;
+    margin: 1rem;
+  }
+
+  main {
+    margin-left: 0;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #toc h2 {
+    font-size: 1rem;
+  }
+
+  #toc ul li {
+    font-size: 0.85rem;
+  }
+
+  section {
+    padding: 1rem;
+  }
+
+  pre, code {
+    font-size: 0.85em;
+  }
+}
+
+
+
+</style>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toc = document.getElementById("toc");
+    const toggleBtn = document.getElementById("toggleToc");
+
+    function checkScreenWidth() {
+      if (window.innerWidth <= 768) {
+        toggleBtn.style.display = 'block';
+        toc.style.display = 'none';
+      } else {
+        toggleBtn.style.display = 'none';
+        toc.style.display = 'block';
+      }
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      toc.style.display = (toc.style.display === 'none') ? 'block' : 'none';
+    });
+
+    window.addEventListener("resize", checkScreenWidth);
+    checkScreenWidth();
+  });
+</script>
+
+</head>
+<body>
+	<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const tocLinks = document.querySelectorAll('#toc a[data-target]');
+      tocLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('data-target');
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    });
+  </script>
+	<!-- Floating Table of Contents -->
+	<div id="toc">
+		<h2>Module 4:</h2>
+		<ul>
+			<li><a href="#" data-target="overview">i. Module Overview</a></li>
+			<li><a href="#" data-target="section-1">I. Post-GWAS Analysis </a></li>
+			<li><a href="#" data-target="section-2">II. Post-GWAS Considerations</a></li>
+			<li><a href="#" data-target="section-3">III. Candidate Gene(CG) Analysis</a></li>
+			<li><a href="#" data-target="section-4">IV. Basic CG Analysis Workflow</a></li>
+			<li><a href="#" data-target="section-5">V. Section 5</a></li>
+			<li><a href="#" data-target="section-6">VI. Section 6</a></li>
+			<li><a href="#" data-target="section-7">VII. Section 7</a></li>
+			<li><a href="#" data-target="section-8">VIII. Section 8</a></li>
+			<li><a
+				href="homework.html"
+				target="blank"> Homework </a>
+			</li>
+		</ul>
+	</div>
+
+
+	<!-- Main Content -->
+	<main style="margin-bottom: 100px;margin-top:20px;">
+		<button id="toggleToc" style="display: none;">☰ Table of Contents</button>
+		
+		<section id="overview">
+			<h2>🧭 Training Overview: Basic Post-GWAS Analysis</h2>
+
+			<h3>🎯 Topic: PostGWAS Analysis using SNPSeek, CropGalaxy, and RicePilaf</h3>
+			<h4>In this module, we will cover basic analysis methods for identification of candidate genes from highly associated genome-wide association studies (GWAS) regions. We will also predict the putative effects of SNPs on identified candidate genes. We will use the following rice-specific tools:</h4>
+				<p>
+					<ol> 
+						<li>Rice SNP-Seek</li>
+						<li>CropGalaxy</li>
+						<li>RicePilaf</li>
+					</ol>
+				</p>
+
+			<h3>👥 Target Audience</h3>
+			<p>Participants should have a background on genome-wide association analysis.</p>
+
+			<h3>🏁 Goal</h3>
+			<label>
+				<ul>
+					<li><input type="checkbox"> Understand the concept of post-GWAS analysis </li>
+					<li><input type="checkbox"> Be familiar with tools and resources available for doing post-GWAS gene-related analysis on rice genomics data</li>
+					<li><input type="checkbox"> Perform “minimum” standard post-GWAS analysis using Rice SNP-Seek, CropGalaxy, and RicePilaf </li>
+				</ul>
+			  </label>
+		</section>
+
+		<section id="section-1">
+			<h2>Post-GWAS Analysis</h2>
+			<p>Genome-wide association studies (GWAS) is instrumental in identifying genetic variants associated with various
+				traits. However, the raw results from GWAS, typically in the form of significant single nucleotide polymorphisms
+				(SNPs), are only the beginning. Performing post-GWAS analysis is a crucial subsequent step to interpret these
+				associations, understand underlying biological mechanisms, and subsequently apply this information to breeding
+				programs.
+			</p>
+			<h3>Why perform Post-GWAS analysis?</h3>
+			<ul>
+				<li>
+					Post-GWAS analysis helps validate the results from the genome-wide association study (GWAS) to better understand the
+					biological functions and mechanisms that link the significant variants (i.e, SNPs) to the trait of interest.
+				</li>
+				<li>
+					Post-GWAS analysis in rice involves the use of various bioinformatics tools and databases to prioritize candidate
+					genes, validate their functions, and integrate findings into practical breeding strategies.
+				</li>
+				<li>
+					<h4>Some questions that can be answered in performing post-GWAS analysis:</h4>
+					<ul>
+						<li> 
+							<i>- Is there support from annotation for the loci?</i>
+						</li>
+						<li>
+							<i>- Are there known genes with functional evidence?</i>
+						</li>
+						<li>
+							<i>- Are there SNPs that affect function?</i>
+						</li>
+						<li>
+							<i>- Do the haplotypes make sense?</i>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</section>
+
+		<section id="section-2">
+			<h2>Post-GWAS Analysis Considerations</h2>
+			<h3>In performing post-GWAS analysis, it is important to consider several points:</h3>
+			<p>
+				<ol>
+					<li>
+						<h4>Significance of the SNP</h4>
+						<ul>
+							<li>
+								Smaller p-values, below the significance threshold  (SNP is significantly associated with the trait)
+								<p>For more information about SNPs and its effects, refer to this <a href="https://online.stat.psu.edu/stat555/node/18/">external lesson</a> and the previous module on GWAS.</p>
+							</li>
+
+						</ul>
+					</li>
+					<li><h4>Use appropriate statistical methods to validate associations and prioritize candidate genes.</h4></li>
+					<li><h4>Integrate functional genomics data, such as gene expression and protein-protein interactions, to support candidate gene selection. </h4></li>
+					<li><h4>Consider the potential impact of environmental factors on trait expression and genetic associations. </h4></li>
+					<li><h4>Utilize available databases and tools for functional annotation and visualization of GWAS results.</h4></li>
+				</ol>
+			</p>
+		</section>
+
+		<section id="section-3">
+			<h2>Candidate Gene (CG) Analysis</h2>
+			<h3>Assuming you have significant GWAS peaks, the next step would be to identify candidate genes responsible for your
+				trait of interest. Candidate gene analysis focuses on investigating specific genes that are believed to be
+				biologically relevant to the trait or disease under study (an example in Figure 3.1).
+			</h3>
+			<ul>
+				<li>
+					<strong>Candidate gene </strong>- a gene that has been identified as related to a particular trait such as phenotype, disease, or condition, (Varshney, 2006)
+				</li>
+				<li>
+					<strong>Analysis framework for post-GWAS analysis:</strong>
+					<ol>
+						<li><a href="https://www.ndsu.edu/pubweb/~mcclean/plsc411/Lecture%205.%20forward%20genetics_XL2018Sep.pdf">Forward Genetics </a>: </li>
+						<p>
+							<i>“I have a QTL from a GWAS study, mapped using markers from the rice reference (Nipponbare) genome, how does the QTL
+							*look* like in another genome of a variety that’s more closely related to my material?”</i>
+						</p>
+
+						<p>
+							Rice varieties, especially those in different sub-populations, may contain sets of genes that are distinct from each
+							other. QTL regions, when inspected in a particular genome (e.g. japonica Nipponbare) may be lacking some genes in
+							the equivalent QTL region when inspected in another variety’s genome (e.g. aus N22), and vice-versa.
+						</p>
+						<li><a href="https://en.wikipedia.org/wiki/Gene_set_enrichment_analysis">Enriched/over-represented biological theme(s)</a> from a selected list of genes</li>
+					</ol>
+				</li>
+				
+			</ul>
+		</section>
+
+		<sectin id="section-4">	
+			<h2>Section 4</h2>
+			
+		</section>
+
+		<sectin id="section-5">	
+			<h2>Section 5</h2>
+			
+		</section>
+
+		<sectin id="section-6">	
+			<h2>Section 6</h2>
+			
+		</section>
+
+		<sectin id="section-7">	
+			<h2>Section 7</h2>
+			
+		</section>
+
+		<sectin id="section-8">	
+			<h2>Section 8</h2>
+			
+		</section>
+		
+		</br> </br> </br>
+	</main>
+	
+
+</body>
+
+</html>
