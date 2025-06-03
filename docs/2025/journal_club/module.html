@@ -200,19 +200,8 @@ strong {
 	<div id="toc">
 		<h2>Module 4:</h2>
 		<ul>
-			<li><a href="#" data-target="overview">i. Module Overview</a></li>
-			<li><a href="#" data-target="section-1">I. Post-GWAS Analysis </a></li>
-			<li><a href="#" data-target="section-2">II. Post-GWAS Considerations</a></li>
-			<li><a href="#" data-target="section-3">III. Candidate Gene(CG) Analysis</a></li>
-			<li><a href="#" data-target="section-4">IV. Basic CG Analysis Workflow</a></li>
-			<li><a href="#" data-target="section-5">V. Section 5</a></li>
-			<li><a href="#" data-target="section-6">VI. Section 6</a></li>
-			<li><a href="#" data-target="section-7">VII. Section 7</a></li>
-			<li><a href="#" data-target="section-8">VIII. Section 8</a></li>
-			<li><a
-				href="homework.html"
-				target="blank"> Homework </a>
-			</li>
+			<li><a href="#" data-target="guidelines">i. Guidelines</a></li>
+			<li><a href="#" data-target="groups">I. Groupings </a></li>
 		</ul>
 	</div>
 
@@ -221,124 +210,92 @@ strong {
 	<main style="margin-bottom: 100px;margin-top:20px;">
 		<button id="toggleToc" style="display: none;">☰ Table of Contents</button>
 		
-		<section id="overview">
-			<h2>🧭 Training Overview: Basic Post-GWAS Analysis</h2>
-
-			<h3>🎯 Topic: PostGWAS Analysis using SNPSeek, CropGalaxy, and RicePilaf</h3>
-			<h4>In this module, we will cover basic analysis methods for identification of candidate genes from highly associated genome-wide association studies (GWAS) regions. We will also predict the putative effects of SNPs on identified candidate genes. We will use the following rice-specific tools:</h4>
-				<p>
-					<ol> 
-						<li>Rice SNP-Seek</li>
-						<li>CropGalaxy</li>
-						<li>RicePilaf</li>
-					</ol>
-				</p>
-
-			<h3>👥 Target Audience</h3>
-			<p>Participants should have a background on genome-wide association analysis.</p>
+		<section id="guidelines">
+			<h2>🧭 Journal Club</h2>
 
 			<h3>🏁 Goal</h3>
 			<label>
+				<p>The goal of journal club is:</p>
 				<ul>
-					<li><input type="checkbox"> Understand the concept of post-GWAS analysis </li>
-					<li><input type="checkbox"> Be familiar with tools and resources available for doing post-GWAS gene-related analysis on rice genomics data</li>
-					<li><input type="checkbox"> Perform “minimum” standard post-GWAS analysis using Rice SNP-Seek, CropGalaxy, and RicePilaf </li>
+					<li>to get introduced to both current and fundamental research
+					<ul>
+						<li>gain literature research skills</li>
+					</ul>ul>
+					</li>
+					<li>team work experience
+					<ul>
+						<li>helping to enhance both research and social skills</li>
+						<li>e.g. selection of material, presentation, leadership etc )</li>
+					</ul>ul>
+					</li>
 				</ul>
 			  </label>
-		</section>
 
-		<section id="section-1">
-			<h2>Post-GWAS Analysis</h2>
-			<p>Genome-wide association studies (GWAS) is instrumental in identifying genetic variants associated with various
-				traits. However, the raw results from GWAS, typically in the form of significant single nucleotide polymorphisms
-				(SNPs), are only the beginning. Performing post-GWAS analysis is a crucial subsequent step to interpret these
-				associations, understand underlying biological mechanisms, and subsequently apply this information to breeding
-				programs.
-			</p>
-			<h3>Why perform Post-GWAS analysis?</h3>
-			<ul>
-				<li>
-					Post-GWAS analysis helps validate the results from the genome-wide association study (GWAS) to better understand the
-					biological functions and mechanisms that link the significant variants (i.e, SNPs) to the trait of interest.
-				</li>
-				<li>
-					Post-GWAS analysis in rice involves the use of various bioinformatics tools and databases to prioritize candidate
-					genes, validate their functions, and integrate findings into practical breeding strategies.
-				</li>
-				<li>
-					<h4>Some questions that can be answered in performing post-GWAS analysis:</h4>
-					<ul>
-						<li> 
-							<i>- Is there support from annotation for the loci?</i>
-						</li>
-						<li>
-							<i>- Are there known genes with functional evidence?</i>
-						</li>
-						<li>
-							<i>- Are there SNPs that affect function?</i>
-						</li>
-						<li>
-							<i>- Do the haplotypes make sense?</i>
-						</li>
+			<h3>The mechanics of Journal Club</h3>
+			<h4>At the end of every week, a group of students will present a paper or a software tool</h4>
+				<p>
+					<ul> 
+						<li>The participants will be assigned into 5 groups with approximately equal member count</li>
+						<li>Each group will be responsible for presenting one topic.</li>
+						<li>One or two presenters.</li>
+						<li>The presentation should be short (5 min), include 3 main slides plus a Thanks/Contribution slide, listing the contribution of each member of the group and sources used.</li>
+						<li>As an option, the presentation may be recorded in advance and shared as a video on any popular video platforms.</li>
+						<li>The group will nominate presenters and the presentation topic ahead of time.</li>
 					</ul>
-				</li>
-			</ul>
-		</section>
+				</p>
 
-		<section id="section-2">
-			<h2>Post-GWAS Analysis Considerations</h2>
-			<h3>In performing post-GWAS analysis, it is important to consider several points:</h3>
+			<h3>Types of presentations</h3>
 			<p>
-				<ol>
-					<li>
-						<h4>Significance of the SNP</h4>
-						<ul>
-							<li>
-								Smaller p-values, below the significance threshold  (SNP is significantly associated with the trait)
-								<p>For more information about SNPs and its effects, refer to this <a href="https://online.stat.psu.edu/stat555/node/18/">external lesson</a> and the previous module on GWAS.</p>
-							</li>
+				<strong>Paper</strong>
+				<ul>
+					<li>3 slides summarizing background and what was accomplished (results, methods)</li>
+					<li>anything that seems particularly interesting to you, open questions</li>
+				</ul>
 
-						</ul>
-					</li>
-					<li><h4>Use appropriate statistical methods to validate associations and prioritize candidate genes.</h4></li>
-					<li><h4>Integrate functional genomics data, such as gene expression and protein-protein interactions, to support candidate gene selection. </h4></li>
-					<li><h4>Consider the potential impact of environmental factors on trait expression and genetic associations. </h4></li>
-					<li><h4>Utilize available databases and tools for functional annotation and visualization of GWAS results.</h4></li>
-				</ol>
+				<strong>Software tool</strong>
+				<ul>
+					<li>Motivation - what problems it solves</li>
+					<li>screenshots or demo</li>
+				</ul>
 			</p>
 		</section>
 
-		<section id="section-3">
-			<h2>Candidate Gene (CG) Analysis</h2>
-			<h3>Assuming you have significant GWAS peaks, the next step would be to identify candidate genes responsible for your
-				trait of interest. Candidate gene analysis focuses on investigating specific genes that are believed to be
-				biologically relevant to the trait or disease under study (an example in Figure 3.1).
-			</h3>
-			<ul>
-				<li>
-					<strong>Candidate gene </strong>- a gene that has been identified as related to a particular trait such as phenotype, disease, or condition, (Varshney, 2006)
-				</li>
-				<li>
-					<strong>Analysis framework for post-GWAS analysis:</strong>
-					<ol>
-						<li><a href="https://www.ndsu.edu/pubweb/~mcclean/plsc411/Lecture%205.%20forward%20genetics_XL2018Sep.pdf">Forward Genetics </a>: </li>
-						<p>
-							<i>“I have a QTL from a GWAS study, mapped using markers from the rice reference (Nipponbare) genome, how does the QTL
-							*look* like in another genome of a variety that’s more closely related to my material?”</i>
-						</p>
-
-						<p>
-							Rice varieties, especially those in different sub-populations, may contain sets of genes that are distinct from each
-							other. QTL regions, when inspected in a particular genome (e.g. japonica Nipponbare) may be lacking some genes in
-							the equivalent QTL region when inspected in another variety’s genome (e.g. aus N22), and vice-versa.
-						</p>
-						<li><a href="https://en.wikipedia.org/wiki/Gene_set_enrichment_analysis">Enriched/over-represented biological theme(s)</a> from a selected list of genes</li>
-					</ol>
-				</li>
-				
-			</ul>
+		<section id="groups">
+			<h2>Groupings</h2>
+			<h4>Group 1</h4>
+			<p>
+				<ul>
+					<li></li>
+				</ul>
+			</p>
+			<h4>Group 2</h4>
+			<p>
+				<ul>
+					<li></li>
+				</ul>
+			</p>
+			<h4>Group 3</h4>
+			<p>
+				<ul>
+					<li></li>
+				</ul>
+			</p>
+			<h4>Group 4</h4>
+			<p>
+				<ul>
+					<li></li>
+				</ul>
+			</p>
+			<h4>Group 5</h4>
+			<p>
+				<ul>
+					<li></li>
+				</ul>
+			</p>
 		</section>
 
+		
+<!--
 		<sectin id="section-4">	
 			<h2>Section 4</h2>
 			
@@ -363,7 +320,7 @@ strong {
 			<h2>Section 8</h2>
 			
 		</section>
-		
+	-->	
 		</br> </br> </br>
 	</main>
 	
