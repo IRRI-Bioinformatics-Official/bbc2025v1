@@ -211,7 +211,8 @@ strong {
     <a href="#" onclick="toggleSection('variant-calling-sub')">ii. Introduction</a>
     <ul id="variant-calling-sub" style="display: none; margin-left: 15px;">
       <li><a href="#S1">Learning Objectives</a></li>
-	  <li><a href="#S2">Tools</a></li>
+      <li><a href="#VC">Variant Calling</a></li>
+      <li><a href="#S2">Tools</a></li>
 
       <li>
         <a href="#" onclick="toggleSection('input-sub')">Input Files</a>
@@ -319,8 +320,27 @@ strong {
 		</ol>
 		</section>
 
+    <section id="VC">
+      <h3>Variant Calling</h3>
+        <ul>
+          <li><strong>Definition</strong></li>
+          <ul style="list-style-type: disc;"><li>Variant calling is the process of identifying genetic variations (such as SNPs and indels) in a sample by comparing it against a reference genome.</li></ul>
+           <br>
+          <li><strong>Purpose</strong></li>
+          <ul style="list-style-type: disc;"><li>To detect differences between sequenced data and the reference genome, which may indicate important genetic variations related to traits, diseases, or evolutionary processes.</li></ul>
+           <br>
+          <li><strong>Applications</strong></li>
+          <ul style="list-style-type: disc;">
+            <li>Understanding genetic diversity</li>
+            <li>Identifying genes associated with traits</li>
+            <li>Improving rice breeding</li>
+          </ul>
+        </ul>
+    </section>		
+
+		
 		<section id="S2">
-			<h4>Tools: </h4>
+			<h3>Tools: </h3>
 			<ol>
 				<li><b><a href="http://bio-bwa.sourceforge.net" target="_blank"><strong>BWA</strong></a></b> 
 					<br>A software package for mapping low-divergent sequences against a large reference genome
@@ -344,7 +364,7 @@ strong {
 		</section>
 
 		<section id="S3">
-			<h4>Input Files: </h4>
+			<h3>Input Files: </h3>
 			<ol>
 				<li id="fastq"><b>Raw reads</b> 
 					<ul>
@@ -373,7 +393,7 @@ strong {
 		</section>
 
 <section id="S4">
-  <h4>Intermediate Files:</h4>
+  <h3>Intermediate Files:</h3>
   <ol>
     <li>
       <b id="sam">Sequence Alignment/Map Format (SAM)</b>
@@ -451,7 +471,7 @@ read456	16	chr1	1050	60	100M	*	0	0	TGCAGTCA...	ACGTTGCA...
 </section>
 
 <section id="S5">
-  <h4>Output File:</h4>
+  <h3>Output File:</h3>
   <ol>
     <li><b>Variant Call Format (VCF)</b></li>
       <ol type="a">
