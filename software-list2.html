@@ -557,5 +557,33 @@ code {
 		</pre>
 	</section>
 
+	<section>
+	  <h4 style="font-size:120%">MacOS-specific</h4>
+
+  <ul style="list-style-type: disc;">
+    <li>Homebrew</li>
+      <ul>
+        <li>Follow installation instructions at the homepage of <a href="https://brew.sh/" target="_blank">Homebrew</a></li>
+        <li>Or on the Terminal app</li>
+          <ul><li style="font-family:'Courier New'">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</li></ul>
+
+        <li>Run these two commands in your terminal to add Homebrew to your PATH:</li>
+          <ul>
+            <li style="font-family:'Courier New'">(echo; echo 'eval "$(/usr/local /bin/brew shellenv)"')</li>
+            <li style="font-family:'Courier New'">eval "$(/usr/local/bin/brew shellenv)"</li>
+          </ul>
+      </ul>
+    <li>In the terminal app</li>
+      <ul style="font-family:'Courier New'">
+        <li>brew install bwa</li>
+        <li>brew install fastp</li>
+        <li>brew install fasqc</li>
+        <li>brew install samtools</li>
+        <li>brew install bcftools</li>
+        <li>brew install picard-tools</li>
+      </ul>
+  </ul>	
+	</section>
+
 </body>
 </html>
