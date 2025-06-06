@@ -33,8 +33,8 @@ html, body {
 	border-radius: 8px;
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 	z-index: 1000;
-	max-height: 100vh; /* Restrict height to the viewport */
-	overflow-y: auto; /* Enable vertical scroll */
+	/* max-height: 100vh;  Restrict height to the viewport */
+	/* overflow-y: auto;  Enable vertical scroll */
 }
 
 #toc h2 {
@@ -193,16 +193,16 @@ strong {
 }
 
 .aligned-list li {
-  list-style: none;
-  margin: 4px 0;
+	list-style: none;
+	margin: 4px 0;
 }
 
 .aligned-list a {
-  display: inline-block;
-  min-width: 240px; /* adjust as needed */
-  padding-left: 1em;
-  text-indent: -1em;
-  white-space: nowrap;
+	display: inline-block;
+	min-width: 240px; /* adjust as needed */
+	padding-left: 1em;
+	text-indent: -1em;
+	white-space: nowrap;
 }
 </style>
 <script>
@@ -275,49 +275,68 @@ strong {
 	<div id="toc">
 		<h2>Table of Contents:</h2>
 		<ul class="aligned-list">
-			<li><a href="#" data-target="overview">i. Overview</a></li>
-			<li><a href="#" data-target="os">I. Operating Systems</a></li>
-			<li><a href="#" data-target="why-linux">II. Linux for
-					Bioinformatics</a></li>
-			<li><a href="#" data-target="filesystem-structure">III.
-					Filesystem Structure and Layout</a></li>
-			<li><a href="#" data-target="intro-linux-commands">IV. Linux
-					Commands</a></li>
-			<li><a href="#" data-target="filesystem">IV. Filesystem
-					Navigation</a></li>
-			<li><a href="#" data-target="filemanagement">V. File
-					Management</a></li>
-			<li><a href="#" data-target="links-linux">VI. Hard and Soft
-					Links</a></li>
-			<li><a href="#" data-target="viewing">VII. Viewing Files</a></li>
-			<li><a href="#" data-target="compressed">VIII. Handling
-					Compressed Files</a></li>
-			<li><a href="#" data-target="bioinformatics-file-formats">IX.
-					Bioinformatics File Formats</a></li>
-			<li><a href="#" data-target="pattern-matching">X. Pattern
-					Matching in Bash</a></li>
-			<li><a href="#" data-target="text-processing-tools">XI. Text
-					Processing Tools</a></li>
-			<li><a href="#" data-target="bash-bioinformatics">XII. Bash
-					Manipulation</a></li>
-			<li><a href="#" data-target="io-redirection">XIII. I/O
-					Redirection</a></li>
-			<li><a href="#" data-target="linux-process-control">XIV.
-					Process Control</a></li>
-			<li><a href="#" data-target="linux-job-control">XIV. Job
-					Control</a></li>
-			<li><a href="#" data-target="shell-expansion">XV. Shell
-					Expansion</a></li>
-			<li><a href="#" data-target="shell-scripting">XVI. Shell
-					Scripting</a></li>
-			<li><a href="#" data-target="environment-variables">XVII.
-					Environment Variable</a></li>
-			<li><a href="#" data-target="bashrc-bash_profile">XVIII.
-					Shell Configuration Files</a></li>
-			<li><a href="#" data-target="linux-tips">XIX. Linux Tips</a></li>
-			<li><a href="#" data-target="quiz">XX. Activity</a></li>
+			<li><details>
+					<summary>
+						<strong>Day 1</strong>
+					</summary>
+					<li><a href="#" data-target="overview">i. Overview</a></li>
+					<li><a href="#" data-target="os">I. Operating Systems</a></li>
+					<li><a href="#" data-target="why-linux">II. Linux for
+							Bioinformatics</a></li>
+					<li><a href="#" data-target="filesystem-structure">III.
+							Filesystem Structure and Layout</a></li>
+					<li><a href="#" data-target="intro-linux-commands">V.
+							Linux Commands</a></li>
+					<li><a href="#" data-target="filesystem">IV. Filesystem
+							Navigation</a></li>
+					<li><a href="#" data-target="filemanagement">VI. File
+							Management</a></li>
+					<li><a href="#" data-target="viewing">VII. Viewing Files</a></li>
+					<li><a href="#" data-target="compressed">VIII. Handling
+							Compressed Files</a></li>
+					
+				</details></li>
+			<li><details>
+					<summary>
+						<strong>Day 2</strong>
+					</summary>
+					<li><a href="#" data-target="hard-soft">VI. Hard and
+							Soft Links</a></li>
+					<li><a href="#" data-target="bioinformatics-file-formats">IX.
+							Bioinformatics File Formats</a></li>
+					<li><a href="#" data-target="pattern-matching">X. Pattern
+							Matching in Bash</a></li>
+					<li><a href="#" data-target="text-processing-tools">XI.
+							Text Processing Tools</a></li>
+					<li><a href="#" data-target="bash-bioinformatics">XII.
+							Bash Manipulation</a></li>
+					<li><a href="#" data-target="shell-scripting">XVI. Shell
+							Scripting</a></li>
+					
+				</details></li>
+			<li><details>
+					<summary>
+						<strong>Day 3</strong>
+					</summary>
+					<li><a href="#" data-target="io-redirection">XIII. I/O
+							Redirection</a></li>
+							
+					<li><a href="#" data-target="linux-process-control">XIV.
+							Process Control</a></li>
+					<li><a href="#" data-target="linux-job-control">XIV. Job
+							Control</a></li>
+					<li><a href="#" data-target="shell-expansion">XV. Shell
+							Expansion</a></li>
+					
+					<li><a href="#" data-target="environment-variables">XVII.
+							Environment Variable</a></li>
+					<li><a href="#" data-target="bashrc-bash_profile">XVIII.
+							Shell Configuration Files</a></li>
+					<li><a href="#" data-target="linux-tips">XIX. Linux Tips</a></li>
+					<li><a href="#" data-target="quiz">XX. Activity</a></li>
 
-			<li><a href="main_c.html" target="blank">IX. Cheat Sheet</a></li>
+					<li><a href="main_c.html" target="blank">IX. Cheat Sheet</a></li>
+				</details></li>
 		</ul>
 	</div>
 
@@ -346,26 +365,23 @@ strong {
 
 		<section id="os">
 			<h2>What is an Operating System?</h2>
-			  <p>
-			    An <strong>Operating System (OS)</strong> is the main software that runs your computer or phone. 
-			    It controls everything — apps, files, memory, and devices like your mouse or keyboard.
-			  </p>
-			
-			  <h3>🧩 What Does It Do?</h3>
-			  <ul>
-			    <li><strong>Runs Programs</strong><br>
-			      Lets you open and use apps like browsers, games, or Word.
-			    </li>
-			    <li><strong>Manages Memory</strong><br>
-			      Shares the computer’s memory (RAM) between programs so they don’t crash.
-			    </li>
-			    <li><strong>Stores Files</strong><br>
-			      Helps you save, open, and organize files in folders.
-			    </li>
-			    <li><strong>Controls Devices</strong><br>
-			      Makes the keyboard, mouse, speakers, and printer work.
-			    </li>
-			  </ul>
+			<p>
+				An <strong>Operating System (OS)</strong> is the main software that
+				runs your computer or phone. It controls everything — apps, files,
+				memory, and devices like your mouse or keyboard.
+			</p>
+
+			<h3>🧩 What Does It Do?</h3>
+			<ul>
+				<li><strong>Runs Programs</strong><br> Lets you open and
+					use apps like browsers, games, or Word.</li>
+				<li><strong>Manages Memory</strong><br> Shares the
+					computer’s memory (RAM) between programs so they don’t crash.</li>
+				<li><strong>Stores Files</strong><br> Helps you save,
+					open, and organize files in folders.</li>
+				<li><strong>Controls Devices</strong><br> Makes the
+					keyboard, mouse, speakers, and printer work.</li>
+			</ul>
 			<h2>Understanding Operating Systems for Bioinformatics</h2>
 			<p>
 				When working with bioinformatics tools, it's essential to understand
@@ -514,7 +530,7 @@ strong {
 				<li><code>/home</code> — Contains user home directories, where
 					personal files and settings are stored (e.g., <code>/home/username</code>).</li>
 			</ul>
-
+			<img src="resources/filestructure.png" alt="Linux Filesystem Structure" style="max-width:100%; height:auto; border:1px solid #ccc; border-radius:8px;">
 			<p>
 				In bioinformatics, most of your work will happen inside your home
 				directory under
@@ -730,17 +746,14 @@ strong {
 					</div></li>
 
 				<li><strong><code>pwd</code> again:</strong> After changing
-					into the <code>Documents</code> directory, typing 
+					into the <code>Documents</code> directory, typing
 					<div class="code_div">
 						<code class="codeStyle">pwd</code>
 						<button class="copy-btn">Copy</button>
-					</div>
-					again will display: 
-						<code>/home/user/Documents</code>
-					</li>
+					</div> again will display: <code>/home/user/Documents</code></li>
 
 				<li><strong>Absolute Path Example:</strong> To go to the <code>Music</code>
-					directory from anywhere, you can use the absolute path: 
+					directory from anywhere, you can use the absolute path:
 					<div class="code_div">
 						<code class="codeStyle">cd /home/user/Music</code>
 						<button class="copy-btn">Copy</button>
@@ -748,7 +761,8 @@ strong {
 
 				<li><strong>Relative Path Example:</strong> If you're in the <code>Documents</code>
 					directory and want to move up one level to <code>/home/user/</code>,
-					use: <div class="code_div">
+					use:
+					<div class="code_div">
 						<code class="codeStyle">cd ..</code>
 						<button class="copy-btn">Copy</button>
 					</div></li>
@@ -756,34 +770,26 @@ strong {
 			<h3>4. Activity: Navigate to a Folder and Explore Its Contents</h3>
 			<p>Let’s practice navigating the file system!</p>
 			<ol>
-				<li><strong>Navigate to a folder:</strong> <br/>
-				- Open your terminal
-					(WSL/Linux/macOS). <br/>
-				- Use the <code>pwd</code> command to check your
-					current directory. <br/>
-				- Use <code>ls</code> to list the contents. 
-				- Move into a subdirectory using 
-				<code>
+				<li><strong>Navigate to a folder:</strong> <br /> - Open your
+					terminal (WSL/Linux/macOS). <br /> - Use the <code>pwd</code>
+					command to check your current directory. <br /> - Use <code>ls</code>
+					to list the contents. - Move into a subdirectory using <code>
 						cd
 						<folder_name>
-					</code>.<br/> 
-				- Try using both absolute and relative paths.</li>
+					</code>.<br /> - Try using both absolute and relative paths.</li>
 
-				<li><strong>Explore directory contents:</strong> <br/>
-				- Use <code>ls -l</code> to list files with details (permissions, file size, etc.). <br/>
-				- Use <code>ls -a</code> to show hidden files. <br/>
-				- Use <code>cd ..</code> to go up one level in the directory.
-				</li>
+				<li><strong>Explore directory contents:</strong> <br /> - Use
+					<code>ls -l</code> to list files with details (permissions, file
+					size, etc.). <br /> - Use <code>ls -a</code> to show hidden files.
+					<br /> - Use <code>cd ..</code> to go up one level in the
+					directory.</li>
 
-				<li><strong>Create a new file and directory:</strong> <br/>
-				- Create a new directory with: 
-				<pre><code>mkdir NewFolder</code></pre> 
-				- Create a new file with: 
-				<pre><code>touch newfile.txt</code></pre> 
-				- List the contents with <code>ls</code> to confirm the changes.
-				</li>
+				<li><strong>Create a new file and directory:</strong> <br /> -
+					Create a new directory with: <pre><code>mkdir NewFolder</code></pre> 
+					- Create a new file with: <pre><code>touch newfile.txt</code></pre> 
+					- List the contents with <code>ls</code> to confirm the changes.</li>
 			</ol>
-			
+
 
 		</section>
 		<section id="filemanagement">
@@ -796,8 +802,7 @@ strong {
 			<ul>
 				<li><strong><code>mkdir</code> (Make Directory):</strong> This
 					command allows you to create a new directory (folder). 
-					<pre><code>mkdir project_folder</code></pre> 
-					Example output: (No output is returned on success, but the
+					<pre><code>mkdir project_folder</code></pre> Example output: (No output is returned on success, but the
 					directory is created.)</li>
 
 				<li><strong><code>touch</code> (Create Empty File):</strong>
@@ -816,7 +821,8 @@ strong {
 
 				<li><strong><code>mv</code> (Move/Rename
 						Files/Directories):</strong> This command moves or renames files and
-					directories. <pre><code>mv oldname.txt newname.txt</code></pre> 
+					directories. 
+					<pre><code>mv oldname.txt newname.txt</code></pre> 
 					Example: This renames `oldname.txt` to `newname.txt`. 
 					<pre><code>mv file1.txt /path/to/destination/</code></pre> 
 					This moves `file1.txt` to a new directory.</li>
@@ -846,6 +852,7 @@ strong {
 					organized: 
 					<pre><code>mkdir my_project/input my_project/output my_project/scripts</code></pre> 
 					This will create three subdirectories within `my_project` for
+					
 					organizing input data, output files, and scripts.</li>
 
 				<li><strong>Creating files inside directories:</strong> Once
@@ -860,96 +867,298 @@ strong {
 			<p>Let's walk through creating a project folder and organizing
 				files:</p>
 			<ul>
-				<li><strong>Create the project folder:</strong> 
-				<div class="code_div">
+				<li><strong>Create the project folder:</strong>
+					<div class="code_div">
 						<code class="codeStyle">mkdir my_bioinformatics_project</code>
 						<button class="copy-btn">Copy</button>
-					</div>
-				This creates the main folder for your project.</li>
+					</div> This creates the main folder for your project.</li>
 
-				<li><strong>Create subdirectories:</strong> 
-				<div class="code_div">
-						<code class="codeStyle">mkdir my_bioinformatics_project/data my_bioinformatics_project/results my_bioinformatics_project/scripts</code>
+				<li><strong>Create subdirectories:</strong>
+					<div class="code_div">
+						<code class="codeStyle">mkdir
+							my_bioinformatics_project/data my_bioinformatics_project/results
+							my_bioinformatics_project/scripts</code>
 						<button class="copy-btn">Copy</button>
-					</div>
-				This organizes your project into folders for data, results, and
+					</div> This organizes your project into folders for data, results, and
 					scripts.</li>
 
-				<li><strong>Create files:</strong> 
-				<div class="code_div">
-						<code class="codeStyle">touch my_bioinformatics_project/data/input_file.txt</code>
+				<li><strong>Create files:</strong>
+					<div class="code_div">
+						<code class="codeStyle">touch
+							my_bioinformatics_project/data/input_file.txt</code>
 						<button class="copy-btn">Copy</button>
 					</div>
 					<div class="code_div">
-						<code class="codeStyle">touch my_bioinformatics_project/scripts/preprocessing.sh</code>
+						<code class="codeStyle">touch
+							my_bioinformatics_project/scripts/preprocessing.sh</code>
 						<button class="copy-btn">Copy</button>
-					</div>
-				These files are created inside the appropriate directories.</li>
+					</div> These files are created inside the appropriate directories.</li>
 
-				<li><strong>Copy files into the project folder:</strong> 
-				<div class="code_div">
-						<code class="codeStyle">cp /path/to/external/input_file.txt my_bioinformatics_project/data/</code>
+				<li><strong>Copy files into the project folder:</strong>
+					<div class="code_div">
+						<code class="codeStyle">cp /path/to/external/input_file.txt
+							my_bioinformatics_project/data/</code>
 						<button class="copy-btn">Copy</button>
-					</div>
-				This copies an existing file into the `data` directory.</li>
+					</div> This copies an existing file into the `data` directory.</li>
 
 				<li><strong>Move files:</strong> If you want to reorganize, use
-					<code>mv</code>: 
+					<code>mv</code>:
 					<div class="code_div">
-						<code class="codeStyle">mv my_bioinformatics_project/scripts/preprocessing.sh my_bioinformatics_project/scripts/analysis.sh</code>
+						<code class="codeStyle">mv
+							my_bioinformatics_project/scripts/preprocessing.sh
+							my_bioinformatics_project/scripts/analysis.sh</code>
 						<button class="copy-btn">Copy</button>
-					</div>
-					This renames the `preprocessing.sh` file to `analysis.sh`.</li>
+					</div> This renames the `preprocessing.sh` file to `analysis.sh`.</li>
 
 				<li><strong>Delete unnecessary files:</strong> If a file is no
-					longer needed, use <code>rm</code> to remove it: 
+					longer needed, use <code>rm</code> to remove it:
 					<div class="code_div">
-						<code class="codeStyle">rm my_bioinformatics_project/data/old_data.txt</code>
+						<code class="codeStyle">rm
+							my_bioinformatics_project/data/old_data.txt</code>
 						<button class="copy-btn">Copy</button>
-					</div>
-					This removes the old data file from your project.</li>
+					</div> This removes the old data file from your project.</li>
 			</ul>
 
 			<h3>4. Activity: Set Up a Project Folder with Dummy Files</h3>
 			<p>Let’s practice by setting up a project folder and organizing
 				it!</p>
 			<ol>
-				<li><strong>Create the project directory:</strong> <br/>
-				- Open your terminal (WSL/Linux/macOS). <br/>
-				- Run the following command: 
+				<li><strong>Create the project directory:</strong> <br /> -
+					Open your terminal (WSL/Linux/macOS). <br /> - Run the following
+					command: 
 					<pre><code>mkdir bioinformatics_project</code></pre>
-				</li>
+					</li>
 
 				<li><strong>Create subdirectories for data, scripts,
-						and results:</strong> <br/>
-						- Create the following directories: 
-						<pre><code>mkdir bioinformatics_project/data bioinformatics_project/scripts bioinformatics_project/results</code></pre>
-						</li>
+						and results:</strong> <br /> - Create the following directories: 
+						<pre><code>mkdir bioinformatics_project/data bioinformatics_project/scripts bioinformatics_project/results</code></pre></li>
 
-				<li><strong>Create some files:</strong> <br/>
-				- Use the <code>touch</code>command to create dummy files: 
-				<pre><code>touch bioinformatics_project/data/input_file.txt</code></pre>
-				<pre><code>touch bioinformatics_project/scripts/analysis.sh</code></pre>
-				</li>
+				<li><strong>Create some files:</strong> <br /> - Use the <code>touch</code>command
+					to create dummy files: 
+					<pre><code>touch bioinformatics_project/data/input_file.txt</code></pre> 
+					<pre><code>touch bioinformatics_project/scripts/analysis.sh</code></pre>
+					</li>
 
-				<li><strong>Copy a file into the project:</strong> <br/>
-				- If you have an existing file (e.g., <code>sample_data.txt</code>), copy it
-					into the project folder: 
+				<li><strong>Copy a file into the project:</strong> <br /> - If
+					you have an existing file (e.g., <code>sample_data.txt</code>),
+					copy it into the project folder: 
 					<pre><code>cp sample_data.txt bioinformatics_project/data/</code></pre>
 					</li>
 
-				<li><strong>Rename a file:</strong> <br/>
-				- Rename the file analysis.sh` to `preprocessing.sh`: 
-				<pre><code>mv bioinformatics_project/scripts/analysis.sh bioinformatics_project/scripts/preprocessing.sh</code></pre>
-				</li>
+				<li><strong>Rename a file:</strong> <br /> - Rename the file
+					analysis.sh` to `preprocessing.sh`: 
+					<pre><code>mv bioinformatics_project/scripts/analysis.sh bioinformatics_project/scripts/preprocessing.sh</code></pre>
+					</li>
 
-				<li><strong>Delete unnecessary files:</strong> <br/>
-				- If there are files you no longer need, delete them with <code>rm</code>: 
-				<pre><code>rm bioinformatics_project/data/old_file.txt</code></pre>
-				</li>
+				<li><strong>Delete unnecessary files:</strong> <br /> - If
+					there are files you no longer need, delete them with <code>rm</code>:
+					<pre><code>rm bioinformatics_project/data/old_file.txt</code></pre>
+					</li>
 			</ol>
 		</section>
-		<section id="links-linux">
+		<section id="viewing">
+			<h2>Viewing Files in Linux (via WSL, Linux, or macOS)</h2>
+			<p>In bioinformatics, you often deal with large datasets, and
+				knowing how to efficiently view files is crucial. In this section,
+				we will explore several commands that can help you view the contents
+				of files in the terminal.</p>
+
+			<h3>1. Key Commands for Viewing Files</h3>
+			<ul>
+				<li><strong><code>cat</code> (Concatenate and View
+						File Contents):</strong> The <code>cat</code> command is used to display
+					the contents of a file directly in the terminal. It's best used for
+					small files, as it prints the entire file at once. 
+					<pre><code>cat filename.txt</code></pre> 
+					Example output: 
+					<pre><code>Welcome to bioinformatics training.</code></pre>
+					<p>
+						<strong>Warning:</strong> Avoid using
+						<code>cat</code>
+						for large files, as it may overwhelm the terminal.
+					</p></li>
+
+				<li><strong><code>less</code> (View File
+						Page-by-Page):</strong> The <code>less</code> command is useful for viewing
+					large files, as it allows you to scroll through the file one page
+					at a time. <pre><code>less filename.txt</code></pre> 
+					You can navigate using:
+					<ul>
+						<li><code>Space</code>: Scroll down one page</li>
+						<li><code>Up/Down Arrow</code>: Move one line up/down</li>
+						<li><code>q</code>: Quit and return to the terminal</li>
+					</ul></li>
+
+				<li><strong><code>head</code> (View the First Few
+						Lines of a File):</strong> The <code>head</code> command shows the first 10
+					lines of a file by default. It’s useful when you want to quickly
+					check the beginning of a large file. 
+					<pre><code>head filename.txt</code></pre> 
+					To view a specific number of lines, use the <code>-n</code>
+					option: 
+					<pre><code>head -n 20 filename.txt</code></pre> 
+					This shows the first 20 lines of the file.</li>
+
+				<li><strong><code>tail</code> (View the Last Few Lines
+						of a File):</strong> The <code>tail</code> command is the opposite of <code>head</code>;
+					it shows the last 10 lines of a file by default. It’s useful for
+					monitoring log files or large datasets where the latest information
+					is more relevant. 
+					<pre><code>tail filename.txt</code></pre> 
+					To view the last few lines or monitor a file in real-time, use: 
+					<pre><code>tail -n 20 filename.txt</code></pre> 
+					This shows the last 20 lines of the file. 
+					<pre><code>tail -f filename.txt</code></pre> 
+					The <code>-f</code> option allows you to follow a file in
+					real-time (useful for logs).</li>
+			</ul>
+
+			<h3>2. Best Tools for Viewing Large Data Files</h3>
+			<p>When working with large data files, it's important to use the
+				right tool to avoid overwhelming your terminal. Here’s a breakdown
+				of the best tools:</p>
+			<ul>
+				<li><strong><code>less</code>:</strong> Ideal for viewing large
+					files, as it loads the file one page at a time. You can scroll
+					through the content and search within the file using <code>/search_term</code>
+					and <code>n</code> to go to the next occurrence.</li>
+				<li><strong><code>head</code> and <code>tail</code>:</strong>
+					These are best when you only need to view the beginning or the end
+					of the file, respectively. They are more efficient than loading the
+					entire file into the terminal.</li>
+				<li><strong><code>cat</code>:</strong> Only recommended for
+					small files, as it prints the entire file to the terminal.</li>
+			</ul>
+
+			<h3>3. Example Walkthrough: Viewing Large Files</h3>
+			<p>Let’s walk through the process of using these commands to view
+				a large file, such as a `.txt` or `.tsv` file.</p>
+
+			<ul>
+				<li><strong>View a small file using <code>cat</code>:
+				</strong> For a small file, simply use:
+					<div class="code_div">
+						<code class="codeStyle">cat small_file.txt</code>
+						<button class="copy-btn">Copy</button>
+					</div> This will display the entire contents of `small_file.txt` at once.
+				</li>
+
+				<li><strong>View a large file using <code>less</code>:
+				</strong> If the file is large, use:
+					<div class="code_div">
+						<code class="codeStyle">less large_file.txt</code>
+						<button class="copy-btn">Copy</button>
+					</div> This will allow you to scroll through the content one page at a
+					time, making it much easier to navigate large files.</li>
+
+				<li><strong>View the first few lines of a file using <code>head</code>:
+				</strong> If you only want to check the beginning of the file, use:
+					<div class="code_div">
+						<code class="codeStyle">head large_file.txt</code>
+						<button class="copy-btn">Copy</button>
+					</div> This will show the first 10 lines by default.</li>
+
+				<li><strong>View the last few lines of a file using <code>tail</code>:
+				</strong> To quickly check the end of a file (e.g., for logs or recent data),
+					use:
+					<div class="code_div">
+						<code class="codeStyle">tail large_file.txt</code>
+						<button class="copy-btn">Copy</button>
+					</div> To monitor the file in real-time (for example, a log file that
+					updates constantly), use:
+					<div class="code_div">
+						<code class="codeStyle">tail -f large_file.txt</code>
+						<button class="copy-btn">Copy</button>
+					</div></li>
+			</ul>
+
+			<h3>4. Activity: Open a `.txt` or `.tsv` File with Each Tool</h3>
+			<p>Let's practice opening a file with each tool to better
+				understand their usage and functionality.</p>
+			<ol>
+				<li><strong>Open a small `.txt` file with <code>cat</code>:
+				</strong> <br> - Open a terminal and run: 
+				<pre><code>cat small_file.txt</code></pre> 
+				- Verify that the entire file is printed to the terminal.</li>
+
+				<li><strong>Open a large `.txt` file with <code>less</code>:
+				</strong> <br> - Use <code>less</code> to view a large file: 
+				<pre><code>less large_file.txt</code></pre> 
+				- Scroll through the file using the <code>Space</code> key and
+					quit by pressing <code>q</code>.</li>
+
+				<li><strong>Open the first 20 lines of a file with <code>head</code>:
+				</strong><br> - Run the following to view the first 20 lines of a file: 
+				<pre><code>head -n 20 large_file.txt</code></pre>
+				</li>
+
+				<li><strong>Open the last 20 lines of a file with <code>tail</code>:
+				</strong> <br>- View the last 20 lines of the file: 
+				<pre><code>tail -n 20 large_file.txt</code></pre>
+				</li>
+
+				<li><strong>Monitor a log file with <code>tail
+							-f</code>:
+				</strong> <br> - If you have a log file, use: 
+				<pre><code>tail -f log_file.txt</code></pre> 
+				- This will allow you to see updates to the log file in real-time.
+				</li>
+			</ol>
+
+			<!-- 
+    <h3>Expected Outcome:</h3>
+    <ul>
+        <li>Participants should be able to efficiently view small and large files using the appropriate commands.</li>
+        <li>They will learn how to scroll through large files using <code>less</code>, view the first few lines with <code>head</code>, and view the last few lines with <code>tail</code>.</li>
+        <li>By the end of the activity, they should feel comfortable using these commands to handle large datasets or logs in bioinformatics tasks.</li>
+    </ul> -->
+		</section><section id="compressed">
+			<h2>🗜️ Handling Compressed Files</h2>
+			<p>Bioinformatics datasets often come as compressed archives. Use
+				the following commands to unpack them:</p>
+
+			<table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%;">
+				<thead>
+					<tr>
+						<th>Command</th>
+						<th>Description</th>
+						<th>Example</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><code>unzip</code></td>
+						<td>Extract files from a <code>.zip</code> archive
+						</td>
+						<td><code>unzip samples.zip</code></td>
+					</tr>
+					<tr>
+						<td><code>tar -xvf</code></td>
+						<td>Extract contents from a <code>.tar</code> archive
+						</td>
+						<td><code>tar -xvf archive.tar</code></td>
+					</tr>
+					<tr>
+						<td><code>tar -xzvf</code></td>
+						<td>Extract a <code>.tar.gz</code> (gzip-compressed tar)
+						</td>
+						<td><code>tar -xzvf genome.tar.gz</code></td>
+					</tr>
+					<tr>
+						<td><code>tar -xjvf</code></td>
+						<td>Extract a <code>.tar.bz2</code> (bzip2-compressed tar)
+						</td>
+						<td><code>tar -xjvf data.tar.bz2</code></td>
+					</tr>
+					<tr>
+						<td><code>gunzip</code></td>
+						<td>Unzip a single <code>.gz</code> file
+						</td>
+						<td><code>gunzip reads.fastq.gz</code></td>
+					</tr>
+				</tbody>
+			</table>
+		</section><section id="hard-soft">
 			<h2>🔗 Hard and Soft Links in Linux</h2>
 			<p>
 				Linux provides two types of links to reference files: <strong>hard
@@ -996,218 +1205,7 @@ strong {
 			</p>
 		</section>
 
-		<section id="viewing">
-			<h2>Viewing Files in Linux (via WSL, Linux, or macOS)</h2>
-			<p>In bioinformatics, you often deal with large datasets, and
-				knowing how to efficiently view files is crucial. In this section,
-				we will explore several commands that can help you view the contents
-				of files in the terminal.</p>
-
-			<h3>1. Key Commands for Viewing Files</h3>
-			<ul>
-				<li><strong><code>cat</code> (Concatenate and View
-						File Contents):</strong> The <code>cat</code> command is used to display
-					the contents of a file directly in the terminal. It's best used for
-					small files, as it prints the entire file at once. 
-					<pre><code>cat filename.txt</code></pre>
-					Example output: 
-					<pre><code>Welcome to bioinformatics training.</code></pre>
-					<p>
-						<strong>Warning:</strong> Avoid using
-						<code>cat</code>
-						for large files, as it may overwhelm the terminal.
-					</p></li>
-
-				<li><strong><code>less</code> (View File
-						Page-by-Page):</strong> The <code>less</code> command is useful for viewing
-					large files, as it allows you to scroll through the file one page
-					at a time. 
-					<pre><code>less filename.txt</code></pre> 
-					You can navigate using:
-					<ul>
-						<li><code>Space</code>: Scroll down one page</li>
-						<li><code>Up/Down Arrow</code>: Move one line up/down</li>
-						<li><code>q</code>: Quit and return to the terminal</li>
-					</ul></li>
-
-				<li><strong><code>head</code> (View the First Few
-						Lines of a File):</strong> The <code>head</code> command shows the first 10
-					lines of a file by default. It’s useful when you want to quickly
-					check the beginning of a large file. 
-					<pre><code>head filename.txt</code></pre>
-					To view a specific number of lines, use the <code>-n</code>
-					option: 
-					<pre><code>head -n 20 filename.txt</code></pre> 
-					This shows the first 20 lines of the file.</li>
-
-				<li><strong><code>tail</code> (View the Last Few Lines
-						of a File):</strong> The <code>tail</code> command is the opposite of <code>head</code>;
-					it shows the last 10 lines of a file by default. It’s useful for
-					monitoring log files or large datasets where the latest information
-					is more relevant. 
-					<pre><code>tail filename.txt</code></pre> 
-					To view the last few lines or monitor a file in real-time, use: 
-					<pre><code>tail -n 20 filename.txt</code></pre> 
-					This shows the last 20 lines of the file. 
-					<pre><code>tail -f filename.txt</code></pre> 
-					The <code>-f</code> option allows you to follow a file in
-					real-time (useful for logs).</li>
-			</ul>
-
-			<h3>2. Best Tools for Viewing Large Data Files</h3>
-			<p>When working with large data files, it's important to use the
-				right tool to avoid overwhelming your terminal. Here’s a breakdown
-				of the best tools:</p>
-			<ul>
-				<li><strong><code>less</code>:</strong> Ideal for viewing large
-					files, as it loads the file one page at a time. You can scroll
-					through the content and search within the file using <code>/search_term</code>
-					and <code>n</code> to go to the next occurrence.</li>
-				<li><strong><code>head</code> and <code>tail</code>:</strong>
-					These are best when you only need to view the beginning or the end
-					of the file, respectively. They are more efficient than loading the
-					entire file into the terminal.</li>
-				<li><strong><code>cat</code>:</strong> Only recommended for
-					small files, as it prints the entire file to the terminal.</li>
-			</ul>
-
-			<h3>3. Example Walkthrough: Viewing Large Files</h3>
-			<p>Let’s walk through the process of using these commands to view
-				a large file, such as a `.txt` or `.tsv` file.</p>
-
-			<ul>
-				<li><strong>View a small file using <code>cat</code>:
-				</strong> For a small file, simply use: 
-					<div class="code_div">
-						<code class="codeStyle">cat small_file.txt</code>
-						<button class="copy-btn">Copy</button>
-					</div>
-					This will display the entire contents of `small_file.txt` at once.
-				</li>
-
-				<li><strong>View a large file using <code>less</code>:
-				</strong> If the file is large, use: 
-					<div class="code_div">
-						<code class="codeStyle">less large_file.txt</code>
-						<button class="copy-btn">Copy</button>
-					</div>
-					This will allow you to scroll through the content one page at a
-					time, making it much easier to navigate large files.</li>
-
-				<li><strong>View the first few lines of a file using <code>head</code>:
-				</strong> If you only want to check the beginning of the file, use: 
-					<div class="code_div">
-						<code class="codeStyle">head large_file.txt</code>
-						<button class="copy-btn">Copy</button>
-					</div>
-					This will show the first 10 lines by default.</li>
-
-				<li><strong>View the last few lines of a file using <code>tail</code>:
-				</strong> To quickly check the end of a file (e.g., for logs or recent data),
-					use: 
-					<div class="code_div">
-						<code class="codeStyle">tail large_file.txt</code>
-						<button class="copy-btn">Copy</button>
-					</div>
-					To monitor the file in real-time (for example, a log file that
-					updates constantly), use: 
-					<div class="code_div">
-						<code class="codeStyle">tail -f large_file.txt</code>
-						<button class="copy-btn">Copy</button>
-					</div>
-				</li>
-			</ul>
-
-			<h3>4. Activity: Open a `.txt` or `.tsv` File with Each Tool</h3>
-			<p>Let's practice opening a file with each tool to better
-				understand their usage and functionality.</p>
-			<ol>
-				<li><strong>Open a small `.txt` file with <code>cat</code>:
-				</strong> <br/>
-				- Open a terminal and run: 
-				<pre><code>cat small_file.txt</code></pre> 
-				- Verify that the entire file is printed to the terminal.</li>
-
-				<li><strong>Open a large `.txt` file with <code>less</code>:
-				</strong> <br/>
-				- Use <code>less</code> to view a large file: 
-				<pre><code>less large_file.txt</code></pre> 
-				- Scroll through the file using the <code>Space</code> key and 
-				quit by pressing <code>q</code>.</li>
-
-				<li><strong>Open the first 20 lines of a file with <code>head</code>:
-				</strong><br/> - Run the following to view the first 20 lines of a file: 
-				<pre><code>head -n 20 large_file.txt</code></pre>
-				</li>
-
-				<li><strong>Open the last 20 lines of a file with <code>tail</code>:
-				</strong> <br/>- View the last 20 lines of the file: 
-				<pre><code>tail -n 20 large_file.txt</code></pre></li>
-
-				<li><strong>Monitor a log file with <code>tail
-							-f</code>:
-				</strong> <br/> - If you have a log file, use: 
-				<pre><code>tail -f log_file.txt</code></pre> 
-				- This will allow you to see updates to the log file in real-time.
-				</li>
-			</ol>
-
-			<!-- 
-    <h3>Expected Outcome:</h3>
-    <ul>
-        <li>Participants should be able to efficiently view small and large files using the appropriate commands.</li>
-        <li>They will learn how to scroll through large files using <code>less</code>, view the first few lines with <code>head</code>, and view the last few lines with <code>tail</code>.</li>
-        <li>By the end of the activity, they should feel comfortable using these commands to handle large datasets or logs in bioinformatics tasks.</li>
-    </ul> -->
-		</section>
-		<section id="compressed">
-			<h2>🗜️ Handling Compressed Files</h2>
-			<p>Bioinformatics datasets often come as compressed archives. Use
-				the following commands to unpack them:</p>
-
-			<table border="1" cellpadding="8" cellspacing="0"
-				style="border-collapse: collapse; width: 100%;">
-				<thead>
-					<tr>
-						<th>Command</th>
-						<th>Description</th>
-						<th>Example</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td><code>unzip</code></td>
-						<td>Extract files from a <code>.zip</code> archive
-						</td>
-						<td><code>unzip samples.zip</code></td>
-					</tr>
-					<tr>
-						<td><code>tar -xvf</code></td>
-						<td>Extract contents from a <code>.tar</code> archive
-						</td>
-						<td><code>tar -xvf archive.tar</code></td>
-					</tr>
-					<tr>
-						<td><code>tar -xzvf</code></td>
-						<td>Extract a <code>.tar.gz</code> (gzip-compressed tar)
-						</td>
-						<td><code>tar -xzvf genome.tar.gz</code></td>
-					</tr>
-					<tr>
-						<td><code>tar -xjvf</code></td>
-						<td>Extract a <code>.tar.bz2</code> (bzip2-compressed tar)
-						</td>
-						<td><code>tar -xjvf data.tar.bz2</code></td>
-					</tr>
-					<tr>
-						<td><code>gunzip</code></td>
-						<td>Unzip a single <code>.gz</code> file
-						</td>
-						<td><code>gunzip reads.fastq.gz</code></td>
-					</tr>
-				</tbody>
-			</table>
-		</section>
+		
 		<section id="bioinformatics-file-formats">
 			<h2>Bioinformatics File Formats</h2>
 			<p>Bioinformatics relies on various file formats to store and
@@ -1269,6 +1267,7 @@ strong {
 					variations.</dd>
 			</dl>
 		</section>
+		
 		<section id="pattern-matching">
 			<h2>🔎 Pattern Matching in Bash</h2>
 
@@ -1553,7 +1552,62 @@ strong {
 			</table>
 		</section>
 
-		<section id="io-redirection">
+		<section id="shell-scripting">
+			<h2>Shell Scripting</h2>
+			<p>Shell scripting allows you to automate tasks by writing a
+				series of commands in a text file, known as a script. To execute a
+				shell script, you need to ensure it has the appropriate permissions
+				and then run it using the terminal.</p>
+			<h3>Creating a Shell Script</h3>
+			<ol>
+				<li>Create a new file with a <code>.sh</code> extension. For
+					example: 
+					<pre><code>nano myscript.sh</code></pre>
+				</li>
+				<li>Add the shebang line at the top to specify the interpreter:
+					<pre><code>#!/bin/bash</code></pre>
+				</li>
+				<li>Write your desired commands below the shebang line. For
+					example: <pre>
+<code>#!/bin/bash
+echo "Hello, World!"</code>
+</pre>
+				</li>
+				<li>Save and exit the editor (in nano, press <code>Ctrl+O</code>
+					to save and <code>Ctrl+X</code> to exit).
+				</li>
+			</ol>
+			<h3>Changing File Permissions to Execute</h3>
+			<p>
+				Before running the script, you need to make it executable. Use the
+				<code>chmod</code>
+				command:
+			</p>
+			<pre><code>chmod +x myscript.sh</code></pre>
+			<p>This command grants execute permission to the script, allowing
+				it to be run as a program.</p>
+			<h3>Running the Script</h3>
+			<p>To execute the script, use one of the following methods:</p>
+			<ul>
+				<li>Run the script from the current directory: 
+				<pre><code>./myscript.sh</code></pre>
+				</li>
+				<li>Specify the full path to the script: 
+				<pre><code>/path/to/myscript.sh</code></pre>
+				</li>
+				<li>Use the <code>bash</code> command to run the script
+					(execute permission not required in this case): 
+					<pre><code>bash myscript.sh</code></pre>
+				</li>
+			</ul>
+			<p>
+				Ensure that the script is located in a directory included in your
+				system's
+				<code>PATH</code>
+				environment variable if you wish to run it without specifying the
+				path.
+			</p>
+		</section><section id="io-redirection">
 			<h2>I/O Redirection</h2>
 			<p>In Linux, command-line programs typically receive input from
 				the keyboard (standard input) and display output on the screen
@@ -1830,9 +1884,8 @@ strong {
 			<h3>Types of Shell Expansion</h3>
 			<ol>
 				<li><strong>Brace Expansion:</strong> Generates arbitrary
-					strings. For example: 
-					<pre><code>echo file{1..3}.txt</code></pre>
-					Output: <pre><code>file1.txt file2.txt file3.txt</code></pre>
+					strings. For example: <pre><code>echo file{1..3}.txt</code></pre> Output: 
+					<pre><code>file1.txt file2.txt file3.txt</code></pre>
 					</li>
 				<li><strong>Tilde Expansion:</strong> Replaces the tilde (~)
 					with the path to the home directory. For example: 
@@ -1844,13 +1897,15 @@ strong {
 					Outputs the path of the home directory.</li>
 				<li><strong>Command Substitution:</strong> Replaces a command
 					with its output. For example: 
-					<pre><code>echo "Today is $(date)"</code></pre>
-					Might output: 
-					<pre><code>Today is Thu May 8 14:58:57 PHT 2025</code></pre>
-					</li>
+					<pre><code>echo "Today is $(date)"</code></pre> 
+					Might output:
+					 <pre><code>Today is Thu May 8 14:58:57 PHT 2025</code></pre>
+					 </li>
 				<li><strong>Arithmetic Expansion:</strong> Evaluates arithmetic
-					expressions. For example: <pre><code>echo $((3 + 2))</code></pre> 
-					Outputs: <pre><code>5</code></pre>
+					expressions. For example: 
+					<pre><code>echo $((3 + 2))</code></pre> 
+					Outputs: 
+					<pre><code>5</code></pre>
 					</li>
 				<li><strong>Word Splitting:</strong> Splits the result of
 					expansions into separate words based on the Internal Field
@@ -1883,62 +1938,7 @@ three</code></pre></li>
 				expansion can be the input for the next.</p>
 		</section>
 
-		<section id="shell-scripting">
-			<h2>Shell Scripting</h2>
-			<p>Shell scripting allows you to automate tasks by writing a
-				series of commands in a text file, known as a script. To execute a
-				shell script, you need to ensure it has the appropriate permissions
-				and then run it using the terminal.</p>
-			<h3>Creating a Shell Script</h3>
-			<ol>
-				<li>Create a new file with a <code>.sh</code> extension. For
-					example: 
-					<pre><code>nano myscript.sh</code></pre>
-				</li>
-				<li>Add the shebang line at the top to specify the interpreter:
-					<pre><code>#!/bin/bash</code></pre>
-				</li>
-				<li>Write your desired commands below the shebang line. For
-					example: 
-					<pre>
-<code>#!/bin/bash
-echo "Hello, World!"</code></pre>
-				</li>
-				<li>Save and exit the editor (in nano, press <code>Ctrl+O</code>
-					to save and <code>Ctrl+X</code> to exit).
-				</li>
-			</ol>
-			<h3>Changing File Permissions to Execute</h3>
-			<p>
-				Before running the script, you need to make it executable. Use the
-				<code>chmod</code>
-				command:
-			</p>
-			<pre><code>chmod +x myscript.sh</code></pre>
-			<p>This command grants execute permission to the script, allowing
-				it to be run as a program.</p>
-			<h3>Running the Script</h3>
-			<p>To execute the script, use one of the following methods:</p>
-			<ul>
-				<li>Run the script from the current directory: 
-				<pre><code>./myscript.sh</code></pre>
-				</li>
-				<li>Specify the full path to the script: 
-				<pre><code>/path/to/myscript.sh</code></pre>
-				</li>
-				<li>Use the <code>bash</code> command to run the script
-					(execute permission not required in this case): 
-					<pre><code>bash myscript.sh</code></pre>
-				</li>
-			</ul>
-			<p>
-				Ensure that the script is located in a directory included in your
-				system's
-				<code>PATH</code>
-				environment variable if you wish to run it without specifying the
-				path.
-			</p>
-		</section>
+		
 
 		<section id="environment-variables">
 			<h2>Environment Variables</h2>
@@ -1981,7 +1981,8 @@ echo "Hello, World!"</code></pre>
 							shells.</li>
 						<li><code>~/.bash_profile</code>: Loaded for login shells.</li>
 					</ul> Add the export statement to one of these files: 
-					<pre><code>export VARIABLE_NAME="value"</code></pre> Then, apply the changes: 
+					<pre><code>export VARIABLE_NAME="value"</code></pre> 
+					Then, apply the changes: 
 					<pre><code>source ~/.bashrc</code></pre>
 				</li>
 				<li>System-wide variables (affect all users):
@@ -1991,9 +1992,11 @@ echo "Hello, World!"</code></pre>
 						<li><code>/etc/profile</code> or scripts in <code>/etc/profile.d/</code>:
 							Used for more complex configurations.</li>
 					</ul> Example of adding a variable to <code>/etc/environment</code>: 
-<pre><code>sudo nano /etc/environment 
+					<pre>
+						<code>sudo nano /etc/environment 
 # Add the line:
-VARIABLE_NAME="value"</code></pre> After editing, apply the changes: 
+VARIABLE_NAME="value"</code>
+</pre> After editing, apply the changes: 
 					<pre><code>source /etc/environment</code></pre>
 				</li>
 			</ul>
@@ -2086,7 +2089,8 @@ VARIABLE_NAME="value"</code></pre> After editing, apply the changes:
 			<pre>
 <code>if [ -f ~/.bashrc ]; then
       . ~/.bashrc
-fi</code></pre>
+fi</code>
+			</pre>
 			<p>
 				This ensures that the configurations in
 				<code>.bashrc</code>
