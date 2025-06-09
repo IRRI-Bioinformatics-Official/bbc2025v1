@@ -957,6 +957,50 @@ strong {
 					</li>
 			</ol>
 		</section>
+		<section id="file-permission">
+  <h2>File Permission and Ownership</h2>
+  <p>
+    In Linux, every file and directory has associated permissions and an owner. These define who can read, write, or execute the file.
+  </p>
+
+  <h3>Permission Structure</h3>
+  <p>
+    File permissions are displayed using symbols like <code>-rwxr-xr--</code>:
+  </p>
+  <ul>
+    <li>The first character indicates type (<code>-</code> for files, <code>d</code> for directories)</li>
+    <li>The next 3 characters are for the owner</li>
+    <li>The next 3 are for the group</li>
+    <li>The last 3 are for others</li>
+  </ul>
+
+  <h3>Common Commands</h3>
+  <ul>
+    <li><code>chmod</code> – change permissions</li>
+    <li><code>chown</code> – change file ownership</li>
+    <li><code>chgrp</code> – change group ownership</li>
+  </ul>
+
+  <h3>Examples</h3>
+  <ul>
+    <li><code>chmod 755 file.sh</code> — sets read/write/execute for owner, read/execute for others</li>
+    <li><code>chown user file.txt</code> — changes owner to <code>user</code></li>
+    <li><code>chown user:group file.txt</code> — changes both owner and group</li>
+  </ul>
+
+  <h3>Octal Values</h3>
+  <p>
+    Each permission can be represented numerically:
+  </p>
+  <ul>
+    <li><code>7</code> = read + write + execute (rwx)</li>
+    <li><code>6</code> = read + write (rw-)</li>
+    <li><code>5</code> = read + execute (r-x)</li>
+    <li><code>4</code> = read only (r--)</li>
+    <li><code>0</code> = no permission (---)</li>
+  </ul>
+</section>
+		
 		<section id="viewing">
 			<h2>Viewing Files in Linux (via WSL, Linux, or macOS)</h2>
 			<p>In bioinformatics, you often deal with large datasets, and
