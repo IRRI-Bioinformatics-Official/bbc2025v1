@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Linux Homework: Bioinformatics Basics</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2em;
+      line-height: 1.6;
+    }
+    code {
+      background: #f4f4f4;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    pre {
+      background: #f0f0f0;
+      padding: 1em;
+      border-left: 4px solid #ccc;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 1em;
+    }
+    th, td {
+      border: 1px solid #999;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background: #ddd;
+    }
+    h2 {
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 0.2em;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📝 Linux Homework: Bioinformatics Basics</h1>
+
+  <section>
+    <h2>🔧 Objectives</h2>
+    <ul>
+      <li>Practice file and directory management</li>
+      <li>Navigate the Linux filesystem</li>
+      <li>View file contents</li>
+      <li>Compress and extract folders</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>📁 Part 1: Setup</h2>
+    <p>Run the following commands in your terminal:</p>
+    <pre><code>mkdir bio_hw
+cd bio_hw
+mkdir raw processed results scripts
+touch raw/sample1.fastq raw/sample2.fasta
+touch scripts/run.sh scripts/clean.sh</code></pre>
+  </section>
+
+  <section>
+    <h2>📂 Part 2: File Navigation</h2>
+    <p>Try these commands and observe the output:</p>
+    <pre><code>pwd
+ls
+cd raw
+ls
+cd ..
+ls -R</code></pre>
+    <p><strong>Question:</strong> What is the full path to <code>sample1.fastq</code>?</p>
+  </section>
+
+  <section>
+    <h2>📄 Part 3: File Management</h2>
+    <p>Move, copy, and rename files:</p>
+    <pre><code>mv raw/sample2.fasta processed/
+cp raw/sample1.fastq results/
+mv scripts/clean.sh scripts/cleanup.sh</code></pre>
+  </section>
+
+  <section>
+    <h2>👁️ Part 4: Viewing Files</h2>
+    <p>Try the following:</p>
+    <pre><code>cat raw/sample1.fastq
+head raw/sample1.fastq
+file raw/sample1.fastq</code></pre>
+    <p><strong>Question:</strong> What do these commands show for an empty file?</p>
+  </section>
+
+  <section>
+    <h2>📦 Part 5: Compression</h2>
+    <p>Compress your folder:</p>
+    <pre><code>zip -r bio_hw.zip bio_hw/
+tar -czvf bio_hw.tar.gz bio_hw/</code></pre>
+    <p>Decompress your archives:</p>
+    <pre><code>unzip bio_hw.zip
+tar -xzvf bio_hw.tar.gz</code></pre>
+  </section>
+
+  <section>
+    <h2>📋 Summary Table</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Format</th>
+          <th>Compress</th>
+          <th>Decompress</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>.zip</td>
+          <td><code>zip -r file.zip folder/</code></td>
+          <td><code>unzip file.zip</code></td>
+        </tr>
+        <tr>
+          <td>.tar.gz</td>
+          <td><code>tar -czvf file.tar.gz folder/</code></td>
+          <td><code>tar -xzvf file.tar.gz</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>✅ Self-Check</h2>
+    <ul>
+      <li>Can you describe what <code>mv</code>, <code>cp</code>, <code>ls</code>, and <code>cat</code> do?</li>
+      <li>What happens when viewing an empty file?</li>
+      <li>Which compression method made the smallest archive?</li>
+    </ul>
+  </section>
+
+</body>
+</html>
