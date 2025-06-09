@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Basic Linux Course</title>
+<title>Basic NGS Data Analysis</title>
 <style>
 body {
 	font-family: Arial, sans-serif;
@@ -32,6 +32,9 @@ html, body {
 	border-radius: 8px;
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 	z-index: 1000;
+
+  max-height: 100vh; /* Restrict height to the viewport */
+	overflow-y: auto; /* Enable vertical scroll */
 }
 
 #toc h2 {
@@ -147,6 +150,23 @@ strong {
     padding: 1rem;
   }
 
+  #copy-btn {
+	margin-top: 10px;
+	cursor: pointer;
+	position: absolute;
+	top: 10px; /* Position the button at the top */
+	right: 10px; /* Position the button at the right */
+	border: 0px;
+	background: #369136;
+	padding: 5px;
+	border-radius: 5px;
+	color: white;
+}
+
+#copy-btn:hover {
+	background-color: #45a049;
+}
+
   pre, code {
     font-size: 0.85em;
   }
@@ -176,8 +196,32 @@ strong {
 
     window.addEventListener("resize", checkScreenWidth);
     checkScreenWidth();
+    
+    const copyButtons = document.querySelectorAll('.copy-btn');
+    
+    copyButtons.forEach(button => {
+        button.addEventListener("click", function() {
+            // Find the associated command text (inside the <code> tag)
+            const commandText = button.previousElementSibling.innerText;
+
+            // Create a temporary input to copy the command text
+            const tempInput = document.createElement("input");
+            tempInput.value = commandText;
+            document.body.appendChild(tempInput);
+
+            // Select the text and copy it
+            tempInput.select();
+            document.execCommand("copy");
+
+            // Remove the temporary input
+            document.body.removeChild(tempInput);
+
+            button.textContent = "Copied";
+        });
+    });
   });
 </script>
+
 
 </head>
 <body>
@@ -198,29 +242,235 @@ strong {
   </script>
 	<!-- Floating Table of Contents -->
 	<div id="toc">
-		<h2>Day 1:</h2>
+		<h2>Outline:</h2>
 		<ul>
-			<li><a href="#" data-target="overview">i. Overview</a></li>
-			<!-- <li><a href="#" data-target="os">I. Operating Systems</a></li>
-			<li><a href="#" data-target="why-linux">II. Why Linux is
-					Important in Bioinformatics</a></li>
-			<li><a href="#" data-target="linux-better">III. Why Linux is
-					Better Than GUI (Graphical User Interface) Tools</a></li>
-			<li><a href="#" data-target="filesystem">IV. Filesystem
-					Navigation </a></li>
-			<li><a href="#" data-target="filemanagement">V. File
-					Management</a></li>
-			<li><a href="#" data-target="viewing">VI. Viewing Files in
-					Linux</a></li>
-			<li><a href="#" data-target="compressed">VII. Handling
-					Compressed File</a></li>
-			<li><a href="#" data-target="quiz">VIII. Activity</a></li>
-			 -->
-			<li><a
+<ul>
+  <details><summary><strong>Day 1</strong></summary>
+    <ul>
+    <li><a href="#" onclick="toggleSection('Day1VC')">1. Variant Calling</a>
+    <ul id="Day1VC" style="display: none; margin-left: 15px;">  
+
+  <li><a href="#overview">i. Overview</a></li>
+  
+  <li>
+    <a href="#" onclick="toggleSection('variant-calling-sub')">ii. Introduction</a>
+    <ul id="variant-calling-sub" style="display: none; margin-left: 15px;">
+      <li><a href="#S1">Learning Objectives</a></li>
+      <li><a href="#VC">Variant Calling</a></li>
+      <li><a href="#S2">Tools</a></li>
+
+      <li>
+        <a href="#" onclick="toggleSection('input-sub')">Input Files</a>
+        <ul id="input-sub" style="display: none; margin-left: 15px;">
+          <li><a href="#fastq">Raw reads</a></li>
+		  <li><a href="#fasta">Reference</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="#" onclick="toggleSection('int-sub')">Intermediate Files</a>
+        <ul id="int-sub" style="display: none; margin-left: 15px;">
+          <li><a href="#sam">SAM</a></li>
+		  <li><a href="#bam">BAM</a></li>
+		  <li><a href="#bai">Index</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="#" onclick="toggleSection('out-sub')">Output File</a>
+        <ul id="out-sub" style="display: none; margin-left: 15px;">
+          <li><a href="#S5">VCF</a></li>
+        </ul>
+      </li>
+	
+    </ul>
+  </li>
+
+  <li>
+    <a href="#" onclick="toggleSection('workflows-sub')">iii. Workflow</a>
+    <ul id="workflows-sub" style="display: none; margin-left: 15px;">
+      <li><a href="#S6">Pipeline</a></li>
+
+      <li>
+        <a href="#" onclick="toggleSection('ref-read-sub')">Reference Data Preparation</a>
+        <ul id="ref-read-sub" style="display: none; margin-left: 15px;">
+              <li><a href="#S17">bwa index</a></li>
+              <li><a href="#S18">samtools faidx</a></li>
+              <li><a href="#S19">picard CreateSequenceDictionary</a></li>
+        </ul>
+      </li>
+      
+      <li>
+        <a href="#" onclick="toggleSection('raw-read-sub')">Raw Read Preparation</a>
+        <ul id="raw-read-sub" style="display: none; margin-left: 15px;">
+          <li><a href="#S9">Quality Check</a></li>
+		  <li><a href="#S10">Cleaning of reads</a></li>
+        </ul>
+      </li>
+
+	  <li><a href="#S11">Alignment</a></li>
+		<li><a href="#S12">SortSam</a></li>
+		<li><a href="#S13">Fix mate info</a></li>
+		<li><a href="#S14">Add read group information</a></li>
+		<li><a href="#S15">Mark Duplicates</a></li>
+    <li><a href="#S22">Merging BAM files</a></li>
+		<li><a href="#S16">Variant Calling</a></li>
+    <li><a href="#S20">Merging GVCFs</a></li>
+    <li><a href="#S21">Genotyping</a></li>    
+    </ul>
+  </li>
+  </li></ul>
+
+  <li>
+<a href="#" onclick="toggleSection('Day2VCFE')">2. VCF Exploration</a>
+    <ul id="Day2VCFE" style="display: none; margin-left: 15px;"> 
+       <li><a href="#DS0">i. Motivation</a></li>
+ <li>
+        <a href="#" onclick="toggleSection('VCFfilestructure')">ii. VCF File</a>
+        <ul id="VCFfilestructure" style="display: none; margin-left: 15px; list-style-type: disc;">
+          <li><a href="#DS1">Structure</a></li>
+          <li><a href="#DS2">Header Section</a></li>
+	  <li><a href="#DS3">Data Section</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="#" onclick="toggleSection('Annot')">iii. QC Annotations</a>
+        <ul id="Annot" style="display: none; margin-left: 15px; list-style: disc;">
+          <li><a href="#DS4">Overview</a></li>
+          <li><a href="#DS5">QUAL</a></li>
+	  <li><a href="#DS6">Read Depth</a></li>
+          <li><a href="#DS7">Quality-by-Depth</a></li>
+          <li><a href="#DS8">MQ and MQ0</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="#" onclick="toggleSection('AFannot')">iv. Allele Frequency Annotations</a>
+        <ul id="AFannot" style="display: none; margin-left: 15px; list-style: disc;">
+          <li><a href="#DS9">AN, AC, AF</a></li>
+          <li><a href="#DS10">Filtering</a></li>
+        </ul>
+      </li>
+
+      <li><a href="#DS11">v. Base Calling Errors</a></li>
+      <li><a href="#DS12">vi. Alignment Errors</a></li>
+
+      <li>
+        <a href="#" onclick="toggleSection('het')">vii. Heterozygosity</a>
+        <ul id="het" style="display: none; margin-left: 15px; list-style: disc;">
+          <li><a href="#DS13">Overview</a></li>
+          <li><a href="#DS14">AF vs heterozygosity</a></li>
+          <li><a href="#DS15">SNP heterozygosity</a></li>
+          <li><a href="#DS16">Filtering</a></li>
+        </ul>
+      </li>
+
+      <li><a href="#DS17">viii. Hardy-Weinberg</a></li>
+      <li><a href="#DS18">ix. Take-away</a></li>
+</li>
+</ul></ul></details>
+
+
+  <details><summary><strong>Day 2</strong></summary>
+    <ul>
+    <li><a href="#" onclick="toggleSection('Day2VCHO')">VC Hands-on</a>
+    <ul id="Day2VCHO" style="display: none; margin-left: 15px;">  
+  <li>
+    <a href="#" onclick="toggleSection('workflows-sub2')">Workflow</a>
+    <ul id="workflows-sub2" style="display: none; margin-left: 15px;">
+      <li><a href="#AS6">Pipeline</a></li>
+
+      <li>
+        <a href="#" onclick="toggleSection('prep-sub')">Preparation and Data Import</a>
+        <ul id="prep-sub" style="display: none; margin-left: 15px;">
+          <li><a href="#AS1">Data Preparation</a></li>
+		      <li><a href="#AS2">Create Output Directory</a></li>
+        </ul>
+      </li>      
+
+      <li>
+        <a href="#" onclick="toggleSection('ref-read-sub')">Reference Data Preparation</a>
+        <ul id="ref-read-sub" style="display: none; margin-left: 15px;">
+              <li><a href="#AS17">bwa index</a></li>
+              <li><a href="#AS18">samtools faidx</a></li>
+              <li><a href="#AS19">picard CreateSequenceDictionary</a></li>
+        </ul>
+      </li>
+      
+      <li>
+        <a href="#" onclick="toggleSection('raw-read-sub')">Raw Read Preparation</a>
+        <ul id="raw-read-sub" style="display: none; margin-left: 15px;">
+          <li><a href="#AS9">Quality Check</a></li>
+		      <li><a href="#AS10">Cleaning of reads</a></li>
+        </ul>
+      </li>
+
+	  	<li><a href="#AS11">Alignment</a></li>
+		<li><a href="#AS12">SortSam</a></li>
+		<li><a href="#AS13">Fix mate info</a></li>
+		<li><a href="#AS14">Add read group information</a></li>
+		<li><a href="#AS15">Mark Duplicates</a></li>
+    <li><a href="#AS20">Merging BAM</a></li>
+		<li><a href="#AS16">Variant Calling</a></li>
+    <li><a href="#AS21">Merging GVCFs</a></li>
+    <li><a href="#AS22">Genotyping</a></li>
+    </ul>
+  
+    			<li><a
+				href="https://drive.google.com/file/d/13-6c0lKjxG-rGj_HTqmlNe76S8Q5kQJ6/view?usp=sharing"
+				target="blank">Cheat Sheet</a></li>
+  </li>
+
+
+
+
+    </ul></li></ul>
+  
+  </details>
+
+
+<details><summary><strong>Day 3</strong></summary>
+    <li><a href="#" onclick="toggleSection('Day2VEHO')">VCF Exploration Hands-on</a>
+    <ul id="Day2VEHO" style="display: none; margin-left: 15px;">  
+        <li>
+      <li><a href="#ZS0">Files</a></li>
+      <li><a href="#ZS1">BCFTools</a></li>
+      <li><a href="#ZS2">Exploring VCF</a></li>
+      <li><a href="#ZS3">BCFTools Query</a></li>
+      <li><a href="#ZS4">Exploring BAM files</a></li>
+      <li><a href="#ZS5">Understanding Alignment Metadata</a></li>
+      <li><a href="#ZS6">Interactive Text Viewer</a></li>
+      <li><a href="#ZS7">Module Summary</a></li>
+      <li><a href="#ZS8">References</a></li>
+  </li>
+  
+</details>
+
+
+
+
+</li>
+</ul>
+
+
+<script>
+  function toggleSection(id) {
+    const section = document.getElementById(id);
+    if (section.style.display === "none") {
+      section.style.display = "block";
+    } else {
+      section.style.display = "none";
+    }
+  }
+</script>
+
+			
+			<!--<li><a
 				href="main_c.html"
-				target="blank">IX. Cheat Sheet</a></li>
+				target="blank">iv. Cheat Sheet</a></li>-->
 		</ul>
-	</div>
+	</div> 
 
 
 	<!-- Main Content -->
@@ -228,762 +478,2724 @@ strong {
 		<button id="toggleToc" style="display: none;">☰ Table of Contents</button>
 		
 		<section id="overview">
-			<h2>🧭 Training Overview: Linux Basics, Filesystem, and Shell
-				Navigation</h2>
+			<h1 style="text-align:center; font-size:200%" >Basic NGS Data Analysis </h1> 
+			
 
-			<h3>🎯 Topic</h3>
-			<p>Linux Basics, Filesystem, and Shell Navigation</p>
+			<h3>🎯  Module Introduction: </h3>
+			<p  style="text-align:justify;">In this module, you will be introduced to the fundamental principles of analyzing Next-Generation Sequencing (NGS) data. The course begins with an overview of various NGS technologies and the types of data they generate. Following this, you will learn how to identify Single Nucleotide Polymorphisms (SNPs) within resequencing datasets. The module also covers essential quality control measures, techniques for filtering erroneous data, and basic statistical analyses to interpret the biological significance of the identified SNPs. </p>.
+		</section>	
 
-			<h3>👥 Target Audience</h3>
-			<p>Beginners in bioinformatics — no prior Linux experience
-				required.</p>
+		<section id="S1">
+			<h3> Section 1: Variant Calling </h3> 
 
-			<h3>🏁 Goal</h3>
-			<p>Help participants become comfortable using the Linux terminal
-				and executing essential file and folder commands commonly used in
-				bioinformatics workflows.</p>
+
+			<h4>🏁 Learning Objectives:</h4>
+			<ol>
+				<li>To develop proficiency in utilizing the Genome Analysis Toolkit (GATK) workflow for variant calling</li>
+			    <li>To understand the process of preparing raw data to meet the specifications of the GATK workflow </li>
+            	<li>Apply knowledge gained from GATK variant calling workflow to effectively identify and characterize genetic variants, including single nucleotide polymorphisms (SNPs) and small insertions/deletions (indels) </li>
+		</ol>
 		</section>
 
-		<!--  
-		<section id="os">
-			<h2>Understanding Operating Systems for Bioinformatics</h2>
-			<p>
-				When working with bioinformatics tools, it's essential to understand
-				the differences between operating systems (OS) like <strong>Windows</strong>,
-				<strong>Linux</strong>, and <strong>macOS</strong>, as well as how
-				to bridge the gap between them using tools like <strong>WSL
-					(Windows Subsystem for Linux)</strong>.
-			</p>
+    <section id="VC">
+      <h3>Variant Calling</h3>
+        <ul>
+          <li><strong>Definition</strong></li>
+          <ul style="list-style-type: disc;"><li>Variant calling is the process of identifying genetic variations (such as SNPs and indels) in a sample by comparing it against a reference genome.</li></ul>
+           <br>
+          <li><strong>Purpose</strong></li>
+          <ul style="list-style-type: disc;"><li>To detect differences between sequenced data and the reference genome, which may indicate important genetic variations related to traits, diseases, or evolutionary processes.</li></ul>
+           <br>
+          <li><strong>Applications</strong></li>
+          <ul style="list-style-type: disc;">
+            <li>Understanding genetic diversity</li>
+            <li>Identifying genes associated with traits</li>
+            <li>Improving rice breeding</li>
+          </ul>
+        </ul>
+    </section>		
 
-			<h3>1. Windows vs. Linux vs. macOS</h3>
-			<ul>
-				<li><strong>Windows</strong> is a popular OS for general use
-					and is often used in corporate environments. While it has GUI-based
-					tools, it can be limiting when working with command-line-heavy
-					bioinformatics workflows. Many bioinformatics tools are not
-					natively supported on Windows, requiring workarounds like WSL or
-					virtual machines.</li>
-				<li><strong>Linux</strong> is the preferred OS for
-					bioinformatics because it offers superior performance, stability,
-					and extensive command-line tools designed specifically for
-					computational tasks and data analysis. Most bioinformatics software
-					is optimized for Linux.</li>
-				<li><strong>macOS</strong> is similar to Linux in terms of
-					underlying architecture (both are Unix-based), so many
-					bioinformatics tools that run on Linux can also run on macOS. It's
-					often preferred by researchers who need a balance of ease of use
-					(macOS GUI) and command-line functionality. It offers strong
-					support for development environments and bioinformatics software,
-					though some specialized Linux tools might require additional setup.</li>
+		
+		<section id="S2">
+			<h3>Tools: </h3>
+			<ol>
+				<li><b><a href="http://bio-bwa.sourceforge.net" target="_blank"><strong>BWA</strong></a></b> 
+					<br>A software package for mapping low-divergent sequences against a large reference genome
+				</li>
+				<li><b><a href="https://gatk.broadinstitute.org/hc/en-us" target="_blank"><strong>Genome Analysis Toolkit (GATK)</strong></a></b> 
+					<br>Offers a wide variety of tools with primary focus on variant discovery and genotyping
+				</li>
+				<li><b><a href="https://github.com/OpenGene/fastp" target="_blank"><strong>FastP</strong></a></b> 
+					<br>A tool designed to provide fast all-in-one preprocessing for FastQ files
+				</li>
+				<li><b><a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/" target="_blank"><strong>FastQC</strong></a></b> 
+					<br> A quality control tool for high throughput sequence data
+				</li>
+				<li><b><a href="http://broadinstitute.github.io/picard/" target="_blank"><strong>Picard</strong></a></b> 
+					<br>A set of command line tools for manipulating high-throughput sequencing data
+				</li>
+				<li><b><a href="http://samtools.sourceforge.net" target="_blank"><strong>SAMtools</strong></a></b> 
+					<br>Tool that provides various utilities for manipulating alignments in the SAM and BAM formats
+				</li>
 			</ul>
+		</section>
 
-			<h3>2. Windows Subsystem for Linux (WSL)</h3>
-			<ul>
-				<li><strong>WSL</strong> allows Windows users to run a Linux
-					environment directly on top of Windows without the need for
-					dual-booting or using virtual machines.</li>
-				<li>WSL provides a full Linux kernel, enabling users to install
-					and run popular bioinformatics tools that are typically only
-					available on Linux.</li>
-				<li><strong>Advantages of WSL:</strong></li>
+		<section id="S3">
+			<h3>Input Files: </h3>
+			<ol>
+				<li id="fastq"><b>Raw reads</b> 
+					<ul>
+						<li><strong>Format:</strong> <code>FASTQ (.fq, .fastq, .fastq.gz)</code></li>
+						<li><strong>FASTQ:</strong> Used to store both the nucleotide sequence data and quality scores </li>
+							<ul>
+								<li><strong>1st line:</strong> Sequence identifier</li>
+								<li><strong>2nd line:</strong> Sequence</li>
+								<li><strong>3rd line:</strong> Quality score identifier</li>
+								<li><strong>4th line:</strong> Base quality scores</li>
+							</ul>
+						<img src="m2files/fastq.png" width="750" height="300">
+
+					</ul>
+				
+					<li id="fasta" style="text-align:justify; margin-top: 30px !important;"><b>Reference</b> 
+					<ol type="a">
+						<li><strong>Format:</strong><code>FASTA (.fasta, .fa, .fsa)</code></li>
+						<li><strong>FASTA:</strong> A text-based format for representing collections of nucleotide or protein sequences. The file consists of several blocks, each containing a header line and sequence lines. Typically, each block contains a sequence of a whole chromosome or a contig. </li>
+							<ul>
+								<li><strong>Line 1:</strong> A header line starting with a <code>></code> character, which contains information about the sequence.</li>
+								<li><strong>Line 2:</strong> Sequence (can occupy several lines)</li>
+							</ul>
+						<img src="m2files/fasta.png" width="750" height="300">
+					</ol>
+		</section>
+
+<section id="S4">
+  <h3>Intermediate Files:</h3>
+  <ol>
+    <li>
+      <b id="sam">Sequence Alignment/Map Format (SAM)</b>
+      <ul>
+        <li>a. Format for storing large nucleotide sequence alignments</li>
+        <li>b. A <code>.sam</code> file consists of two sections:
+          <ul>
+            <li><strong>Header</strong> (lines starting with <code>@</code>): Contains metadata about the reference genome and alignment process.</li>
+            <li><strong>Alignment section</strong>: Contains one line per read, describing its alignment to the reference.</li>
+          </ul>
+
+          <p><strong>Example <code>.sam</code> content:</strong></p>
+          <pre><code>@HD	VN:1.6	SO:coordinate
+@SQ	SN:chr1	LN:248956422
+@PG	ID:bwa	PN:bwa	VN:0.7.17-r1188
+read123	0	chr1	1000	60	100M	*	0	0	ACGTACGT...	TGCAACGT...
+read456	16	chr1	1050	60	100M	*	0	0	TGCAGTCA...	ACGTTGCA...
+</code></pre>
+
+          <p>Explanation of fields in alignment lines (tab-delimited):</p>
+          <ol>
+            <li><strong>QNAME</strong>: Query name (e.g., read ID)</li>
+            <li><strong>FLAG</strong>: Bitwise flag describing the read (e.g., strand, pairing)</li>
+            <li><strong>RNAME</strong>: Reference sequence name (e.g., chr1)</li>
+            <li><strong>POS</strong>: 1-based position where alignment starts</li>
+            <li><strong>MAPQ</strong>: Mapping quality (0–60, higher is better)</li>
+            <li><strong>CIGAR</strong>: CIGAR string describing alignment (e.g., 100M = 100 matched bases)</li>
+            <li><strong>RNEXT</strong>: Next read's reference name (for paired-end)</li>
+            <li><strong>PNEXT</strong>: Position of the next read (paired-end)</li>
+            <li><strong>TLEN</strong>: Template length</li>
+            <li><strong>SEQ</strong>: Read sequence</li>
+            <li><strong>QUAL</strong>: Quality scores (ASCII-encoded)</li>
+          </ol>
+        </li>
+      </ul>
+    </li>
+
+    <li style="margin-top: 30px !important;">
+      <b id="bam">Binary SAM files (BAM)</b>
+      <ol type="a">
+        <li>Binary version of the SAM format</li>
+        <li>To view the file, use:</li>
+      	<table style="width: 100%; border-collapse: collapse; margin-bottom: 5px;">
+        <tr>
+          <td style="font-family: Courier, monospace; background-color: #f0f0f0; padding: 12px; border: 1px solid #ccc;">
+            <span style="color: #4622a7;">samtools view</span> <span style="color: #0752a8;">[BAMfile]</span>
+          </td>
+        </tr>
+      </table>     
+        <li><a href="https://samtools.github.io/hts-specs/SAMv1.pdf" target="_blank">Specification document (section 4)</a></li>
+        <!--<li><img src="BAM.png" width="620" height="75" alt="BAM format example image"></li>-->
+      </ol>
+    </li>
+
+    <li style="margin-top: 30px !important;">
+      <b id="bai">BAM Index files</b>
+      <ol type="a">
+        <li><code>samtools index</code> – indexes SAM/BAM/CRAM files</li>
+        <li>Syntax:</li>
+       
+
+      	<table style="width: 100%; border-collapse: collapse; margin-bottom: 5px;">
+        <tr>
+          <td style="font-family: Courier, monospace; background-color: #f0f0f0; padding: 12px; border: 1px solid #ccc;">
+            <span style="color: #4622a7;">samtools index</span> 
+            <span style="color: #8d5409;">[options]</span>
+            <span style="color: #0752a8;">[BAMfile]</span>
+          </td>
+        </tr>
+      </table>
+        
+      </ol>
+    </li>
+  </ol>
+</section>
+
+<section id="S5">
+  <h3>Output File:</h3>
+  <ol>
+    <li><b>Variant Call Format (VCF)</b></li>
+      <ol type="a">
+        <li> A file format used to store genetic variants, including their genomic position, reference and alternate alleles, quality scores, 
+          and sample-specific genotype data . It only <strong>lists positions where a variant is present</strong>.</li>
+        <li><a href="https://samtools.github.io/hts-specs/VCFv4.2.pdf" target="_blank">Specification document</a></li>
+        <img src="m2files/vcf.png" width="750" height="auto" alt="VCF format example image">
+      </ol>
+      <br>
+      <li><b>Genomic Variant Call Format (gVCF)</b></li>
+      <ol type="a">
+        <li>A kind of VCF that <strong>includes both variant and non-variant regions</strong>. 
+            It provides information about regions where no variation was found, which helps in later combining data from multiple samples.</li>
+        <img src="m2files/gvcf.png" width="750" height="auto" alt="VCF format example image">
+      </ol>   
+  </ol>
+</section>
+
+
+		<section id="S6">
+			<h3> Section 2: Variant Calling Pipeline </h3> 
+			<h4 style="margin-bottom: 1px !important;">Description</h4>
+			<p style="margin-top: 5px !important;">This is a pipeline for variant calling based on best practices for GATK4</p>
+			<h4 style="margin-bottom: 1px !important;">Requirements and Preparation </h4>
+			<ol style="margin-top: 5px !important;">
+				<li>Ubuntu installation on your laptop/workstation</li>
+				<li>Installation of the necessary tools</li>
+					<ol type="a">
+						<li>BWA, FastP, FastQC, GATK4, Picard, Samtools</li>
+					</ol>
+				<li>Demo dataset</li>
+					<ol type="a">
+						<li><strong>Reference:</strong><code>Ref.fasta</code></li>
+						<li><strong>Data:</strong><code>sample-1_1.fq.gz  sample-1_2.fq.gz</code></li>
+					</ol>
+			</ol>
+    
+      			<h4 style="margin-bottom: 10px !important;">Pipeline</h4>
+		      	<p style="margin-top: 30px !important;"><img src="m2files/workflow.png" width="auto" height="auto"></p>
+		</section>
+			
+
+		<section id="S8">
+			<h4 style="font-size:110%">Reference Data Preparation (Indexing)</h4>	
+				<p style="font-size:108%"><b>Tools:</b> <a href="https://bio-bwa.sourceforge.net/bwa.shtml#3" target="_blank"><strong>bwa index</strong></a>, 
+          <a href="https://www.htslib.org/doc/samtools-faidx.html" target="_blank"><strong>samtools faidx</strong></a>, 
+          <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360036712531-CreateSequenceDictionary-Picard" target="_blank"><strong>picard CreateSequenceDictionary</strong></a></p>
+				<details>
+ 			    <summary><b>Purpose</b></summary>
+				<ul><li><p>Indexing improves the ability of tools to rapidly access random locations of the file. It allows efficient retrieval of sequence data from the FASTA file.</p></li></ul>
+				</details>
+<details>
+  <summary><b>Commands</b></summary>
+  
+  <!--<div style="font-family: Arial, sans-serif; font-size: 14px; margin: 10px 0; line-height: 1.6;">-->
+    <p>The following commands are essential for preparing the reference genome and supporting tools for alignment and variant calling:</p>
+
+    <!-- bwa index Command -->
+	<h4 id="S17" style="font-size:109%; margin-bottom: 5px !important;">BWA Index</h4>
+    <div style="margin-bottom: 15px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 5px; padding: 10px;">
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 5px;">
+        <tr>
+          <td style="font-family: Courier, monospace; background-color: #f0f0f0; padding: 12px; border: 1px solid #ccc;">
+            <span style="color: #4622a7;">bwa index</span> <span style="color: #0752a8;">[Reference.fasta]</span>
+          </td>
+        </tr>
+      </table>
+      <p><strong>bwa index:</strong> This command generates an index for the reference genome. The index allows the aligner (like <span style="color: #0752a8;">bwa</span>) to quickly locate matching sequences during alignment, making the process more efficient.</p>
+	  <p><strong>Output Files:</strong> Several index files are generated in the same directory as the FASTA:</p>
+      <ul style="margin-left: 15px;">
+        <li><code>Ref.fasta.bwt</code></li>
+        <li><code>Ref.fasta.pac</code></li>
+        <li><code>Ref.fasta.ann</code></li>
+        <li><code>Ref.fasta.amb</code></li>
+        <li><code>Ref.fasta.sa</code></li>
+      </ul>
+	  <p>
+  <strong>File descriptions:</strong>
+  <ul>
+    <li><code>.bwt</code> – Burrows-Wheeler Transform of the reference</li>
+    <li><code>.pac</code> – Packed version of the reference sequence</li>
+    <li><code>.ann</code> – Annotation file with contig names and lengths</li>
+    <li><code>.amb</code> – Information about ambiguous bases (Ns)</li>
+    <li><code>.sa</code> – Suffix array used for fast search</li>
+  </ul>
+</p>
+      <p>These files allow <code>bwa</code> to perform fast sequence lookups during read alignment.</p>
+    </div>
+
+    <!-- samtools faidx Command -->
+	<h4 id="S18" style="font-size:109%; margin-bottom: 5px !important;">Samtools faidx</h4>
+    <div style="margin-bottom: 15px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 5px; padding: 10px;">
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 5px;">
+        <tr>
+          <td style="font-family: Courier, monospace; background-color: #f0f0f0; padding: 12px; border: 1px solid #ccc;">
+            <span style="color: #4622a7;">samtools faidx</span> <span style="color: #0752a8;">[Reference.fasta]</span>
+          </td>
+        </tr>
+      </table>
+      <p><strong>samtools faidx:</strong> This command creates an index file (.fai) for the reference FASTA file. This index is required by tools like GATK to quickly access specific sequences from the reference genome during operations like variant calling.</p>
+	    <p><strong>Output:</strong> <code>Ref.fasta.fai</code></p>
+  <p style="margin-top: 8px;">
+    The <code>.fai</code> file is a tab-delimited index
+  </p>
+  <!--
+  <ul style="margin-left: 15px;">
+    <li><strong>Sequence name</strong> (e.g., chromosome)</li>
+    <li><strong>Length</strong> of the sequence</li>
+    <li><strong>Offset</strong> (byte position in the file)</li>
+    <li><strong>Line bases</strong> (number of bases per line in FASTA)</li>
+    <li><strong>Line width</strong> (including newline characters)</li>
+  </ul> -->
+  <p>
+    This index is required by GATK and other tools to reference genome positions directly and efficiently.
+  </p>
+  <p><strong>Example <code>.fai</code> content:</strong></p>
+
+<pre><code>chr1	248956422	52		60	61
+ chr2	242193529	253404903	60	61
+ chr3	198295559	500657153	60	61
+</code></pre>
+
+<p>
+  <strong>Columns:</strong>
+  <ol>
+    <li><strong>Sequence name</strong> (e.g., chr1)</li>
+    <li><strong>Sequence length</strong> in bases</li>
+    <li><strong>Byte offset</strong> of the first base in the FASTA file</li>
+    <li><strong>Line length</strong> of sequence lines in the FASTA</li>
+    <li><strong>Line width </strong> including newline characters</li>
+  </ol>
+</p>
+    </div>
+
+    <!-- picard CreateSequenceDictionary Command -->
+	<h4 id="S19" style="font-size:109%; margin-bottom: 5px !important;">Picard CreateSequenceDictionary</h4>
+    <div style="margin-bottom: 15px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 5px; padding: 10px;">
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 5px;">
+        <tr>
+          <td style="font-family: Courier, monospace; background-color: #f0f0f0; padding: 12px; border: 1px solid #ccc;">
+            <span style="color: #0c0c0c;">java -jar</span> 
+            <span style="color: #4622a7;">$PICARD</span>
+            <span style="color: #4622a7;">CreateSequenceDictionary</span> 
+            <span style="color: #8d5409;">-REFERENCE</span> <span style="color: #0752a8;">[Reference.fasta]</span> 
+            <span style="color: #8d5409;">-OUTPUT</span> <span style="color: #417905;">[Reference.dict]</span>
+          </td>
+        </tr>
+      </table>
+      <p><strong>picard CreateSequenceDictionary:</strong> This command generates a sequence dictionary file (.dict) from the reference FASTA file. This file is required by tools like <strong>GATK</strong> for proper handling of BAM files and ensures that genomic sequences can be accessed correctly during analysis.</p>
+	  <p><strong>Output:</strong> <code>Ref.dict</code></p>
+		<p style="margin-top: 8px;">
+			The <code>.dict</code> file is a text file containing metadata for each sequence (contig) in the FASTA, such as its name, length, and MD5 checksum, allowing tools to validate and synchronize reference data across workflows.
+		</p>
+		<p><strong>Example <code>.dict</code> content:</strong></p>
+
+<pre><code>@HD	VN:1.6	SO:coordinate
+ @SQ	SN:chr1	LN:248956422	M5:6aef897c3d6ff0c78aff06ac189178dd
+ @SQ	SN:chr2	LN:242193529	M5:f98db672eb0993dcfdabafe2a8824adb
+ @SQ	SN:chr3	LN:198295559	M5:3e8bb77c8e8e9d1217c335d58efb8c09
+</code></pre>
+    </div>
+
+  </div>
+</details>
+
+			</section>
+    
+			<section >	
+				<h4 style="font-size:110%; margin-top: 5px !important;">Raw Read Preparation</h4>
+				<ol>
+				<li>
+				<h4 id="S9" style="font-size:109%">Quality Check</h4>
+				<p><b>Tool:</b> <strong>FastQC </strong><a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/" target="_blank">Analysis Modules</a></p>
+				</li>
+				<details>
+ 			    <summary><b>Purpose</b></summary>
+				<ul><li><p>To ensure that subsequent analyses are based on reliable data.</p></li></ul>
+				</details>
+<details>
+  <summary><b>Syntax</b></summary>
+
+  <!-- Command Syntax Table -->
+  <table style="font-family: Courier, monospace; background-color: #f7f7f7; border-collapse: collapse; width: 100%; margin: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 5px;">
+    <tr>
+      <td style="padding: 12px 16px; border: 1px solid #ccc;">
+        <span style="color:#4622a7;">fastqc</span>
+        <span style="color:#0752a8;">[in1.fq]</span>
+        <span style="color:#0752a8;">[in2.fq]</span>
+        <span style="color:#0752a8;">[...inN.fq]</span>
+      </td>
+    </tr>
+  </table>
+
+  <!-- Argument Descriptions -->
+  <div style="font-family: Arial, sans-serif; font-size: 14px; margin: 5px 0 15px 0;">
+    <strong style="color: #333;">Arguments:</strong>
+    <ul style="list-style-type: none; padding-left: 10px; margin: 10px 0;">
+      <li><code style="color:#0752a8;">in1</code>: First input sequence file</li>
+      <li><code style="color:#0752a8;">in2</code>: Second input sequence file</li>
+      <li><code style="color:#0752a8;">...inN</code>: Additional input files for batch QC</li>
+    </ul>
+  </div>
+
+  <!-- Real Command Example -->
+  <details>
+    <summary><b>Command</b></summary>
+    <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+      <tr>
+        <td style="padding: 10px; border: 1px solid #ccc;">
+          fastqc Data/sample-1_1.fq.gz Data/sample-1_2.fq.gz
+        </td>
+      </tr>
+    </table>
+  </details>
+</details>
+
+
+				<details>
+				<summary><b>Output</b></summary>
+				<ul><li>				
+					<p><strong>FastQC Report </strong> - identify potential issues such as adapter contamination, overrepresented sequences, and base quality distribution. </p>
+					<img src="m2files/fastqc-result.png" width="auto" height="auto">
+				</li></ul>
+				</details>
+
+
+				<li>
+				<h4 id="S10" style="font-size:109%">Cleaning</h4>
+				<p><b>Tool:</b><a href="https://github.com/OpenGene/fastp" target="_blank"><strong>FastP</strong></a></p>
+				<details>
+ 			    <summary><b>Functionality</b></summary>
+				<ul><li><p>A fast all-in-one preprocessing tool for removing adapters, filtering, and trimming raw sequencing data</p></li></ul>
+				</details>
+
+<details>
+  <summary><b>Syntax</b></summary>
+
+  <!-- Command Syntax Table -->
+  <table style="font-family: Courier, monospace; background-color: #f7f7f7; border-collapse: collapse; width: 100%; margin: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 5px;">
+    <tr>
+      <td style="padding: 12px 16px; border: 1px solid #ccc;">
+        <span style="color:#4622a7;">fastp</span>
+        <span style="color:#8d5409;">-i</span> <span style="color:#0752a8;">[in1.fq]</span>
+        <span style="color:#8d5409;">-I</span> <span style="color:#0752a8;">[in2.fq]</span>
+        <span style="color:#8d5409;">-o</span> <span style="color:#417905;">[out1.fq]</span>
+        <span style="color:#8d5409;">-O</span> <span style="color:#417905;">[out2.fq]</span>
+      </td>
+    </tr>
+  </table>
+
+  <!-- Argument Descriptions -->
+  <div style="font-family: Arial, sans-serif; font-size: 14px; margin: 5px 0 15px 0;">
+    <strong style="color: #333;">Arguments:</strong>
+    <ul style="list-style-type: none; padding-left: 10px; margin: 10px 0;">
+      <li><code style="color:#8d5409;">-i</code>: Input file for Read 1</li>
+      <li><code style="color:#8d5409;">-I</code>: Input file for Read 2</li>
+      <li><code style="color:#8d5409;">-o</code>: Output cleaned Read 1</li>
+      <li><code style="color:#8d5409;">-O</code>: Output cleaned Read 2</li>
+    </ul>
+  </div>
+
+  <!-- Real Command Example -->
+  <details>
+    <summary><b>Command</b></summary>
+    <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+      <tr>
+        <td style="padding: 10px; border: 1px solid #ccc;">
+          fastp -i Data/sample-1_1.fq.gz -I Data/sample-1_2.fq.gz -o Data/sample-1_1-cleaned.fq.gz -O Data/sample-1_2-cleaned.fq.gz
+        </td>
+      </tr>
+    </table>
+  </details>
+</details>
+				<details>
+				<summary><b>Output</b></summary>
+				<ul><li>				
+					<p>Cleaned reads ready for alignment<strong>(*-cleaned.fq.gz)</strong></p>
+				</li></ul>
+				</details>
+				</li>
+				</ol>				
+			</section>	
+			<section id="S11">
+				<h4 id="S9" style="font-size:110%">Alignment to Reference Genome</h4>
+				<p style="font-size:108%"><b>Tool:</b><a href="https://bio-bwa.sourceforge.net/bwa.shtml#3" target="_blank"><strong>bwa mem</strong></a></p>
+				<ol>
+				<details>
+ 			    <summary><b>Purpose</b></summary>
+				<ul><li><p>Maps sequencing reads to a reference genome to identify variation locations, enabling accurate variant calling.</p></li></ul>
+				</details>
+
+				<details>
+ 			    <summary><b>Syntax</b></summary>
 				<ul>
-					<li>Easy access to both Windows and Linux tools in one
-						environment.</li>
-					<li>Ideal for Windows users who need to run Linux tools
-						without switching OS.</li>
-					<li>Access to the Linux file system and native Linux utilities
-						directly from Windows.</li>
-				</ul>
-				<li><strong>Limitations of WSL:</strong></li>
-				<ul>
-					<li>Some high-performance tools might not run as efficiently
-						as on a full Linux system.</li>
-					<li>While WSL 2 supports a full Linux kernel, it still
-						operates within Windows, which could affect performance with very
-						large datasets or computationally intensive tasks.</li>
-				</ul>
-			</ul>
+				<li>
+				<table style="font-family: Courier, monospace; background-color: #f7f7f7; border-collapse: collapse; width: 100%; margin: 10px 0;">
+ 				 <tr>
+    				<td style="padding: 10px 15px; border: 1px solid #ccc;">
+      				<span style="color:#4622a7;">bwa mem</span> 
+              <span style="color:#8d5409;">arguments</span>
+      				<span style="color:#0752a8;">[Reference.fasta]</span>
+      				<span style="color:#0752a8;">[in1.fq]</span>
+     			 	<span style="color:#0752a8;">[in2.fq]</span>
+      				<span style="color:#000;">&gt;</span>
+      				<span style="color:#417905;">[aln.sam]</span>
+    				</td>
+  				</tr>
+				</table>
+				<div style="font-family: Arial, sans-serif; font-size: 14px; margin: 5px 0 15px 0;">
+ 			 	<strong style="color: #333;">Arguments:</strong>
+  				<ul style="list-style-type: none; padding-left: 10px;">
+    			<li><span style="color: #8d5409;"><code>-t INT</code></span>: number of threads (e.g., <code>-t 8</code>)</li>
+  				</ul>
+				</div>
 
-			<h3>3. Choosing the Right OS for Your Work</h3>
-			<ul>
-				<li><strong>Linux</strong> is the best option for
-					bioinformatics work, as it provides the best performance,
-					efficiency, and native support for bioinformatics tools.</li>
-				<li><strong>macOS</strong> is a good alternative if you need
-					the Unix environment but prefer a more user-friendly GUI. It’s
-					compatible with most bioinformatics tools and is widely used by
-					researchers who prefer working with a Mac.</li>
-				<li><strong>Windows</strong> is less ideal for bioinformatics
-					but can be used effectively with tools like WSL to run Linux-based
-					tools without switching OSs.</li>
-				<li>If you’re a Windows user and need Linux tools, <strong>WSL</strong>
-					is a great option to get the Linux environment without leaving
-					Windows.
+      <details>
+        <summary><b>Command</b></summary>
+        <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+        <tr>
+        <td style="padding: 10px; border: 1px solid #ccc;">
+          bwa mem -t 8 Ref/Ref.fasta Data/sample-1_1-cleaned.fq.gz Data/sample-1_2-cleaned.fq.gz > Output/sample.sam
+        </td>
+        </tr>
+        </table>
+      </details>    
+
 				</li>
-				<li>For macOS users, using a native Unix-based environment
-					makes it easy to run bioinformatics tools, but certain specialized
-					Linux tools might require additional setup or a virtual machine.</li>
-			</ul>
-		</section>
+				</ul>	
+				</details>
+				<details>
+				<summary><b>Output</b></summary>
+				<ul><li>				
+					Sequence alignment data / alignment output <strong>(SAM format)</strong>
+				</li></ul>
+				</details>
+			</section>
 
-		<section id="why-linux">
-			<h2>Why Linux is Important in Bioinformatics</h2>
-			<ul>
-				<li><strong>Most Bioinformatics Tools Are Built for
-						Linux:</strong> Many tools used in bioinformatics, like those for gene
-					analysis and sequencing, work best on Linux systems.</li>
-				<li><strong>Free and Open Source:</strong> Linux is free to
-					use, and bioinformatics software is often open-source, meaning
-					anyone can use, modify, and share it.</li>
-				<li><strong>Handles Large Data Efficiently:</strong>
-					Bioinformatics involves working with huge data files (like genome
-					data). Linux is good at managing and processing large amounts of
-					data quickly.</li>
-				<li><strong>Works Well with High-Performance
-						Computers:</strong> Many research labs use powerful Linux-based computers
-					(called clusters) to analyze data faster.</li>
-				<li><strong>Tons of Useful Tools:</strong> Linux has many
-					built-in tools that make it easy to work with large data files,
-					such as sorting, searching, and filtering information.</li>
-			</ul>
-		</section>
-		<section id="linux-better">
-			<h2>Why Linux is Better Than GUI (Graphical User Interface)
-				Tools</h2>
-			<ul>
-				<li><strong>Faster and More Efficient:</strong> Linux tools are
-					lightweight, meaning they use less memory and run faster compared
-					to GUI-based tools.</li>
-				<li><strong>Automation:</strong> You can write simple scripts
-					to automate repetitive tasks, saving you time when working with big
-					datasets.</li>
-				<li><strong>Works Well with Large Datasets:</strong> Linux
-					tools can handle large files without crashing, unlike some GUI
-					tools that may struggle with big data.</li>
-				<li><strong>Remote Access:</strong> You can easily access and
-					run tasks on remote computers or servers using Linux, which is
-					especially useful for bioinformatics work.</li>
-				<li><strong>Customizable:</strong> You can personalize your
-					Linux setup to make it work just the way you want, allowing you to
-					create custom workflows.</li>
-				<li><strong>Can Process Data Faster with Multiple
-						Processors:</strong> Linux supports running tasks on multiple processors at
-					once, which speeds up data analysis, especially for big
-					bioinformatics jobs.</li>
-			</ul>
+			<section id="S12"> 
+			<h4 style="font-size:110%">Sorting</h4>	
+				<p style="font-size:108%"><b>Tool:</b><a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037594291-SortSam-Picard" target="_blank"><strong>SortSam</strong></a></p>
+				<ol>
+				<details>
+ 			    <summary><b>Purpose</b></summary>
+				<ol>
+				<li  style="margin-top: 10px !important;">To organize reads by their genomic position for efficient variant calling.</li>
+				<li>To reduce file size and enable faster processing of files.</li>
+				</ol>
+				</details>
+				<details>
+  <summary><b>Syntax</b></summary>
 
-			<h2>In Short:</h2>
-			<p>Linux is fast, efficient, and free, making it ideal for
-				bioinformatics work. It lets you process large amounts of data
-				quickly, run tools from anywhere, and automate repetitive
-				tasks—advantages that GUI tools can’t always match.</p>
-		</section>
+  <!-- Command Syntax Table -->
+  <table style="font-family: Courier, monospace; background-color: #f7f7f7; border-collapse: collapse; width: auto; margin: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 5px;">
+    <tr>
+      <td style="padding: 12px 16px; border: 1px solid #ccc;">
+        <span style="color:#0c0c0c;">java -jar</span> <span style="color: #4622a7;">$GATK SortSam</span> 
+        <span style="color:#8d5409;">--INPUT</span> <span style="color:#0752a8;">[aln.sam]</span>
+        <span style="color:#8d5409;">--OUTPUT</span> <span style="color:#417905;">[sorted.bam]</span>
+        <span style="color:#8d5409;">-SORT_ORDER</span> <span style="color:#0752a8;">[coordinate]</span>
+      </td>
+    </tr>
+  </table>
 
-		<section id="filesystem">
-			<h2>Filesystem Navigation in Linux (via WSL, Linux, or macOS)</h2>
-			<p>Understanding how to navigate the file system is essential for
-				working in the Linux terminal. Let’s go over the fundamental
-				commands used for navigation.</p>
+  <!-- Argument Descriptions -->
+  <div style="font-family: Arial, sans-serif; font-size: 14px; margin: 5px 0 15px 0;">
+    <strong style="color: #333;">Arguments:</strong>
+    <ul style="list-style-type: none; padding-left: 10px; margin: 10px 0;">
+      <li><code style="color:#8d5409;">--INPUT, -I</code>: Input BAM or SAM file to sort. <strong>Required</strong></li>
+      <li><code style="color:#8d5409;">--OUTPUT, -O</code>: Sorted BAM or SAM output file. <strong>Required</strong></li>
+      <li><code style="color:#8d5409;">--SORT_ORDER, -SO</code>: Sort order of the output file.</li>
+      <ul style="padding-left: 15px;">
+        <li><code style="color:#0752a8;">coordinate</code>: Sorts primarily according to the SEQ and POS fields of the record.</li>
+        <!--<li><code style="color:#0752a8;">duplicate</code>: Sorts so that duplicate reads are adjacent.</li>
+        <li><code style="color:#0752a8;">queryname</code>: Sorts according to the readname.</li>-->
+      </ul>
+    </ul>
+  </div>
 
-			<h3>1. Key Commands</h3>
-			<ul>
-				<li><strong><code>pwd</code> (Print Working
-						Directory):</strong> This command shows the <strong>current
-						directory</strong> you are in. <pre>
-						<code>pwd</code>
-					</pre> Example output: <pre>
-						<code>/home/user/Documents</code>
-					</pre></li>
+  <!-- Real Command Example -->
+  <details>
+    <summary><b>Command</b></summary>
+    <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+      <tr>
+        <td style="padding: 10px; border: 1px solid #ccc;">
+          java -jar $GATK SortSam --INPUT Output/sample.sam --OUTPUT Output/sample.sorted.bam -SORT_ORDER coordinate
+        </td>
+      </tr>
+    </table>
+  </details>
+</details>
+				<details>
+				<summary><b>Output</b></summary>
+				<ul><li>				
+				  Sorted aligned reads <strong>(.sorted.bam)</strong>
+				</li></ul>
+				</details>
+			</section>
 
-				<li><strong><code>ls</code> (List):</strong> This command lists
-					all files and directories in the <strong>current directory</strong>.
-					<pre>
-						<code>ls</code>
-					</pre> Example output: <pre>
-						<code>Documents  Pictures  Downloads  Music</code>
-					</pre>
-					<ul>
-						<li>Use <code>ls -l</code> to show detailed information about
-							files.
-						</li>
-						<li>Use <code>ls -a</code> to show hidden files (files
-							starting with a dot).
-						</li>
-					</ul></li>
+			<section id="S13">
+			<h4 style="font-size:110%">Fix mate information</h4>	
+			<p style="font-size:108%"><b>Tool:</b><a href="https://gatk.broadinstitute.org/hc/en-us/articles/4405451362843-FixMateInformation-Picard" target="_blank"><strong>FixMateInformation</strong></a></p>
+<ol>
+  <details>
+    <summary><b>Purpose</b></summary>
+    <ul>
+      <li style="margin-top: 10px !important;">To ensure that the paired-end sequencing reads have consistent and correct mate information.</li>
+    </ul>
+  </details>
 
-				<li><strong><code>cd</code> (Change Directory):</strong> This
-					command allows you to <strong>move into a different
-						directory</strong>. <pre>
-						<code>cd Documents</code>
-					</pre> This will move you into the <strong>Documents</strong> directory
-					(if it exists in the current directory).
-					<ul>
-						<li>To go up one level, use <code>cd ..</code>.
-						</li>
-					</ul></li>
-			</ul>
+  <details>
+    <summary><b>Syntax</b></summary>
 
-			<h3>2. Absolute vs. Relative Paths</h3>
-			<p>
-				There are two types of paths used for navigation in Linux: <strong>absolute
-					paths</strong> and <strong>relative paths</strong>.
-			</p>
-			<ul>
-				<li><strong>Absolute Path:</strong> This is the full path to a
-					file or directory, starting from the root directory (<code>/</code>).
-					<pre>
-						<code>/home/user/Documents</code>
-					</pre> The absolute path always starts from the root (<code>/</code>), so
-					it is a <strong>complete reference</strong> to the file or
-					directory location.</li>
+    <!-- Command Syntax Table -->
+    <table style="font-family: Courier, monospace; background-color: #f7f7f7; border-collapse: collapse; width: auto; margin: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 5px;">
+      <tr>
+        <td style="padding: 12px 16px; border: 1px solid #ccc;">
+          <span style="color:#0c0c0c;">java -jar</span>
+          <span style="color:#4622a7;">$GATK FixMateInformation</span>
+          <span style="color:#8d5409;">--INPUT</span> <span style="color:#0752a8;">[sorted.bam]</span>
+          <span style="color:#8d5409;">--OUTPUT</span> <span style="color:#417905;">[fxmt.bam]</span>
+          <span style="color:#8d5409;">--CREATE_INDEX</span> <span style="color:#0752a8;">[TRUE]</span>
+          <span style="color:#8d5409;">--VALIDATION_STRINGENCY</span> <span style="color:#0752a8;">[LENIENT]</span>
+        </td>
+      </tr>
+    </table>
 
-				<li><strong>Relative Path:</strong> This refers to a location <strong>relative
-						to the current directory</strong>. <pre>
-						<code>cd Documents</code>
-					</pre> If you're currently in the <code>/home/user/</code> directory,
-					this will take you to <code>/home/user/Documents</code>.
-					<ul>
-						<li>Use <code>cd ..</code> to move to the parent directory.
-						</li>
-					</ul></li>
-			</ul>
+    <!-- Argument Descriptions -->
+    <div style="font-family: Arial, sans-serif; font-size: 14px; margin: 5px 0 15px 0;">
+      <strong style="color: #333;">Arguments:</strong>
+      <ul style="list-style-type: none; padding-left: 10px; margin: 10px 0;">
+        <li><code style="color:#8d5409;">--INPUT, -I</code>: The input files to check and fix. <strong>Required</strong></li>
+        <li><code style="color:#8d5409;">--OUTPUT, -O</code>: The output file to write to. <strong>Required</strong></li>
+        <li><code style="color:#8d5409;">--CREATE_INDEX</code>: Whether to create an index when writing VCF or coordinate sorted BAM output. <!--Default: <code>false</code>. Possible values: <code>true</code>, <code>false</code></li>-->
+        <li><code style="color:#8d5409;">--VALIDATION_STRINGENCY</code>: Validation stringency for all SAM files read by this program. <!--Default: <code>STRICT</code>. Possible values:-->
+          <ul style="padding-left: 15px;">
+            <!--<li><code style="color:#0752a8;">STRICT</code>: Do the right thing, throw an exception if something looks wrong.</li>-->
+            <li><code style="color:#0752a8;">LENIENT</code>: Emit warnings but keep going if possible.</li>
+            <!--<li><code style="color:#0752a8;">SILENT</code>: Like LENIENT, only don’t emit warning messages.</li>-->
+          </ul>
+        </li>
+      </ul>
+    </div>
 
-			<h3>3. Example Walkthrough</h3>
-			<p>Let’s assume your file structure looks like this:</p>
-			<pre>
-				<code>
-/home/user/
-  ├── Documents/
-  ├── Music/
-  └── Pictures/
-    </code>
-			</pre>
+    <!-- Real Command Example -->
+    <details>
+      <summary><b>Command</b></summary>
+      <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+        <tr>
+          <td style="padding: 10px; border: 1px solid #ccc;">
+            java -jar $GATK FixMateInformation --INPUT Output/sample.sorted.bam --OUTPUT Output/sample.fxmt.bam --CREATE_INDEX TRUE --VALIDATION_STRINGENCY LENIENT
+          </td>
+        </tr>
+      </table>
+    </details>
+  </details>
 
-			<ul>
-				<li><strong><code>pwd</code></strong> (Print Working
-					Directory): If you're currently in the <code>/home/user/</code>
-					directory, typing <code>pwd</code> will display: <pre>
-						<code>/home/user</code>
-					</pre></li>
+  <details>
+    <summary><b>Output</b></summary>
+    <ul>
+      <li><p>Mate-fixed aligned reads <strong>(.fxmt.bam)</strong> and an index <strong>(.fxmt.bai)</strong>.</p></li>
+    </ul>
+  </details>
+</ol>
+			</section>
 
-				<li><strong><code>ls</code></strong> (List Contents): To list
-					the contents of <code>/home/user/</code>, type: <pre>
-						<code>ls</code>
-					</pre> Output: <pre>
-						<code>Documents  Music  Pictures</code>
-					</pre></li>
+			<section id="S14">
+			<h4 style="font-size:110%">Add Read Group Information</h4>	
+			<p style="font-size:108%"><b>Tool:</b><a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037226472-AddOrReplaceReadGroups-Picard" target="_blank"><strong>AddOrReplaceReadGroups</strong></a></p>
+<ol>
+  <details>
+    <summary><b>Purpose</b></summary>
+    <ol>
+      <li>To distinguish sequencing data sources and ensure accurate variant calling and analysis.</li>
+      <li>To read more about "read groups", please see this <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890671" target="_blank">link</a>.</li>
+    </ol>
+  </details>
 
-				<li><strong><code>cd</code></strong> (Change Directory): To
-					move into the <code>Documents</code> directory, type: <pre>
-						<code>cd Documents</code>
-					</pre></li>
+  <details>
+    <summary><b>Syntax</b></summary>
 
-				<li><strong><code>pwd</code> again:</strong> After changing
-					into the <code>Documents</code> directory, typing <code>pwd</code>
-					again will display: <pre>
-						<code>/home/user/Documents</code>
-					</pre></li>
+    <!-- Command Syntax Table -->
+    <table style="font-family: Courier, monospace; background-color: #f7f7f7; border-collapse: collapse; width: auto; margin: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 5px;">
+      <tr>
+        <td style="padding: 12px 16px; border: 1px solid #ccc;">
+          <span style="color:#0c0c0c;">java -jar</span>
+          <span style="color: #4622a7;">$GATK AddOrReplaceReadGroups</span>
+          <span style="color:#8d5409;">--INPUT</span> <span style="color:#0752a8;">[fxmt.bam]</span>
+          <span style="color:#8d5409;">--OUTPUT</span> <span style="color:#417905;">[addrep.bam]</span>
+          <span style="color:#8d5409;">--RGID</span> <span style="color:#0752a8;">[ID]</span>
+          <span style="color:#8d5409;">--RGPU</span> <span style="color:#0752a8;">[Unit]</span>
+          <span style="color:#8d5409;">--RGLB</span> <span style="color:#0752a8;">[Library]</span>
+          <span style="color:#8d5409;">-PL</span> <span style="color:#0752a8;">[Platform]</span>
+          <span style="color:#8d5409;">-SM</span> <span style="color:#0752a8;">[SampleName]</span>
+          <span style="color:#8d5409;">-CN</span> <span style="color:#0752a8;">[CenterName]</span>
+          <span style="color:#8d5409;">--VALIDATION_STRINGENCY</span> <span style="color:#0752a8;">[LENIENT]</span>
+          <span style="color:#8d5409;">--CREATE_INDEX</span> <span style="color:#0752a8;">[TRUE]</span>
+        </td>
+      </tr>
+    </table>
 
-				<li><strong>Absolute Path Example:</strong> To go to the <code>Music</code>
-					directory from anywhere, you can use the absolute path: <pre>
-						<code>cd /home/user/Music</code>
-					</pre></li>
+    <!-- Argument Descriptions -->
+    <div style="font-family: Arial, sans-serif; font-size: 14px; margin: 5px 0 15px 0;">
+      <strong style="color: #333;">Arguments:</strong>
+      <ul style="list-style-type: none; padding-left: 10px; margin: 10px 0;">
+        <li><code style="color:#8d5409;">--INPUT, -I</code>: Input file (BAM or SAM or a GA4GH url). <strong>Required</strong></li>
+        <li><code style="color:#8d5409;">--OUTPUT, -O</code>: Output file (BAM or SAM). <strong>Required</strong></li>
+        <li><code style="color:#8d5409;">--RGLB, -LB</code>: Read-Group library. <strong>Required</strong></li>
+        <li><code style="color:#8d5409;">--RGPL, -PL</code>: Read-Group platform (e.g., ILLUMINA). <strong>Required</strong></li>
+        <li><code style="color:#8d5409;">--RGPU, -PU</code>: Read-Group platform unit (e.g., run barcode). <strong>Required</strong></li>
+        <li><code style="color:#8d5409;">--RGSM, -SM</code>: Read-Group sample name. <strong>Required</strong></li>
+        <li><code style="color:#8d5409;">--RGCN, -CN</code>: Read-Group sequencing center name. Default: <code>null</code></li>
+        <li><code style="color:#8d5409;">--RGID, -ID</code>: Read-Group ID. Default: <code>1</code></li>
+      </ul>
+    </div>
 
-				<li><strong>Relative Path Example:</strong> If you're in the <code>Documents</code>
-					directory and want to move up one level to <code>/home/user/</code>,
-					use: <pre>
-						<code>cd ..</code>
-					</pre></li>
-			</ul>
+    <!-- Real Command Example -->
+    <details>
+      <summary><b>Command</b></summary>
+      <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+        <tr>
+          <td style="padding: 10px; border: 1px solid #ccc;">
+            java -jar $GATK AddOrReplaceReadGroups --INPUT Output/sample.fxmt.bam --OUTPUT Output/sample.addrep.bam --RGID run100 --RGPU unit1 --RGLB lib1 -PL Illumina -SM sample -CN CN --VALIDATION_STRINGENCY LENIENT --CREATE_INDEX TRUE
+          </td>
+        </tr>
+      </table>
+    </details>
+  </details>
 
-			<h3>4. Activity: Navigate to a Folder and Explore Its Contents</h3>
-			<p>Let’s practice navigating the file system!</p>
-			<ol>
-				<li><strong>Navigate to a folder:</strong> - Open your terminal
-					(WSL/Linux/macOS). - Use the <code>pwd</code> command to check your
-					current directory. - Use <code>ls</code> to list the contents. -
-					Move into a subdirectory using <code>
-						cd
-						<folder_name>
-					</code>. - Try using both absolute and relative paths.</li>
+  <details>
+    <summary><b>Output</b></summary>
+    <ul>
+      <li><p>Aligned reads with updated read group information <strong>(.addrep.bam)</strong> and an index <strong>(.addrep.bai)</strong>.</p></li>
+    </ul>
+  </details>
+</ol>
 
-				<li><strong>Explore directory contents:</strong> - Use <code>ls
-						-l</code> to list files with details (permissions, file size, etc.). -
-					Use <code>ls -a</code> to show hidden files. - Use <code>cd
-						..</code> to go up one level in the directory.</li>
+			</section>
 
-				<li><strong>Create a new file and directory:</strong> - Create
-					a new directory with: <pre>
-						<code>mkdir NewFolder</code>
-					</pre> - Create a new file with: <pre>
-						<code>touch newfile.txt</code>
-					</pre> - List the contents with <code>ls</code> to confirm the changes.</li>
-			</ol>
-		</section>
-		<section id="filemanagement">
-			<h2>File Management in Linux (via WSL, Linux, or macOS)</h2>
-			<p>Understanding file management is crucial for organizing your
-				data and projects. Let’s cover some essential file management
-				commands in Linux.</p>
+				
+		<section id="S15">
+		<h4 style="font-size:110%">Mark Duplicates</h4>		 
 
-			<h3>1. Key File Management Commands</h3>
-			<ul>
-				<li><strong><code>mkdir</code> (Make Directory):</strong> This
-					command allows you to create a new directory (folder). <pre>
-						<code>mkdir project_folder</code>
-					</pre> Example output: (No output is returned on success, but the
-					directory is created.)</li>
+		<p style="font-size:108%"><b>Tool:</b><a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037052812-MarkDuplicates-Picard" target="_blank"><strong>MarkDuplicates</strong></a></p>
+<ol>
+  <details>
+    <summary><b>Purpose</b></summary>
+    <ul>
+      <li>To avoid bias and inaccuracies.</li>
+    </ul>
+  </details>
 
-				<li><strong><code>touch</code> (Create Empty File):</strong>
-					This command is used to create an empty file. It can also be used
-					to update the timestamp of an existing file. <pre>
-						<code>touch newfile.txt</code>
-					</pre> Example output: (No output is returned on success, but the file is
-					created.)</li>
+  <details>
+    <summary><b>Syntax</b></summary>
 
-				<li><strong><code>cp</code> (Copy Files/Directories):</strong>
-					This command is used to copy files or directories. <pre>
-						<code>cp file1.txt file2.txt</code>
-					</pre> This copies `file1.txt` to `file2.txt`. <pre>
-						<code>cp -r folder1 folder2</code>
-					</pre> The `-r` option is used to copy directories recursively.</li>
+    <!-- Command Syntax Table -->
+    <table style="font-family: Courier, monospace; background-color: #f7f7f7; border-collapse: collapse; width: auto; margin: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 5px;">
+      <tr>
+        <td style="padding: 12px 16px; border: 1px solid #ccc;">
+          <span style="color:#0c0c0c;">java -jar</span>
+          <span style="color:#4622a7">$GATK MarkDuplicates</span>
+          <span style="color:#8d5409;">--INPUT</span> <span style="color:#0752a8;">[addrep.bam]</span>
+          <span style="color:#8d5409;">--OUTPUT</span> <span style="color:#417905;">[mkdup.bam]</span>
+          <span style="color:#8d5409;">--CREATE_INDEX</span> <span style="color:#0752a8;">[TRUE]</span>
+          <span style="color:#8d5409;">--VALIDATION_STRINGENCY</span> <span style="color:#0752a8;">[LENIENT]</span>
+          <span style="color:#8d5409;">--METRICS_FILE</span> <span style="color:#417905;">[mkdup.metrics]</span>
+          <span style="color:#8d5409;">--MAX_FILE_HANDLES_FOR_READ_ENDS_MAP</span> <span style="color:#0752a8;">[1000]</span>
+        </td>
+      </tr>
+    </table>
 
-				<li><strong><code>mv</code> (Move/Rename
-						Files/Directories):</strong> This command moves or renames files and
-					directories. <pre>
-						<code>mv oldname.txt newname.txt</code>
-					</pre> Example: This renames `oldname.txt` to `newname.txt`. <pre>
-						<code>mv file1.txt /path/to/destination/</code>
-					</pre> This moves `file1.txt` to a new directory.</li>
+    <!-- Argument Descriptions -->
+    <div style="font-family: Arial, sans-serif; font-size: 14px; margin: 5px 0 15px 0;">
+      <strong style="color: #333;">Arguments:</strong>
+      <ul style="list-style-type: none; padding-left: 10px; margin: 10px 0;">
+        <li><code style="color:#8d5409;">--INPUT, -I</code>: Input SAM or BAM files to analyze. Must be coordinate sorted. <strong>Required</strong></li>
+        <li><code style="color:#8d5409;">--OUTPUT, -O</code>: Output file with marked duplicates. <strong>Required</strong></li>
+        <li><code style="color:#8d5409;">--METRICS_FILE, -M</code>: File to write duplication metrics to. <strong>Required</strong></li>
+        <li><code style="color:#8d5409;">--MAX_FILE_HANDLES_FOR_READ_ENDS_MAP</code>: Maximum number of file handles to keep open when spilling read ends to disk.</li>
+      </ul>
+    </div>
 
-				<li><strong><code>rm</code> (Remove/Delete
-						Files/Directories):</strong> This command is used to remove files or
-					directories. <pre>
-						<code>rm file1.txt</code>
-					</pre> This deletes `file1.txt`. Be cautious as this is permanent. <pre>
-						<code>rm -r folder1</code>
-					</pre> The `-r` option allows you to remove directories and their
-					contents recursively.</li>
-			</ul>
+    <!-- Real Command Example -->
+    <details>
+      <summary><b>Command</b></summary>
+      <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+        <tr>
+          <td style="padding: 10px; border: 1px solid #ccc;">
+            java -jar $GATK MarkDuplicates --INPUT Output/sample.addrep.bam --OUTPUT Output/sample.mkdup.bam --VALIDATION_STRINGENCY LENIENT --CREATE_INDEX TRUE --METRICS_FILE Output/sample.mkdup.metrics --MAX_FILE_HANDLES_FOR_READ_ENDS_MAP 1000
+          </td>
+        </tr>
+      </table>
+    </details>
+  </details>
 
-			<h3>2. Creating and Organizing Directories</h3>
-			<p>Creating a structured directory system is essential for
-				organizing project files. Here's how you can organize your data:</p>
+  <details>
+    <summary><b>Output</b></summary>
+    <ul>
+      <li>Duplicate-marked alignment file <strong>(.mkdup.bam)</strong><br>
+      Index <strong>(.mkdup.bai)</strong> <br>
+      Duplication metrics file <strong>(.mkdup.metrics)</strong></li>
+    </ul>
 
-			<ul>
-				<li><strong>Creating a new project directory:</strong> Use <code>mkdir</code>
-					to create a new directory for your project: <pre>
-						<code>mkdir my_project</code>
-					</pre> This will create a directory called `my_project`.</li>
+    </p>
+  </details>
+</ol>
 
-				<li><strong>Creating subdirectories:</strong> You can create
-					multiple directories within your project folder to keep files
-					organized: <pre>
-						<code>mkdir my_project/input my_project/output my_project/scripts</code>
-					</pre> This will create three subdirectories within `my_project` for
-					organizing input data, output files, and scripts.</li>
+		</section> 
 
-				<li><strong>Creating files inside directories:</strong> Once
-					you've set up your directories, you can create files in them using
-					the <code>touch</code> command: <pre>
-						<code>touch my_project/input/data.txt my_project/scripts/analysis.py</code>
-					</pre> This will create two files: one in the `input` folder (`data.txt`)
-					and another in the `scripts` folder (`analysis.py`).</li>
-			</ul>
 
-			<h3>3. Example Walkthrough: Organizing a Project</h3>
-			<p>Let's walk through creating a project folder and organizing
-				files:</p>
-			<ul>
-				<li><strong>Create the project folder:</strong> <pre>
-						<code>mkdir my_bioinformatics_project</code>
-					</pre> This creates the main folder for your project.</li>
+    <!--MERGING BAM FILES-->
+    <section id="S22">
+    <h4 style="font-size:110%">Merging BAM files <i>(Optional)</i></h4>
+      <p style="font-size:108%"><b>Tool:</b><a href="https://www.htslib.org/doc/samtools-merge.html" target="_blank"><strong>samtools merge</strong></a></p>
+ 
+  <details>
+    <summary><b>Purpose</b></summary>
+    <ul>
+      <li>Merging <i>(if there are multiple read pairs per sample)</i></li>
+    </ul>
+  </details>
 
-				<li><strong>Create subdirectories:</strong> <pre>
-						<code>mkdir my_bioinformatics_project/data my_bioinformatics_project/results my_bioinformatics_project/scripts</code>
-					</pre> This organizes your project into folders for data, results, and
-					scripts.</li>
+  <details>
+    <summary><b>Syntax</b></summary>
 
-				<li><strong>Create files:</strong> <pre>
-						<code>touch my_bioinformatics_project/data/input_file.txt</code>
-					</pre> <pre>
-						<code>touch my_bioinformatics_project/scripts/preprocessing.sh</code>
-					</pre> These files are created inside the appropriate directories.</li>
+    <!-- Command Syntax Table -->
+    <table style="font-family: Courier, monospace; background-color: #f7f7f7; border-collapse: collapse; width: auto; margin: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 5px;">
+      <tr>
+        <td style="padding: 12px 16px; border: 1px solid #ccc;">
+          <span style="color:#4622a7;">samtools merge</span>
+          <span style="color:#417905;">[out.bam]</span>           
+          <span style="color:#0752a8;">[in1.bam]</span>
+          <span style="color:#0752a8;">[in2.bam]</span>
+        </td>
+      </tr>
+    </table>
 
-				<li><strong>Copy files into the project folder:</strong> <pre>
-						<code>cp /path/to/external/input_file.txt my_bioinformatics_project/data/</code>
-					</pre> This copies an existing file into the `data` directory.</li>
+    <!-- Argument Descriptions -->
+    <!--<div style="font-family: Arial, sans-serif; font-size: 14px; margin: 5px 0 15px 0;">
+      <strong style="color: #333;">Arguments:</strong>
+      <ul style="list-style-type: none; padding-left: 10px; margin: 10px 0;">
+        <li><code style="color:#8d5409;">--variant, -V</code>: 	A VCF file containing variants. <strong>Required</strong></li>
+        <li><code style="color:#8d5409;">--output, -O</code>: File to which variants should be written. <strong>Required</strong></li>
+        <li><code style="color:#8d5409;">--reference, -R</code>: Reference sequence file. <strong>Required</strong></li>
+      </ul>
+    </div>-->
+  </details>
 
-				<li><strong>Move files:</strong> If you want to reorganize, use
-					<code>mv</code>: <pre>
-						<code>mv my_bioinformatics_project/scripts/preprocessing.sh my_bioinformatics_project/scripts/analysis.sh</code>
-					</pre> This renames the `preprocessing.sh` file to `analysis.sh`.</li>
+  <details>
+    <summary><b>Output</b></summary>
+    <ul>
+      <li>Merged BAM file</strong><br></li>
+    </ul>
+  </details>
+</ol>   
+    </section>  
 
-				<li><strong>Delete unnecessary files:</strong> If a file is no
-					longer needed, use <code>rm</code> to remove it: <pre>
-						<code>rm my_bioinformatics_project/data/old_data.txt</code>
-					</pre> This removes the old data file from your project.</li>
-			</ul>
-
-			<h3>4. Activity: Set Up a Project Folder with Dummy Files</h3>
-			<p>Let’s practice by setting up a project folder and organizing
-				it!</p>
-			<ol>
-				<li><strong>Create the project directory:</strong> - Open your
-					terminal (WSL/Linux/macOS). - Run the following command: <pre>
-						<code>mkdir bioinformatics_project</code>
-					</pre></li>
-
-				<li><strong>Create subdirectories for data, scripts,
-						and results:</strong> - Create the following directories: <pre>
-						<code>mkdir bioinformatics_project/data bioinformatics_project/scripts bioinformatics_project/results</code>
-					</pre></li>
-
-				<li><strong>Create some files:</strong> - Use the <code>touch</code>
-					command to create dummy files: <pre>
-						<code>touch bioinformatics_project/data/input_file.txt</code>
-					</pre> <pre>
-						<code>touch bioinformatics_project/scripts/analysis.sh</code>
-					</pre></li>
-
-				<li><strong>Copy a file into the project:</strong> - If you
-					have an existing file (e.g., <code>sample_data.txt</code>), copy it
-					into the project folder: <pre>
-						<code>cp sample_data.txt bioinformatics_project/data/</code>
-					</pre></li>
-
-				<li><strong>Rename a file:</strong> - Rename the file
-					`analysis.sh` to `preprocessing.sh`: <pre>
-						<code>mv bioinformatics_project/scripts/analysis.sh bioinformatics_project/scripts/preprocessing.sh</code>
-					</pre></li>
-
-				<li><strong>Delete unnecessary files:</strong> - If there are
-					files you no longer need, delete them with <code>rm</code>: <pre>
-						<code>rm bioinformatics_project/data/old_file.txt</code>
-					</pre></li>
-			</ol>
-
+    <!--VARIANT CALLING-->
+		<section id="S16">
+		<h4 style="font-size:110%">Variant Calling</h4>
 		
+		<p style="font-size:108%"><b>Tool:</b><a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037225632-HaplotypeCaller" target="_blank"><strong>HaplotypeCaller</strong></a></p>
+<ol>
+  <details>
+    <summary><b>Functionality</b></summary>
+    <ul>
+      <li>Call SNPs and indels from aligned sequencing reads.</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary><b>Syntax</b></summary>
+
+    <!-- Command Syntax Table -->
+    <table style="font-family: Courier, monospace; background-color: #f7f7f7; border-collapse: collapse; width: auto; margin: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 5px;">
+      <tr>
+        <td style="padding: 12px 16px; border: 1px solid #ccc;">
+          <span style="color:#0c0c0c;">java -jar</span>
+          <span style="color:#4622a7;">$GATK HaplotypeCaller</span>
+          <span style="color:#8d5409;">-R</span> <span style="color:#0752a8;">[Reference.fasta]</span>
+          <span style="color:#8d5409;">-I</span> <span style="color:#0752a8;">[mkdup.bam]</span>
+          <span style="color:#8d5409;">-O</span> <span style="color:#417905;">[file.g.vcf]</span>
+          <span style="color:#8d5409;">-ERC</span> <span style="color:#0752a8;">[GVCF]</span>
+          <span style="color:#8d5409;">--bam-output</span> <span style="color:#417905;">[file.bamout.bam]</span>
+          <span style="color:#8d5409;">--showHidden</span> <span style="color:#0752a8;">[true]</span>
+        </td>
+      </tr>
+    </table>
+
+    <!-- Argument Descriptions -->
+    <div style="font-family: Arial, sans-serif; font-size: 14px; margin: 5px 0 15px 0;">
+      <strong style="color: #333;">Arguments:</strong>
+      <ul style="list-style-type: none; padding-left: 10px; margin: 10px 0;">
+        <li><code style="color:#8d5409;">--input, -I</code>: BAM/SAM/CRAM file containing reads. <strong>Required</strong></li>
+        <li><code style="color:#8d5409;">--output, -O</code>: File to which variants should be written. <strong>Required</strong></li>
+        <li><code style="color:#8d5409;">--reference, -R</code>: Reference sequence file. <strong>Required</strong></li>
+        <li><code style="color:#8d5409;">--emit-ref-confidence, -ERC</code>: Mode for emitting reference confidence scores.<br>
+          <strong>Default:</strong> <code>NONE</code> | <strong>Options:</strong> <code>NONE</code>, <code>BP_RESOLUTION</code>, <code>GVCF</code>
+        </li>
+        <li><code style="color:#8d5409;">--showHidden</code>: Display hidden arguments.<br>
+          <strong>Default:</strong> <code>false</code> | <strong>Options:</strong> <code>true</code>, <code>false</code>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Real Command Example -->
+    <details>
+      <summary><b>Command</b></summary>
+      <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+        <tr>
+          <td style="padding: 10px; border: 1px solid #ccc;">
+            java -jar $GATK HaplotypeCaller \<br>
+            -R Ref/Ref.fasta \<br>
+            -I Output/sample.mkdup.bam \<br>
+            -O Output/sample.g.vcf \<br>
+            -ERC GVCF \<br>
+            --bam-output Output/sample.bamout.bam \<br>
+            --showHidden true
+          </td>
+        </tr>
+      </table>
+    </details>
+  </details>
+
+  <details>
+    <summary><b>Output</b></summary>
+    <ul>
+      <li>A set of raw variant calls, including SNPs and indels <strong>(.g.vcf)</strong><br>
+        GVCF index <strong>(.g.vcf.idx)</strong> <br>
+        BAM file <strong>bamout.bam</strong> <br>
+        BAM file index <strong>bamout.bai</strong>      
+      </li>
+    </ul>
+  </details>
+</ol>
 		</section>
-		<section id="viewing">
-			<h2>Viewing Files in Linux (via WSL, Linux, or macOS)</h2>
-			<p>In bioinformatics, you often deal with large datasets, and
-				knowing how to efficiently view files is crucial. In this section,
-				we will explore several commands that can help you view the contents
-				of files in the terminal.</p>
 
-			<h3>1. Key Commands for Viewing Files</h3>
-			<ul>
-				<li><strong><code>cat</code> (Concatenate and View
-						File Contents):</strong> The <code>cat</code> command is used to display
-					the contents of a file directly in the terminal. It's best used for
-					small files, as it prints the entire file at once. <pre>
-						<code>cat filename.txt</code>
-					</pre> Example output: <pre>
-						<code>Welcome to bioinformatics training.</code>
-					</pre>
-					<p>
-						<strong>Warning:</strong> Avoid using
-						<code>cat</code>
-						for large files, as it may overwhelm the terminal.
-					</p></li>
+    <!--MERGING-->
+    <section id="S20">
+    <h4 style="font-size:110%">Merging GATK GVCFs</h4>
+      <p style="font-size:108%"><b>Tool:</b><a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037593911-CombineGVCFs" target="_blank"><strong>CombineGVCFS</strong></a></p>
+ 
+<ol type="1">
+  <details>
+    <summary><b>Purpose</b></summary>
+    <ol>
+      <li>SNP calling produces multiple gVCF files – <i>each file has variant for one sample.</i></li>
+      <li>To analyze the data, it is necessary to merge the individual gVCF files.</li>
+    </ol>
+  </details>
 
-				<li><strong><code>less</code> (View File
-						Page-by-Page):</strong> The <code>less</code> command is useful for viewing
-					large files, as it allows you to scroll through the file one page
-					at a time. <pre>
-						<code>less filename.txt</code>
-					</pre> You can navigate using:
-					<ul>
-						<li><code>Space</code>: Scroll down one page</li>
-						<li><code>Up/Down Arrow</code>: Move one line up/down</li>
-						<li><code>q</code>: Quit and return to the terminal</li>
-					</ul></li>
 
-				<li><strong><code>head</code> (View the First Few
-						Lines of a File):</strong> The <code>head</code> command shows the first 10
-					lines of a file by default. It’s useful when you want to quickly
-					check the beginning of a large file. <pre>
-						<code>head filename.txt</code>
-					</pre> To view a specific number of lines, use the <code>-n</code>
-					option: <pre>
-						<code>head -n 20 filename.txt</code>
-					</pre> This shows the first 20 lines of the file.</li>
+  <details>
+    <summary><b>Syntax</b></summary>
 
-				<li><strong><code>tail</code> (View the Last Few Lines
-						of a File):</strong> The <code>tail</code> command is the opposite of <code>head</code>;
-					it shows the last 10 lines of a file by default. It’s useful for
-					monitoring log files or large datasets where the latest information
-					is more relevant. <pre>
-						<code>tail filename.txt</code>
-					</pre> To view the last few lines or monitor a file in real-time, use: <pre>
-						<code>tail -n 20 filename.txt</code>
-					</pre> This shows the last 20 lines of the file. <pre>
-						<code>tail -f filename.txt</code>
-					</pre> The <code>-f</code> option allows you to follow a file in
-					real-time (useful for logs).</li>
-			</ul>
+    <!-- Command Syntax Table -->
+    <table style="font-family: Courier, monospace; background-color: #f7f7f7; border-collapse: collapse; width: auto; margin: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 5px;">
+      <tr>
+        <td style="padding: 12px 16px; border: 1px solid #ccc;">
+          <span style="color:#0c0c0c;">java -jar</span>
+          <span style="color:#4622a7;">$GATK CombineGVCFS</span>
+          <span style="color:#8d5409;">-R</span> <span style="color:#0752a8;">[Reference.fasta]</span>
+          <span style="color:#8d5409;">-V</span> <span style="color:#0752a8;">[in1.g.vcf]</span>
+          <span style="color:#8d5409;">-V</span> <span style="color:#0752a8;">[in2.g.vcf]</span>
+          <span style="color:#8d5409;">-O</span> <span style="color:#417905;">[merged.g.vcf]</span>
+        </td>
+      </tr>
+    </table>
 
-			<h3>2. Best Tools for Viewing Large Data Files</h3>
-			<p>When working with large data files, it's important to use the
-				right tool to avoid overwhelming your terminal. Here’s a breakdown
-				of the best tools:</p>
-			<ul>
-				<li><strong><code>less</code>:</strong> Ideal for viewing large
-					files, as it loads the file one page at a time. You can scroll
-					through the content and search within the file using <code>/search_term</code>
-					and <code>n</code> to go to the next occurrence.</li>
-				<li><strong><code>head</code> and <code>tail</code>:</strong>
-					These are best when you only need to view the beginning or the end
-					of the file, respectively. They are more efficient than loading the
-					entire file into the terminal.</li>
-				<li><strong><code>cat</code>:</strong> Only recommended for
-					small files, as it prints the entire file to the terminal.</li>
-			</ul>
+    <!-- Argument Descriptions -->
+    <div style="font-family: Arial, sans-serif; font-size: 14px; margin: 5px 0 15px 0;">
+      <strong style="color: #333;">Arguments:</strong>
+      <ul style="list-style-type: none; padding-left: 10px; margin: 10px 0;">
+        <li><code style="color:#8d5409;">--variant, -V</code>: One or more VCF files containing variants. <strong>Required</strong></li>
+        <li><code style="color:#8d5409;">--output, -O</code>: File to which variants should be written. <strong>Required</strong></li>
+        <li><code style="color:#8d5409;">--reference, -R</code>: Reference sequence file. <strong>Required</strong></li>
+      </ul>
+    </div>
 
-			<h3>3. Example Walkthrough: Viewing Large Files</h3>
-			<p>Let’s walk through the process of using these commands to view
-				a large file, such as a `.txt` or `.tsv` file.</p>
+    <!-- Real Command Example -->
+   <!-- <details>
+      <summary><b>Command</b></summary>
+      <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+        <tr>
+          <td style="padding: 10px; border: 1px solid #ccc;">
+            java -jar $GATK HaplotypeCaller \<br>
+            -R Ref/Ref.fasta \<br>
+            -I Output/sample.mkdup.bam \<br>
+            -O Output/sample.g.vcf \<br>
+            -ERC GVCF \<br>
+            --bam-output Output/sample.bamout.bam \<br>
+            --showHidden true
+          </td>
+        </tr>
+      </table>
+    </details>-->
+  </details>
 
-			<ul>
-				<li><strong>View a small file using <code>cat</code>:
-				</strong> For a small file, simply use: <pre>
-						<code>cat small_file.txt</code>
-					</pre> This will display the entire contents of `small_file.txt` at once.
-				</li>
+  <details>
+    <summary><b>Output</b></summary>
+    <ul>
+      <li>The combined GVCF</strong><br></li>
+    </ul>
+  </details>
+</ol>      
+    </section>
 
-				<li><strong>View a large file using <code>less</code>:
-				</strong> If the file is large, use: <pre>
-						<code>less large_file.txt</code>
-					</pre> This will allow you to scroll through the content one page at a
-					time, making it much easier to navigate large files.</li>
 
-				<li><strong>View the first few lines of a file using <code>head</code>:
-				</strong> If you only want to check the beginning of the file, use: <pre>
-						<code>head large_file.txt</code>
-					</pre> This will show the first 10 lines by default.</li>
 
-				<li><strong>View the last few lines of a file using <code>tail</code>:
-				</strong> To quickly check the end of a file (e.g., for logs or recent data),
-					use: <pre>
-						<code>tail large_file.txt</code>
-					</pre> To monitor the file in real-time (for example, a log file that
-					updates constantly), use: <pre>
-						<code>tail -f large_file.txt</code>
-					</pre></li>
-			</ul>
+    <!--Genotyping-->
+    <section id="S21">
+    <h4 style="font-size:110%">Genotyping</h4>
+      <p style="font-size:108%"><b>Tool:</b><a href="https://gatk.broadinstitute.org/hc/en-us/articles/360041417092-GenotypeGVCFs" target="_blank"><strong>GenotypeGVCFs</strong></a></p>
+ 
+  <details>
+    <summary><b>Purpose</b></summary>
+    <ul>
+      <li>Produces genotype calls, filters out non-variant positions</i></li>
+    </ul>
+  </details>
 
-			<h3>4. Activity: Open a `.txt` or `.tsv` File with Each Tool</h3>
-			<p>Let's practice opening a file with each tool to better
-				understand their usage and functionality.</p>
-			<ol>
-				<li><strong>Open a small `.txt` file with <code>cat</code>:
-				</strong> - Open a terminal and run: <pre>
-						<code>cat small_file.txt</code>
-					</pre> - Verify that the entire file is printed to the terminal.</li>
+  <details>
+    <summary><b>Syntax</b></summary>
 
-				<li><strong>Open a large `.txt` file with <code>less</code>:
-				</strong> - Use <code>less</code> to view a large file: <pre>
-						<code>less large_file.txt</code>
-					</pre> - Scroll through the file using the <code>Space</code> key and
-					quit by pressing <code>q</code>.</li>
+    <!-- Command Syntax Table -->
+    <table style="font-family: Courier, monospace; background-color: #f7f7f7; border-collapse: collapse; width: auto; margin: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 5px;">
+      <tr>
+        <td style="padding: 12px 16px; border: 1px solid #ccc;">
+          <span style="color:#0c0c0c;">java -jar</span>
+          <span style="color:#4622a7;">$GATK GenotypeGVCFs</span>
+          <span style="color:#8d5409;">-R</span> <span style="color:#0752a8;">[Reference.fasta]</span>
+          <span style="color:#8d5409;">-V</span> <span style="color:#0752a8;">[input.g.vcf]</span>
+          <span style="color:#8d5409;">-O</span> <span style="color:#417905;">[output.vcf]</span>
+        </td>
+      </tr>
+    </table>
 
-				<li><strong>Open the first 20 lines of a file with <code>head</code>:
-				</strong> - Run the following to view the first 20 lines of a file: <pre>
-						<code>head -n 20 large_file.txt</code>
-					</pre></li>
+    <!-- Argument Descriptions -->
+    <div style="font-family: Arial, sans-serif; font-size: 14px; margin: 5px 0 15px 0;">
+      <strong style="color: #333;">Arguments:</strong>
+      <ul style="list-style-type: none; padding-left: 10px; margin: 10px 0;">
+        <li><code style="color:#8d5409;">--variant, -V</code>: 	A VCF file containing variants. <strong>Required</strong></li>
+        <li><code style="color:#8d5409;">--output, -O</code>: File to which variants should be written. <strong>Required</strong></li>
+        <li><code style="color:#8d5409;">--reference, -R</code>: Reference sequence file. <strong>Required</strong></li>
+      </ul>
+    </div>
+  </details>
 
-				<li><strong>Open the last 20 lines of a file with <code>tail</code>:
-				</strong> - View the last 20 lines of the file: <pre>
-						<code>tail -n 20 large_file.txt</code>
-					</pre></li>
+  <details>
+    <summary><b>Output</b></summary>
+    <ul>
+      <li>The combined, genotyped VCF</strong><br></li>
+    </ul>
+  </details>
+</ol>   
+    </section>
 
-				<li><strong>Monitor a log file with <code>tail
-							-f</code>:
-				</strong> - If you have a log file, use: <pre>
-						<code>tail -f log_file.txt</code>
-					</pre> - This will allow you to see updates to the log file in real-time.
-				</li>
+
+  
+	
+    <!--VCF Exploration-->		
+	<section id="DS0">
+	<h4 style="font-size:120%">Motivation</h4>	
+  <ul style="list-style: disc;">
+    <li>Variant callers output both true and false variants
+      <ul style="list-style: disc;"><li>Base calling errors, alignment errors, contamination...</li></ul>
+    </li>
+    <li>Balance between sensitivity and precision</li>
+    <li>The needs of applications may require different preference between precision or sensitivity</li>
+    <li>Multi-sample analysis allows to increase the proportion of true positives without sacrificing sensitivity.</li>
+    <li>Population genetics principles applicable to your set of samples can further increase the accuracy</li>
+  </ul>
+</section>    
+		
+    <!--VCF File Structure-->
+    <section id="DS1">
+			<h4 style="font-size:120%">VCF File: <strong>Structure</strong></h4>	
+      <ul style="list-style: disc;">
+        <li>GATK provides various annotations to help users filter the variants</li>
+        <li>We will first recall the details of VCF format and then go over the annotations</li>
+      </ul>
+
+      <br>Here is an example VCF, colored using bioSyntax tool.
+      <br><img src="m2files/vcfcolored.png" width="100%" height="auto">
+      <br><strong>Lines 1-29</strong> make up the <code>Header Section</code>, <strong>Lines 30 and below</strong> comprise the <code>Data section</code>
+        <ul style="list-style: disc;">
+          <li><strong>Line 1 </strong>shows VCF version</li>
+          <li><strong>Line 2 </strong>has a single definition of filters (values in the FILTER column). In this example there is only one filter value <code>PASS</code></li>
+          <li><strong>Line 3 to 7 </strong>Definition of Genotype information fields</li>
+          <li><strong>Line 8</strong>the command used to create file</li>
+          <li><strong>Line 9 to 26 </strong>define <code>INFO</code> annotations. The <code>INFO</code> column is usually where all quality related annotations are located. There are quite a few annotations here, we will only use 2 or 3 of these in this presentation</li>
+          <li><strong>Line 27 </strong>lists reference genome contigs names and lengths. In this example there is only one contig. <strong>In real rice datasets you will have 12 lines</strong>, one for each chromosome</li>
+        </ul>
+        Finally in the bottom we see <strong>data section</strong> (only variant related columns, because the INFO column takes a lot of horizontal space). 
+        The actual sample genotype data are in columns starting from the 10th (not shown here). 
+      <br>
+      <br><h4 style="font-size:120%"  id="S2">VCF File: <strong>Section</strong></h4>	
+      VCF file consists of two parts: <strong>header</strong> and <strong>data</strong> section. 
+      <br><img src="m2files/vcfstructure.png" width="auto" height="300">
+      <br>
+      
+      <br>
+      <ul style="list-style:circle;">
+        <li>
+        <h3>Header Section</h3>
+        <p style="margin-top: 5px !important;">The Header contains:
+          <ul style="list-style: disc;">
+            <li>VCF Version</li>
+            <li>Commands used to create file</li>
+            <li>Definitions of annotations</li>
+            <li>Names and lengths of contigs/chromosomes</li>
+            <li>Last line: column names for data matrix</li>
+          </ul></li>
+          </p> 
+        <br>
+        <li>
+        <h3 id="DS3">Data Section</h3>
+        <p>Each data row contains genotype call data defined by the formatting string located in <code>FORMAT</code> column
+          <ul style="list-style: disc; text-align: justify;">
+            <li>Example below: <code>GT:AD:DP:GQ:PL</code> means that each data point consists of 5 values separated by colon(:), namely: <code>: GT: genotype</code>, <code>AD: allele depth</code>… etc.</li>
+                <b>GT - Genotype (Numerical encoding)</b>
+                <ul>
+                  <li><code>0</code> - reference allele, <code>1</code>- first alt allele, <code>2</code>-second alt allele, etc</li>
+                  <li><code>0/1</code> - unphased , <code>0|1</code> - phased heterozygote</li>
+                  <li><code>1/1 </code>homozygous variant (based on 1st alternate allele)</li>
+                </ul>
+            <li>The format can be different for each variant (different rows may have different strings in the FORMAT column), but consistent across samples (i.e. within the row)</li> 
+            <li><strong>Example</strong> - look at the first non-missing genotype call</li>
+            <img src="m2files/gt.png" width="100%" height="auto">
+              <ul>
+                <li>
+                  <code>GT=0/0</code> (homozygous ref)<br>
+                  <code>AD=4,0</code> (4 reads support REF, 0 reads support ALT<br>
+                  <code>DP=4</code><br>
+                  <code>GQ=3</code><br>
+                  <code>PL = 0,3,45</code>(phred-scaled odds , lower is better)
+                </li>
+              </ul>
+          </ul>
+        </p> 
+        </li>
+      </ul>
+    </section>
+
+    <!--QC Annotations-->
+    <section id="DS4">
+    <h4 style="font-size:120%">QC Annotations</h4>	
+    <ul style="list-style: disc;">
+      <li><strong>Genotype Call Level</strong> <i> (for each sample at each variant)</i></li>
+        <ul style="list-style: circle;">
+          <li><code>GQ</code> : genotype quality</li>
+          <li><code>PL</code> : genotype likelihood</li>
+          <li><code>AD</code> :  allele depth <i>(number of reads supporting each allele)</i></li>
+          <li>See <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035531392-Difference-between-QUAL-and-GQ-annotations-in-germline-variant-calling" target="_blank">link</a>
+            for a more detailed explanation of differences between <code>QUAL</code> and <code>GQ</code></li>
+        </ul>
+        <br>
+      <li><strong>Variant Level</strong></li>
+        <ul style="list-style: circle;">
+          <li><code>QUAL</code></li>
+          <li><code>FILTER</code></li>
+          <li><code>INFO</code> : <code>DP</code>, <code>QD</code>, <code>AN</code>, <code>AC</code>, <code>AF</code></li>
+        </ul>
+    </ul>
+    </section>
+
+    <!--QUAL-->
+    <section id="DS5">
+    <h4 style="font-size:120%">QUAL</h4>	
+
+      <p>QUAL is usually defined as: <strong>Phred-scaled probability of having no variant at this position</strong>
+      <br><br>
+
+      <code>higher QUAL = lower prob of no variant = higher prob of real variant</code>
+      </p>
+      <br>
+
+          <table>
+        <thead>
+            <tr>
+                <th>QUAL</th>
+                <th>P(no variant)</th>
+                <th>-logP</th>
+            </tr>
+        </thead>
+        <tbody >
+            <tr>
+                <td>10</td>
+                <td>0.1</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>20</td>
+                <td>0.01</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>30</td>
+                <td>0.001</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>40</td>
+                <td>0.0001</td>
+                <td>4</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+      <p><strong>Phred scaled means take log10 and multiply by -10:</strong></p>
+    <br>
+            <p style="text-align: center;"> 
+              \(QUAL = (−log P(no variant)) * 10\)
+	          </p>    
+
+    <br><br>	    
+    <strong>Question</strong>: How bad/good is <code>QUAL=30</code>?
+    <ul>
+      <li>- In 100,000 variants with QUAL=30, expect 0.001*100,000 = 100 false positives</li>
+    </ul>
+    </section>
+
+    <section id="DS6">
+    <h4 style="font-size:120%">Read Depth (DP)</h4>	
+
+      <p>
+        <ul>
+          <li>DP within INFO column <code>(INFO/DP)</code> : Read depth of coverage for this position across all samples</li>
+          <img src="m2files/DP.png" width="100%" height="auto">
+
+          <li><strong>DP within each genotype call</strong> - read depth for that genotype only example: </li>
+          <br><pre><b>FORMAT          Sample1            Sample2            Sample3</b>
+GT:AD:DP      0/0:12,0 :12        0/1:6,4:10       1/1:0,33:33</pre>
+        </ul>
+        <br>
+        <strong>Note</strong> : <i>DP shows depth <b>AFTER</b> filtering by UG or HC algorithm. It is not the same as BAM read depth.</i>
+      </p>
+    </section>
+    
+    <!--Quality-by-Depth-->
+    <section id="DS7">
+    <h4 style="font-size:120%">Quality-by-Depth (QD)</h4>	
+
+      <p>
+        <ul style="list-style-type: disc;">
+          <li>Quality-by-depth or QUAL-by-depth</li>
+          <li>Motivation:</li>
+            <ul style="list-style-type: circle;">
+              <li>higher DP leads to higher QUAL</li> 
+              <li>thus, to assess quality regardless of depth, need to normalise it. Relevant for high coverage data</li>
+            </ul>
+          <li>QD uses only the reads supporting the ALT allele (so, it’s not simply QUAL/DP)</li>
+            <ul style="list-style-type: circle;">
+              <li>For exact definition see <a href="https://gatk.broadinstitute.org/hc/en-us/articles/5257827326747-QualByDepth" target="_blank">GATK documentation</a></li>
+            </ul>
+          <li>QD distribution is usually bimodal (smaller QD peak from heterozygous calls, larger QD peak from homozygous alt calls)</li>
+          <li>GATK filtering recommendation: <code>QD > 2</code></li>
+        </ul>
+      </p>     
+    </section>
+
+    <!--MQ and MQ0-->
+    <section id="DS8">
+    <h4 style="font-size:120%">MQ and MQ0</h4>	
+      
+      <ul style="list-style: disc;">
+        <li><strong>MQ: Mapping quality</strong></li>
+          <ul style="list-style: circle;">
+            <li>Defined in VCF header as: <code>##INFO=(ID=MQ,Number=1,Type=Float,Description="RMS Mapping Quality")</code></li>
+            <li>Each read has a mapping quality - confidence that alignment is good</li>
+            <li>MQ is an average of mapping quality across all reads supporting the variant 
+              <br><code>(actual average measure: Root Mean Square)</code></li>
+          </ul>
+        <br>
+        <li><strong>MQ0: number of reads with mapping quality 0</strong></li>
+          <ul style="list-style: circle;">
+            <li>Many reads with MQ=0 signify a region that is hard to align - perhaps should not trust </li>
+          </ul>
+      </ul>
+      <br>
+      <p><strong>Recommended minimum <code>MQ = S40</code></strong></p>
+    </section>
+
+    <!--Allele Frequency Annotations-->
+    <section id="DS9">
+    <h4 style="font-size:120%">Allele Frequency Annotations</h4>
+    <h4 style="font-size:110%">AN, AC, AF</h4>
+      <ul>
+        <li><code><strong>AN</strong></code></li>
+          <ul style="list-style: circle;">
+            <li>Total number of chromosomes with called allele</li>
+            <li>Number of non-missing genotypes times ploidy</li>
+          </ul>
+          <br>
+        <li><code><strong>AC</strong></code></li>
+          <ul style="list-style: circle;">
+            <li>Number of chromosomes carrying ALT allele in case of several ALT alleles (multiallelic SNP)</li>
+            <li>The counts will be separated by comma <code>“,”</code></li>
+          </ul>
+          <br>
+        <li><code><strong>AF</strong></code></li>
+          <ul style="list-style: circle;">
+            <li>Allele Frequency</li>
+            <li>Proportion of chromosomes carrying ALT allele = <code>AC/AN</code></li>
+          </ul>        
+      </ul>
+
+      <br>
+      <p>
+        <ul style="list-style: disc;"">
+          <li>These quantities can also be extracted from simpler formats like <code>HapMap</code> and <code>PLINK</code> </li>
+          <li>VCF also has some related quantities with prefix MLE (maximum likelihood estimate): <code>MLEAC</code>, <code>MLEAF</code>. <strong>We will not use these.</strong></li>
+        </ul>
+      </p>
+    </section>
+
+    <!--Filtering on AF-->
+    <section id="DS10">
+    <h4 style="font-size:120%">Filtering on Allele Frequency</h4>
+
+      <ul style="list-style: disc;">
+        <li>Filtering on allele frequency is perhaps most popular type of filtering. You may see recommendations like 
+          <br><code style="text-align: center;">filter all alleles with frequency < 1% or 5%</code></li><br>
+        <li>While this is helpful in most cases, there are some considerations to keep in mind</li>
+      </ul>
+    </section>
+
+
+    <!--Base Calling Errors-->
+    <section id="DS11">
+    <h4 style="font-size:120%">Base Calling Errors</h4>
+
+      <ul style="list-style: disc; text-align: justify;">
+        <li>Sequencing (base calling) errors are very rare events, and thus are mostly found as singleton SNPs (i.e. appear only in a single sample).</li>
+          <ul style="list-style: circle;">
+            <li>However, base calling errors will typically appear in only one read covering a position, and GATK tries to detect these.. The variant quality (QUAL and GQ) will typically reflect this and filtering based on GATK annotations should deal with most of these.</li>
+            <li>On the other hand, based on population genetics we expect an abundance of singleton SNPs in every diverse sample.( Highest number across all frequency bins).</li>
+            <li>With data produced by modern NGS* instruments, most singleton SNPs are actually true SNPs.</li>
+          </ul>
+          <br>
+        <li>Depending on analysis needed, one may wish to retain even rarest SNPs, after filtering based on GATK annotations only (no allele frequency filtering).</li>
+      </ul>
+    </section>
+
+    <!--Alignment Errors-->
+    <section id="DS12">
+    <h4 style="font-size:120%">Alignment Errors</h4>
+      <ul style="list-style: disc; text-align: justify;">
+        <li>Plant genomes are complicated:</li>
+          <ul style="list-style: circle;">
+            <li>Ubiquitous repeats</li>
+            <li>Traces of ancient WGD (whole genome duplication)</li>
+            <li>Divergence in terms of structural variants. Sample genome may have large deletions, insertions, translocations, or inversions, compared to the reference genome</li>
+          </ul>
+          <br>
+        <li>As a result, read mapping is imperfect. Reads originating from one place in the genome may be mapped to another</li>
+        <li>This is most common source of false variants. These come from a real biological signal (correctly sequenced read), but are not positioned correctly</li>
+          <ul style="list-style: circle;">
+            <li>sometimes can hinder genotyping a true variant (one can have both true and false genotype at the same position)</li>
+          </ul>
+        <li>The same alignment error can be affecting multiple samples, and the resulting false SNPs may have high allele frequency.</li>
+      </ul>
+    </section>
+
+    <!--Heterozygosity-->
+    <section id="DS13">
+    <h4 style="font-size:120%">Heterozygosity</h4>
+      <ul style="list-style: disc;">
+        <li>For an inbred species, the expected amount of heterozygotes at a given SNP position is less than for randomly mating population, and is given by a (modified) Hardy-Weinberg formula</li>
+          <ul>
+            <!--<li><code>Expected prop. of het. = 2p(1-p)(1-F)</code> -->
+
+            <p style="text-align: center;"> 
+              \(Expected.prop.of.het. = 2p(1-p)(1-F)\)
+	          </p>    		    
+		    
+              <br><br>where:
+	      <code><br>F is the inbreeding coefficient</code>
+              <code> <br>p is the allele frequency</code></li>
+          </ul>
+          <br>
+        <li><code>F</code> can be estimated from genome-wide data. GATK in multi-sample genotyping mode also provides estimates of <code>F (InbreedingCoef)</code>. </li>
+      </ul>
+      
+    <br><br>
+    <h4 id="DS14" style="font-size:110%">Allele frequency vs heterozygosity in 3K data</h4>
+
+    <strong><p>Figure 1</p></strong>
+    <img src="m2files/AF1.png" width="100%" height="auto">
+    <ul style="list-style: disc;">
+      <li>Observe that the distribution is quite far from random mating expectation <b><span style="color:#7e0404;">(red curve)</span></b></li>
+      <li><code>Y axis</code>: proportion of heterozygous calls 
+        <br> <code>X axis</code>: allele frequency</li>
+    </ul>
+
+    <br><br>
+    <strong><p>Figure 2</p></strong>
+    <img src="m2files/AF2.png" width="100%" height="auto">
+    <ul style="list-style: disc;">
+      <li>Same figure with repeat region SNPs colored <b><span style="color:#0752a8;">blue</span></b></li>
+      <li>Higher heterozygosity SNPs tend to concentrate in repeat regions</li>
+    </ul>
+
+    <br><br>
+    <strong><p>Figure 3</p></strong>
+    <img src="m2files/AF3.png" width="100%" height="auto">
+    <ul style="list-style: disc;">
+      <li>Same plot with log axis for Y. It is seen more clearly that SNPs in non-repetitive regions are at the small heterozygosity proportion</li>
+    </ul>    
+
+    <br><br>
+    <h4 id="DS15" style="font-size:110%">SNP heterozygosity along genome</h4>
+
+    <strong><p>Figure 1</p></strong>
+    <img src="m2files/snpH.png" width="100%" height="auto">
+    <ul style="list-style: disc;">
+      <li>Shown is the beginning of <code>Chr9</code></li>
+      <li>Highly heterozygous SNPs are clustered <b><span style="color:#7e0404;">(red curve)</span></b>, consistent with their potential origin in duplications</li>
+      <li>They are quite ubiquitous, can explain a large proportion of raw SNPs that are filtered</li>
+    </ul>
+
+
+    <br><br>
+    <h4 id="DS16" style="font-size:110%">Filtering: <strong>based on heterozygosity</strong></h4>
+    <ul style="list-style: disc;">
+      <li>Initial filtering using QD annotation deals with many alignment errors</li>
+      <li>If <code>InbreedingCoef</code> is available, it may be used, otherwise we can estimate it</li>
+    </ul>
+    
+    <br><br>
+    <h4 style="font-size:110%">Filtering: <strong>based on Hardy-Weinberg</strong></h4>
+    <ul style="list-style: disc;">
+      <li><code>Question:</code> "Some tools (e.g. PLINK) have a built-in filtering based on testing Hardy-Weinberg expectation. Can we use that filtering when we analyse rice data"?</li>
+        <ul>
+          <li><strong>Short Answer:</strong> No</li>
+          <li>The built-in HWE test does not account for inbreeding, thus it is inappropriate for rice.</li>
+        </ul>
+    </ul>
+    </section>
+
+    <!--Hardy-Weinberg-->
+    <section id="DS17">
+    <h4 style="font-size:120%">Why the <strong>standard</strong> Hardy-Weinberg can be inappropriate</h4>
+        <img src="m2files/HW.png" width="100%" height="auto">
+   
+       <ul style="list-style: disc;">
+        <li><code>Y axis</code>: test statistics (high values result in filtering out)
+          <br><code>X axis</code>: proportion of het calls</li>
+        <li>If you use standard HW filtering, you lose a lot of good SNPs. Need to use modified HW filtering</li>
+      </ul>  
+    
+      <br>
+    <h4 style="font-size:120%"><strong>Modified</strong> Hardy-Weinberg</h4>
+      <ul>
+        <li>Expected proportion of heterozygous calls under standard  HW: </li>
+          <ul>
+          <p style="text-align: center;"> 
+            \(Hexp = 2p(1-p)\)
+	   </p> <br>	
+          </ul>
+        
+          <li>When there is inbreeding, the expected proportion of hets is given by the following formula</li>
+          <ul>
+          <p style="text-align: center;"> 
+            \(Hexp = 2p(1-p)(1-F)\)
+	   </p> <br>
+            <br><code>F</code> = inbreeding coefficient
+            <br><code>F > 0.95</code> for rice
+          </ul>          
+      </ul>  
+    </section>
+
+    <!--Take-away-->
+    <section id="DS18">
+    <h4 style="font-size:120%">Take-away</h4>
+
+      <ul style="list-style: disc; text-align: justify;">
+        <li>Variant callers output both true and false variants due to various errors (base calling errors, alignment errors, contamination) and filtering helps to overcome those errors.</li>
+        <li>Different analyses may require different filtering procedures. Allele frequency filtering is good for some analyses (GWAS), but could potentially lead to bias in other analysis (divergence)</li>
+        <li>Using population genetics principles can help design filtering that fits your data</li>
+        <li>For inbred species, filtering based on heterozygosity/inbreeding coefficient is appropriate (and built-in tools based on HW filtering for human data are not appropriate)</li>
+      </ul>
+    </section>		
+    
+    
+
+    <!--Day 2 Hands-on-->
+ 	<!-- Pipeline -->   
+		<section id="AS6">
+			<h3>Variant Calling Pipeline </h3> 
+			<h4 style="margin-bottom: 1px !important;">Description</h4>
+			<p style="margin-top: 5px !important;">This is a pipeline for variant calling based on best practices for GATK4</p>
+			<h4 style="margin-bottom: 1px !important;">Requirements and Preparation </h4>
+			<ol style="margin-top: 5px !important;">
+				<li>Ubuntu installation on your laptop/workstation</li>
+				<li>Installation of the necessary tools</li>
+					<ol type="a">
+						<li>BWA, FastP, FastQC, GATK4, Picard, Samtools</li>
+					</ol>
+				<li><a href="input/sample.tar.gz">Demo dataset</a></li>
+					<ol type="a">
+						<li><strong>Reference:</strong><code>Ref.fasta</code></li>
+						<li><strong>Data:</strong><code>sample-1_1.fq.gz  sample-1_2.fq.gz</code></li>
+					</ol>
 			</ol>
+    
+      			<h4 style="margin-bottom: 10px !important;">Pipeline</h4>
+		      	<p style="margin-top: 30px !important;"><img src="m2files/workflow.png" width="auto" height="auto"></p>
+		</section>
+			
+    <!--Data Preparation-->
+    <section>
+			<h4 style="font-size:110%">Data Preparation and Import</h4>	
+      <ol>
+        <li id="AS1"><b>Unpack the sample dataset archive.</b></li>
+          <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+                    <code class="codeStyle">tar -xzvf sample.tar.gz</code>
+					        </div>
+                </td>
+                </tr>
+               </table>
+               <button class="copy-btn">Copy</button>
+              </li>
+              <li><p><i>Extracts the <code>sample.tar.gz</code> archive</i></p></li>              
+            </ul>
+        </details>
+          <details>
+            <summary><b>Output</b></summary>
+            <ul><li><img src="m2files/o1.png" width="650" height="115"></li>
 
+    <style>
+        .box {
+            background-color: #f0f0f0; /* Set the background color */
+            padding: 1px; /* Add some space around the text */
+            width: 645px; /* Control the width of the box */
+            font-family: monospace; /* Use a monospace font for the tree structure */
+            white-space: pre-wrap; /* Ensure that the text wraps */
+            border: 1px solid #ccc; /* Optional: Add a border around the box */
+            margin: 1px; /* Optional: Add margin around the box */
+        }
+    </style>
+
+
+<li>   <div class="box">
+          sample
+          ├── Data
+          │   ├── sample-1_1.fq.gz
+          │   └── sample-1_2.fq.gz
+          └── Ref
+              └── Ref.fasta
+
+          3 directories, 3 files
+    </div></li></ul>
+        </details>
+        <br>
+        <li id="AS2"><b>Create <code>Output</code> directory.</b></li>
+          
+          <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+				          	<code class="codeStyle">cd sample </code>
+			          	</div>                       
+                </td>
+                </tr>         
+               </table>
+                <button class="copy-btn">Copy</button>
+              </li>
+              <br>
+              <li>
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+				          	<code class="codeStyle">mkdir Output</code>
+			          	</div>                       
+                </td>
+                </tr>         
+               </table>
+                <button class="copy-btn">Copy</button>                
+
+              </li>
+
+              <li><p><i>Changes the current directory to <code style="font-family: Courier, monospace;">sample</code> and creates a new directory named <code style="font-family: Courier, monospace;">Output</code><br> inside it.</i></p></li>              
+            </ul>
+        </details>
+        <details>
+            <summary><b>Output</b></summary>
+            <ul><li><img src="m2files/o2.png" width="650" height="115"></li>
+        </details>
+      </ol>    
+    </section>
+
+    <!--REFERENCE DATA PREPARATION-->
+		<section id="AS8">
+			<h4 style="font-size:110%">Reference Data Preparation (Indexing)</h4>	
+      <ol>
+
+         <!--BWA INDEX-->       
+        <li><h4 id="S17" style="font-size:109%; margin-bottom: 5px !important;">BWA Index</h4></li>
+         <strong>Syntax</strong>
+         <table style="width: 100%; border-collapse: collapse; margin-bottom: 5px;">
+           <tr>
+             <td style="font-family: Courier, monospace; background-color: #f0f0f0; padding: 12px; border: 1px solid #ccc;">
+               <span style="color: #4622a7;">bwa index</span> <span style="color: #0752a8;">[Reference.fasta]</span>
+             </td>
+           </tr>
+         </table>
+        
+          <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+           				<div class="code_div"></div>
+					          <code class="codeStyle">bwa index Ref/Ref.fasta</code>
+			            </div>           
+                </td>
+                </tr>
+               </table>
+                  <button class="copy-btn">Copy</button>
+              </li>
+              <li><p><i>Indexes the <code style="font-family: Courier, monospace;">Ref.fasta</code> file using the BWA tool</i></p></li>              
+            </ul>
+        </details>
+
+        <details>
+            <summary><b>Output</b></summary>
+            <ul>
+              <li><strong>Files:</strong></li>
+                <code>Ref.fasta.bwt</code><br>
+                <code>Ref.fasta.pac</code><br>
+                <code>Ref.fasta.ann</code><br>
+                <code>Ref.fasta.amb</code><br>
+                <code>Ref.fasta.sa</code><br>
+                <p>
+
+                </p>
+              <li><img src="m2files/o3.png" width="650" height="130"></li>
+        </details>
+
+        <!--SAMTOOLS FAIDX-->
+        <li><h4 id="AS18" style="font-size:109%; margin-bottom: 5px !important;">Samtools faidx</h4></li>
+          <strong>Syntax</strong>
+          <table style="width: 100%; border-collapse: collapse; margin-bottom: 5px;">
+            <tr>
+              <td style="font-family: Courier, monospace; background-color: #f0f0f0; padding: 12px; border: 1px solid #ccc;">
+               <span style="color: #4622a7;">samtools faidx</span> <span style="color: #0752a8;">[Reference.fasta]</span>
+              </td>
+            </tr>
+          </table>  
+
+           <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+					          <code class="codeStyle">samtools faidx Ref/Ref.fasta</code>
+			            </div>                             
+                </td>
+                </tr>
+               </table>
+                  <button class="copy-btn">Copy</button>
+              </li>
+              <li><p><i>Indexes the <code style="font-family: Courier, monospace;">Ref.fasta</code> file using samtools</i></p></li>              
+            </ul>
+        </details>
+
+        <details>
+            <summary><b>Output</b></summary>
+            <ul>
+              <li><strong>File: </strong><code>Ref.fasta.fai</code></li>
+              <li><img src="m2files/o4.png" width="650" height="138"></li>
+        </details>
+
+        <!--PICARD CREEATESEQUENCEDICTIONARY--> 
+        <li><h4 id="AS19" style="font-size:109%; margin-bottom: 5px !important;">Picard CreateSequenceDictionary</h4></li>
+        <strong>Syntax</strong>
+          <table style="width: 100%; border-collapse: collapse; margin-bottom: 5px;">
+            <tr>
+              <td style="font-family: Courier, monospace; background-color: #f0f0f0; padding: 12px; border: 1px solid #ccc;">
+                <span style="color: #0c0c0c;">java -jar</span> 
+                <span style="color: #4622a7;">$PICARD</span>
+                <span style="color: #4622a7;">CreateSequenceDictionary</span> 
+                <span style="color: #8d5409;">-REFERENCE</span> <span style="color: #0752a8;">[Reference.fasta]</span> 
+                <span style="color: #8d5409;">-OUTPUT</span> <span style="color: #417905;">[Reference.dict]</span>
+              </td>
+            </tr>
+          </table>
+
+        <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+					          <code class="codeStyle">java -jar $PICARD CreateSequenceDictionary -REFERENCE Ref/Ref.fasta -OUTPUT Ref/Ref.dict</code>
+			            </div> 
+                </td>
+                </tr>
+               </table>
+                <button class="copy-btn">Copy</button>
+              </li>
+              <li><p><i>Creates a sequence dictionary for <code style="font-family: Courier, monospace;">Ref.fasta</code></i></p></li>              
+            </ul>
+        </details>
+
+        <details>
+            <summary><b>Output</b></summary>
+            <ul>
+              <li><strong>File: </strong><code>Ref.dict</code></li>
+              <li><img src="m2files/o5.png" width="650" height="165"></li>
+        </details>
+      </ol>  
+			</section>
+
+      <!--RAW READ PREPARATION-->    
+			<section >	
+        <h4 style="font-size:110%;">Raw Read Preparation</h4>
+				<ol>
+        <!--Quality Check-->
+				<li><h4 id="AS9">Quality Check</h4></li>
+        <strong>Syntax</strong>
+        
+        <table style="font-family: Courier, monospace; background-color: #f7f7f7; border-collapse: collapse; width: 100%; margin: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 5px;">
+          <tr>
+            <td style="padding: 12px 16px; border: 1px solid #ccc;">
+             <span style="color:#4622a7;">fastqc</span>
+             <span style="color:#0752a8;">[in1.fq]</span>
+             <span style="color:#0752a8;">[in2.fq]</span>
+            <span style="color:#0752a8;">[...inN.fq]</span>
+            </td>
+          </tr>
+        </table>
+
+        <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+					          <code class="codeStyle">fastqc Data/sample-1_1.fq.gz Data/sample-1_2.fq.gz</code>
+			            </div>                     
+                </td>
+                </tr>
+               </table>
+                <button class="copy-btn">Copy</button>
+              </li>
+              <li><p><i>Runs FastQC analysis on files <code style="font-family: Courier, monospace;">sample-1_1.fq.gz</code> and <code style="font-family: Courier, monospace;">sample-1_2.fq.gz</code></i></p></li>              
+            </ul>
+        </details>
+
+        <details>
+            <summary><b>Output</b></summary>
+            <ul>
+              <li><strong>File: </strong><code>FastQC reports</code></li>
+              <li><img src="m2files/o6.png" width="650" height="140"></li>
+        </details>
+
+        <!--Cleaning of Reads-->
+				<li><h4 id="AS10" style="font-size:109%">Cleaning</h4></li>
+        <strong>Syntax</strong>
+
+        <table style="font-family: Courier, monospace; background-color: #f7f7f7; border-collapse: collapse; width: 100%; margin: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 5px;">
+         <tr>
+          <td style="padding: 12px 16px; border: 1px solid #ccc;">
+           <span style="color:#4622a7;">fastp</span>
+           <span style="color:#8d5409;">-i</span> <span style="color:#0752a8;">[in1.fq]</span>
+           <span style="color:#8d5409;">-I</span> <span style="color:#0752a8;">[in2.fq]</span>
+           <span style="color:#8d5409;">-o</span> <span style="color:#417905;">[out1.fq]</span>
+           <span style="color:#8d5409;">-O</span> <span style="color:#417905;">[out2.fq]</span>
+          </td>
+         </tr>
+        </table>
+
+        <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+					          <code class="codeStyle">fastp -i Data/sample-1_1.fq.gz -I Data/sample-1_2.fq.gz -o Data/sample-1_1-cleaned.fq.gz -O Data/sample-1_2-cleaned.fq.gz</code>
+			            </div>    
+                </td>
+                </tr>
+               </table>
+                <button class="copy-btn">Copy</button>
+              </li>
+              <li><p><i>Clean reads <code style="font-family: Courier, monospace;">sample-1_1.fq.gz</code> and <code style="font-family: Courier, monospace;">sample-1_2.fq.gz</code></i></p></li>              
+            </ul>
+        </details>
+
+        <details>
+            <summary><b>Output</b></summary>
+            <ul>
+              <li><strong>File: </strong><code>*-cleaned.fq.gz</code></li>
+              <li><img src="m2files/o7.png" width="650" height="155"></li>
+        </details>
+
+        </ol> 
+      </section>	
+
+      <!--ALIGNMENT-->
+			<section id="AS11">
+				<h4 id="S9" style="font-size:110%">Alignment to Reference Genome</h4>
+        <strong>Syntax</strong>
+
+				<table style="font-family: Courier, monospace; background-color: #f7f7f7; border-collapse: collapse; width: 100%; margin: 10px 0;">
+ 				 <tr>
+    				<td style="padding: 10px 15px; border: 1px solid #ccc;">
+      				<span style="color:#4622a7;">bwa mem</span> 
+              <span style="color:#8d5409;">arguments</span>
+      				<span style="color:#0752a8;">[Reference.fasta]</span>
+      				<span style="color:#0752a8;">[in1.fq]</span>
+     			 	<span style="color:#0752a8;">[in2.fq]</span>
+      				<span style="color:#000;">&gt;</span>
+      				<span style="color:#417905;">[aln.sam]</span>
+    				</td>
+  				</tr>
+				</table>
+
+        <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+					          <code class="codeStyle">bwa mem -t 8 Ref/Ref.fasta Data/sample-1_1-cleaned.fq.gz Data/sample-1_2-cleaned.fq.gz > Output/sample.sam</code>
+			            </div>                      
+                </td>
+                </tr>
+               </table>
+                  <button class="copy-btn">Copy</button>
+              </li>
+              <li><p><i>Align cleaned reads <code style="font-family: Courier, monospace;">sample-1_1-cleaned.fq.gz</code> and <code style="font-family: Courier, monospace;">sample-1_2-cleaned.fq.gz</code><br>
+              to a reference genome <code style="font-family: Courier, monospace;">Ref.fasta</code></i></p></li>              
+            </ul>
+        </details>
+
+        <details>
+            <summary><b>Output</b></summary>
+            <ul>
+              <li><strong>File: </strong><code>sample.sam</code></li>
+              <li><img src="m2files/o8.png" width="650" height="50"></li>
+        </details>
+			</section>
+
+      <!--Sorting of reads-->
+			<section id="AS12"> 
+			<h4 style="font-size:110%">Sorting</h4>	
+				<p style="font-size:108%"><b>Tool:</b><a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037594291-SortSam-Picard" target="_blank"><strong>SortSam</strong></a></p>
+
+        <strong>Syntax</strong>
+        <table style="font-family: Courier, monospace; background-color: #f7f7f7; border-collapse: collapse; width: auto; margin: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 5px;">
+          <tr>
+            <td style="padding: 12px 16px; border: 1px solid #ccc;">
+              <span style="color:#0c0c0c;">java -jar</span> <span style="color: #4622a7;">$GATK SortSam</span> 
+              <span style="color:#8d5409;">--INPUT</span> <span style="color:#0752a8;">[aln.sam]</span>
+              <span style="color:#8d5409;">--OUTPUT</span> <span style="color:#417905;">[sorted.bam]</span>
+              <span style="color:#8d5409;">-SORT_ORDER</span> <span style="color:#0752a8;">[coordinate]</span>
+            </td>
+          </tr>
+        </table>
+
+        <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+					          <code class="codeStyle">java -jar $GATK SortSam --INPUT Output/sample.sam --OUTPUT Output/sample.sorted.bam -SORT_ORDER coordinate</code>
+			            </div>                      
+                </td>
+                </tr>
+               </table>
+                <button class="copy-btn">Copy</button>
+              </li>
+              <li><p><i>Sorts <code style="font-family: Courier, monospace;">sample.sam</code> file by coordinate.</i></p></li>              
+            </ul>
+        </details>
+
+        <details>
+            <summary><b>Output</b></summary>
+            <ul>
+              <li><strong>File: </strong><code>sample.sorted.bam</code></li>
+              <li><img src="m2files/o9.png" width="650" height="60"></li>
+        </details>
+        
+			</section>
+
+
+      <!--Fixmateinformation-->
+			<section id="AS13">
+			<h4 style="font-size:110%">Fix mate information</h4>	
+			<p style="font-size:108%"><b>Tool:</b><a href="https://gatk.broadinstitute.org/hc/en-us/articles/4405451362843-FixMateInformation-Picard" target="_blank"><strong>FixMateInformation</strong></a></p>
+
+      <strong>Syntax</strong>
+       <table style="font-family: Courier, monospace; background-color: #f7f7f7; border-collapse: collapse; width: 100%; margin: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 5px;">
+         <tr>
+            <td style="padding: 12px 16px; border: 1px solid #ccc;">
+              <span style="color:#0c0c0c;">java -jar</span>
+              <span style="color:#4622a7;">$GATK FixMateInformation</span>
+              <span style="color:#8d5409;">--INPUT</span> <span style="color:#0752a8;">[sorted.bam]</span>
+              <span style="color:#8d5409;">--OUTPUT</span> <span style="color:#417905;">[fxmt.bam]</span>
+              <span style="color:#8d5409;">--CREATE_INDEX</span> <span style="color:#0752a8;">[TRUE]</span>
+              <span style="color:#8d5409;">--VALIDATION_STRINGENCY</span> <span style="color:#0752a8;">[LENIENT]</span>
+            </td>
+          </tr>
+        </table>     
+
+        <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+					          <code class="codeStyle">java -jar $GATK  FixMateInformation --INPUT Output/sample.sorted.bam --OUTPUT Output/sample.fxmt.bam --CREATE_INDEX TRUE --VALIDATION_STRINGENCY LENIENT</code>
+			            </div>                     
+                </td>
+                </tr>
+               </table>
+                  <button class="copy-btn">Copy</button>
+              </li>
+              <li><p><i>Fixes mate information in a sorted BAM file <code style="font-family: Courier, monospace;">sample.sorted.bam</code> .</i></p></li>              
+            </ul>
+        </details>
+
+        <details>
+            <summary><b>Output</b></summary>
+            <ul>
+              <li><strong>Files: </strong></li>
+              <code>sample.fxmt.bam</code><br>
+              <code>sample.fxmt.bai</code><br>
+              <br>
+              <li><img src="m2files/o10.png" width="650" height="80"></li>
+        </details>
+
+      </section>
+
+      <!--ADD READ GROUP INFO-->
+			<section id="AS14">
+			<h4 style="font-size:110%">Add Read Group Information</h4>	
+			<p style="font-size:108%"><b>Tool:</b><a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037226472-AddOrReplaceReadGroups-Picard" target="_blank"><strong>AddOrReplaceReadGroups</strong></a></p>
+
+      <strong>Syntax</strong>
+
+        <table style="font-family: Courier, monospace; background-color: #f7f7f7; border-collapse: collapse; width: 100%; margin: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 5px;">
+          <tr>
+            <td style="padding: 12px 16px; border: 1px solid #ccc;">
+              <span style="color:#0c0c0c;">java -jar</span>
+              <span style="color: #4622a7;">$GATK AddOrReplaceReadGroups</span>
+              <span style="color:#8d5409;">--INPUT</span> <span style="color:#0752a8;">[fxmt.bam]</span>
+              <span style="color:#8d5409;">--OUTPUT</span> <span style="color:#417905;">[addrep.bam]</span>
+              <span style="color:#8d5409;">--RGID</span> <span style="color:#0752a8;">[ID]</span>
+              <span style="color:#8d5409;">--RGPU</span> <span style="color:#0752a8;">[Unit]</span>
+              <span style="color:#8d5409;">--RGLB</span> <span style="color:#0752a8;">[Library]</span>
+              <span style="color:#8d5409;">-PL</span> <span style="color:#0752a8;">[Platform]</span>
+              <span style="color:#8d5409;">-SM</span> <span style="color:#0752a8;">[SampleName]</span>
+              <span style="color:#8d5409;">-CN</span> <span style="color:#0752a8;">[CenterName]</span>
+              <span style="color:#8d5409;">--VALIDATION_STRINGENCY</span> <span style="color:#0752a8;">[LENIENT]</span>
+              <span style="color:#8d5409;">--CREATE_INDEX</span> <span style="color:#0752a8;">[TRUE]</span>
+            </td>
+          </tr>
+        </table>
+
+        <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+					          <code class="codeStyle">java -jar $GATK AddOrReplaceReadGroups --INPUT Output/sample.fxmt.bam --OUTPUT Output/sample.addrep.bam --RGID run100 --RGPU unit1 --RGLB lib1 -PL Illumina -SM sample -CN CN --VALIDATION_STRINGENCY LENIENT --CREATE_INDEX TRUE</code>
+			            </div>        
+                </td>
+                </tr>
+               </table>
+                  <button class="copy-btn">Copy</button>
+              </li>
+              <li><p><i>Adds read group information in <code style="font-family: Courier, monospace;">sample.fxmt.bam</code> file.</i></p></li>              
+            </ul>
+        </details>
+
+        <details>
+            <summary><b>Output</b></summary>
+            <ul>
+              <li><strong>Files: </strong></li>
+              <code>sample.addrep.bam</code><br>
+              <code>sample.addrep.bai</code><br>
+              <br>
+              <li><img src="m2files/o11.png" width="650" height="130"></li>
+        </details>      
+
+			</section>
+
+			<!--MARK DUPLICATES-->
+		  <section id="AS15">
+		  <h4 style="font-size:110%">Mark Duplicates</h4>		 
+		  <p style="font-size:108%"><b>Tool:</b><a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037052812-MarkDuplicates-Picard" target="_blank"><strong>MarkDuplicates</strong></a></p>
+
+      <strong>Syntax</strong>
+
+      <table style="font-family: Courier, monospace; background-color: #f7f7f7; border-collapse: collapse; width: 100%; margin: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 5px;">
+        <tr>
+          <td style="padding: 12px 16px; border: 1px solid #ccc;">
+            <span style="color:#0c0c0c;">java -jar</span>
+            <span style="color:#4622a7">$GATK MarkDuplicates</span>
+            <span style="color:#8d5409;">--INPUT</span> <span style="color:#0752a8;">[addrep.bam]</span>
+            <span style="color:#8d5409;">--OUTPUT</span> <span style="color:#417905;">[mkdup.bam]</span>
+            <span style="color:#8d5409;">--CREATE_INDEX</span> <span style="color:#0752a8;">[TRUE]</span>
+            <span style="color:#8d5409;">--VALIDATION_STRINGENCY</span> <span style="color:#0752a8;">[LENIENT]</span>
+            <span style="color:#8d5409;">--METRICS_FILE</span> <span style="color:#417905;">[mkdup.metrics]</span>
+            <span style="color:#8d5409;">--MAX_FILE_HANDLES_FOR_READ_ENDS_MAP</span> <span style="color:#0752a8;">[1000]</span>
+          </td>
+        </tr>
+      </table>
+
+        <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+					          <code class="codeStyle">java -jar $GATK MarkDuplicates --INPUT Output/sample.addrep.bam --OUTPUT Output/sample.mkdup.bam --VALIDATION_STRINGENCY LENIENT --CREATE_INDEX TRUE --METRICS_FILE Output/sample.mkdup.metrics --MAX_FILE_HANDLES_FOR_READ_ENDS_MAP 1000</code>
+			            </div>                    
+                </td>
+                </tr>
+               </table>
+                  <button class="copy-btn">Copy</button>
+              </li>
+              <li><p><i>Identifies and marks duplicate reads in <code style="font-family: Courier, monospace;">sample.addrep.bam</code> file.</i></p></li>              
+            </ul>
+        </details>
+
+        <details>
+            <summary><b>Output</b></summary>
+            <ul>
+              <li><strong>Files: </strong></li>
+              <code>sample.mkdup.bam</code><br>
+              <code>sample.mkdup.bai</code><br>
+              <code>sample.mkdup.metrics</code><br>
+              <br>
+              <li><img src="m2files/o12.png" width="650" height="160"></li>
+        </details>  
+    
+		  </section>
+
+      <!--MERGING BAM FILES (OPTIONAL)-->
+      <section id="AS20">
+		  <h4 style="font-size:110%">Merging BAM Files <i>(Optional)</i></h4>		 
+		  <p style="font-size:108%"><b>Tool:</b><a href="https://www.htslib.org/doc/samtools-merge.html" target="_blank"><strong>samtools merge</strong></a></p>
+      
+      <strong>Syntax</strong>
+      <table style="font-family: Courier, monospace; background-color: #f7f7f7; border-collapse: collapse; width: 100%; margin: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 5px;">
+        <tr>
+          <td style="padding: 12px 16px; border: 1px solid #ccc;">
+            <span style="color:#4622a7;">samtools merge</span>
+            <span style="color:#417905;">[out.bam]</span>           
+            <span style="color:#0752a8;">[in1.bam]</span>
+            <span style="color:#0752a8;">[in2.bam]</span>
+          </td>
+        </tr>
+      </table>
+
+        <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+					          <code class="codeStyle">samtools merge SB4-1A_SHB134-11-44.mkdup.bam   \
+                      ./V300088030.4/Output/V300088030.4.mkdup.bam \
+                      ./V300081906.4/Output/V300081906.4.mkdup.bam \
+                      ./V300082057.1/Output/V300082057.1.mkdup.bam
+                    </code>
+			            </div>                    
+                </td>
+                </tr>
+               </table>
+              </li>            
+            </ul>
+        </details>
+
+      </section>
+
+      <!--VARIANT CALLING-->
+  		<section id="AS16">
+	  	<h4 style="font-size:110%">Variant Calling</h4>
+		  <p style="font-size:108%"><b>Tool:</b><a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037225632-HaplotypeCaller" target="_blank"><strong>HaplotypeCaller</strong></a></p>
+
+      <strong>Syntax</strong>
+
+        <table style="font-family: Courier, monospace; background-color: #f7f7f7; border-collapse: collapse; width: 100; margin: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 5px;">
+          <tr>
+            <td style="padding: 12px 16px; border: 1px solid #ccc;">
+              <span style="color:#0c0c0c;">java -jar</span>
+              <span style="color:#4622a7;">$GATK HaplotypeCaller</span>
+              <span style="color:#8d5409;">-R</span> <span style="color:#0752a8;">[Reference.fasta]</span>
+              <span style="color:#8d5409;">-I</span> <span style="color:#0752a8;">[mkdup.bam]</span>
+              <span style="color:#8d5409;">-O</span> <span style="color:#417905;">[file.g.vcf]</span>
+              <span style="color:#8d5409;">-ERC</span> <span style="color:#0752a8;">[GVCF]</span>
+              <span style="color:#8d5409;">--bam-output</span> <span style="color:#417905;">[file.bamout.bam]</span>
+              <span style="color:#8d5409;">--showHidden</span> <span style="color:#0752a8;">[true]</span>
+            </td>
+          </tr>
+        </table>
+
+        <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+           				<div class="code_div"></div>
+					          <code class="codeStyle">
+							      java -jar $GATK HaplotypeCaller \ <br>
+                    -R Ref/Ref.fasta \ <br>
+                    -I Output/sample.mkdup.bam \ <br>
+                    -O Output/sample.g.vcf \ <br>
+                    -ERC GVCF \ <br>
+                    --bam-output Output/sample.bamout.bam \<br>
+                    --showHidden true
+							      </code>
+			            </div>  
+                </td>
+                </tr>
+               </table>
+                  <button class="copy-btn">Copy</button>
+              </li>
+              <li><p><i>Performs variant calling on a BAM file  <code style="font-family: Courier, monospace;">sample.mkdup.bam</code> against a reference genome <br>
+              <code>Ref.fasta</code></i></p></li>              
+            </ul>
+        </details>
+
+        <details>
+            <summary><b>Output</b></summary>
+            <ul>
+              <li><strong>Files: </strong></li>
+              <code>sample.g.vcf</code><br>
+              <code>sample.g.vcf.idx</code><br>
+              <code>sample.bamout.bam</code><br>
+              <code>sample.bamout.bai</code><br>
+              <br>              
+              <li><img src="m2files/o13.png" width="650" height="210"></li></ul>
+        </details> 
+		</section>	
+    
+    <!--Merging GVCFs-->
+    <section id="AS21">
+	  	<h4 style="font-size:110%">Merging GATK GVCFs</h4>
+		  <p style="font-size:108%"><b>Tool:</b><a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037593911-CombineGVCFs" target="_blank"><strong>CombineGVCFS</strong></a></p>
+
+      <strong>Syntax</strong>
+
+      <table style="font-family: Courier, monospace; background-color: #f7f7f7; border-collapse: collapse; width: auto; margin: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 5px;">
+        <tr>
+          <td style="padding: 12px 16px; border: 1px solid #ccc;">
+            <span style="color:#0c0c0c;">java -jar</span>
+            <span style="color:#4622a7;">$GATK CombineGVCFS</span>
+            <span style="color:#8d5409;">-R</span> <span style="color:#0752a8;">[Reference.fasta]</span>
+            <span style="color:#8d5409;">-V</span> <span style="color:#0752a8;">[in1.g.vcf]</span>
+            <span style="color:#8d5409;">-V</span> <span style="color:#0752a8;">[in2.g.vcf]</span>
+            <span style="color:#8d5409;">-O</span> <span style="color:#417905;">[merged.g.vcf]</span>
+          </td>
+          </tr>
+        </table>      
+
+        <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+					          <code class="codeStyle">java -jar $GATK CombineGVCFs \<br>
+	                    -R  Ref/chr01.fa  \<br>
+	                    -V  gvcfs/sample1.g.vcf \<br>
+                      -V  gvcfs/sample2.g.vcf \<br>
+                      -V  gvcfs/sample3.g.vcf \ <br>
+	                    -O  Output/combined.g.vcf
+                    </code>
+			            </div>                    
+                </td>
+                </tr>
+               </table>
+               <button class="copy-btn">Copy</button>
+              </li>            
+            </ul>
+        </details>        
+
+        <details>
+            <summary><b>Output</b></summary>
+            <ul>
+            <li><strong>File: </strong><code>Combined GVCFs</code></li> 
+            <li><img src="m2files/combinedgvcfs.png" width="650" height="auto"></li> 
+            </ul>
+        </details>
+    </section>
+
+    <!--Genotyping GVCFs-->
+    <section id="AS22">
+	  	<h4 style="font-size:110%">Genotyping GVCFs</h4>
+		  <p style="font-size:108%"><b>Tool:</b><a href="https://gatk.broadinstitute.org/hc/en-us/articles/360041417092-GenotypeGVCFs" target="_blank"><strong>GenotypeGVCFs</strong></a></p>
+      
+      <strong>Syntax</strong>
+        <table style="font-family: Courier, monospace; background-color: #f7f7f7; border-collapse: collapse; width: auto; margin: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 5px;">
+          <tr>
+            <td style="padding: 12px 16px; border: 1px solid #ccc;">
+              <span style="color:#0c0c0c;">java -jar</span>
+              <span style="color:#4622a7;">$GATK GenotypeGVCFs</span>
+              <span style="color:#8d5409;">-R</span> <span style="color:#0752a8;">[Reference.fasta]</span>
+              <span style="color:#8d5409;">-V</span> <span style="color:#0752a8;">[input.g.vcf]</span>
+              <span style="color:#8d5409;">-O</span> <span style="color:#417905;">[output.vcf]</span>
+            </td>
+          </tr>
+        </table>     
+
+        <details>
+            <summary><b>Command</b></summary>
+            <ul>
+              <li>           
+                 <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+					          <code class="codeStyle">java -jar $GATK  GenotypeGVCFs -R Ref/chr01.fa -V Output/combined.g.vcf -O Output/combined.vcf         
+                    </code>
+			            </div>                    
+                </td>
+                </tr>
+               </table>
+               <button class="copy-btn">Copy</button>
+              </li>            
+            </ul>
+        </details>        
+
+        <details>
+            <summary><b>Output</b></summary>
+            <ul>
+            <li><strong>File: </strong> <code>Merged VCF</code></li> 
+            <li><img src="m2files/genotypegvcf.png" width="650" height="auto"></li> 
+            </ul>
+        </details>        
+    </section>
+
+    <!--Day 3-->
+    <section id="ZS0">
+	<h4 style="font-size:120%">Input and Output Files</h4>	
+  <h4>Input Files</h4>
+  <table>
+    <thead>
+      <tr>
+        <th>File Type</th>
+        <th>File Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>VCF</strong></td>
+        <td><a href="input/geno-250kb.vcf.gz"><code>geno-250kb.vcf.gz</code></a></td>
+      </tr>
+      <tr>
+        <td><strong>gVCF</strong></td>
+        <td><a href="input/sample1-50kb.g.vcf"><code>sample1-50kb.g.vcf</code></a></td>
+      </tr>
+      <tr>
+        <td><strong>BAM</strong></td>
+        <td><a href="input/kanin-4.sorted.bam"><code>kanin-4.sorted.bam</code></a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br><br>
+  <h4>Output Files</h4>
+  <table>
+    <thead>
+      <tr>
+        <th>Output Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Statistics</strong></td>
+        <td>General summary metrics and counts</td>
+      </tr>
+      <tr>
+        <td><strong>Tables</strong></td>
+        <td>Structured result tables for further analysis</td>
+      </tr>
+      <tr>
+        <td><strong>Plots</strong></td>
+        <td>Visual representations such as charts and graphs</td>
+      </tr>
+    </tbody>
+  </table>
+</section>    
 		
-		</section>
-		<section id="compressed">
-			<h2>🗜️ Handling Compressed Files</h2>
-			<p>Bioinformatics datasets often come as compressed archives. Use
-				the following commands to unpack them:</p>
+    <!--Subsection 1: Getting to know the tools-->
+    <section id="ZS1">
+			<h4 style="font-size:120%">Getting to know the tool</h4>	
+      <p>Installing <strong>BCFtools</strong> - <i>please follow the <a href="https://irri-bioinformatics-official.github.io/bbc2025v1/5software.html" target="_blank">Software Installation Guide</a></i></p>  
+      <ol type="i">
+          <li>To get help directly within the terminal, you can run the command without arguments:</li>
+           <p><strong>Usage:</strong> <code>bcftools [--version|--version-only] [--help] [command] [argument]</code></p> 
+            <ul>
+              <li><code>bcftools  #</code></li>
+              <li><code>bcftools -h</code></li>
+              <li><code>bcftools view</code></li>
+            </ul>
+          
+          <li>Most used commands:</li>
+            <ul>
+              <li><code>bcftools  # </code>:<i> with no arguments</i>: general info and list of commands</li>
+              <li><code>bcftools query</code>: transform VCF/BCF into user-defined formats</li>
+              <li><code>bcftools view</code>: VCF/BCF conversion, view, subset and filter VCF/BCF files</li>
+            </ul>
 
-			<table>
-				<thead>
-					<tr>
-						<th>Command</th>
-						<th>Description</th>
-						<th>Example</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td><code>unzip</code></td>
-						<td>Extract files from a <code>.zip</code> archive
-						</td>
-						<td><code>unzip samples.zip</code></td>
-					</tr>
-					<tr>
-						<td><code>tar -xvf</code></td>
-						<td>Extract contents from a <code>.tar</code> archive
-						</td>
-						<td><code>tar -xvf archive.tar</code></td>
-					</tr>
-					<tr>
-						<td><code>tar -xzvf</code></td>
-						<td>Extract a <code>.tar.gz</code> (gzip-compressed tar)
-						</td>
-						<td><code>tar -xzvf genome.tar.gz</code></td>
-					</tr>
-					<tr>
-						<td><code>tar -xjvf</code></td>
-						<td>Extract a <code>.tar.bz2</code> (bzip2-compressed tar)
-						</td>
-						<td><code>tar -xjvf data.tar.bz2</code></td>
-					</tr>
-					<tr>
-						<td><code>gunzip</code></td>
-						<td>Unzip a single <code>.gz</code> file
-						</td>
-						<td><code>gunzip reads.fastq.gz</code></td>
-					</tr>
-				</tbody>
-			</table>
+          <p style="margin-top: 20px !important; margin-bottom: 5px !important;">
+            <i><strong>* Adding information to VCF</strong></i>
+              <ul>
+                <li><code>bcftools annotate</code>: annotate and edit VCF/BCF files. E.g. add variant IDs</li>
+                <li><code>bcftools csq</code>: call variation consequences (like snpEff)</li>
+              </ul>
+          </p>
+           
+          <p style="margin-top: 20px !important; margin-bottom: 5px !important;">         
+            <i><strong>* Manipulating VCF files</strong></i>
+             <ul>
+                <li><code>bcftools isec</code>: convert VCF/BCF files to different formats and back</li>
+                <li><code>bcftools reheader</code>: modify VCF/BCF header, change sample names</li>
+                <li><code>bcftools sort</code>: sort VCF/BCF file</li>
+                <li><code>bcftools index</code>: needed for random access into VCF file</li>
+            </ul>  
+          </p>          
+        </ol>
+    </section>
 
-		
-		</section>
+    <!--Subsection 2: Exploring VCF Files-->
+    <section id="ZS2">
+		<h4 style="font-size:120%">Initial getting to know the data</h4>	
+      <p>So, you got a fresh VCF file from the variant calling pipeline. It may be a <code>gVCF</code> file or a simple <code>VCF</code> file.</p>
+      <p><strong>Question</strong>: What is the difference?</p>
+      
+      <ul style="list-style-type:disc;"><li><i>The input data folder has both a <code>gVCF</code> and a <code>VCF</code> file. Let's see what is inside these files.</i></li></ul>
 
-		<section id="quiz">
-			<h2>📘 Linux Terminal Practice: Folder Navigation & File
-				Inspection</h2>
-			<p>Use the terminal to complete each task. If the command works,
-				write down the result. If it returns an error, copy the exact error
-				message from your terminal. In some tasks, you’ll be asked what
-				command you would use to achieve a certain outcome.</p>
-			<p>
-				<strong>📝 Instructions:</strong>
-			</p>
+    <h5 style="font-size:120%">VCF Header</h5>	
+      <p>A lot of information about how the VCF was produced and what kind of information may be found in it, is located in the header. To see the header you may run:</p>
 
-			<ul>
-				<li>1. Write all your answers in a plain text file named <code>yourLastname_activity1.txt</code>.
-					Once done, submit the file to: <strong>.....</strong>.
-				</li>
-				<li>2. Download this file: <a
-					href="/bbc2025v1/docs/2025/module1_basic_linux/resources/bio_training.zip"><strong>bio_training.zip</strong></a>.
-				</li>
-			</ul>
+              <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                  <td style="padding: 10px; border: 1px solid #ccc;">
+                    <div class="code_div"></div>
+				          	  <code class="codeStyle">bcftools view --header-only geno-250kb.vcf.gz</code>
+			          	  </div>                       
+                  </td>
+                </tr>         
+              </table>
+              <button class="copy-btn">Copy</button> 
+
+      <br><br>
+      <p>Based on the information in the header, please do the following exercise.</p>
+      
+        <h5 style="font-size:100%; margin-bottom: 5px !important;">Hands-on exercise</h5>	
+        <p>For both input VCF files, extract the headers and answer the questions:</p>
+        <ol type="1">
+          <li>Find which commands produced the original VCF file (GATKCommandLine).</li>
+          <li>Find which commands were applied to the original VCF file to create the current file.</li>
+          <li>Find names of chromosomes or contigs that are present in this (g)VCF.</li>
+          <li>Does this VCF contain InbreedingCoefficient metrics?</li>
+          <li>Does this VCF contain QD metrics? What is its type (number, string, etc)?</li>
+        </ol>
+    
+    <h5 style="font-size:100%; margin-bottom: 5px !important;">Overall Stats</h5>
+    <p>To get an overall report containing many basic statistics, run bcftools stats</p>
+
+              <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                  <td style="padding: 10px; border: 1px solid #ccc;">
+                    <div class="code_div"></div>
+				          	  <code class="codeStyle">bcftools stats geno-250kb.vcf.gz > stats.txt</code>
+			          	  </div>                       
+                  </td>
+                </tr>         
+              </table>
+              <button class="copy-btn">Copy</button>       
+         
+        <h5 style="font-size:100%; margin-bottom: 5px !important;">Exercise</h5>	
+        <p>Based on the stats file, find out how many of the following are in the file:</p>
+          <ul style="list-style:disc;">
+            <li>SNPs</li>
+            <li>indels</li>
+            <li>multiallelic SNPS</li>
+            <li>multi-nucleotide polymorphisms (MNPs)</li>
+            <li>reference-only variants (not SNPs)</li>
+            <li>Ts/Tv ratio</li>
+            <li>Number of SNPs with allele frequency between 0 and 0.01</li>
+          </ul>
+    </section>
+
+    <!--Subsection3: BCFTools Quesry Command-->
+    <section id="ZS3">
+    <h4 style="font-size:120%;">BCFtools query command</h4>
+    <p style="text-align: justify;">The main element in the structure of the command is the query string (or format string) that specifies what information you want to get. 
+      For each record in the VCF the query string will be evaluated and added as a row in the output</p>
+        <!--<ul><li><code>bcftools query -f '%CHROM\t%POS\t%REF\t%ALT[\t%SAMPLE=%GT]\n' file.vcf.gz</code></li></ul>-->
+
+      	<table style="width: 100%; border-collapse: collapse; margin-bottom: 5px;">
+        <tr>
+          <td style="font-family: Courier, monospace; background-color: #f0f0f0; padding: 12px; border: 1px solid #ccc;">
+            <span style="color: #6d23f562;">bcftools query</span> 
+            <span style="color: #F5A623;">-f</span>
+            <span style="color: #1d5361;">'%CHROM\t%POS\t%REF\t%ALT[\t%SAMPLE=%GT]\n'</span>
+            <span style="color:#4A90E2;">file.vcf.gz</span>
+          </td>
+        </tr>
+      </table>        
 
 
-			<h3>📦 Task 0: Extract the training archive</h3>
-			<pre>
-				<code>unzip bio_training.zip</code>
-			</pre>
-			<p>
-				<strong>Q1:</strong> Did the folder
-				<code>bio_training/</code>
-				get created successfully?
-			</p>
-			<p>
-				<strong>Q2:</strong> If there was an error, what was the exact
-				message? What command should be use?
-			</p>
+        <h5 style="font-size:100%; margin-bottom: 5px !important;">Extract variant QC metrics</h5>
+        <p style="text-align: justify;">To get various QC metrics, include the names of the metrics with the <code>%</code> sign prefix into the query string. 
+          There are some metrics, like read depth <code>DP</code>,  that are applicable to both variant as a whole or to each sample. 
+          To distinguish between these, use prefixes <code>INFO</code> and <code>FORMAT</code> 
+          <ul style="list-style:disc;">
+           <li><code>INFO/DP</code>: depth across all samples, is placed into the INFO column</li>
+           <li><code>FORMAT/DP</code>: depth at each individual sample genotype call, is mentioned in the FORMAT column, the actual information is located in the genotype matrix</li>
+          </ul>
+        </p>
+        
+        <p><br><i><strong>Example: some variant level QC metrics</strong></i></p>
+          <code>bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%QUAL\t%QD\t%INFO/DP\n' file.vcf.gz > variant-DP.txt</code>
+          <!--<table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+            <tr>
+              <td style="padding: 10px; border: 1px solid #ccc;">
+                <div class="code_div"></div>
+				          <code class="codeStyle">bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%QUAL\t%QD\t%INFO/DP\n' file.vcf.gz> variant-DP.txt</code>
+			          </div>                       
+              </td>
+            </tr>         
+          </table>
+          <button class="copy-btn">Copy</button> -->
+          
+        <br><br>
+        <p><i><strong>For comparison, here is an example of read depths of each sample:</strong></i></p>
+          <code>bcftools query -f '%CHROM\t%POS\t%REF\t%ALT[\t%SAMPLE=%FORMAT/DP]\n' file.vcf.gz</code>
+                <!--<table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                  <tr>
+                    <td style="padding: 10px; border: 1px solid #ccc;">
+                      <div class="code_div"></div>
+				          	    <code class="codeStyle">bcftools query -f '%CHROM\t%POS\t%REF\t%ALT[\t%SAMPLE=%FORMAT/DP]\n' file.vcf.gz</code>
+			          	    </div>                       
+                    </td>
+                  </tr>         
+                </table>
+                <button class="copy-btn">Copy</button> -->
 
-			<h3>🔍 Task 1: Navigate to a folder</h3>
-			<pre>
-				<code>cd /bio_training/projectA/data</code>
-			</pre>
-			<p>
-				<strong>Q1:</strong> What are the names of the files in this
-				directory? Use
-				<code>ls</code>
-				to list them.
-			</p>
-			<p>
-				<strong>Q2:</strong> Did the command work? If not, What should
-				command be use to go to data folder under projectA?
-			</p>
+        <br><br> 
+        <h5 style="font-size:100%; margin-bottom: 5px !important;">Extract variant genotype matrix as a table </h5>   
+        <p>Let us create a file by first putting row names, then dumping all the genotype calls:</p>       
 
-			<h3>📄 Task 2: View a file</h3>
-			<pre>
-				<code>cat exp1.tsv</code>
-			</pre>
-			<p>
-				<strong>Q1:</strong> What is the content of the file? Can you spot
-				the gene with the highest expression?
-			</p>
-			<p>
-				<strong>Q2:</strong> Did the command work? If not, what exact error
-				message did you see?
-			</p>
+                <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                  <tr>
+                    <td style="padding: 10px; border: 1px solid #ccc;">
+                      <div class="code_div"></div>
+				          	    <code class="codeStyle">bcftools query -f 'CHROM\tPOS\tREF\tALT[\t%SAMPLE]\n' geno-250kb.vcf.gz | head -n 1 > out.txt</code>
+			          	    </div>                       
+                    </td>
+                  </tr>         
+                </table>
+                <button class="copy-btn">Copy</button> 
 
-			<h3>📂 Task 3: Count number of files in a directory</h3>
-			<pre>
-				<code>ls | wc -l</code>
-			</pre>
-			<p>
-				<strong>Q1:</strong> How many items (files and folders) are listed?
-			</p>
-			<p>
-				<strong>Q2:</strong> What command would you use to list the actual
-				names instead of just the count?
-			</p>
+                <br><br>
 
-			<h3>📜 Task 4: Check logs</h3>
-			<pre>
-				<code>tail -n 1 ../results/error.log</code>
-			</pre>
-			<p>
-				<strong>Q1:</strong> What does the last line of the error log say?
-			</p>
-			<p>
-				<strong>Q2:</strong> Did the command work? If not, what exact error
-				message did you see?
-			</p>
+                <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                  <tr>
+                    <td style="padding: 10px; border: 1px solid #ccc;">
+                      <div class="code_div"></div>
+				          	    <code class="codeStyle">bcftools query -f '%CHROM\t%POS\t%REF\t%ALT[\t%GT]\n' geno-250kb.vcf.gz >> out.txt</code>
+			          	    </div>                       
+                    </td>
+                  </tr>         
+                </table>
+                <button class="copy-btn">Copy</button>                 
+        
+        <br><br>        S
+        <p><i>Note in the first command we don't use <code>%</code> except in the <code>%SAMPLE</code> - thus, only sample names will be interpolated into the string.</i></p>
+    </section>
 
-			<h3>🔍 Task 5: Search metadata</h3>
-			<pre>
-				<code>grep FAIL ../../projectB/metadata/samples.tsv</code>
-			</pre>
-			<p>
-				<strong>Q1:</strong> Which samples failed the quality check?
-			</p>
-			<p>
-				<strong>Q2:</strong> What command should be used if we want to
-				ignore uppercase/lowercase differences?
-			</p>
+    <!--Exploring alignment (BAM) files-->
+    <section id="ZS4">
+    <h4 style="font-size:120%">Exploring alignment (BAM) files</h4> 
+      <p style="text-align: justify;">We will use SAMtools software to retrieve basic information about the alignment data from BAM files.
+        In order to make sense of some of the following, it would help to be familiar with SAM file structure, which you can read about in <a href="https://samtools.github.io/hts-specs/SAMv1.pdf" target="_blank">SAM format specifications</a>. 
+        See also the <a href="https://en.wikipedia.org/wiki/SAM_(file_format)" target="_blank">SAM format wiki page</a> for easier reading.
+        <br><br>The following SAMtools commands will be used:
+          <ul>
+            <code>samtools index</code>
+            <br><code>samtools view</code>
+            <br><code>samtools tview</code>
+            <br><code>samtools stats</code>
+            <br><code>samtools flags</code>
+          </ul>
+      
+      <h5 style="font-size:100%; margin-bottom: 5px !important;">View header and alignments</h5>  
+      <p>To view header:
+        <ul>
+          <li><i>In older versions of samtools</i></li>
 
-			<h3>🔢 Task 6: Count lines in a log file</h3>
-			<pre>
-				<code>wc -l ../../projectB/logs/pipeline.log</code>
-			</pre>
-			<p>
-				<strong>Q1:</strong> How many lines are in the log file?
-			</p>
-			<p>
-				<strong>Q2:</strong> What command would you use to count the number
-				of words instead?
-			</p>
+                <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+				          	<code class="codeStyle">samtools view -h  kanin-4.sorted.bam | less</code>
+			          	</div>                       
+                </td>
+                </tr>         
+               </table>
+                <button class="copy-btn">Copy</button>       
 
-			<h3>📁 Task 7: Create a new folder and file</h3>
-			<pre>
-				<code>mkdir analysis && touch analysis/summary.txt</code>
-			</pre>
-			<p>
-				<strong>Q1:</strong> What command would show the full absolute path
-				of the new file?
-			</p>
-			<p>
-				<strong>Q2:</strong> What command would you use to confirm that the
-				file is empty?
-			</p>
-		</section>
-		-->
-		</br> </br> </br>
+          <br><br>
+          <li><i>In the newest versions</i></li>
+                <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+				          	<code class="codeStyle">samtools head  kanin-4.sorted.bam</code>
+			          	</div>                       
+                </td>
+                </tr>         
+               </table>
+                <button class="copy-btn">Copy</button> 
+        </ul>
+      </p>
+      <br>
+      <p>To view alignments in a more familiar environment of MS Excel,  you may use <code>samtools view</code> and save the result as a <strong>TSV</strong> file, which you can then view in Excel by importing as a tab separated file</p>
+
+              <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+				          	<code class="codeStyle">echo "QUERYNAME,FLAG,REFNAME,POS,MAPQ,CIGAR,RNEXT,POSNEXT,TLEN,SEQ,QUAL" | tr "," "\t"   > aln.tsv</code>
+			          	</div>                       
+                </td>
+                </tr>         
+               </table>
+                <button class="copy-btn">Copy</button>    
+                
+                <br><br>
+                <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+				          	<code class="codeStyle">samtools view kanin-4.sorted.bam | head -n 20  >> aln.tsv</code>
+			          	</div>                       
+                </td>
+                </tr>         
+               </table>
+                <button class="copy-btn">Copy</button>                 
+        <br><br>
+        <p><i><strong>Note:</strong> changing tabs to commas in the whole file using the <code>tr</code> command might not be a very good idea, since the base quality string may contain commas.</i></p>
+    </section>
+
+    <!--Understanding alignment metadata-->
+    <section id="ZS5">
+    <h4 style="font-size:120%">Understanding Alignment Metadata</h4> 
+      <p>A lot of information about alignment of a read pair  to reference is contained in the <strong>flags</strong> column.
+        Each <strong>flags</strong> is a boolean <code>true or false</code> value encoded in a bit of the flags byte.
+        See <a href="https://en.wikipedia.org/wiki/SAM_(file_format)#Bitwise_flags" target="_blank">Bitwise flags</a></p>
+        <p>
+        To easily retrieve the flags pertaining to a certain read alignment, <i>e.g. the first read in the input BAM file is</i>
+        <pre>FCD0R2NACXX:7:2105:6385:19577#CCACATTC_24       163     Chr7    272768  0       83M     =       273143  458     AGTTGTTTCCTCCCGCCGTGGCCCACGCTTTATCCGCACTGCGCGGAAGCGTGTTGTTGGTTCTTCCACCGTGTTCCGTTTCC  BFHHHHJJIJIJJJIJJJGHJJJIIIIIJJJIIIIJIJJJJGHEDD@BDDDB@BDDDDDDDDDDDDCCDDDDDDDDDDDDDCD  NM:i:1  MD:Z:5C77       MC:Z:83M        AS:i:78 XS:i:78</pre>
+        </p>
+        Its flag column shows value <code><b>163</b></code>
+          <ul>
+              <li>
+                <p>Run the following:</p>
+                <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+				          	<code class="codeStyle">samtools flags 163</code>
+			          	</div>                       
+                </td>
+                </tr>         
+               </table>
+                <button class="copy-btn">Copy</button>   
+              </li>
+            <br>
+            <li>The result: <code><b>0xa3	163	PAIRED,PROPER_PAIR,MREVERSE,READ2</code></b></li>
+          </ul>  
+          <br>
+        
+          <p>To understand meanings of these abbreviations, start with running samtools flags without arguments 
+
+                <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+				          	<code class="codeStyle">samtools flags</code>
+			          	</div>                       
+                </td>
+                </tr>         
+               </table>
+                <button class="copy-btn">Copy</button> 
+                <br><br>  
+
+          <pre>About: Convert between textual and numeric flag representation
+Usage: samtools flags FLAGS...
+
+Each FLAGS argument is either an INT (in decimal/hexadecimal/octal) representing
+a combination of the following numeric flag values, or a comma-separated string
+NAME,...,NAME representing a combination of the following flag names:
+
+   0x1     1  PAIRED         paired-end / multiple-segment sequencing technology
+   0x2     2  PROPER_PAIR    each segment properly aligned according to aligner
+   0x4     4  UNMAP          segment unmapped
+   0x8     8  MUNMAP         next segment in the template unmapped
+  0x10    16  REVERSE        SEQ is reverse complemented
+  0x20    32  MREVERSE       SEQ of next segment in template is rev.complemented
+  0x40    64  READ1          the first segment in the template
+  0x80   128  READ2          the last segment in the template
+ 0x100   256  SECONDARY      secondary alignment
+ 0x200   512  QCFAIL         not passing quality controls or other filters
+ 0x400  1024  DUP            PCR or optical duplicate
+ 0x800  2048  SUPPLEMENTARY  supplementary alignment</pre>
+
+
+            <br>The next read is
+            <pre>FCD0R2NACXX:7:2105:6385:19577#CCACATTC_24       83      Chr7    273143  0       83M     =       272768  -458    TCGGCGTAGCTCTGTGACTTGTCCACACCCATTGTATCAGGTGTTTTTATGATTTGAAAAATCCAGTTTATGCCTAGTGTGTG  BDDDBDEEEEEFFFDFFFHHHHJIHHHJJIJGIJJJJJJJJJJJJJJJJJJJJJJJJJJJIIJJJJJJIJJJJJJJJHHHHHF  NM:i:1  MD:Z:30G52 </pre>
+            with the flag <code><b>83</b></code>
+          
+            <br><br>
+
+          <ul>
+              <li>
+                <p>Run the following:</p>
+                <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+				          	<code class="codeStyle">samtools flags 83</code>
+			          	</div>                       
+                </td>
+                </tr>         
+               </table>
+                <button class="copy-btn">Copy</button>   
+              </li>
+            <br>
+            <li>The result: <code><b>0x53    83      PAIRED,PROPER_PAIR,REVERSE,READ1</code></b></li>
+          </ul>            
+    </section>
+
+    <!--Interactive text viewer (tview)-->
+    <section id="ZS6">
+    <h4 style="font-size:120%">Interactive text Viewer</h4>
+    <p>First, make sure the file is indexed 
+ 
+                <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+				          	<code class="codeStyle">samtools index kanin-4.sorted.bam</code>
+			          	</div>                       
+                </td>
+                </tr>         
+               </table>
+                <button class="copy-btn">Copy</button>       
+      
+    <br><br>Then  <i>(No need to pipe to less command!)</i>
+
+                <table style="font-family: Courier, monospace; background-color: #f0f0f0; border-collapse: collapse; width: 100%; margin: 10px 0;">
+                <tr>
+                <td style="padding: 10px; border: 1px solid #ccc;">
+                  <div class="code_div"></div>
+				          	<code class="codeStyle">samtools tview kanin-4.sorted.bam -p Chr7:6011011</code>
+			          	</div>                       
+                </td>
+                </tr>         
+               </table>
+                <button class="copy-btn">Copy</button>    
+    </p> 
+    <br>
+    <p><i>For a more feature-full experience, use a GUI alignment viewer such as IGV.</i></p>
+    </section>
+
+    <!--Module Summary-->
+    <section id="ZS7"> 
+    <h4 style="font-size:120%">Module Summary</h4>
+    <p style="text-align: justify;">Understanding the genetic basis of diversity through the discovery of Single Nucleotide Polymorphisms (SNPs) via variant calling is a fundamental step in gene discovery. 
+      By identifying and analyzing SNPs, researchers can uncover genetic variations that contribute to differences in traits. This knowledge is critical for pinpointing specific 
+      genes associated with those traits, facilitating advancements in fields such as genetics, breeding, and biotechnology.
+
+      In this module, you have gained an understanding of the Variant Calling workflow. You have explored the essential tools and software used for variant discovery, including 
+      FASTQC, BWA, Picard, SamTools, and GATK. You have also had the opportunity to perform variant calling, and you have learned how to analyze and interpret the resulting data files, such as VCF and BAM files.
+
+        <ul style="list-style: disc; text-align: justify;">
+          <li>Single Nucleotide Polymorphisms (SNPs) and Insertions/Deletions (InDels) are crucial for analyzing rice diversity, establishing population structure, and identifying genes associated with important traits.</li>
+          <li>The variant calling workflow is essential for identifying variants in a diverse rice population. It is important to become proficient with software tools such as BWA, SamTools, GATK, and BCFTools for effective variant calling.</li>
+          <li>Exploring BAM and VCF output files is crucial for understanding and interpreting variant data.</li>
+        </ul>
+    </p>
+    </section>
+
+    <section id="ZS8">
+      <h4 style="font-size:120%">References</h4>
+      <p>Slatko BE, Gardner AF, Ausubel FM. Overview of Next-Generation Sequencing Technologies. Curr Protoc Mol Biol. 2018 Apr;122(1):e59. doi: 10.1002/cpmb.59. PMID: 29851291; PMCID: PMC6020069. https://doi.org/10.1002/cpmb.59</p>
+    </section>
+
+
+
+
+  </br> </br> </br>
 	</main>
 	
 
