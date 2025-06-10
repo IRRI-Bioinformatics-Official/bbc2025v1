@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Linux Commands Cheatsheet</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f9f9f9;
+      color: #333;
+    }
+    h1, h2 {
+      color: #2c3e50;
+    }
+    code {
+      background: #e8e8e8;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+    .tip {
+      background: #dff0d8;
+      border-left: 5px solid #3c763d;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    th {
+      background: #2c3e50;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Linux Commands Cheatsheet</h1>
+
+<section>
+  <h2>Basic Syntax</h2>
+  <p><code>[command] [options] [arguments]</code></p>
+  <p><strong>Example:</strong> <code>ls -l /home/user</code></p>
+
+  <div class="tip">
+    <strong>🧠 Tips for Beginners:</strong>
+    <ul>
+      <li>Use <code>man [command]</code> to read manuals (e.g., <code>man ls</code>).</li>
+      <li>Use <strong>Tab</strong> to auto-complete filenames and commands.</li>
+      <li>Use the <strong>up arrow</strong> to recall previous commands.</li>
+      <li>Be cautious with destructive commands like <code>rm</code>.</li>
+      <li><strong>👉 Tip:</strong> Commands work the same on WSL, macOS, and Linux.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Filesystem Navigation</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Command</th>
+        <th>Description</th>
+        <th>Sample Usage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><code>pwd</code></td><td>Print current working directory</td><td><code>pwd</code></td></tr>
+      <tr><td><code>ls</code></td><td>List files and directories in current folder</td><td><code>ls</code></td></tr>
+      <tr><td><code>ls -a</code></td><td>List all files, including hidden files</td><td><code>ls -a</code></td></tr>
+      <tr><td><code>cd &lt;directory&gt;</code></td><td>Change to the directory specified by <code>&lt;directory&gt;</code></td><td><code>cd Documents</code></td></tr>
+      <tr><td><code>cd ..</code></td><td>Move up one directory level</td><td><code>cd ..</code></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>File Management</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Command</th>
+        <th>Description</th>
+        <th>Sample Usage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><code>mkdir &lt;folder&gt;</code></td><td>Create a new folder named <code>&lt;folder&gt;</code></td><td><code>mkdir project</code></td></tr>
+      <tr><td><code>touch &lt;file&gt;</code></td><td>Create an empty file named <code>&lt;file&gt;</code></td><td><code>touch notes.txt</code></td></tr>
+      <tr><td><code>cp &lt;source&gt; &lt;destination&gt;</code></td><td>Copy file from <code>&lt;source&gt;</code> to <code>&lt;destination&gt;</code></td><td><code>cp file1.txt file2.txt</code></td></tr>
+      <tr><td><code>cp -r &lt;source&gt; &lt;destination&gt;</code></td><td>Recursively copy a folder from <code>&lt;source&gt;</code> to <code>&lt;destination&gt;</code></td><td><code>cp -r folder1 folder2</code></td></tr>
+      <tr><td><code>mv &lt;source&gt; &lt;destination&gt;</code></td><td>Move or rename file from <code>&lt;source&gt;</code> to <code>&lt;destination&gt;</code></td><td><code>mv old.txt new.txt</code></td></tr>
+      <tr><td><code>rm &lt;file&gt;</code></td><td>Delete the file named <code>&lt;file&gt;</code></td><td><code>rm unwanted.txt</code></td></tr>
+      <tr><td><code>rm -r &lt;folder&gt;</code></td><td>Recursively delete folder named <code>&lt;folder&gt;</code></td><td><code>rm -r old_folder</code></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Viewing Files</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Command</th>
+        <th>Description</th>
+        <th>Sample Usage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><code>cat &lt;file&gt;</code></td><td>Display the contents of the file <code>&lt;file&gt;</code></td><td><code>cat file.txt</code></td></tr>
+      <tr><td><code>less &lt;file&gt;</code></td><td>View the file <code>&lt;file&gt;</code> one screen at a time</td><td><code>less bigfile.txt</code></td></tr>
+      <tr><td><code>head &lt;file&gt;</code></td><td>Show the first 10 lines of the file <code>&lt;file&gt;</code></td><td><code>head file.txt</code></td></tr>
+      <tr><td><code>head -n &lt;num&gt; &lt;file&gt;</code></td><td>Show the first <code>&lt;num&gt;</code> lines of the file <code>&lt;file&gt;</code></td><td><code>head -n 20 file.txt</code></td></tr>
+      <tr><td><code>tail &lt;file&gt;</code></td><td>Show the last 10 lines of the file <code>&lt;file&gt;</code></td><td><code>tail file.txt</code></td></tr>
+      <tr><td><code>tail -n &lt;num&gt; &lt;file&gt;</code></td><td>Show the last <code>&lt;num&gt;</code> lines of the file <code>&lt;file&gt;</code></td><td><code>tail -n 20 file.txt</code></td></tr>
+      <tr><td><code>tail -f &lt;file&gt;</code></td><td>Follow the live updates of the file <code>&lt;file&gt;</code></td><td><code>tail -f log.txt</code></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Compressing Files</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Command</th>
+        <th>Description</th>
+        <th>Sample Usage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><code>zip &lt;archive.zip&gt; &lt;file&gt;</code></td><td>Compress a file into a ZIP archive</td><td><code>zip archive.zip notes.txt</code></td></tr>
+      <tr><td><code>zip -r &lt;archive.zip&gt; &lt;folder&gt;</code></td><td>Compress a folder into a ZIP archive recursively</td><td><code>zip -r project.zip project_folder</code></td></tr>
+      <tr><td><code>tar -cvf &lt;file.tar&gt; &lt;folder&gt;</code></td><td>Create a tar archive from a folder</td><td><code>tar -cvf backup.tar my_folder</code></td></tr>
+      <tr><td><code>tar -czvf &lt;file.tar.gz&gt; &lt;folder&gt;</code></td><td>Create a gzip-compressed tar file</td><td><code>tar -czvf backup.tar.gz my_folder</code></td></tr>
+      <tr><td><code>tar -cjvf &lt;file.tar.bz2&gt; &lt;folder&gt;</code></td><td>Create a bzip2-compressed tar file</td><td><code>tar -cjvf backup.tar.bz2 my_folder</code></td></tr>
+      <tr><td><code>gzip &lt;file&gt;</code></td><td>Compress a file using gzip</td><td><code>gzip data.txt</code></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Handling Compressed Files</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Command</th>
+        <th>Description</th>
+        <th>Sample Usage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><code>unzip &lt;file.zip&gt;</code></td><td>Extract files from <code>&lt;file.zip&gt;</code></td><td><code>unzip archive.zip</code></td></tr>
+      <tr><td><code>tar -xvf &lt;file.tar&gt;</code></td><td>Extract files from a tar archive <code>&lt;file.tar&gt;</code></td><td><code>tar -xvf backup.tar</code></td></tr>
+      <tr><td><code>tar -xzvf &lt;file.tar.gz&gt;</code></td><td>Extract files from a gzip-compressed tar file <code>&lt;file.tar.gz&gt;</code></td><td><code>tar -xzvf backup.tar.gz</code></td></tr>
+      <tr><td><code>tar -xjvf &lt;file.tar.bz2&gt;</code></td><td>Extract files from a bzip2-compressed tar file <code>&lt;file.tar.bz2&gt;</code></td><td><code>tar -xjvf backup.tar.bz2</code></td></tr>
+      <tr><td><code>gunzip &lt;file.gz&gt;</code></td><td>Uncompress the file <code>&lt;file.gz&gt;</code></td><td><code>gunzip data.gz</code></td></tr>
+    </tbody>
+  </table>
+</section>
+
+</body>
+</html>
