@@ -126,6 +126,27 @@
 </section>
 
 <section>
+  <h2>Compressing Files</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Command</th>
+        <th>Description</th>
+        <th>Sample Usage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><code>zip &lt;archive.zip&gt; &lt;file&gt;</code></td><td>Compress a file into a ZIP archive</td><td><code>zip archive.zip notes.txt</code></td></tr>
+      <tr><td><code>zip -r &lt;archive.zip&gt; &lt;folder&gt;</code></td><td>Compress a folder into a ZIP archive recursively</td><td><code>zip -r project.zip project_folder</code></td></tr>
+      <tr><td><code>tar -cvf &lt;file.tar&gt; &lt;folder&gt;</code></td><td>Create a tar archive from a folder</td><td><code>tar -cvf backup.tar my_folder</code></td></tr>
+      <tr><td><code>tar -czvf &lt;file.tar.gz&gt; &lt;folder&gt;</code></td><td>Create a gzip-compressed tar file</td><td><code>tar -czvf backup.tar.gz my_folder</code></td></tr>
+      <tr><td><code>tar -cjvf &lt;file.tar.bz2&gt; &lt;folder&gt;</code></td><td>Create a bzip2-compressed tar file</td><td><code>tar -cjvf backup.tar.bz2 my_folder</code></td></tr>
+      <tr><td><code>gzip &lt;file&gt;</code></td><td>Compress a file using gzip</td><td><code>gzip data.txt</code></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
   <h2>Handling Compressed Files</h2>
   <table>
     <thead>
