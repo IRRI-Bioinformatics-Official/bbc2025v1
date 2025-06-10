@@ -237,7 +237,7 @@ strong {
 			<h4>At the end of every week, a group of students will present a paper or a software tool</h4>
 				<p>
 					<ul> 
-						<li>The participants will be assigned into 5 groups with approximately equal member count</li>
+						<li>The participants will be assigned into 6 groups with approximately equal member count</li>
 						<li>Each group will be responsible for presenting one topic.</li>
 						<li>One or two presenters.</li>
 						<li>The presentation should be short (5 min), include 3 main slides plus a Thanks/Contribution slide, listing the contribution of each member of the group and sources used.</li>
@@ -289,7 +289,7 @@ strong {
 			<h2>Journal Club Candidate papers and topics </h2>
 			<p>For each module see possible topics below. </p>
 			
-			<h3>Module 1 - Linux for bioinformatics </h3>
+			<h3>Module 1 - Linux for bioinformatics</h3>
 			<p>
 				You can choose one of the following topics:
 				<ul>
@@ -299,11 +299,11 @@ strong {
 							<li><a href="https://github.com/dathere/qsv" target="blank">qsv</a>, <a href="https://github.com/medialab/xan?tab=readme-ov-file#quick-tour" target="blank">xan</a>, <a href="https://csvkit.readthedocs.io/" target="blank">csvkit</a> – CSV manipulation</li>
 							<li><a href="https://jqlang.org" target="blank">jq</a>/<a href="https://github.com/01mf02/jaq" target="blank">jaq</a> - JSON manipulation</li>
 							<li><a href="http://maasha.github.io/biopieces/" target="blank">Biopieces</a> </li>
-							<li>DuckDB – This is a versatile all-purpose database, but we can focus on its command-line <a href="https://duckdb.org/2024/06/20/cli-data-processing-using-duckdb-as-a-unix-tool.html" target="blank">CSV data processing capabilities</a></li>
+							<li href="https://duckdb.org" target"blank">DuckDB – This is a versatile all-purpose database, but we can focus on its command-line <a href="https://duckdb.org/2024/06/20/cli-data-processing-using-duckdb-as-a-unix-tool.html" target="blank">CSV data processing capabilities</a></li>
 							<li>Or anything else you may find interesting and fitting this topic</li>
 						</ul>
 					</li>
-					<li>Maximizing productivity of command-line usage via advanced customization and automation.
+					<li>Tools for maximizing productivity of command-line usage. Advanced customization and automation.
 						<ul>
 							<li>Tmux/screen </li>
 							<li>Other shells that could be useful for data analysis: <a href="https://github.com/fish-shell/fish-shell" target="blank">Fish</a>, <a href="https://github.com/xonsh/xonsh" target="blank">xonsh</a>, <a href="https://www.nushell.sh/" target="blank">nushell</a></li>
@@ -312,7 +312,118 @@ strong {
 					</li>
 				</ul>
 			</p>
+			<h3>Module 2 - NGS</h3>
+			<p>
+				Choose any of the following topics for your presentation. You can take any of suggested papers / tools as a basis, but feel free to add other papers or tools that you find relevant.
+				<br>
+				Topics:
+				<ul>
+					<li><strong>Alignment</strong> The foundation of everything in bioinformatics
+						<ul>
+							<li>Short-read alignment
+								<ul>
+									<li><a href="http://arxiv.org/abs/1303.3997" target="blank">BWA paper</a>: Li H. (2013) Aligning sequence reads, clone sequences and assembly contigs with BWA-MEM.</li>
+									<li><a href="https://lh3.github.io/minimap2/" target="blank">Minimap2 aligner</a></li>
+									<li>Benchmark papers - comparison of different tools</li>
+								</ul>
+							</li>
+							<li>Global alignment. Some recent papers:
+								<ul>
+									<li><a href="https://www.pnas.org/doi/full/10.1073/pnas.2113075119" target>anchorWave</a></li>
+									<li><a href="https://pubmed.ncbi.nlm.nih.gov/38265119/" target="blank">A*</a> algorithm for global alignment</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><strong>Pangenome</strong> This is a very hot and promising research topic.</li>
+						<ul>
+							<li><a href="https://acsess.onlinelibrary.wiley.com/doi/full/10.1002/tpg2.20177" target="blank">Review papers.</a> It is useful to read some reviews and know the motivation for use of pangenome for crop species.</li>
+							<li>Technical papers. There are several "versions" of pangenome:
+								<ul>
+									<li>Variation graphs or Pangenome graphs  - for representing all variation or all structural variation.
+										<ul>
+											<li>Nat. Genetics 2019 <a href="https://www.nature.com/articles/s41588-018-0316-4" target="blank">Fast and accurate genomic analyses using genome graphs</a></li>
+											<li>vg toolset - see <a href="https://github.com/vgteam/vg" target="blank">github</a> page and vg <a href="https://www.nature.com/articles/nbt.4227" target="blank">paper</a> </li>
+											<li><a href="https://www.liebertpub.com/doi/10.1089/cmb.2017.0251" target="blank">Superbubbles</a> and cacti paper</li>
+										</ul>
+									</li>
+									<li>Genes only approach, where the goal is to gather gene models across different genomes and understand gene presence-absence variations - probably the earliest pangenome approach.
+										<ul>
+											<li>GENESPACE <a href="https://elifesciences.org/articles/78526" target="blank">paper</a> and <a a href="https://github.com/jtlovell/GENESPACE" target="blank">github</a></li>
+										</ul>
+									</li>
+									<li>Multi-reference approach</li>
+								</ul>
+							</li>
+						</ul>
+					<li><strong>Workflow management systems</strong>
+						<ul>
+							<li>Nextflow</li>
+							<li>Example SNP calling workflow in rice - Yong's HPC <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10809545/" target="blank">pipeline</a></li>
+						</ul>
+					
+					</li>
+				</ul>
+			</p>
 			
+			<h3>Module 3 - GWAS and Population Structure</h3>
+			<p>
+			<ul>
+				<li><strong>Population structure of rice:</strong>
+					<ul>
+						<li>Any recent paper on large scale rice population history</li>
+						<li>MAGIC panel <a href="https://www.nature.com/articles/s41597-020-0438-2" target="blank">(rice pangenome references)</a></li>
+					</ul>
+				</li>
+				<li><strong>GWAS methodology</strong>
+					<ul>
+						<li>Multi-trait GWAS</li>
+						<li>Multi-marker GWAS <a href="https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1005767" target="blank">FarmCPU</a> or <a href="https://academic.oup.com/gigascience/article/8/2/giy154/5238723" target="blank">BLINK</a> paper, <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4172578/" target="blank">SUPER</a> GWAS method paper
+							<ul>
+								<li><a href="https://zzlab.net/software/index.html" target="blank">software page</a></li>
+							</ul>
+						</li>
+						<li><a href="https://www.nature.com/articles/s41437-019-0205-3" target="blank">Power in GWAS</a></li>
+					</ul>
+				</li>
+			</ul>
+			</p>
+			<h3>Module 4 - Post-GWAS</h3>
+			<p>
+			<ul>
+				<li><strong>Online databases, resources and tools</strong>
+					<ul>
+						<li>Gramene, other databases</li>
+						<li><a href="https://www.sciencedirect.com/science/article/pii/S167420522300076X?via%3Dihub" target="blank">Rice Gene Index</a></li>
+					</ul>
+				</li>
+				<li><strong>Galaxy</strong>
+					<ul>
+						<li>Rice Galaxy/Crop Galaxy</li>
+						<li>General Galaxy resources</li>
+					</ul>
+				</li>
+				<li><strong>SNP-Seek:</strong>
+					<ul>
+						<li><a href="http://nar.oxfordjournals.org/content/early/2016/11/29/nar.gkw1135.abstract" target="blank">Mansueto, et al. Rice SNP-seek database update: new SNPs, indels, and queries.Nucl. Acids Res.(2017) 45 (D1): D1075-D1081.</a>
+							<ul>
+								<li>This paper describes new features and datasets added to SNP-Seek in 2015-2017 as well as software and database updates.</li>
+							</ul>
+						</li>
+						<li><a href="http://doi.org/10.1093/nar/gku1039" target="blank">Alexandrov, et al. SNP-Seek database of SNPs derived from 3000 rice genomes.Nucl. Acids Res.(2015). 43(D1):D1023-D1027</a>
+							<ul>
+								<li>This is the first publication introducing SNP-Seek database, data generation for Nipponbare reference,and common use cases.</li>
+							</ul>
+						</li>
+						<li><a href="http://doi.org/10.1016/j.cpb.2016.12.003" target="blank">Mansueto, et al. SNP-Seek II: A resource for allele mining and analysis of big genomic data in Oryza sativa.Current Plant Biology(2016). 7-8:16-25</a>
+							<ul>
+								<li>This paper contains details on variant calling for 5 references, integration of additional genomic data, web interface, database schema, use cases, web services API.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			</p>
 		</section>
 <!--
 		<section id="groups">
