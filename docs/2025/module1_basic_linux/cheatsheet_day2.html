@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Linux for Bioinformatics</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; }
+    h2, h3 { color: #2c3e50; }
+    table { border-collapse: collapse; width: 100%; margin-bottom: 2em; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #2c3e50; color: white;}
+  </style>
+</head>
+<body>
+
+<h2>🔗 Hard and Soft Links in Linux</h2>
+<table>
+  <thead>
+    <tr><th>Command</th><th>Description</th><th>Sample Usage</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ln original_file.txt hard_link.txt</td>
+      <td>Creates a hard link. Replace <code>original_file.txt</code> and <code>hard_link.txt</code>.</td>
+      <td>ln notes.txt notes_hardlink.txt</td>
+    </tr>
+    <tr>
+      <td>ln -s /path/to/original_file.txt soft_link.txt</td>
+      <td>Creates a symbolic link. Replace <code>/path/to/original_file.txt</code> and <code>soft_link.txt</code>.</td>
+      <td>ln -s ~/docs/data.txt data_link.txt</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>🧬 Bioinformatics File Formats</h2>
+<table>
+  <thead>
+    <tr><th>Format</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>FASTQ</td><td>Stores sequencing reads, often compressed as .fastq.gz. Contains ID, sequence, separator, and quality.</td></tr>
+    <tr><td>FASTA</td><td>Text format for nucleotide or protein sequences. Starts with <code>></code> header.</td></tr>
+    <tr><td>Multi-FASTA</td><td>FASTA format with multiple sequences separated by headers.</td></tr>
+    <tr><td>GFF3</td><td>Describes genome features. Contains fields like type, start, end, and attributes.</td></tr>
+    <tr><td>SAM</td><td>Alignment format with header and alignment section. May be compressed to BAM.</td></tr>
+    <tr><td>VCF</td><td>Stores sequence variations (SNPs, InDels). Includes chrom, pos, ID, ref, alt, and genotype.</td></tr>
+  </tbody>
+</table>
+
+<h2>🔎 Pattern Matching in Bash</h2>
+
+<h3>🌟 Globbing (Wildcard Expansion)</h3>
+<table>
+  <thead>
+    <tr><th>Pattern</th><th>Description</th><th>Sample Usage</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>*</td><td>Matches any number of characters</td><td>ls *.txt</td></tr>
+    <tr><td>?</td><td>Matches a single character</td><td>ls data?.csv</td></tr>
+    <tr><td>[abc]</td><td>Matches one of 'a', 'b', or 'c'</td><td>ls file[123].txt</td></tr>
+    <tr><td>[a-z]</td><td>Matches any character a–z</td><td>ls report[a-z].txt</td></tr>
+  </tbody>
+</table>
+
+<h3>📘 Regular Expressions</h3>
+<table>
+  <thead>
+    <tr><th>Pattern</th><th>Description</th><th>Sample Usage</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>.</td><td>Matches any character</td><td>grep "A.G" file.txt</td></tr>
+    <tr><td>*</td><td>Repeats previous pattern</td><td>grep "A*T" file.txt</td></tr>
+    <tr><td>^</td><td>Anchors to line start</td><td>grep "^ATG" file.txt</td></tr>
+    <tr><td>$</td><td>Anchors to line end</td><td>grep "end$" file.txt</td></tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr><th>Feature</th><th>Globbing</th><th>Regex</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Used For</td><td>File/folder matching</td><td>Text pattern matching</td></tr>
+    <tr><td>Example</td><td>ls *.fasta</td><td>^GATC</td></tr>
+    <tr><td>Complexity</td><td>Simple</td><td>Flexible and powerful</td></tr>
+  </tbody>
+</table>
+
+<section id="text-processing-cheatsheet">
+ <h2>📘 Text Processing Tools Cheat Sheet</h2>
+  <p>This table summarizes key command-line tools used in bioinformatics text processing. Click the tool name to learn more.</p>
+
+  <table border="1" cellspacing="0" cellpadding="8">
+    <thead>
+      <tr>
+        <th>🔧 Tool</th>
+        <th>🧾 Syntax</th>
+        <th>📄 Description</th>
+        <th>💡 Sample Usage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="https://man7.org/linux/man-pages/man1/cat.1.html" target="_blank" rel="noopener noreferrer">cat</a></td>
+        <td><code>cat [file]</code></td>
+        <td>Displays file contents or concatenates multiple files.</td>
+        <td><code>cat sequences.fasta</code><br><em>Displays a FASTA file in the terminal.</em></td>
+      </tr>
+      <tr>
+        <td><a href="https://man7.org/linux/man-pages/man1/grep.1.html" target="_blank" rel="noopener noreferrer">grep</a></td>
+        <td><code>grep [pattern] [file]</code></td>
+        <td>Searches for lines matching a pattern.</td>
+        <td>
+          <code>grep "gene" genes.gff</code><br><em>Finds lines with the word "gene".</em><br>
+          <code>grep "chr2" genes.gff</code><br><em>Finds lines from chromosome 2.</em>
+        </td>
+      </tr>
+      <tr>
+        <td><a href="https://man7.org/linux/man-pages/man1/cut.1.html" target="_blank" rel="noopener noreferrer">cut</a></td>
+        <td><code>cut -f[N] -d[delimiter] [file]</code></td>
+        <td>Extracts specific fields (columns) from text files.</td>
+        <td>
+          <code>cut -f1 samples.tsv</code><br><em>Extracts first column (Sample ID).</em><br>
+          <code>cut -f1,3 samples.tsv</code><br><em>Extracts Sample ID and Age.</em>
+        </td>
+      </tr>
+      <tr>
+        <td><a href="https://man7.org/linux/man-pages/man1/tr.1.html" target="_blank" rel="noopener noreferrer">tr</a></td>
+        <td><code>tr [set1] [set2]</code></td>
+        <td>Translates or deletes characters.</td>
+        <td><code>cat seq.txt | tr 'a-z' 'A-Z'</code><br><em>Converts lowercase to uppercase.</em></td>
+      </tr>
+      <tr>
+        <td><a href="https://www.gnu.org/software/gawk/manual/gawk.html" target="_blank" rel="noopener noreferrer">awk</a></td>
+        <td><code>awk '{print $N}' [file]</code></td>
+        <td>Processes and filters columns based on conditions.</td>
+        <td>
+          <code>awk '{print $1}' samples.tsv</code><br><em>Prints first column.</em><br>
+          <code>awk '$4 == "case" {count++} END {print count}' samples.tsv</code><br><em>Counts samples labeled "case" in column 4.</em>
+        </td>
+      </tr>
+      <tr>
+        <td><a href="https://www.gnu.org/software/sed/manual/sed.html" target="_blank" rel="noopener noreferrer">sed</a></td>
+        <td><code>sed 's/old/new/' [file]</code></td>
+        <td>Edits text in a stream with search-and-replace.</td>
+        <td>
+          <code>sed 's/old/new/' file.txt</code><br><em>Replaces first "old" with "new" in each line.</em><br>
+          <code>sed 's/fruit/FRUIT/g' mixed.txt</code><br><em>Replaces all instances of "fruit" with "FRUIT".</em>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Combined</strong></td>
+        <td><code>[tool1] | [tool2] | ...</code></td>
+        <td>Combines tools using pipes for complex tasks.</td>
+        <td>
+          <code>grep "gene" genes.gff | cut -f9 | tr ';' '\n' | sort | uniq</code><br>
+          <em>Extracts gene attributes, splits them, and lists unique entries.</em>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </section>
+
+
+<h2>🧬 Bash Manipulation for Bioinformatics</h2>
+<table>
+  <thead>
+    <tr><th>Task</th><th>Command</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Extract FASTA headers</td><td>grep "^>" mydata.fasta > headers.txt</td><td>Replace <code>mydata.fasta</code> and <code>headers.txt</code>.</td></tr>
+    <tr><td>Count FASTA headers</td><td>grep -c "^>" mydata.fasta</td><td>Counts sequences in FASTA file.</td></tr>
+    <tr><td>Split multi-FASTA</td><td>awk '/^>/{if (seq) print seq > filename; filename=$1; seq=""; next} {seq = seq $0} END{print seq > filename}' mydata.fasta</td><td>Splits sequences to files. Replace <code>mydata.fasta</code>.</td></tr>
+    <tr><td>Combine FASTA files</td><td>cat seq1.fasta seq2.fasta > combined.fasta</td><td>Replace filenames as needed.</td></tr>
+    <tr><td>Extract gene info</td><td>awk '$3 == "gene" {print $9}' mydata.gff3 &#124; cut -d ';' -f1 > gene_info.txt</td><td>Replace filenames and fields as needed.</td></tr>
+    <tr><td>Count genes</td><td>awk '$3 == "gene" {count++} END {print count}' mydata.gff3</td><td>Counts gene entries in GFF3 file.</td></tr>
+    <tr><td>Skip VCF metadata</td><td>grep -v "^#" mydata.vcf > data.vcf</td><td>Removes header lines. Replace files.</td></tr>
+    <tr><td>Filter VCF by quality</td><td>awk '$6 > 30' mydata.vcf > filtered.vcf</td><td>Filters variants. Change field or threshold if needed.</td></tr>
+  </tbody>
+</table>
+
+<h2>📜 Shell Scripting</h2>
+<table>
+  <thead>
+    <tr><th>Task</th><th>Command</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Create script</td><td>nano myscript.sh</td><td>Creates script file. Replace <code>myscript.sh</code>.</td></tr>
+    <tr><td>Add shebang</td><td>#!/bin/bash</td><td>Defines the shell interpreter at top of script.</td></tr>
+    <tr><td>Make executable</td><td>chmod +x myscript.sh</td><td>Grants execute permission. Replace filename.</td></tr>
+    <tr><td>Run script (local)</td><td>./myscript.sh</td><td>Run script in current directory.</td></tr>
+    <tr><td>Run with path</td><td>/path/to/myscript.sh</td><td>Run script using full path.</td></tr>
+    <tr><td>Run with bash</td><td>bash myscript.sh</td><td>Run without setting execute permission.</td></tr>
+  </tbody>
+</table>
+
+</body>
+</html>
