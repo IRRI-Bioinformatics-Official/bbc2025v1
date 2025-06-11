@@ -318,8 +318,6 @@ strong {
 							Matching in Bash</a></li>
 					<li><a href="#" data-target="text-processing-tools">XI.
 							Text Processing Tools</a></li>
-					<li><a href="#" data-target="bash-bioinformatics">XII.
-							Bash Manipulation And Scripting</a></li>
 					<li><a href="cheatsheet_day2.html" target="_blank">Cheat Sheet</a></li>
 					
 				</details></li>
@@ -329,7 +327,8 @@ strong {
 					</summary>
 					<li><a href="#" data-target="io-redirection">XIII. I/O
 							Redirection</a></li>
-							
+					<li><a href="#" data-target="bash-bioinformatics">XII.
+							Bash Manipulation And Scripting</a></li>
 					<li><a href="#" data-target="linux-process-control">XIV.
 							Process Control</a></li>
 					<li><a href="#" data-target="linux-job-control">XIV. Job
@@ -341,11 +340,7 @@ strong {
 							Environment Variable</a></li>
 					<li><a href="#" data-target="bashrc-bash_profile">XVIII.
 							Shell Configuration Files</a></li>
-					<li><a href="#" data-target="linux-tips">XIX. Linux Tips</a></li>
-					<li><a href="#" data-target="quiz">XX. Activity</a></li>
-
-					<li><a href="main_c.html" target="blank">IX. Cheat Sheet</a></li>
-				</details></li>
+					</details></li>
 		</ul>
 	</div>
 
@@ -1676,7 +1671,59 @@ ln file1.txt hardlink.txt
 
 		</section>
 		 -->
-
+</section><section id="io-redirection">
+			<h2>I/O Redirection</h2>
+			<p>In Linux, command-line programs typically receive input from
+				the keyboard (standard input) and display output on the screen
+				(standard output). I/O redirection allows you to change these
+				default sources and destinations, enabling you to direct input and
+				output to and from files or other commands.</p>
+			<h3>Standard Streams</h3>
+			<ul>
+				<li><strong>Standard Input (stdin):</strong> The default source
+					of input, usually the keyboard.</li>
+				<li><strong>Standard Output (stdout):</strong> The default
+					destination for output, usually the screen.</li>
+				<li><strong>Standard Error (stderr):</strong> The default
+					destination for error messages, usually the screen.</li>
+			</ul>
+			<h3>Output Redirection</h3>
+			<p>Redirect the output of a command to a file:</p>
+			<pre><code>ls > file_list.txt</code></pre>
+			<p>
+				This command writes the output of
+				<code>ls</code>
+				to
+				<code>file_list.txt</code>
+				, overwriting the file if it exists.
+			</p>
+			<p>Append the output to the end of a file without overwriting:</p>
+			<pre><code>ls >> file_list.txt</code></pre>
+			<p>
+				This command adds the output of
+				<code>ls</code>
+				to the end of
+				<code>file_list.txt</code>
+				.
+			</p>
+			<h3>Input Redirection</h3>
+			<p>Use a file as input to a command:</p>
+			<pre><code>wc -l < file_list.txt</code></pre>
+			<p>
+				This command counts the number of lines in
+				<code>file_list.txt</code>
+				.
+			</p>
+			<h3>Pipes</h3>
+			<p>Use the output of one command as the input to another:</p>
+			<pre><code>ls | head -3 > file.txt</code></pre>
+			<p>
+				This command lists files, takes the first three lines, and writes
+				them to
+				<code>file.txt</code>
+				.
+			</p>
+		</section>
 		<section id="bash-bioinformatics">
   <h2>💻 Understanding Bash Manipulation and Scripting</h2>
   <p><strong>Bash</strong> (Bourne Again SHell) is the command-line shell used in most Linux systems. It allows users to run commands, manipulate text and files, and write scripts to automate repetitive tasks.</p>
@@ -1714,6 +1761,84 @@ ln file1.txt hardlink.txt
   <h3>📝 What is Bash Scripting?</h3>
   <p>Bash scripting involves writing a series of Bash commands in a script file (with <code>.sh</code> extension). These scripts can be reused to automate tasks such as file processing, data filtering, or running pipelines.</p>
 
+  <section>
+  <h2>💲 Using the Dollar Sign in Shell Scripting</h2>
+
+  <p>After covering the essentials — <strong>1) script structure, 2) file operations, 3) pattern matching, and 4) input/output</strong> — we can explore how the <code>$</code> symbol is used in scripting. This symbol plays a critical role in referencing variables, capturing command output, and working with script arguments.</p>
+
+  <h3>📌 Common Use Cases of <code>$</code> in Shell Scripts</h3>
+
+  <h4>1. 🔠 Variables and Substitution</h4>
+  <pre><code>filename="sample.txt"
+echo "The file is named $filename"</code></pre>
+
+  <h4>2. 📆 Command Substitution</h4>
+  <pre><code>today=$(date)
+echo "Today's date is: $today"</code></pre>
+
+  <h4>3. 🧑‍💻 Script Arguments</h4>
+  <pre><code># greet.sh
+echo "Hello $1! You provided the file: $2"
+
+# Usage:
+./greet.sh Alice data.fasta</code></pre>
+
+  <h4>4. 🧾 Special Variables</h4>
+  <ul>
+    <li><code>$0</code> – Script name</li>
+    <li><code>$#</code> – Number of arguments</li>
+    <li><code>$@</code> – All arguments</li>
+    <li><code>$?</code> – Exit status of last command</li>
+    <li><code>$$</code> – Process ID of the script</li>
+  </ul>
+
+  <h4>5. ➗ Arithmetic Operations</h4>
+  <pre><code>a=10
+b=2
+result=$((a / b))
+echo "Result: $result"</code></pre>
+
+	<h4>🧪 6. Basic Conditions</h4>
+<pre><code>if [ -f "input.txt" ]; then
+  echo "File exists"
+fi
+</code></pre>
+<p>📘 Learn more about <code>if</code> conditions here: 
+  <a href="https://linuxize.com/post/bash-if-else-statement/" target="_blank">
+    Bash Beginners Guide – If Statements
+  </a>
+</p>
+
+<h4>7. 🗃️ Looping Over Files with <code>$</code></h4>
+<p>Although loops go beyond basic syntax, this shows practical use:</p>
+<pre><code>for file in *.fasta
+do
+  echo "Processing $file"
+done
+</code></pre>
+<p>📘 Learn more about <code>for</code> loops here: 
+  <a href="https://linuxize.com/post/bash-for-loop/	" target="_blank">
+    Bash Beginners Guide – Loops
+  </a>
+</p>
+
+
+  <h3>📋 Summary of <code>$</code> Use Cases</h3>
+  <table border="1" cellpadding="5">
+    <tr><th>Expression</th><th>Meaning</th></tr>
+    <tr><td><code>$var</code></td><td>Access variable value</td></tr>
+    <tr><td><code>$(command)</code></td><td>Command substitution</td></tr>
+    <tr><td><code>$1, $2, ...</code></td><td>Script arguments</td></tr>
+    <tr><td><code>$#</code></td><td>Number of arguments</td></tr>
+    <tr><td><code>$@</code></td><td>All arguments</td></tr>
+    <tr><td><code>$?</code></td><td>Exit status</td></tr>
+    <tr><td><code>$((...))</code></td><td>Arithmetic evaluation</td></tr>
+    <tr><td><code>${var%.ext}</code></td><td>Remove extension</td></tr>
+  </table>
+
+  <p>These tools make your scripts flexible, dynamic, and much more powerful when automating real tasks in bioinformatics and system operations.</p>
+</section>
+  
   <h4>📄 Example: <code>process_samples.sh</code></h4>
   <pre><code>#!/bin/bash
 
@@ -1723,43 +1848,102 @@ for sample in samples/*.txt; do
   echo "Processing $sample"
   grep "gene" "$sample" | cut -f1,2
 done</code></pre>
- <h4>📄 Example: <code>simpleCommands.sh</code></h4>
+ <h4>📄 Example: <code>organize.sh</code>. Here is the sample files you can use: <a href="/bbc2025v1/docs/2025/module1_basic_linux/resources/scripting.zip">scripting.zip</a></h4>
 <pre><code>#!/bin/bash
 
-# Bioinformatics scripting basics: greeting, listing, copying, and renaming
+# Create target folders
+mkdir -p fasta fastq txt csv log other
 
-echo "🔬 Welcome to Bioinformatics Scripting!"
-echo "📅 Today's date is: $(date)"
+# Move files based on extension (from current dir and known subdirectories)
+mv *.fasta fasta/
+mv dir1/*.fasta dir2/*.fasta dir3/*.fasta fasta/
 
-# 1. List FASTA files
-echo "📂 Listing all .fasta files in the current directory:"
-ls *.fasta 2>/dev/null
+mv *.fastq fastq/
+mv dir1/*.fastq dir2/*.fastq dir3/*.fastq fastq/
 
-# 2. Copy a file (if it exists)
-if [ -f "example.fasta" ]; then
-    echo "📄 Copying 'example.fasta' to 'example_backup.fasta'..."
-    cp example.fasta example_backup.fasta
-    echo "✅ Copy done."
-else
-    echo "⚠️ File 'example.fasta' not found. Skipping copy."
-fi
+mv *.txt txt/
+mv dir1/*.txt dir2/*.txt dir3/*.txt txt/
 
-# 3. Rename a file (if it exists)
-if [ -f "old_name.fasta" ]; then
-    echo "✏️ Renaming 'old_name.fasta' to 'new_name.fasta'..."
-    mv old_name.fasta new_name.fasta
-    echo "✅ Rename done."
-else
-    echo "⚠️ File 'old_name.fasta' not found. Skipping rename."
-fi
+mv *.csv csv/
+mv dir1/*.csv dir2/*.csv dir3/*.csv csv/
 
-echo "✅ All tasks completed!"
-</code></pre>
+mv *.log log/
+mv dir1/*.log dir2/*.log dir3/*.log log/
+
+# Move other file types
+mv *.* other/
+mv dir1/*.* dir2/*.* dir3/*.* other/
+
+# Remove unnecessary (now empty) directories
+rm -r dir1 dir2 dir3
+
+# Show how many files are in each folder
+echo "📁 File counts:"
+echo "fasta:  $(ls fasta | wc -l) files"
+echo "fastq:  $(ls fastq | wc -l) files"
+echo "txt:    $(ls txt | wc -l) files"
+echo "csv:    $(ls csv | wc -l) files"
+echo "log:    $(ls log | wc -l) files"
+echo "other:  $(ls other | wc -l) files"
+
+echo "✅ Files organized and extra directories removed."</code></pre>
 
   <p><strong>How to run:</strong></p>
   <pre><code>bash process_samples.sh</code></pre>
+ <h4>📄 UPDATE SCRIPT Example: <code>organize.sh</code>. This uses if and loop statements</h4> 
+  <pre><code>#!/bin/bash
 
-  <h3>🧬 Why Bash Scripting Matters in Bioinformatics</h3>
+# Define extensions and their target folders
+extensions="fasta fastq txt csv log"
+folders="fasta fastq txt csv log other"
+
+# Create target folders
+for folder in $folders; do
+  mkdir -p "$folder"
+done
+
+# Known directories to check
+dirs="dir1 dir2 dir3"
+
+# Move files by extension from current and subdirectories
+for ext in $extensions; do
+  # Move from current directory
+  if ls *."$ext"; then
+    mv *."$ext" "$ext"/
+  fi
+
+  # Move from subdirectories
+  for d in $dirs; do
+    if ls "$d"/*."$ext"; then
+      mv "$d"/*."$ext" "$ext"/
+    fi
+  done
+done
+
+# Move remaining files to "other"
+for d in . $dirs; do
+  if ls "$d"/*.*; then
+    mv "$d"/*.* other/
+  fi
+done
+
+# Remove now-empty subdirectories
+for d in $dirs; do
+  if [ -d "$d" ]; then
+    rmdir "$d"
+  fi
+done
+
+# Count files in each folder
+echo "📁 File counts:"
+for folder in $folders; do
+  count=$(ls "$folder" | wc -l)
+  echo "$folder: $count files"
+done
+
+echo "✅ Files organized and extra directories removed."</code></pre>
+  
+ <h3>🧬 Why Bash Scripting Matters in Bioinformatics</h3>
   <ul>
     <li>⚙️ Automates repetitive analysis steps</li>
     <li>📊 Processes large text-based files (FASTA, FASTQ, GFF, VCF)</li>
@@ -1821,58 +2005,6 @@ echo "Hello, World!"</code>
 				environment variable if you wish to run it without specifying the
 				path.
 			</p>
-		</section><section id="io-redirection">
-			<h2>I/O Redirection</h2>
-			<p>In Linux, command-line programs typically receive input from
-				the keyboard (standard input) and display output on the screen
-				(standard output). I/O redirection allows you to change these
-				default sources and destinations, enabling you to direct input and
-				output to and from files or other commands.</p>
-			<h3>Standard Streams</h3>
-			<ul>
-				<li><strong>Standard Input (stdin):</strong> The default source
-					of input, usually the keyboard.</li>
-				<li><strong>Standard Output (stdout):</strong> The default
-					destination for output, usually the screen.</li>
-				<li><strong>Standard Error (stderr):</strong> The default
-					destination for error messages, usually the screen.</li>
-			</ul>
-			<h3>Output Redirection</h3>
-			<p>Redirect the output of a command to a file:</p>
-			<pre><code>ls > file_list.txt</code></pre>
-			<p>
-				This command writes the output of
-				<code>ls</code>
-				to
-				<code>file_list.txt</code>
-				, overwriting the file if it exists.
-			</p>
-			<p>Append the output to the end of a file without overwriting:</p>
-			<pre><code>ls >> file_list.txt</code></pre>
-			<p>
-				This command adds the output of
-				<code>ls</code>
-				to the end of
-				<code>file_list.txt</code>
-				.
-			</p>
-			<h3>Input Redirection</h3>
-			<p>Use a file as input to a command:</p>
-			<pre><code>wc -l < file_list.txt</code></pre>
-			<p>
-				This command counts the number of lines in
-				<code>file_list.txt</code>
-				.
-			</p>
-			<h3>Pipes</h3>
-			<p>Use the output of one command as the input to another:</p>
-			<pre><code>ls | head -3 > file.txt</code></pre>
-			<p>
-				This command lists files, takes the first three lines, and writes
-				them to
-				<code>file.txt</code>
-				.
-			</p>
 		</section>
 
 		<section id="linux-process-control">
@@ -1929,7 +2061,10 @@ echo "Hello, World!"</code>
 			</p>
 			<pre><code>renice -n 10 -p <PID></code></pre>
 			<p>Adjust the priority of a process identified by its PID.</p>
+			
+
 		</section>
+		
 		<section id="linux-job-control">
 			<h2>Linux Job Control</h2>
 			<p>
@@ -2080,6 +2215,32 @@ echo "Hello, World!"</code>
 				<dd>Suspends the currently running foreground process by
 					sending a SIGTSTP signal, allowing it to be resumed later.</dd>
 			</dl>
+			
+			<h3>🧪 Real-Time Process and Job Control Examples</h3>
+
+  <p><strong>Create a background process:</strong></p>
+  <pre><code>sleep 300 &</code></pre>
+
+  <p><strong>View it with:</strong></p>
+  <pre><code>ps aux | grep sleep
+top</code></pre>
+
+  <p><strong>Suspend with Ctrl+Z, then:</strong></p>
+  <pre><code>jobs
+bg %1
+fg %1
+kill %1</code></pre>
+
+  <p><strong>Adjust priority:</strong></p>
+  <pre><code>nice -n 10 sleep 300 &
+renice -n -5 -p &lt;PID&gt;</code></pre>
+
+  <h4>🧹 Reminder: Clean Up</h4>
+  <p>To safely clean up background processes created for this demo:</p>
+  <pre><code>killall sleep
+jobs
+</code></pre>
+			
 
 			<p>
 				For more detailed information and examples on managing jobs in
