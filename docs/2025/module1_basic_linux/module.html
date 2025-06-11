@@ -102,6 +102,13 @@ code {
 	display: block;
 }
 
+  .tip {
+      background: #dff0d8;
+      border-left: 5px solid #3c763d;
+      padding: 10px;
+      margin: 10px 0;
+    }
+
 ul {
 	list-style-type: none;
 	padding-left: 20px;
@@ -1554,27 +1561,35 @@ ln file1.txt hardlink.txt
 			<p>In bioinformatics, many files are plain text — like FASTA,
 				GFF, or VCF files. Linux provides powerful tools to read, search,
 				and manipulate these files directly from the terminal.</p>
+				
+			<div class="tip">
+			    <strong>🧠 Tips:</strong>
+			    <ul>
+			      <li>To observe the changes made by each command, start by viewing the original file using cat (e.g. cat [filename])</li>
+			      
+			    </ul>
+			  </div>
 
 			
    <h3>📄 1. <code>cat</code> – Concatenate and Display File Content (5 mins)</h3>
   <p><strong>Definition:</strong> <code>cat</code> reads files sequentially and writes them to standard output. It's often used to view or merge files.</p>
   <p><strong>Basic Syntax:</strong> <code>cat [filename]</code></p>
+  <p><em>1. Displays the contents of a FASTA file directly in the terminal.</em></p>
   <pre><code>cat sequences.fasta</code></pre>
-  <p><em>Displays the contents of a FASTA file directly in the terminal.</em></p>
+  <p><em>2. Combines two files into one called <code>combined.txt</code>.</em></p>
   <pre><code>cat file1.txt file2.txt > combined.txt</code></pre>
-  <p><em>Combines two files into one called <code>combined.txt</code>.</em></p>
+  
 
   <h3>🔍 2. <code>grep</code> – Search for Patterns (15 mins)</h3>
   <p><strong>Definition:</strong> <code>grep</code> searches for lines matching a pattern, often used to locate specific genes, IDs, or mutations.</p>
   <p><strong>Basic Syntax:</strong> <code>grep [options] 'pattern' [file]</code></p>
+  <p><em>1. Finds all lines that contain the word "gene" in a GFF file.</em></p>
   <pre><code>grep "gene" genes.gff</code></pre>
-  <p><em>Finds all lines that contain the word "gene" in a GFF file.</em></p>
+  <p><em>2. Case-insensitive search for "chr1" in a VCF file.</em></p>
   <pre><code>grep -i "chr1" variants.vcf</code></pre>
-  <p><em>Case-insensitive search for "chr1" in a VCF file.</em></p>
+  <p><em>3. Excludes header lines (those starting with <code>#</code>) from the output.</em></p>
   <pre><code>grep -v "^#" variants.vcf</code></pre>
-  <p><em>Excludes header lines (those starting with <code>#</code>) from the output.</em></p>
-
-  <ul>
+   <ul>
     <li><code>-i</code>: Case-insensitive search</li>
     <li><code>-v</code>: Invert match (exclude matching lines)</li>
     <li><code>-c</code>: Count the number of matches</li>
@@ -1583,10 +1598,11 @@ ln file1.txt hardlink.txt
   <h3>🔪 3. <code>cut</code> – Extract Text Columns (10 mins)</h3>
   <p><strong>Definition:</strong> <code>cut</code> slices text by column, useful for extracting data fields from TSV/CSV/VCF files.</p>
   <p><strong>Basic Syntax:</strong> <code>cut -f[column] -d[delimiter] [file]</code></p>
+  <p><em>1. Extracts the first field (Sample ID) from a tab-separated file.</em></p>
   <pre><code>cut -f1 samples.tsv</code></pre>
-  <p><em>Extracts the first field (Sample ID) from a tab-separated file.</em></p>
+  <p><em>2. Extracts the second field from a colon-separated file.</em></p>
   <pre><code>cut -d':' -f2 mixed_data.txt</code></pre>
-  <p><em>Extracts the second field from a colon-separated file.</em></p>
+  
 
   <ul>
     <li><code>-f</code>: Specify field number</li>
@@ -1596,32 +1612,35 @@ ln file1.txt hardlink.txt
   <h3>🔤 4. <code>tr</code> – Translate or Delete Characters (5 mins)</h3>
   <p><strong>Definition:</strong> <code>tr</code> replaces or removes characters. It's handy for format normalization or case conversion.</p>
   <p><strong>Basic Syntax:</strong> <code>tr [set1] [set2]</code></p>
+  <p><em>1. Converts all lowercase letters in a DNA sequence file to uppercase.</em></p>
   <pre><code>cat seq.txt | tr 'a-z' 'A-Z'</code></pre>
-  <p><em>Converts all lowercase letters in a DNA sequence file to uppercase.</em></p>
+  <p><em>2. Removes carriage returns (useful when converting Windows to Unix format).</em></p>
   <pre><code>tr -d '\r' &lt; windows_file.txt</code></pre>
-  <p><em>Removes carriage returns (useful when converting Windows to Unix format).</em></p>
+  <p><em>3. Replaces colons with tabs, converting to a tab-delimited format.</em></p>
   <pre><code>tr ':' '\t' &lt; colon_data.txt</code></pre>
-  <p><em>Replaces colons with tabs, converting to a tab-delimited format.</em></p>
+  
 
   <h3>🧠 5. <code>awk</code> – Analyze and Format Column Data (15 mins)</h3>
   <p><strong>Definition:</strong> <code>awk</code> is a programming language for pattern scanning and processing. It handles field-based logic and reports.</p>
   <p><strong>Basic Syntax:</strong> <code>awk '{action}' [file]</code></p>
+  <p><em>1. Prints the first column (sample names or IDs) from the file.</em></p>
   <pre><code>awk '{print $1}' samples.tsv</code></pre>
-  <p><em>Prints the first column (sample names or IDs) from the file.</em></p>
+  <p><em>2. Filters rows where column 3 equals "gene" and prints selected columns (seqid, start, end).</em></p>
   <pre><code>awk '$3 == "gene" {print $1, $4, $5}' genes.gff</code></pre>
-  <p><em>Filters rows where column 3 equals "gene" and prints selected columns (seqid, start, end).</em></p>
+  <p><em>3. Prints variant ID and quality score if quality is greater than 100.</em></p>
   <pre><code>awk -F'\t' '{if ($5 &gt; 100) print $1, $5}' variants.vcf</code></pre>
-  <p><em>Prints variant ID and quality score if quality is greater than 100.</em></p>
+  
 
   <h3>✂️ 6. <code>sed</code> – Stream Edit Text In-Place (10 mins)</h3>
   <p><strong>Definition:</strong> <code>sed</code> edits text in a stream. It's useful for substitutions, filtering, and quick text editing in-place.</p>
   <p><strong>Basic Syntax:</strong> <code>sed 's/pattern/replacement/' [file]</code></p>
+  <p><em>1. Replaces the first occurrence of "old" with "new" in each line.</em></p>
   <pre><code>sed 's/old/new/' file.txt</code></pre>
-  <p><em>Replaces the first occurrence of "old" with "new" in each line.</em></p>
+  <p><em>2. Replaces all occurrences of "gene" with "GENE" per line.</em></p>
   <pre><code>sed 's/gene/GENE/g' genes.gff</code></pre>
-  <p><em>Replaces all occurrences of "gene" with "GENE" per line.</em></p>
+  <p><em>3. Prints only the first 5 lines of the file.</em></p>
   <pre><code>sed -n '1,5p' genes.gff</code></pre>
-  <p><em>Prints only the first 5 lines of the file.</em></p>
+  
 
   <ul>
     <li><code>s/old/new/</code>: Replace first match per line</li>
