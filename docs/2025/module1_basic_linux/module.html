@@ -1610,7 +1610,7 @@ ln file1.txt hardlink.txt
   <p><em>Prints the first column (sample names or IDs) from the file.</em></p>
   <pre><code>awk '$3 == "gene" {print $1, $4, $5}' genes.gff</code></pre>
   <p><em>Filters rows where column 3 equals "gene" and prints selected columns (seqid, start, end).</em></p>
-  <pre><code>awk -F'\t' '{if ($5 &gt; 100) print $1, $5}' variants.tsv</code></pre>
+  <pre><code>awk -F'\t' '{if ($5 &gt; 100) print $1, $5}' variants.vcf</code></pre>
   <p><em>Prints variant ID and quality score if quality is greater than 100.</em></p>
 
   <h3>✂️ 6. <code>sed</code> – Stream Edit Text In-Place (10 mins)</h3>
