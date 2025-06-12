@@ -2564,117 +2564,55 @@ fi</code>
 			<p>You'll be prompted to enter your password to confirm your
 				identity.</p>
 		</section>
+		
+		<section>
+  <h2>Popup Quiz: Build a Gene Expression Matrix</h2>
 
-		<!-- 
-		<section id="quiz">
-			<h2>📘 Linux Terminal Practice: Folder Navigation & File
-				Inspection</h2>
-			<p>Use the terminal to complete each task. If the command works,
-				write down the result. If it returns an error, copy the exact error
-				message from your terminal. In some tasks, you’ll be asked what
-				command you would use to achieve a certain outcome.</p>
-			<p>
-				<strong>📝 Instructions:</strong>
-			</p>
+  <h3>📝 Use Case:</h3>
+  <p>
+    You are given 6 expression data files named:
+    <code>sample1.tab, sample2.tab, ..., sample6.tab</code><br>
+    Download it <a href="/bbc2025v1/docs/2025/module1_basic_linux/resources/sample.zip">here</a><br>
+    Each file contains <strong>two columns</strong>:<br>
+    - <strong>Column 1</strong>: Gene names<br>
+    - <strong>Column 2</strong>: Expression values for that sample
+  </p>
+  <p>
+    Your goal is to write a <strong>Bash script</strong> that:
+  </p>
+  <ol>
+    <li>Extracts gene names from <code>sample1.tab</code></li>
+    <li>Extracts expression values (column 2) from all 6 files</li>
+    <li>Combines all values side-by-side into a single file</li>
+    <li>Names the final output as: <code>&lt;yourlastname&gt;_activity4.txt</code><br>
+      Example: If your last name is <code>Garcia</code>, output file should be <code>Garcia_activity4.txt</code>
+    </li>
+  </ol>
 
-			<ul>
-				<li>1. Write all your answers in a plain text file named <code>yourLastname_activity1.txt</code>.
-					Once done, submit the file to: <strong>.....</strong>.
-				</li>
-				<li>2. Download this file: <a
-					href="/bbc2025v1/docs/2025/module1_basic_linux/resources/bio_training.zip"><strong>bio_training.zip</strong></a>.
-				</li>
-			</ul>
+  <h3>🔧 Requirements:</h3>
+  <ul>
+    <li>Script should accept <strong>one parameter</strong>: the name of the first input file (e.g., <code>sample1.tab</code>)</li>
+    <li>Use a <code>for</code> loop to process <code>sample1.tab</code> to <code>sample6.tab</code></li>
+    <li>Use <code>awk</code> to extract columns</li>
+    <li>Use <code>paste</code> to combine files</li>
+    <li>Optionally, clean up temporary files</li>
+  </ul>
 
+  <h3>💡HINTS [You may choose not to use these hints and are encouraged to solve the problem using your own approach.]</h3>
+  <ul>
+    <li>Use <code>awk '{print $1}'</code> to get the first column (gene names)</li>
+    <li>Use <code>for ((i=1; i&lt;=6; i++))</code> to iterate over files</li>
+    <li>Use <code>sample${i}.tab</code> for dynamic filenames</li>
+    <li>Use <code>paste</code> to merge files side by side</li>
+    <li>Run your script like: <code>./your_script.sh sample1.tab</code></li>
+  </ul>
 
-			<h3>📦 Task 0: Extract the training archive</h3>
-			<pre><code>unzip bio_training.zip</code></pre>
-			<p>
-				<strong>Q1:</strong> Did the folder
-				<code>bio_training/</code>
-				get created successfully?
-			</p>
-			<p>
-				<strong>Q2:</strong> If there was an error, what was the exact
-				message? What command should be use?
-			</p>
+  <h3>✅ Expected Output File Format (tab-delimited):</h3>
+	  <img src="resources/result.png" alt="Linux Filesystem Structure" style="max-width:100%; height:auto; border:1px solid #ccc; border-radius:8px;">
+</section>
 
-			<h3>🔍 Task 1: Navigate to a folder</h3>
-			<pre><code>cd /bio_training/projectA/data</code></pre>
-			<p>
-				<strong>Q1:</strong> What are the names of the files in this
-				directory? Use
-				<code>ls</code>
-				to list them.
-			</p>
-			<p>
-				<strong>Q2:</strong> Did the command work? If not, What should
-				command be use to go to data folder under projectA?
-			</p>
-
-			<h3>📄 Task 2: View a file</h3>
-			<pre><code>cat exp1.tsv</code></pre>
-			<p>
-				<strong>Q1:</strong> What is the content of the file? Can you spot
-				the gene with the highest expression?
-			</p>
-			<p>
-				<strong>Q2:</strong> Did the command work? If not, what exact error
-				message did you see?
-			</p>
-
-			<h3>📂 Task 3: Count number of files in a directory</h3>
-			<pre><code>ls | wc -l</code></pre>
-			<p>
-				<strong>Q1:</strong> How many items (files and folders) are listed?
-			</p>
-			<p>
-				<strong>Q2:</strong> What command would you use to list the actual
-				names instead of just the count?
-			</p>
-
-			<h3>📜 Task 4: Check logs</h3>
-			<pre><code>tail -n 1 ../results/error.log</code></pre>
-			<p>
-				<strong>Q1:</strong> What does the last line of the error log say?
-			</p>
-			<p>
-				<strong>Q2:</strong> Did the command work? If not, what exact error
-				message did you see?
-			</p>
-
-			<h3>🔍 Task 5: Search metadata</h3>
-			<pre><code>grep FAIL ../../projectB/metadata/samples.tsv</code></pre>
-			<p>
-				<strong>Q1:</strong> Which samples failed the quality check?
-			</p>
-			<p>
-				<strong>Q2:</strong> What command should be used if we want to
-				ignore uppercase/lowercase differences?
-			</p>
-
-			<h3>🔢 Task 6: Count lines in a log file</h3>
-			<pre><code>wc -l ../../projectB/logs/pipeline.log</code></pre>
-			<p>
-				<strong>Q1:</strong> How many lines are in the log file?
-			</p>
-			<p>
-				<strong>Q2:</strong> What command would you use to count the number
-				of words instead?
-			</p>
-
-			<h3>📁 Task 7: Create a new folder and file</h3>
-			<pre><code>mkdir analysis && touch analysis/summary.txt</code></pre>
-			<p>
-				<strong>Q1:</strong> What command would show the full absolute path
-				of the new file?
-			</p>
-			<p>
-				<strong>Q2:</strong> What command would you use to confirm that the
-				file is empty?
-			</p>
-		</section>
-		 -->
+		
+		
 		</br> </br> </br>
 	</main>
 
