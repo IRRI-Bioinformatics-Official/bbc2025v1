@@ -87,7 +87,7 @@
 </table>
 
 <section id="text-processing-cheatsheet">
- <h2>📘 Text Processing Tools Cheat Sheet</h2>
+  <h2>📘 Text Processing Tools Cheat Sheet</h2>
   <p>This table summarizes key command-line tools used in bioinformatics text processing. Click the tool name to learn more.</p>
 
   <table border="1" cellspacing="0" cellpadding="8">
@@ -104,15 +104,15 @@
         <td><a href="https://man7.org/linux/man-pages/man1/cat.1.html" target="_blank" rel="noopener noreferrer">cat</a></td>
         <td><code>cat [file]</code></td>
         <td>Displays file contents or concatenates multiple files.</td>
-        <td><code>cat sequences.fasta</code><br><em>Displays a FASTA file in the terminal.</em></td>
+        <td><em>Displays a FASTA file in the terminal.</em><br><code>cat sequences.fasta</code></td>
       </tr>
       <tr>
         <td><a href="https://man7.org/linux/man-pages/man1/grep.1.html" target="_blank" rel="noopener noreferrer">grep</a></td>
         <td><code>grep [pattern] [file]</code></td>
         <td>Searches for lines matching a pattern.</td>
         <td>
-          <code>grep "gene" genes.gff</code><br><em>Finds lines with the word "gene".</em><br>
-          <code>grep "chr2" genes.gff</code><br><em>Finds lines from chromosome 2.</em>
+          <em>Finds lines with the word "gene".</em><br><code>grep "gene" genes.gff</code><br>
+          <em>Finds lines from chromosome 2.</em><br><code>grep "chr2" genes.gff</code>
         </td>
       </tr>
       <tr>
@@ -120,23 +120,23 @@
         <td><code>cut -f[N] -d[delimiter] [file]</code></td>
         <td>Extracts specific fields (columns) from text files.</td>
         <td>
-          <code>cut -f1 samples.tsv</code><br><em>Extracts first column (Sample ID).</em><br>
-          <code>cut -f1,3 samples.tsv</code><br><em>Extracts Sample ID and Age.</em>
+          <em>Extracts first column (Sample ID).</em><code>cut -f1 samples.tsv</code><br>
+          <em>Extracts Sample ID and Age.</em><br><code>cut -f1,3 samples.tsv</code>
         </td>
       </tr>
       <tr>
         <td><a href="https://man7.org/linux/man-pages/man1/tr.1.html" target="_blank" rel="noopener noreferrer">tr</a></td>
         <td><code>tr [set1] [set2]</code></td>
         <td>Translates or deletes characters.</td>
-        <td><code>cat seq.txt | tr 'a-z' 'A-Z'</code><br><em>Converts lowercase to uppercase.</em></td>
+        <td><em>Converts lowercase to uppercase.</em><br><code>cat seq.txt | tr 'a-z' 'A-Z'</code></td>
       </tr>
       <tr>
         <td><a href="https://www.gnu.org/software/gawk/manual/gawk.html" target="_blank" rel="noopener noreferrer">awk</a></td>
         <td><code>awk '{print $N}' [file]</code></td>
         <td>Processes and filters columns based on conditions.</td>
         <td>
-          <code>awk '{print $1}' samples.tsv</code><br><em>Prints first column.</em><br>
-          <code>awk '$4 == "case" {count++} END {print count}' samples.tsv</code><br><em>Counts samples labeled "case" in column 4.</em>
+          <em>Prints first column.</em><br><code>awk '{print $1}' samples.tsv</code><br>
+          <em>Counts samples labeled "case" in column 4.</em><br><code>awk '$4 == "case" {count++} END {print count}' samples.tsv</code>
         </td>
       </tr>
       <tr>
@@ -144,22 +144,90 @@
         <td><code>sed 's/old/new/' [file]</code></td>
         <td>Edits text in a stream with search-and-replace.</td>
         <td>
-          <code>sed 's/old/new/' file.txt</code><br><em>Replaces first "old" with "new" in each line.</em><br>
-          <code>sed 's/fruit/FRUIT/g' mixed.txt</code><br><em>Replaces all instances of "fruit" with "FRUIT".</em>
+          <em>Replaces first "old" with "new" in each line.</em><br><code>sed 's/old/new/' file.txt</code><br>
+          <em>Replaces all instances of "fruit" with "FRUIT".</em><br><code>sed 's/fruit/FRUIT/g' mixed.txt</code>
         </td>
       </tr>
       <tr>
-        <td><strong>Combined</strong></td>
-        <td><code>[tool1] | [tool2] | ...</code></td>
-        <td>Combines tools using pipes for complex tasks.</td>
+		  <td><a href="https://man7.org/linux/man-pages/man1/paste.1.html" target="_blank" rel="noopener noreferrer">paste</a></td>
+		  <td><code>paste [file1] [file2] ...</code></td>
+		  <td>Joins lines of files side-by-side (column-wise).</td>
+		  <td>
+		    <em>Merges two files line by line into columns.</em><br>
+		    <code>paste names.txt scores.txt</code><br>
+		    <em>Combines gene ID column with multiple gene expression columns.</em><br>
+		    <code>paste gene.txt gene1.txt gene2.txt</code><br>
+		  	
+		  </td>
+		</tr>
+		<tr>
+		  <td><a href="https://man7.org/linux/man-pages/man1/wc.1.html" target="_blank" rel="noopener noreferrer">wc</a></td>
+		  <td><code>wc [options] [file]</code></td>
+		  <td>Prints line, word, and byte counts for a file.</td>
+		  <td>
+		    <em>Get number of lines, words, and characters in a file.</em><br>
+		    <code>wc myfile.txt</code><br>
+		    <em>Count only lines in a file.</em><br>
+		    <code>wc -l data.csv</code><br>
+		  </td>
+		</tr>
+		<tr>
+		  <td><a href="https://man7.org/linux/man-pages/man1/sort.1.html" target="_blank" rel="noopener noreferrer">sort</a></td>
+		  <td><code>sort [options] [file]</code></td>
+		  <td>Sorts lines of text files.</td>
+		  <td>
+		    <em>Sort lines in a file alphabetically.</em><br>
+		    <code>sort fruits.txt</code><br>
+		    <em>Sort numerically by second column (tab-separated).</em><br>
+		    <code>sort -k2,2n data.tsv</code><br>
+		  </td>
+		</tr>
+		
+		<tr>
+		  <td><a href="https://man7.org/linux/man-pages/man1/uniq.1.html" target="_blank" rel="noopener noreferrer">uniq</a></td>
+		  <td><code>uniq [options] [input_file]</code></td>
+		  <td>Filters out or reports repeated lines in a file (must be sorted).</td>
+		  <td>
+		    <em>Remove duplicate lines from sorted input.</em><br>
+		    <code>sort names.txt | uniq</code><br>
+		    <em>Show only duplicated lines.</em><br>
+		    <code>sort genes.txt | uniq -d</code><br>
+		  </td>
+		</tr>
+      
+      <tr>
+        <td><strong>for loop</strong></td>
+        <td><code>for ((i=start; i&lt;=end; i++)); do [commands]; done</code></td>
+        <td>Loops through a numeric range and executes a command block.</td>
         <td>
-          <code>grep "gene" genes.gff | cut -f9 | tr ';' '\n' | sort | uniq</code><br>
-          <em>Extracts gene attributes, splits them, and lists unique entries.</em>
+        <em>prints from 1 to 10</em>
+          <code>for ((i=1;i&lt;=10;i++)); do echo $i; done</code>
+        </td>
+      </tr>
+      
+      <tr>
+        <td><strong>if else</strong></td>
+        <td><code>if [ condition ]; then [do this]; else [do that]; fi</code></td>
+        <td>Executes code conditionally based on a test.</td>
+        <td>
+          <em>Checks if file exists.</em><br><code>if [ -f file.txt ]; then echo "Exists"; else echo "Missing"; fi</code>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Combined Use Case</strong></td>
+        <td><code>awk + for + paste + if</code></td>
+        <td>Combines loops and commands for automation of tabular gene expression matrix creation.</td>
+        <td>
+        	<em>Extract the first column from a data file (e.g., file.txt) and save it to gene.txt</em>
+          <code>awk '{ print $1 }' file.txt > gene.txt</code><br>
+          <em>Extracts the first column from each of the 10 files namely file1, file2...to file10.txt and writes it into a corresponding output file. </em>
+          <code>for ((i=1;i&lt;=10;i++)); do awk '{ print $1 }' file${i}.txt &gt; output${i}.txt; done</code><br>
+          
         </td>
       </tr>
     </tbody>
   </table>
-  </section>
+</section>
 
 
 <h2>🧬 Bash Manipulation for Bioinformatics</h2>

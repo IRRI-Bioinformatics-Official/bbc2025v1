@@ -1,0 +1,13 @@
+SampleID	Organism	Tissue	Condition	Variety	Replicate
+R1	Oryza_sativa	Leaf	Control	IR64	1
+R2	Oryza_sativa	Leaf	Stress	IR64	1
+R3	Oryza_sativa	Leaf	Control	IR64	2
+R4	Oryza_sativa	Leaf	Stress	IR64	2
+R5	Oryza_sativa	Root	Control	IR64	1
+R6	Oryza_sativa	Root	Stress	IR64	1
+R7	Oryza_sativa	Root	Control	IR64	2
+R8	Oryza_sativa	Root	Stress	IR64	2
+R9	Oryza_sativa	Leaf	Control	Nipponbare	1
+R10	Oryza_sativa	Leaf	Stress	Nipponbare	1
+R11	Oryza_sativa	Root	Control	Nipponbare	1
+R12	Oryza_sativa	Root	Stress	Nipponbare	1
