@@ -2602,6 +2602,51 @@ fi</code>
 	  <img src="resources/result.png" alt="Linux Filesystem Structure" style="max-width:100%; height:auto; border:1px solid #ccc; border-radius:8px;">
 </section>
 
+<section id="popupquiz3">
+  <h2>Popup Quiz 3</h2>
+
+  <h3>1. Show all samples for the variety “Nipponbare”</h3>
+  <p><strong>Command:</strong></p>
+  <pre><code>grep "Nipponbare" samples.tsv</code></pre>
+  <p><strong>Explanation:</strong> This command looks through the file and shows all lines that mention “Nipponbare”.</p>
+
+  <h3>2. Count how many samples are under the "Stress" condition</h3>
+  <p><strong>Command:</strong></p>
+  <pre><code>grep "Stress" samples.tsv | wc -l</code></pre>
+  <p><strong>Explanation:</strong> 
+    <ul>
+      <li><code>grep "Stress"</code> finds all lines that contain the word "Stress".</li>
+      <li><code>wc -l</code> counts how many lines were found.</li>
+      <li><strong>The pipe <code>|</code> connects the two commands</strong> so that the result of <code>grep</code> is passed into <code>wc -l</code>.</li>
+    </ul>
+  </p>
+
+  <h3>3. Show SampleID, Tissue, Variety, and Replicate for samples with Replicate 2</h3>
+  <p><strong>Command:</strong></p>
+  <pre><code>awk '$6 == "2" {print $1, $3, $5, $6}' samples.tsv</code></pre>
+  <p><strong>Explanation:</strong> This shows only the rows where the 6th column (Replicate) is “2”. It prints just the needed columns: Sample ID (column 1), Tissue (3), Variety (5), and Replicate (6).</p>
+
+  <h3>4. Save only SampleID, Organism, and Variety into a new file</h3>
+  <p><strong>Command:</strong></p>
+  <pre><code>cut -f1,2,5 samples.tsv > newSamples.tsv</code></pre>
+  <p><strong>Explanation:</strong> This picks columns 1 (SampleID), 2 (Organism), and 5 (Variety) from the file and saves them into a new file called <code>newSamples.tsv</code>.</p>
+
+  <h3>5. Turn commas into new lines and rename gene codes</h3>
+  <p><strong>Command:</strong></p>
+  <pre><code>cat genes.txt | tr ',' '\n' | sed 's/LOC_Os/Gene/g' > clean_genes.txt</code></pre>
+  <p><strong>Explanation:</strong> 
+    <ul>
+      <li><code>cat genes.txt</code> reads the file.</li>
+      <li><code>tr ',' '\n'</code> changes every comma into a new line.</li>
+      <li><code>sed 's/LOC_Os/Gene/g'</code> replaces all "LOC_Os" with "Gene".</li>
+      <li><strong>The pipe <code>|</code></strong> is used to pass the result of one command to the next. This creates a chain where the output of one command becomes the input of the next.</li>
+      <li><code>></code> saves the final cleaned result into a file called <code>clean_genes.txt</code>.</li>
+    </ul>
+  </p>
+</section>
+
+
+
 		
 		
 		</br> </br> </br>
