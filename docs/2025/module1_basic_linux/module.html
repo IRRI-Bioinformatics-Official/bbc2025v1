@@ -2589,22 +2589,13 @@ fi</code>
     </li>
   </ol>
 
-  <h3>🔧 Requirements:</h3>
-  <ul>
-    <li>Script should accept <strong>one parameter</strong>: the name of the first input file (e.g., <code>sample1.tab</code>)</li>
-    <li>Use a <code>for</code> loop to process <code>sample1.tab</code> to <code>sample6.tab</code></li>
-    <li>Use <code>awk</code> to extract columns</li>
-    <li>Use <code>paste</code> to combine files</li>
-    <li>Optionally, clean up temporary files</li>
-  </ul>
-
-  <h3>💡HINTS [You may choose not to use these hints and are encouraged to solve the problem using your own approach.]</h3>
+    <h3>💡HINTS [You may choose not to use these hints and are encouraged to solve the problem using your own approach.]</h3>
   <ul>
     <li>Use <code>awk '{print $1}'</code> to get the first column (gene names)</li>
     <li>Use <code>for ((i=1; i&lt;=6; i++))</code> to iterate over files</li>
     <li>Use <code>sample${i}.tab</code> for dynamic filenames</li>
     <li>Use <code>paste</code> to merge files side by side</li>
-    <li>Run your script like: <code>./your_script.sh sample1.tab</code></li>
+ 
   </ul>
 
   <h3>✅ Expected Output File Format (tab-delimited):</h3>
