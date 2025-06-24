@@ -205,12 +205,17 @@ strong {
 			<li><a href="#" data-target="section-2">II. Post-GWAS Considerations</a></li>
 			<li><a href="#" data-target="section-3">III. Candidate Gene(CG) Analysis</a></li>
 			<li><a href="#" data-target="section-4">IV. Basic CG Analysis Workflow</a></li>
-			<li><a href="#" data-target="section-5">V. Rice SNPSeek</a></li>
-			<li><a href="#" data-target="section-6">VI. CropGalaxy</a></li>
-			<li><a href="#" data-target="section-7">VII. RicePilaf</a></li>
-			<li><a href="#" data-target="section-8">VIII. Summary</a></li>
-			<li><a href="#" data-target="section-8">IX. References</a></li>
-			<li><a href="homework.html" target="blank">X. Homework </a></li>
+			<li><details>
+				<summary>
+					<a href="#"> V. Online tools for post-GWAS </a>
+				</summary>
+				<li><a href="#" data-target="section-5a">A. Rice SNPSeek</a></li>
+				<li><a href="#" data-target="section-5b">B. CropGalaxy</a></li>
+				<li><a href="#" data-target="section-5c">C. RicePilaf</a></li>
+			</details></li>
+			<li><a href="#" data-target="section-6">VI. Summary</a></li>
+			<li><a href="#" data-target="section-7">VII. References</a></li>
+			<li><a href="homework.html" target="blank">VIII. Homework </a></li>
 		</ul>
 	</div>
 
@@ -305,6 +310,12 @@ strong {
 			<h2>Candidate Gene (CG) Analysis</h2>
 			<h3>Assuming you have significant GWAS peaks, the next step would be to identify candidate genes responsible for your trait of interest. Candidate gene analysis focuses on investigating specific genes that are believed to be biologically relevant to the trait or disease under study (an example in Figure 3.1).
 			</h3>
+			<p style="text-align:left;">
+				<img src="images/figure_3_1.png" alt="Information Flow (Figure 3.1)" style="max-width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+				<br>
+				<em><b>Figure 3.1. </b> Information flow from GWAS study, identified GWAS QTL, genes under GWAS QTL, leading to post-GWAS analysis (using days to 80% heading as trait from the 3K Rice Genomes project).</em>
+			</p>
+			<br>
 			<ul>
 				<li>
 					<strong>Candidate gene </strong>- a gene that has been identified as related to a particular trait such as phenotype, disease, or condition, (Varshney, 2006)
@@ -327,26 +338,29 @@ strong {
 			</ul>
 		</section>
 
-		<sectin id="section-4">	
+		<section id="section-4">	
 			<h2>Basic CG analysis Workflow</h2>
 			<h3>There are many ways to perform candidate gene analysis. Below is a simple workflow to do CG analysis. </h3>
-			<p><i>image here...</i></p>
+			<p style="text-align:left;">
+				<img src="images/figure_4_1.png" alt="CG Analysis Workflow (Figure 4.1)" style="max-width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+				<br>
+				<em><b>Figure 4.1.</b> Simple workflow to do candidate gene analysis</em>
+			</p>
 			<ol>
-				<li><p>Create SNP List or range of SNP positions in genome (chr, range of positions of SNPs in base pair, example Chr01:1000-10000; Chr02:3000-50000) </p></li>
-				<li><p>Generate gene list within the given range.</p></li>
-				<li><p>Analyze genes for associated information (as a separate exercise, also identify Marker/SNP effect on candidate genes using snpEff)</p></li>
-				<li>
-					<p>Use other k-nown/computed information using other tools (e.g. websites such as RicePilaf, KnetMiner Cereals, RiceNet)</p>
-					<oi>
-						<li>Identify enriched biological themes associated with the gene list</li>
-						<li>Identify co-expressed genes (co-expression network) : genes that are in cis (contiguous to the associated SNPs) or in trans (genes located outside the GWAS region (may be in the same chromosome but far away from the GWAS region or totally in another chromosome) and NOT in the identified gene list).</li>
-					</ol>
+				<li><p> <b>Create SNP List </b> or range of SNP positions in genome (chr, range of positions of SNPs in base pair, example Chr01:1000-10000; Chr02:3000-50000) </p></li>
+				<li><p><b>Generate gene list</b> within the given range.</p></li>
+				<li><p><b>Analyze genes for associated information</b> (as a separate exercise, also identify Marker/SNP effect on candidate genes using snpEff)</p></li>
+				<li><p><b>Use other k-nown/computed information using other tools (e.g. websites such as RicePilaf, KnetMiner Cereals, RiceNet)</b></p>
+					<ul>
+						<li><b>a. Identify enriched biological themes </b> associated with the gene list</li>
+						<li><b>b. Identify co-expressed genes (co-expression network)</b> : genes that are <em>in cis</em> (contiguous to the associated SNPs) or <em>in trans</em> (genes located outside the GWAS region (may be in the same chromosome but far away from the GWAS region or totally in another chromosome) and <b>NOT</b> in the identified gene list).</li>
+					</ul>
 				</li>
 			</ol>
 			<p>Several publicly available tools can be used to perform this kind of analysis. In the next section, you will learn about three of them: Rice SNPSeek, Rice-CropGalaxy, and RicePilaf.</p>
 		</section>
 
-		<section id="section-5">	
+		<section id="section-5a">	
 			<h2>Rice SNPSeek (v3)</h2>
 			
 			<p><h3>Rice SNPSeek (v3) is an online web application that provides a user-friendly, comprehensive database for the genetic variations, phenotypes, and variety information of the 3000 rice genomes accessions. </h3> <a href="">Click here</a> to know more about the 3K Rice Genomes project, and for knowledge about the scientific output of the 3K RG project, read Genomic variation in 3,010 diverse accessions of Asian cultivated rice</p>
@@ -369,7 +383,7 @@ strong {
 				</p>
 		</section>
 
-		<section id="section-6">	
+		<section id="section-5b">	
 			<h2>CropGalaxy</h2>
 			
 			<h3>CropGalaxy is a federated instance of Galaxy which houses tools and datasets for crop genomic analysis. It stemmed from the original Galaxy platform initially developed for biomedical research. To learn more about the Galaxy platform, go to this link and read this paper - The Galaxy platform for accessible, reproducible, and collaborative data analyses: 2024 update.</h3>
@@ -408,7 +422,7 @@ strong {
 			<p>See the <a href="">workflow</a> described here  to see the whole process.</p>
 		</section>
 
-		<section id="section-7">	
+		<section id="section-5c">	
 			<h2>RicePilaf</h2>
 			<h3>RicePilaf is a web-based post-GWAS/QTL application that integrates pangenomic, coexpression, regulatory, epigenomic, ontology, pathway, and text-mining information. It aims to provide functional insights into rice QTLs and GWAS regions identified from QTL and GWAS mapping studies.</h3>
 			<p>⚠️Before proceeding with this section, read the <a href="">RicePilaf publication</a> first, this is required reading! 
@@ -482,21 +496,23 @@ strong {
 			</p>
 		</section>
 
-		<section id="section-8">	
+		<section id="section-6">	
 			<h2>Summary</h2>
-			<h3>In this module, we introduced 3 web portals (Rice SNP-Seek, CropGalaxy, RicePilaf) specialized for rice post-GWAS analysis. It is expected that you have learned how to use these online resources using the sample datasets provided.</h3>
-			<p>
-				Post-GWAS analysis is an essential step after identifying genome regions (either by GWAS or QTL mapping) that are associated with traits of interest. A typical QTL identified from GWAS may span a large portion of the genome and contain up to thousands of genes within the region, and it is a resource-intensive exercise to experimentally study these genes within the GWAS region.
-				<br>
-				Utilizing analysis frameworks implemented in the various tools demonstrated provides a systematic method of filtering and prioritizing candidate genes for further experimentation, resulting in a reduction from hundreds to thousands to potentially tens of genes to investigate. Furthermore, genes that are not within the QTL region that may be causative to the trait of interest could be identified; such genes could be missed if the information used is only the QTL region from GWAS.
-				<br>
-				Post-GWAS analysis is by no means an endpoint to CG discovery itself but rather it presents a smaller and better-informed set of candidate genes as hypotheses for further testing.
-			</p>
+			<h3>In this module, we introduced three web resources specialized for rice post-GWAS analysis: Rice SNP-Seek, CropGalaxy, RicePilaf. It is expected that you have learned how to use these online resources using the sample datasets provided.</h3>
+			
+			<ul>
+				<li><p>Post-GWAS analysis is an essential step after identifying genome regions (either by GWAS or QTL mapping) that are associated with traits of interest. A typical QTL identified from GWAS may span a large portion of the genome and contain up to thousands of genes within the region, and it is a resource-intensive exercise to experimentally study these genes within the GWAS region.</li></p>
+				
+				<li><p>Utilizing analysis frameworks implemented in the various tools demonstrated provides a systematic method of filtering and prioritizing candidate genes for further experimentation, resulting in a reduction from hundreds to thousands to potentially tens of genes to investigate. Furthermore, genes that are not within the QTL region that may be causative to the trait of interest could be identified; such genes could be missed if the information used is only the QTL region from GWAS.</li></p>
+				
+				<li><p>Post-GWAS analysis is by no means an endpoint to CG discovery itself but rather it presents a smaller and better-informed set of candidate genes as hypotheses for further testing.</li></p>
+				
+			</ul>
 
 		</section>
 		
-		<section id="section-9">	
-			<h2>References</h2>
+		<section id="section-7">	
+			<h2><u>References</u></h2>
 			<p>
 				<ul>
 					<li> The 3,000 rice genomes project. https://doi.org/10.1186/2047-217X-3-7</li>
