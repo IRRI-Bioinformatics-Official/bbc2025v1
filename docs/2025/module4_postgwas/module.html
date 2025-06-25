@@ -337,16 +337,27 @@ strong {
 								<span class="round-bullet"></span>Smaller p-values, below the significance threshold  (SNP is significantly associated with the trait)
 							</li>
 							<li>
-								<span class="round-bullet"></span>For more information about SNPs and its effects, refer to this <a href="https://online.stat.psu.edu/stat555/node/18/">external lesson</a> and the previous module on GWAS.
+								<span class="round-bullet"></span>For more information about SNPs and its effects, refer to this <a href="https://online.stat.psu.edu/stat555/node/18/" target="_blank">external lesson</a> and the previous module on GWAS.
 							</li>
-
+							<li>
+								<span class="round-bullet"></span>It is important to note, however, that <em>some SNPs may NOT lie</em> within the candidate gene, but are just nearby close to the gene.
+							</li>
 						</ul>
 					</li>
-					<li><b>Use appropriate statistical methods</b> to validate associations and prioritize candidate genes.</li>
-					<li><b>Integrate functional genomics data,</b> such as gene expression and protein-protein interactions, to support candidate gene selection. ></li>
-					<li><b>Consider the potential impact of environmental factors</b> on trait expression and genetic associations. </li>
-					<li><b>Utilize available databases and tools</b> for functional annotation and visualization of GWAS results.</li>
-				</ol>
+					<li><b>Prior information about the genes</b>
+						<ul>
+							<li><span class="round-bullet"></span>Literature and data mining (<a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank">PubMed</a>, publication-specific deposited data sets) includes experimental information / results that validate the function of candidate genes from previous studies.
+							</li>
+							<li>Genes and annotations/re-annotation from well-established databases
+								<ul>
+									<li>i. Primary gene models : <a href="http://rice.uga.edu/" target="_blank">Rice Genome Annotation Project</a>, <a href="https://rapdb.dna.affrc.go.jp/" target="_blank">RAP-DB</a></li>
+									<li>ii. Secondary annotation of genes : <a href=https://www.gramene.org/" target="_blank">Gramene</a>, <a href="http://plants.ensembl.org/index.html" target="_blank">ENSEMBL Plants</a>, <a href="https://snp-seek.irri.org/index.zul" target="_blank">Rice SNPSeek</a>, <a href="https://shigen.nig.ac.jp/rice/oryzabase/locale/change?lang=en" target="_blank">Oryzabase</a>, <a href="https://integbio.jp/dbcatalog/en/record/nbdc01234" target="_blank">QTARO </a>/ <a href="https://integbio.jp/dbcatalog/en/record/nbdc01235" target="_blank">OGRO</a>
+</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><b>Interpretation involving the trait, genes, and its expression needs expert knowledge</b> s (biochemical pathways, protein interaction networks, gene networks, protein docking, etc.).</li>
 			</p>
 		</section>
 
@@ -362,18 +373,18 @@ strong {
 			<br>
 			<ul>
 				<li>
-					<strong>Candidate gene </strong>- a gene that has been identified as related to a particular trait such as phenotype, disease, or condition, (Varshney, 2006)
+					<strong>Candidate gene </strong>- a gene that has been identified as related to a particular trait such as phenotype, disease, or condition, <a href="https://www.researchgate.net/publication/7478744_Varshney_RK_Graner_A_Sorrells_ME_Genomics-assisted_breeding_for_crop_improvement_Trends_Plant_Sci_10_621-630" target="_blank">(Varshney, 2006)</a>.
 				</li>
 				<li>
 					<strong>Analysis framework for post-GWAS analysis:</strong>
 					<ol>
-						<li><a href="https://www.ndsu.edu/pubweb/~mcclean/plsc411/Lecture%205.%20forward%20genetics_XL2018Sep.pdf">Forward Genetics </a>: </li>
+						<li><a href="https://www.ndsu.edu/pubweb/~mcclean/plsc411/Lecture%205.%20forward%20genetics_XL2018Sep.pdf" target="_blank">Forward Genetics </a>: </li>
 						<p>
 							<i>“I have a QTL from a GWAS study, mapped using markers from the rice reference (Nipponbare) genome, how does the QTL *look* like in another genome of a variety that’s more closely related to my material?”</i>
 						</p>
 
 						<p>Rice varieties, especially those in different sub-populations, may contain sets of genes that are distinct from each	other. QTL regions, when inspected in a particular genome (e.g. japonica Nipponbare) may be lacking some genes in the equivalent QTL region when inspected in another variety’s genome (e.g. aus N22), and vice-versa.</p>
-						<li><a href="https://en.wikipedia.org/wiki/Gene_set_enrichment_analysis">Enriched/over-represented biological theme(s)</a> from a selected list of genes</li>
+						<li><a href="https://en.wikipedia.org/wiki/Gene_set_enrichment_analysis" target="_blank">Enriched/over-represented biological theme(s)</a> from a selected list of genes</li>
 						 <i>“I have a list of genes from a small QTL from GWAS, and I wish to know more of the biology behind this gene list.”</i>
 						 <p>The set of CGs in the QTL may have a particular biological theme  (e.g. metabolic pathway/process, a particular gene function, or a component of a cellular or organ structure) over-represented in this subset, that may be important to the trait of interest. </p>
 					</ol>
@@ -393,15 +404,15 @@ strong {
 			<ol>
 				<li><p> <b>Create SNP List </b> or range of SNP positions in genome (chr, range of positions of SNPs in base pair, example Chr01:1000-10000; Chr02:3000-50000) </p></li>
 				<li><p><b>Generate gene list</b> within the given range.</p></li>
-				<li><p><b>Analyze genes for associated information</b> (as a separate exercise, also identify Marker/SNP effect on candidate genes using snpEff)</p></li>
-				<li><p><b>Use other k-nown/computed information using other tools (e.g. websites such as RicePilaf, KnetMiner Cereals, RiceNet)</b></p>
+				<li><p><b>Analyze genes for associated information</b> (as a separate exercise, also identify Marker/SNP effect on candidate genes using <a href="https://pcingola.github.io/SnpEff/" target="_blank">snpEff</a>)</p></li>
+				<li><p><b>Use other k-nown/computed information using other tools (e.g. websites such as <a href="https://ricepilaf.irri.org/" target="_blank">RicePilaf</a>, <a href="https://knetminer.com/" target="_blank">KnetMiner </a>, <a href="https://www.inetbio.org/ricenet/" target="_blank">RiceNet</a>)</b></p>
 					<ul>
 						<li><b>a. Identify enriched biological themes </b> associated with the gene list</li>
-						<li><b>b. Identify co-expressed genes (co-expression network)</b> : genes that are <em>in cis</em> (contiguous to the associated SNPs) or <em>in trans</em> (genes located outside the GWAS region (may be in the same chromosome but far away from the GWAS region or totally in another chromosome) and <b>NOT</b> in the identified gene list).</li>
+						<li><b>b. Identify co-expressed genes (co-expression network)</b> : <em>genes that are in cis</em> (contiguous to the associated SNPs) or <em>in trans</em> (genes located outside the GWAS region (may be in the same chromosome but far away from the GWAS region or totally in another chromosome) and <b>NOT</b> in the identified gene list).</li>
 					</ul>
 				</li>
 			</ol>
-			<p>Several publicly available tools can be used to perform candidate gene analysis. In the next section, you will learn about three of them: Rice SNPSeek, CropGalaxy, and RicePilaf.</p>
+			<p>Several publicly available tools can be used to perform candidate gene analysis. In the next section, you will learn about three of them: <b>Rice SNPSeek, CropGalaxy, and RicePilaf. </b></p>
 		</section>
 
 		<section id="section-5a">	
@@ -446,26 +457,41 @@ strong {
 				<em><b>Figure 5.2.</b> A query workflow in Rice SNP-Seek V3.</em>
 			</p>
 			
-			<p>Here’s a <a href="videos/SNPseekV3_screenRecording.mov" target="_blank">video</a> demonstrating the key features of Rice SNPSeek.</p>
+			<p>Here’s a <a href="https://cgiar-my.sharepoint.com/:v:/g/personal/v_juanillas_cgiar_org/EeGps7-CWGpOtBsm0yLLKmMBV5nJ5Hpqgxwedq9Iibj2zg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=DFHtQb" target="_blank">video</a> demonstrating the key features of Rice SNPSeek.</p>
 		</section>
 
 		<section id="section-5b">	
 			<h2><u>CropGalaxy</u></h2>
 			
-			<h3>CropGalaxy is a federated instance of Galaxy which houses tools and datasets for crop genomic analysis. It stemmed from the original Galaxy platform initially developed for biomedical research. To learn more about the Galaxy platform, go to this link and read this paper - The Galaxy platform for accessible, reproducible, and collaborative data analyses: 2024 update.</h3>
-			<p>Required reading: <a href="">Rice Galaxy: an open resource for plant science</a></p>
+			<p><strong><a href="http://cropgalaxy.excellenceinbreeding.org/" target="_blank">CropGalaxy</a></strong> is a federated instance of <a href="https://usegalaxy.org/" target="_blank">Galaxy</a> which houses tools and datasets for crop genomic analysis. It stemmed from the original Galaxy platform initially developed for biomedical research. To learn more about the Galaxy platform, go to this <a href="https://academic.oup.com/nar/advance-article/doi/10.1093/nar/gkae410/7676834" target="_blank">link</a> and read this paper - <a href="https://academic.oup.com/nar/advance-article/doi/10.1093/nar/gkae410/7676834" target="_blank">The Galaxy platform for accessible, reproducible, and collaborative data analyses: 2024 update.</a></p>
 
-			<p>Recall in the Linux module that you learned how to run analysis software under the command-line environment. Galaxy provides a graphical interface “wrapper” to these command-line tools so that you don’t need to remember how to type-in these commands. It  also provides a workflow environment where you can “string” a series of commands you repeatedly use in an analysis series. </p>
-			<p><i>image here... </i></p>
-			<p>Galaxy offers three core features that fit our needs in rice genomics:</p>
-			<ul>
-				<li>Accessibility. The platform enables users without programming experience to run tools and workflows easily by providing a graphical user interface to bioinformatics tools commonly run on command-line.
-</li>
-				<li>Reproducibility.Galaxy captures information so that any user can repeat and understand the complete computational analysis done.</li>
-				<li>Transparency. Galaxy allows users to share and publish analyses via the web and create interactive, web-based documents that describe the complete analysis.
-</li>
-			</ul>
-			<p><i>image here...</i></p>
+			<div class="required-reading">
+				❗<strong>Required reading:</strong> <a href="https://academic.oup.com/gigascience/article/8/5/giz028/5492234" target="_blank">Rice Galaxy: an open resource for plant science</a>
+			</div>
+
+
+			<p>Recall in the Linux module that you learned how to run analysis software under the command-line environment. Galaxy provides a graphical interface “wrapper” to these command-line tools so that you don’t need to remember how to type-in these  commands. It  also provides a workflow environment where you can “string” a series of commands you repeatedly use in an analysis series. </p>
+			<p style="text-align:left;">
+				<img src="images/figure_6_1.png" alt="CLI and Galaxy (Figure 6.1)" style="max-width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+				<br>
+				<em><b>Figure 6.1.</b> The tool “Line/Word/Character count of a dataset” runs the command-line unix tool “wc” on the background.</em>
+			</p>
+			
+			<p><b>Galaxy offers three core features that fit our needs in rice genomics:</b></p>
+			<p><ul class="reference-list">
+				<li><span class="round-bullet"></span><b>Accessibility. </b>
+				<br>
+				The platform enables users without programming experience to run tools and workflows easily by providing a graphical user interface to bioinformatics tools commonly run on command-line.</li>
+
+				<li><span class="round-bullet"></span><b>Reproducibility</b>
+				<br>
+				Galaxy captures information so that any user can repeat and understand the complete computational analysis done.</li>
+				
+				<li><span class="round-bullet"></span><b>Transparency</b>
+				<br>
+				Galaxy allows users to share and publish analyses via the web and create interactive, web-based documents that describe the complete analysis.</li>
+			</ul></p>
+
 			<p>CropGalaxy contains shared datasets such as high-density genotypes from the 3KRG, and annotations of new reference genomes for rice. It also offers freely available tools to empower the plant research community to perform genomics analyses: GWAS, post-GWAS, primer design, population diversity and genomic prediction.
 </p>
 			<p>Here’s a video on how to access CropGalaxy, as well as some of the functionalities of the platform.
