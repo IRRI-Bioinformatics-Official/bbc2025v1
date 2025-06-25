@@ -298,15 +298,14 @@ strong {
 			</p>
 			<h3>Why perform Post-GWAS analysis?</h3>
 			<ul>
-				<li>
+				<li><span style="color:blue;">✔️</span> 
 					Post-GWAS analysis helps validate the results from the genome-wide association study (GWAS) to better understand the biological functions and mechanisms that link the significant variants (i.e, SNPs) to the trait of interest.
 				</li>
-				<li>
-					Post-GWAS analysis in rice involves the use of various bioinformatics tools and databases to prioritize candidate
-					genes, validate their functions, and integrate findings into practical breeding strategies.
+				<li><span style="color:blue;">✔️</span> 
+					Post-GWAS analysis in rice involves the use of various bioinformatics tools and databases to prioritize candidate genes, validate their functions, and integrate findings into practical breeding strategies.
 				</li>
-				<li>
-					<h4>Some questions that can be answered in performing post-GWAS analysis:</h4>
+				<li><span style="color:blue;">✔️</span> 
+					We perform post-GWAS analysis to answer questions such as:
 					<ul>
 						<li> 
 							<i>- Is there support from annotation for the loci?</i>
@@ -315,7 +314,7 @@ strong {
 							<i>- Are there known genes with functional evidence?</i>
 						</li>
 						<li>
-							<i>- Are there SNPs that affect function?</i>
+							<i>- Are there SNPs that affect the function?</i>
 						</li>
 						<li>
 							<i>- Do the haplotypes make sense?</i>
@@ -340,15 +339,15 @@ strong {
 								<span class="round-bullet"></span>For more information about SNPs and its effects, refer to this <a href="https://online.stat.psu.edu/stat555/node/18/" target="_blank">external lesson</a> and the previous module on GWAS.
 							</li>
 							<li>
-								<span class="round-bullet"></span>It is important to note, however, that <em>some SNPs may NOT lie</em> within the candidate gene, but are just nearby close to the gene.
+								<span class="round-bullet"></span>It is important to note, however, that <em>some SNPs may NOT lie</em> within the candidate gene, but are just nearby, close to the gene.
 							</li>
 						</ul>
 					</li>
 					<li><b>Prior information about the genes</b>
-						<ul>
+						<ul class="reference-list">
 							<li><span class="round-bullet"></span>Literature and data mining (<a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank">PubMed</a>, publication-specific deposited data sets) includes experimental information / results that validate the function of candidate genes from previous studies.
 							</li>
-							<li>Genes and annotations/re-annotation from well-established databases
+							<li><span class="round-bullet"></span>Genes and annotations/re-annotation from well-established databases
 								<ul>
 									<li>i. Primary gene models : <a href="http://rice.uga.edu/" target="_blank">Rice Genome Annotation Project</a>, <a href="https://rapdb.dna.affrc.go.jp/" target="_blank">RAP-DB</a></li>
 									<li>ii. Secondary annotation of genes : <a href=https://www.gramene.org/" target="_blank">Gramene</a>, <a href="http://plants.ensembl.org/index.html" target="_blank">ENSEMBL Plants</a>, <a href="https://snp-seek.irri.org/index.zul" target="_blank">Rice SNPSeek</a>, <a href="https://shigen.nig.ac.jp/rice/oryzabase/locale/change?lang=en" target="_blank">Oryzabase</a>, <a href="https://integbio.jp/dbcatalog/en/record/nbdc01234" target="_blank">QTARO </a>/ <a href="https://integbio.jp/dbcatalog/en/record/nbdc01235" target="_blank">OGRO</a>
@@ -363,8 +362,8 @@ strong {
 
 		<section id="section-3">
 			<h2><u>Candidate Gene (CG) Analysis</u></h2>
-			<h3>Assuming you have significant GWAS peaks, the next step would be to identify candidate genes responsible for your trait of interest. Candidate gene analysis focuses on investigating specific genes that are believed to be biologically relevant to the trait or disease under study (an example in Figure 3.1).
-			</h3>
+			<p><h3>Assuming you have significant GWAS peaks, the next step would be to identify candidate genes responsible for your trait of interest. </h3>Candidate gene analysis focuses on investigating specific genes that are believed to be biologically relevant to the trait or disease under study (an example in Figure 3.1).
+			</p>
 			<p style="text-align:left;">
 				<img src="images/figure_3_1.png" alt="Information Flow (Figure 3.1)" style="max-width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
 				<br>
@@ -526,29 +525,50 @@ strong {
 		</section>
 
 		<section id="section-5c">	
-			<h2><u>RicePilaf</u></h2>
-			<h3>RicePilaf is a web-based post-GWAS/QTL application that integrates pangenomic, coexpression, regulatory, epigenomic, ontology, pathway, and text-mining information. It aims to provide functional insights into rice QTLs and GWAS regions identified from QTL and GWAS mapping studies.</h3>
-			<p>⚠️Before proceeding with this section, read the <a href="">RicePilaf publication</a> first, this is required reading! 
-				<br>
-				In this publication, you are expected to learn the various tools incorporated in RicePilaf, and have an overview of the algorithms/computational methods used in these tools.
+			<h2><u>RicePilaf</u></h2> 
+
+			<p><strong><a href="https://ricepilaf.irri.org/" target="_blank">RicePilaf</a></strong> is a web-based post-GWAS/QTL application that integrates pangenomic, coexpression, regulatory, epigenomic, ontology, pathway, and text-mining information. It aims to provide functional insights into rice QTLs and GWAS regions identified from QTL and GWAS mapping studies.</p>
+
+			<div class="required-reading">
+				❗<strong>Before proceeding with this section, read the </strong> <a href="https://academic.oup.com/gigascience/article/8/5/giz028/5492234" target="_blank">Rice Pilaf publication </a>first. This is required reading.
+			</div>
+			<p>In this publication, you are expected to learn the various tools incorporated in RicePilaf, and have an overview of the algorithms/computational methods used in these tools.
 			</p>
-			<p>An overview of RicePilaf’s functionalities is shown in Figure 7.1.</p>
-			<p><i>image here...</i></p>
-			<p>A typical analysis flow in RicePilaf is illustrated in the diagram in Figure 7.2.</p>
-			<p><i>image here...</i></p>
-			<p>
-				Watch the example RicePilaf analysis (video) using preharvest sprouting QTLs, from the RicePilaf paper. In this video, step-by-step analysis of the pre-harvest sprouting QTLs is demonstrated, for each of the component tools in RicePilaf. 
+			
+			<p>An overview of RicePilaf’s functionalities is shown in Figure 5c.1.</p>
+
+			<p style="text-align:left;">
+				<img src="images/figure_5c_1.png" alt="RicePilaf graphical abstract (Figure 5c.1)" style="max-width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+				<br>
+				<em><b>Figure 5c.1.</b> RicePilaf graphical abstract. RicePilaf crosses GWAS/QTL-mapping results with multiple data sources on rice.
+				</em>
+			</p>
+
+			<br>
+			<p>A typical analysis flow in RicePilaf is illustrated in the diagram in Figure 5c.2.</p>
+
+			<p style="text-align:left;">
+				<img src="images/figure_5c_2.png" alt="RicePilaf analyses workflow (Figure 5c.2)" style="max-width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+				<br>
+				<em><b>Figure 5c.2.</b> Typical analysis workflow using RicePilaf with a known QTL region and trait description information as input data.
+				</em>
+			</p>
+
+			<p>Watch the example RicePilaf analysis <a href="https://youtu.be/UyRxx4aI8O8" target="_blank">(video)</a> using preharvest sprouting QTLs, from the RicePilaf paper. In this video, step-by-step analysis of the pre-harvest sprouting QTLs is demonstrated, for each of the component tools in RicePilaf.
+				<br> <br>
+				<iframe width="100%" height="315" src="https://www.youtube.com/embed/UyRxx4aI8O8" frameborder="0" allowfullscreen></iframe>
 				<br>
 				Look at the video description in YouTube for the corresponding time-stamped chapters. The tools demonstrated are the following:
 				<ul>
 					<li><b>Gene List and lift-over: include MH63, IR64 genomes</b>
 						<ul>
+							<li><b class="timestamp">0:00 </b>Start of the PHS analysis demo in RicePilaf</li>
 							<li><b class="timestamp">0:07 </b>Select PHS example as interval for analysis</li>
 							<li><b class="timestamp">0:10 </b>Click on "Proceed to Analyses Menu"</li>
 							<li><b class="timestamp">0:14 </b>Using the "Gene List and Lift-Over" menu</li>
 							<li><b class="timestamp">0:25 </b>Select genome for lift-over on drop-down menu</li>
 							<li><b class="timestamp">0:36 </b>Select MH63 genome</li>
-							<li><b class="timestamp">0:41</b> Add IR64 genome</li>
+							<li><b class="timestamp">0:41 </b>Add IR64 genome</li>
 							<li><b class="timestamp">0:47 </b>Click on "Show gene list" and inspecting/navigating the result output</li>
 							<li><b class="timestamp">1:48 </b>Exporting the results as csv file</li>
 						</ul>
