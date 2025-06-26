@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PostGWAS module</title>
+<style>
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	line-height: 1.6;
+	display: flex;
+	margin-bottom: 100px;
+}
+
+html, body {
+	height: 100%;
+	overflow: auto;
+	overscroll-behavior: contain;
+}
+
+/* Floating Table of Contents */
+#toc {
+	position: fixed;
+	top: 0px;
+	left: 20px;
+	width: 200px;
+	background-color: #f8f9fa;
+	padding: 1rem;
+	border-radius: 8px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	z-index: 1000;
+}
+
+#toc h2 {
+	font-size: 1.2rem;
+	margin-bottom: 1rem;
+}
+
+#toc ul {
+	list-style-type: none;
+	font-size: .9rem;
+	padding: 0;
+}
+
+#toc ul li {
+	margin: 0.5rem 0;
+}
+
+#toc ul li a {
+	text-decoration: none;
+	color: #007bff;
+}
+
+#toc ul li a:hover {
+	text-decoration: underline;
+}
+/* Main content styling */
+main {
+	margin-left: 240px; /* Adjusted for TOC width */
+	padding: 2rem;
+	flex-grow: 1;
+}
+
+h1, h2 {
+	color: #2c3e50;
+}
+
+section {
+	margin-bottom: 2rem;
+	max-width: 800px;
+	padding: 20px;
+	background-color: white;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+pre, code {
+	background-color: #ededed;
+	color: #312f2f;
+	padding: 5px 10px;
+	border-radius: 4px;
+	font-size: .9em;
+	font-family: Consolas, monospace;
+	overflow-x: auto;
+}
+
+code {
+	font-size: 1em;
+	background-color: #ededed;
+	padding: 2px 5px;
+	border-radius: 3px;
+}
+
+ul {
+	list-style-type: none;
+	padding-left: 20px;
+}
+
+ul li {
+	margin-bottom: 10px;
+}
+
+ol {
+	padding-left: 20px;
+}
+
+li {
+	margin-bottom: 10px;
+}
+
+strong {
+	color: #2c3e50;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  #toc {
+    position: static;
+    width: auto;
+    box-shadow: none;
+    margin: 1rem;
+  }
+
+  main {
+    margin-left: 0;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #toc h2 {
+    font-size: 1rem;
+  }
+
+  #toc ul li {
+    font-size: 0.85rem;
+  }
+
+  section {
+    padding: 1rem;
+  }
+
+  pre, code {
+    font-size: 0.85em;
+  }
+}
+
+.check-list {
+	list-style: none;
+	padding-left: 0;
+}
+
+.check-list li::before {
+	content: "✅";
+	margin-right: 8px;
+}
+
+.reference-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.reference-list li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+
+.round-bullet {
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  background-color: #555;
+  border-radius: 50%;
+}
+
+.timestamp {
+  color: #160101;
+  font-size: 1rem;
+}
+
+.required-reading {
+  background-color: #fff8e1;
+  border-left: 4px solid #ffa000;
+  padding: 10px 15px;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+</style>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toc = document.getElementById("toc");
+    const toggleBtn = document.getElementById("toggleToc");
+
+    function checkScreenWidth() {
+      if (window.innerWidth <= 768) {
+        toggleBtn.style.display = 'block';
+        toc.style.display = 'none';
+      } else {
+        toggleBtn.style.display = 'none';
+        toc.style.display = 'block';
+      }
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      toc.style.display = (toc.style.display === 'none') ? 'block' : 'none';
+    });
+
+    window.addEventListener("resize", checkScreenWidth);
+    checkScreenWidth();
+  });
+</script>
+
+</head>
+<body>
+	<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const tocLinks = document.querySelectorAll('#toc a[data-target]');
+      tocLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('data-target');
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    });
+  </script>
+	<!-- Floating Table of Contents -->
+	<div id="toc">
+		<h2>Module 4:</h2>
+		<ul>
+			<li><a href="#" data-target="overview">i. Module Overview</a></li>
+			<li><a href="#" data-target="section-1">I. Post-GWAS Analysis </a></li>
+			<li><a href="#" data-target="section-2">II. Post-GWAS Considerations</a></li>
+			<li><a href="#" data-target="section-3">III. Candidate Gene(CG) Analysis</a></li>
+			<li><a href="#" data-target="section-4">IV. Basic CG Analysis Workflow</a></li>
+			<li><details>
+				<summary>
+					<a href="#"> V. Online tools for post-GWAS </a>
+				</summary>
+				<li><a href="#" data-target="section-5a">A. Rice SNPSeek</a></li>
+				<li><a href="#" data-target="section-5b">B. CropGalaxy</a></li>
+				<li><a href="#" data-target="section-5c">C. RicePilaf</a></li>
+			</details></li>
+			<li><a href="#" data-target="section-6">VI. Summary</a></li>
+			<li><a href="#" data-target="section-7">VII. References</a></li>
+			<li><a href="homework.html" target="blank">VIII. Homework </a></li>
+		</ul>
+	</div>
+
+
+	<!-- Main Content -->
+	<main style="margin-bottom: 100px;margin-top:20px;">
+		<button id="toggleToc" style="display: none;">☰ Table of Contents</button>
+		
+		<section id="overview">
+			<h2>🧭 Module Overview:</h2>
+
+			<h3>🎯 Post-GWAS Analysis using SNPSeek, CropGalaxy, and RicePilaf</h3>
+			<p>In this module, we will cover basic analysis methods for identification of candidate genes from highly associated genome-wide association studies (GWAS) regions. We will also predict the putative effects of SNPs on identified candidate genes. We will use the following rice-specific tools:</p>
+				<p>
+					<ul class="reference-list"> 
+						<li><span class="round-bullet"></span>Rice SNP-Seek</li>
+						<li><span class="round-bullet"></span>CropGalaxy</li>
+						<li><span class="round-bullet"></span>RicePilaf</li>
+					</ul>
+				</p>
+
+			<h3>👥 Target Audience</h3>
+			<p>✅Participants should have prior knowledge and experience on genome-wide association studies (GWAS).</p>
+
+			<h3>🏁 Goal</h3>
+			<label>
+				<ul>
+					<li><input type="checkbox"> Understand the concept of post-GWAS analysis </li>
+					<li><input type="checkbox"> Be familiar with tools and resources available for doing post-GWAS gene-related analysis on rice genomics data</li>
+					<li><input type="checkbox"> Perform “minimum” standard post-GWAS analysis using Rice SNP-Seek, CropGalaxy, and RicePilaf </li>
+				</ul>
+			  </label>
+		</section>
+
+		<section id="section-1">
+			<h2><u>Post-GWAS Analysis</u></h2>
+			<p>Genome-wide association studies (GWAS) is instrumental in identifying genetic variants associated with various traits. However, the raw results from GWAS, typically in the form of significant single nucleotide polymorphisms (SNPs), are only the beginning. Performing post-GWAS analysis is a crucial subsequent step to interpret these associations, understand underlying biological mechanisms, and subsequently apply this information to breeding programs.
+			</p>
+			<h3>Why perform Post-GWAS analysis?</h3>
+			<ul>
+				<li><span style="color:blue;">✔️</span> 
+					Post-GWAS analysis helps validate the results from the genome-wide association study (GWAS) to better understand the biological functions and mechanisms that link the significant variants (i.e, SNPs) to the trait of interest.
+				</li>
+				<li><span style="color:blue;">✔️</span> 
+					Post-GWAS analysis in rice involves the use of various bioinformatics tools and databases to prioritize candidate genes, validate their functions, and integrate findings into practical breeding strategies.
+				</li>
+				<li><span style="color:blue;">✔️</span> 
+					We perform post-GWAS analysis to answer questions such as:
+					<ul>
+						<li> 
+							<i>- Is there support from annotation for the loci?</i>
+						</li>
+						<li>
+							<i>- Are there known genes with functional evidence?</i>
+						</li>
+						<li>
+							<i>- Are there SNPs that affect the function?</i>
+						</li>
+						<li>
+							<i>- Do the haplotypes make sense?</i>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</section>
+
+		<section id="section-2">
+			<h2><u>Post-GWAS Analysis Considerations</u></h2>
+			<h3>In performing post-GWAS analysis, it is important to consider several points:</h3>
+			<p>
+				<ol>
+					<li>
+						<b>Significance of the SNP</b>
+						<ul class="reference-list">
+							<li>
+								<span class="round-bullet"></span>Smaller p-values, below the significance threshold  (SNP is significantly associated with the trait)
+							</li>
+							<li>
+								<span class="round-bullet"></span>For more information about SNPs and its effects, refer to this <a href="https://online.stat.psu.edu/stat555/node/18/" target="_blank">external lesson</a> and the previous module on GWAS.
+							</li>
+							<li>
+								<span class="round-bullet"></span>It is important to note, however, that <em>some SNPs may NOT lie</em> within the candidate gene, but are just nearby, close to the gene.
+							</li>
+						</ul>
+					</li>
+					<li><b>Prior information about the genes</b>
+						<ul class="reference-list">
+							<li><span class="round-bullet"></span>Literature and data mining (<a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank">PubMed</a>, publication-specific deposited data sets) includes experimental information / results that validate the function of candidate genes from previous studies.
+							</li>
+							<li><span class="round-bullet"></span>Genes and annotations/re-annotation from well-established databases
+								<ul>
+									<li>i. Primary gene models : <a href="http://rice.uga.edu/" target="_blank">Rice Genome Annotation Project</a>, <a href="https://rapdb.dna.affrc.go.jp/" target="_blank">RAP-DB</a></li>
+									<li>ii. Secondary annotation of genes : <a href=https://www.gramene.org/" target="_blank">Gramene</a>, <a href="http://plants.ensembl.org/index.html" target="_blank">ENSEMBL Plants</a>, <a href="https://snp-seek.irri.org/index.zul" target="_blank">Rice SNPSeek</a>, <a href="https://shigen.nig.ac.jp/rice/oryzabase/locale/change?lang=en" target="_blank">Oryzabase</a>, <a href="https://integbio.jp/dbcatalog/en/record/nbdc01234" target="_blank">QTARO </a>/ <a href="https://integbio.jp/dbcatalog/en/record/nbdc01235" target="_blank">OGRO</a>
+</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><b>Interpretation involving the trait, genes, and its expression needs expert knowledge</b> s (biochemical pathways, protein interaction networks, gene networks, protein docking, etc.).</li>
+			</p>
+		</section>
+
+		<section id="section-3">
+			<h2><u>Candidate Gene (CG) Analysis</u></h2>
+			<p><h3>Assuming you have significant GWAS peaks, the next step would be to identify candidate genes responsible for your trait of interest. </h3>Candidate gene analysis focuses on investigating specific genes that are believed to be biologically relevant to the trait or disease under study (an example in Figure 3.1).
+			</p>
+			<p style="text-align:left;">
+				<img src="images/figure_3_1.png" alt="Information Flow (Figure 3.1)" style="max-width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+				<br>
+				<em><b>Figure 3.1. </b> Information flow from GWAS study, identified GWAS QTL, genes under GWAS QTL, leading to post-GWAS analysis (using days to 80% heading as trait from the 3K Rice Genomes project).</em>
+			</p>
+			<br>
+			<ul>
+				<li>
+					<strong>Candidate gene </strong>- a gene that has been identified as related to a particular trait such as phenotype, disease, or condition, <a href="https://www.researchgate.net/publication/7478744_Varshney_RK_Graner_A_Sorrells_ME_Genomics-assisted_breeding_for_crop_improvement_Trends_Plant_Sci_10_621-630" target="_blank">(Varshney, 2006)</a>.
+				</li>
+				<li>
+					<strong>Analysis framework for post-GWAS analysis:</strong>
+					<ol>
+						<li><a href="https://www.ndsu.edu/pubweb/~mcclean/plsc411/Lecture%205.%20forward%20genetics_XL2018Sep.pdf" target="_blank">Forward Genetics </a>: </li>
+						<p>
+							<i>“I have a QTL from a GWAS study, mapped using markers from the rice reference (Nipponbare) genome, how does the QTL *look* like in another genome of a variety that’s more closely related to my material?”</i>
+						</p>
+
+						<p>Rice varieties, especially those in different sub-populations, may contain sets of genes that are distinct from each	other. QTL regions, when inspected in a particular genome (e.g. japonica Nipponbare) may be lacking some genes in the equivalent QTL region when inspected in another variety’s genome (e.g. aus N22), and vice-versa.</p>
+						<li><a href="https://en.wikipedia.org/wiki/Gene_set_enrichment_analysis" target="_blank">Enriched/over-represented biological theme(s)</a> from a selected list of genes</li>
+						 <i>“I have a list of genes from a small QTL from GWAS, and I wish to know more of the biology behind this gene list.”</i>
+						 <p>The set of CGs in the QTL may have a particular biological theme  (e.g. metabolic pathway/process, a particular gene function, or a component of a cellular or organ structure) over-represented in this subset, that may be important to the trait of interest. </p>
+					</ol>
+				</li>
+				
+			</ul>
+		</section>
+
+		<section id="section-4">	
+			<h2><u>Basic CG analysis Workflow</u></h2>
+			<h3>There are many ways to perform candidate gene analysis. Below is a simple workflow to do CG analysis. </h3>
+			<p style="text-align:left;">
+				<img src="images/figure_4_1.png" alt="CG Analysis Workflow (Figure 4.1)" style="max-width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+				<br>
+				<em><b>Figure 4.1.</b> Simple workflow to do candidate gene analysis</em>
+			</p>
+			<ol>
+				<li><p> <b>Create SNP List </b> or range of SNP positions in genome (chr, range of positions of SNPs in base pair, example Chr01:1000-10000; Chr02:3000-50000) </p></li>
+				<li><p><b>Generate gene list</b> within the given range.</p></li>
+				<li><p><b>Analyze genes for associated information</b> (as a separate exercise, also identify Marker/SNP effect on candidate genes using <a href="https://pcingola.github.io/SnpEff/" target="_blank">snpEff</a>)</p></li>
+				<li><p><b>Use other k-nown/computed information using other tools (e.g. websites such as <a href="https://ricepilaf.irri.org/" target="_blank">RicePilaf</a>, <a href="https://knetminer.com/" target="_blank">KnetMiner </a>, <a href="https://www.inetbio.org/ricenet/" target="_blank">RiceNet</a>)</b></p>
+					<ul>
+						<li><b>a. Identify enriched biological themes </b> associated with the gene list</li>
+						<li><b>b. Identify co-expressed genes (co-expression network)</b> : <em>genes that are in cis</em> (contiguous to the associated SNPs) or <em>in trans</em> (genes located outside the GWAS region (may be in the same chromosome but far away from the GWAS region or totally in another chromosome) and <b>NOT</b> in the identified gene list).</li>
+					</ul>
+				</li>
+			</ol>
+			<p>Several publicly available tools can be used to perform candidate gene analysis. In the next section, you will learn about three of them: <b>Rice SNPSeek, CropGalaxy, and RicePilaf. </b></p>
+		</section>
+
+		<section id="section-5a">	
+			<h2><u>Rice SNPSeek (v3)</u></h2>
+			
+			<p><strong><a href="https://snpseek.irri.org/" target="_blank">Rice SNPSeek (v3)</a></strong> is an online web application that provides a user-friendly, comprehensive database for the genetic variations, phenotypes, and variety information of the 3000 rice genomes accessions. </strong><a href="https://iric.irri.org/projects/3000-rice-genomes-project" target="_blank">Click here</a> to know more about the 3K Rice Genomes project. To know more about the scientific output of the 3K RG project, read <a href="https://www.nature.com/articles/s41586-018-0063-9" target="_blank">Genomic variation in 3,010 diverse accessions of Asian cultivated rice</a></p>
+			
+			<div class="required-reading">
+				❗<strong>Required reading:</strong> <a href="https://doi.org/10.1093/nar/gkw1135" target="_blank">Rice SNP-Seek database update: new SNPs, indels, and queries</a>
+			</div>
+
+			<p style="text-align:left;">
+				<img src="images/figure_5a_1.png" alt="SNPSeek (Figure 5a.1)" style="max-width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+				<br>
+				<em><b>Figure 5a.1.</b> The landing page of Rice SNP-Seek V3.</em>
+			</p>
+			<p><strong>Rice SNPSeek  offers the following functionalities:</strong>
+				<ul class="reference-list">
+					<li><span class="round-bullet"></span>
+						<strong>Search queries:</strong>
+						<p>Rice SNPSeek allows users to search genotypes against single to multiple reference genomes, gene loci of interest, as well as varietal passport and morphological data. It   also allows combined queries on the 3K rice genomes and other rice datasets hosted in the platform. Users can also generate genotype matrices of indels across multiple varieties.</p>
+					</li>
+					<li><span class="round-bullet"></span>
+						<strong>Genome Visualization:</strong>
+						<p>The application allows genome visualizations to display the sequences and gene models, as well as the alignment of the 3000 rice accessions against the reference. This helps in verifying visually whether SNP locations lie within or nearby certain gene loci.</p>
+					</li>
+					<li><span class="round-bullet"></span>
+						<strong>SNP/Marker Annotator:</strong>
+						<p>Users can create a list of significant markers from their GWA studies and use this feature to annotate markers with evidence from other databases and/or analyses such as rice gene models, and SNP effects from SNPeff results.</p>
+					</li>
+				
+				</ul>
+			</p>
+			<p>These are only some of the functionalities that Rice SNPSeek offers. To use the platform and know more about its features, go to the <a href="https://snpseek.irri.org/" target="_blank">SNP-Seek v3 site.</a></p>
+			<br>
+
+			<p>The figure below shows the connection between several query workflows. Users can construct a variety list or a locus list, then use these in genotype query. SNP lists, on the other hand, can be extracted from a genotype query, and constrain another genotype query. Finally, one can annotate SNPs using Marker Annotator to help prioritize candidate genes from GWAS.</p>
+				
+			<p style="text-align:left;">
+				<img src="images/figure_5a_2.png" alt="SNPSeek Workflow(Figure 5a.2)" style="max-width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+				<br>
+				<em><b>Figure 5a.2.</b> A query workflow in Rice SNP-Seek V3.</em>
+			</p>
+			
+			<p>Here’s a <a href="https://cgiar-my.sharepoint.com/:v:/g/personal/v_juanillas_cgiar_org/EeGps7-CWGpOtBsm0yLLKmMBV5nJ5Hpqgxwedq9Iibj2zg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=DFHtQb" target="_blank">video</a> demonstrating the key features of Rice SNPSeek.</p>
+		</section>
+
+		<section id="section-5b">	
+			<h2><u>CropGalaxy</u></h2>
+			
+			<p><strong><a href="http://cropgalaxy.excellenceinbreeding.org/" target="_blank">CropGalaxy</a></strong> is a federated instance of <a href="https://usegalaxy.org/" target="_blank">Galaxy</a> which houses tools and datasets for crop genomic analysis. It stemmed from the original Galaxy platform initially developed for biomedical research. To learn more about the Galaxy platform, go to this <a href="https://academic.oup.com/nar/advance-article/doi/10.1093/nar/gkae410/7676834" target="_blank">link</a> and read this paper - <a href="https://academic.oup.com/nar/advance-article/doi/10.1093/nar/gkae410/7676834" target="_blank">The Galaxy platform for accessible, reproducible, and collaborative data analyses: 2024 update.</a></p>
+
+			<div class="required-reading">
+				❗<strong>Required reading:</strong> <a href="https://academic.oup.com/gigascience/article/8/5/giz028/5492234" target="_blank">Rice Galaxy: an open resource for plant science</a>
+			</div>
+
+
+			<p>Recall in the Linux module that you learned how to run analysis software under the command-line environment. Galaxy provides a graphical interface “wrapper” to these command-line tools so that you don’t need to remember how to type-in these  commands. It  also provides a workflow environment where you can “string” a series of commands you repeatedly use in an analysis series. </p>
+			<p style="text-align:left;">
+				<img src="images/figure_5b_1.png" alt="CLI and Galaxy (Figure 5b.1)" style="max-width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+				<br>
+				<em><b>Figure 5b.1.</b> The tool “Line/Word/Character count of a dataset” runs the command-line unix tool “wc” on the background.</em>
+			</p>
+			
+			<p><b>Galaxy offers three core features that fit our needs in rice genomics:</b></p>
+			<p><ul class="reference-list">
+				<li><span class="round-bullet"></span><b>Accessibility. </b>
+				<br>
+				The platform enables users without programming experience to run tools and workflows easily by providing a graphical user interface to bioinformatics tools commonly run on command-line.</li>
+
+				<li><span class="round-bullet"></span><b>Reproducibility</b>
+				<br>
+				Galaxy captures information so that any user can repeat and understand the complete computational analysis done.</li>
+				
+				<li><span class="round-bullet"></span><b>Transparency</b>
+				<br>
+				Galaxy allows users to share and publish analyses via the web and create interactive, web-based documents that describe the complete analysis.</li>
+			</ul></p>
+
+			<p style="text-align:left;">
+				<img src="images/figure_5b_2.png" alt="CropGalaxy Landing Page (Figure 5b.2)" style="max-width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+				<br>
+				<em><b>Figure 5b.2.</b> The landing page of CropGalaxy.</em>
+			</p>
+
+			<p>CropGalaxy contains shared datasets such as high-density genotypes from the 3KRG, and annotations of new reference genomes for rice. It also offers freely available tools to empower the plant research community to perform genomics analyses: GWAS, post-GWAS, primer design, population diversity and genomic prediction.</p>
+
+			<p>Here’s a <a href="https://cgiar-my.sharepoint.com/:v:/g/personal/v_juanillas_cgiar_org/ER9AdPc3NddMjHFwh71wDzMBO0MRihdtJNMPPkY-HDYGag?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=6qT1kf" target="_blank">video </a>on how to access CropGalaxy, as well as some of the functionalities of the platform.</p>
+
+			<h3>Candidate Gene Analysis:</h3>
+			<p>To perform candidate gene analysis in CropGalaxy, we will be using most of the tools in the tool-suite named: <strong>RiceGalaxy: SNP Data Tools</strong>. Here, we have a set of tools dedicated for this type of analysis:
+				<ul>
+					<li>Get Genes by Region IDs</li>
+					<li>Fast Preranked Gene Set Enrichment Analysis (FGSEA2)</li>
+					<li>Find Gene by terms/li>
+					<li>Lift-Over via SNP</li>
+					<li>...</li>
+				</ul>
+				<p style="text-align:left;">
+					<img src="images/figure_5b_3.png" alt="CropGalaxy Landing Page (Figure 5b.3)" style="max-width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+					<br>
+					<em><b>Figure 5b.3.</b> SNP Data tools available in the tool panel.</em>
+				</p>
+			</p>
+			
+			<p>In this section, we will use Lift-over via SNP to demonstrate how to use CropGalaxy in finding candidate genes.</p>
+			
+			<p>Let’s take for instance the DTF_SS (days to flower under severe stress) QTL, qDTF2.2,reported in this <a href="https://doi.org/10.1038/s41598-019-50880-z" target="_blank">publication</a>. The SNPs used were based on Nipponbare which belongs to japonica subpopulation. However, the donor parent is aus-type.  We want to look into these Nipponbare-based (japonica) markers to see where they lie in the N22 (aus-type) genome, and look for candidate genes, as well as annotations we can use to derive more understanding about our QTL/trait of interest.</p>
+
+			<p>See the <a href="http://cropgalaxy.excellenceinbreeding.org/u/vjuanillas/h/postgwas-hands-on" target="_blank">workflow</a> described here  to see the whole process.</p>
+		</section>
+
+		<section id="section-5c">	
+			<h2><u>RicePilaf</u></h2> 
+
+			<p><strong><a href="https://ricepilaf.irri.org/" target="_blank">RicePilaf</a></strong> is a web-based post-GWAS/QTL application that integrates pangenomic, coexpression, regulatory, epigenomic, ontology, pathway, and text-mining information. It aims to provide functional insights into rice QTLs and GWAS regions identified from QTL and GWAS mapping studies.</p>
+
+			<div class="required-reading">
+				❗<strong>Before proceeding with this section, read the </strong> <a href="https://academic.oup.com/gigascience/article/8/5/giz028/5492234" target="_blank">Rice Pilaf publication </a>first. This is required reading.
+			</div>
+			<p>In this publication, you are expected to learn the various tools incorporated in RicePilaf, and have an overview of the algorithms/computational methods used in these tools.
+			</p>
+			
+			<p>An overview of RicePilaf’s functionalities is shown in Figure 5c.1.</p>
+
+			<p style="text-align:left;">
+				<img src="images/figure_5c_1.png" alt="RicePilaf graphical abstract (Figure 5c.1)" style="max-width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+				<br>
+				<em><b>Figure 5c.1.</b> RicePilaf graphical abstract. RicePilaf crosses GWAS/QTL-mapping results with multiple data sources on rice.
+				</em>
+			</p>
+
+			<br>
+			<p>A typical analysis flow in RicePilaf is illustrated in the diagram in Figure 5c.2.</p>
+
+			<p style="text-align:left;">
+				<img src="images/figure_5c_2.png" alt="RicePilaf analyses workflow (Figure 5c.2)" style="max-width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+				<br>
+				<em><b>Figure 5c.2.</b> Typical analysis workflow using RicePilaf with a known QTL region and trait description information as input data.
+				</em>
+			</p>
+
+			<p>Watch the example RicePilaf analysis <a href="https://youtu.be/UyRxx4aI8O8" target="_blank">(video)</a> using preharvest sprouting QTLs, from the RicePilaf paper. In this video, step-by-step analysis of the pre-harvest sprouting QTLs is demonstrated, for each of the component tools in RicePilaf.
+				<br> <br>
+				<iframe width="100%" height="315" src="https://www.youtube.com/embed/UyRxx4aI8O8" frameborder="0" allowfullscreen></iframe>
+				<br>
+				Look at the video description in YouTube for the corresponding time-stamped chapters. The tools demonstrated are the following:
+				<ul>
+					<li><b>Gene List and lift-over: include MH63, IR64 genomes</b>
+						<ul>
+							<li><b class="timestamp">0:00 </b>Start of the PHS analysis demo in RicePilaf</li>
+							<li><b class="timestamp">0:07 </b>Select PHS example as interval for analysis</li>
+							<li><b class="timestamp">0:10 </b>Click on "Proceed to Analyses Menu"</li>
+							<li><b class="timestamp">0:14 </b>Using the "Gene List and Lift-Over" menu</li>
+							<li><b class="timestamp">0:25 </b>Select genome for lift-over on drop-down menu</li>
+							<li><b class="timestamp">0:36 </b>Select MH63 genome</li>
+							<li><b class="timestamp">0:41 </b>Add IR64 genome</li>
+							<li><b class="timestamp">0:47 </b>Click on "Show gene list" and inspecting/navigating the result output</li>
+							<li><b class="timestamp">1:48 </b>Exporting the results as csv file</li>
+						</ul>
+					</li>
+					<li><b>Gene retrieval by text mining: Use “pre-harvest sprouting” as key search phrase</b>
+						<ul>
+							<li><b class="timestamp">1:58 </b>Using the "Gene retrieval by text mining" tool</li>
+							<li><b class="timestamp">2:05 </b>Select the example query "pre-harvest sprouting"</li>
+							<li><b class="timestamp">2:13 </b>Inspecting the output of the "gene retrieval by text mining" tool</li>
+						</ul>
+					</li>
+
+					<li><b>Coexpression network analysis: Inspect the top 2 modules and the connectivity of the GWAS genes with other genes in the network</b>
+						<ul>
+							<li><b class="timestamp">2:39 </b>Using the "Coexpression Network Analysis" tool</li>
+							<li><b class="timestamp">3:05 </b>Inspecting the output of the Coexpression analysis tool</li>
+							<li><b class="timestamp">3:15 </b>Inspecting the top module (most significant) output in detail</li>
+							<li><b class="timestamp">3:37 </b>Inspecting the connection of the 3 genes from the region to other genes in the network</li>
+							<li><b class="timestamp">4:02 </b>Inspecting another module output (the 2nd significant)</li>
+							<li><b class="timestamp">4:09 </b>Inspecting the connection of the 2 genes from the region to other genes in the network</li>
+						</ul>						
+					</li>
+					<li><b>Regulatory feature enrichment tool use and inspection of the output</b>
+						<ul>
+							<li><b class="timestamp">4:25 </b>Using the "Regulatory Feature Enrichment" tool</li>
+							<li><b class="timestamp">4:45 </b>Inspecting the output of the Regulatory feature enrichment tool</li>
+						</ul>
+					</li>
+					<li><b>Epigenomic information tool, inspect the output for 2 QTLs, note the active and inactive regions based on the results in the genome browser</b>
+						<ul>
+							<li><b class="timestamp">5:01 </b> Using the "epigenomic information" tool</li>
+							<li><b class="timestamp">5:33</b> Inspecting the output of the epigenomic information tool (1st interval) - with inactive regions </li>
+							<li><b class="timestamp">5:46 </b>Inspecting the output of the epigenomic information tool (2nd interval) - no inactive region</li>
+						</ul>
+					</li>
+					<li><b>Generate the Summary output of the analyses, explore the output table.</b>
+						<ul>
+							<li><b class="timestamp">6:14</b>  Generating the summary output of all tools</li>
+							<li><b class="timestamp">6:30 </b> Inspecting the gene list from the summary output</li>
+						</ul>
+					</li>
+					<li><b>Inspecting the gene list from the summary output</b>
+						<ul>
+							<li><b class="timestamp">7:01</b> Reset all analyses before running a fresh one.</li>
+						</ul>
+					</li>
+				</ul>
+			</p>
+		</section>
+
+		<section id="section-6">	
+			<h2><u>Summary</u></h2>
+			<h3>In this module, we introduced three web resources specialized for rice post-GWAS analysis: Rice SNP-Seek, CropGalaxy, RicePilaf. It is expected that you have learned how to use these online resources using the sample datasets provided.</h3>
+
+			<ul class="check-list">
+				<li><b>Post-GWAS analysis is an essential step after identifying genome regions</b> (either by GWAS or QTL mapping) that are associated with traits of interest. A typical QTL identified from GWAS may span a large portion of the genome and contain up to thousands of genes within the region, and it is a resource-intensive exercise to experimentally study these genes within the GWAS region.</li>
+				
+				<li><b>Utilizing analysis frameworks implemented in the various tools demonstrated</b>, provides a systematic method of filtering and prioritizing candidate genes for further experimentation, resulting in a reduction from hundreds or thousands to potentially tens of genes to investigate. Furthermore, genes that are not within the QTL region that may be causative to the trait of interest could be identified; such genes could be missed if the information used is only the QTL region from GWAS.</li>
+				
+				<li><b>Post-GWAS analysis is by no means an endpoint to CG discovery itself</b>. Rather, it presents a smaller and better-informed set of candidate genes as hypotheses for further testing.</li>
+				
+			</ul>
+
+		</section>
+		
+		<section id="section-7">	
+			<h2><u>References</u></h2>
+			<p>
+				<ul class="reference-list">
+					<li> <span class="round-bullet"></span> The 3,000 rice genomes project. https://doi.org/10.1186/2047-217X-3-7</li>
+					<li> <span class="round-bullet"></span>Genomic variation in 3,010 diverse accessions of Asian cultivated rice. https://doi.org/10.1038/s41586-018-0063-9</li>
+					<li><span class="round-bullet"></span>Varshney, R. K., Graner, A., & Sorrells, M. E. (2006). Genic microsatellite markers in plants: features and applications. Trends in Biotechnology, 24(2), 71-81.</li>
+					<li><span class="round-bullet"></span>Rice SNP-Seek database update: new SNPs, indels, and queries. https://doi.org/10.1093/nar/gkz1020</li>
+					<li><span class="round-bullet"></span>Rice Galaxy: an open resource for plant science. https://doi.org/10.1093/gigascience/giz028</li>
+					<li><span class="round-bullet"></span>RicePilaf: a web-based post-GWAS/QTL application for functional insights into rice QTLs and GWAS regions. https://doi.org/10.1093/gigascience/giae013</li>
+				</ul>
+			</p>
+		</section>
+		
+		</br> </br> </br>
+	</main>
+	
+</body>
+
+</html>
