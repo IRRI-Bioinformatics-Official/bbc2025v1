@@ -404,7 +404,7 @@ strong {
 				<li><p> <b>Create SNP List </b> or range of SNP positions in genome (chr, range of positions of SNPs in base pair, example Chr01:1000-10000; Chr02:3000-50000) </p></li>
 				<li><p><b>Generate gene list</b> within the given range.</p></li>
 				<li><p><b>Analyze genes for associated information</b> (as a separate exercise, also identify Marker/SNP effect on candidate genes using <a href="https://pcingola.github.io/SnpEff/" target="_blank">snpEff</a>)</p></li>
-				<li><p><b>Use other k-nown/computed information using other tools (e.g. websites such as <a href="https://ricepilaf.irri.org/" target="_blank">RicePilaf</a>, <a href="https://knetminer.com/" target="_blank">KnetMiner </a>, <a href="https://www.inetbio.org/ricenet/" target="_blank">RiceNet</a>)</b></p>
+				<li><p><b>Use other k-nown/computed information using other tools (e.g. websites such as <a href="https://ricepilaf.irri.org/" target="_blank">RicePilaf</a>, <a href="https://knetminer.com/" target="_blank">KnetMiner</a>,<a href="https://www.inetbio.org/ricenet/" target="_blank">RiceNet</a>)</b></p>
 					<ul>
 						<li><b>a. Identify enriched biological themes </b> associated with the gene list</li>
 						<li><b>b. Identify co-expressed genes (co-expression network)</b> : <em>genes that are in cis</em> (contiguous to the associated SNPs) or <em>in trans</em> (genes located outside the GWAS region (may be in the same chromosome but far away from the GWAS region or totally in another chromosome) and <b>NOT</b> in the identified gene list).</li>
@@ -478,7 +478,7 @@ strong {
 			
 			<p><b>Galaxy offers three core features that fit our needs in rice genomics:</b></p>
 			<p><ul class="reference-list">
-				<li><span class="round-bullet"></span><b>Accessibility. </b>
+				<li><span class="round-bullet"></span><b>Accessibility </b>
 				<br>
 				The platform enables users without programming experience to run tools and workflows easily by providing a graphical user interface to bioinformatics tools commonly run on command-line.</li>
 
@@ -501,7 +501,7 @@ strong {
 
 			<p>Here’s a <a href="https://cgiar-my.sharepoint.com/:v:/g/personal/v_juanillas_cgiar_org/ER9AdPc3NddMjHFwh71wDzMBO0MRihdtJNMPPkY-HDYGag?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=6qT1kf" target="_blank">video </a>on how to access CropGalaxy, as well as some of the functionalities of the platform.</p>
 
-			<h3>Candidate Gene Analysis:</h3>
+			<!--<h3>Candidate Gene Analysis:</h3>
 			<p>To perform candidate gene analysis in CropGalaxy, we will be using most of the tools in the tool-suite named: <strong>RiceGalaxy: SNP Data Tools</strong>. Here, we have a set of tools dedicated for this type of analysis:
 				<ul>
 					<li>Get Genes by Region IDs</li>
@@ -521,7 +521,7 @@ strong {
 			
 			<p>Let’s take for instance the DTF_SS (days to flower under severe stress) QTL, qDTF2.2,reported in this <a href="https://doi.org/10.1038/s41598-019-50880-z" target="_blank">publication</a>. The SNPs used were based on Nipponbare which belongs to japonica subpopulation. However, the donor parent is aus-type.  We want to look into these Nipponbare-based (japonica) markers to see where they lie in the N22 (aus-type) genome, and look for candidate genes, as well as annotations we can use to derive more understanding about our QTL/trait of interest.</p>
 
-			<p>See the <a href="http://cropgalaxy.excellenceinbreeding.org/u/vjuanillas/h/postgwas-hands-on" target="_blank">workflow</a> described here  to see the whole process.</p>
+			<p>See the <a href="http://cropgalaxy.excellenceinbreeding.org/u/vjuanillas/h/postgwas-hands-on" target="_blank">workflow</a> described here  to see the whole process.</p>-->
 		</section>
 
 		<section id="section-5c">	
@@ -559,8 +559,8 @@ strong {
 				<iframe width="100%" height="315" src="https://www.youtube.com/embed/UyRxx4aI8O8" frameborder="0" allowfullscreen></iframe>
 				<br>
 				Look at the video description in YouTube for the corresponding time-stamped chapters. The tools demonstrated are the following:
-				<ul>
-					<li><b>Gene List and lift-over: include MH63, IR64 genomes</b>
+				<ul class="reference-list">
+					<li><span class="round-bullet"></span><b>Gene List and lift-over: include MH63, IR64 genomes</b>
 						<ul>
 							<li><b class="timestamp">0:00 </b>Start of the PHS analysis demo in RicePilaf</li>
 							<li><b class="timestamp">0:07 </b>Select PHS example as interval for analysis</li>
@@ -573,7 +573,7 @@ strong {
 							<li><b class="timestamp">1:48 </b>Exporting the results as csv file</li>
 						</ul>
 					</li>
-					<li><b>Gene retrieval by text mining: Use “pre-harvest sprouting” as key search phrase</b>
+					<li><span class="round-bullet"></span><b>Gene retrieval by text mining: Use “pre-harvest sprouting” as key search phrase</b>
 						<ul>
 							<li><b class="timestamp">1:58 </b>Using the "Gene retrieval by text mining" tool</li>
 							<li><b class="timestamp">2:05 </b>Select the example query "pre-harvest sprouting"</li>
@@ -581,7 +581,7 @@ strong {
 						</ul>
 					</li>
 
-					<li><b>Coexpression network analysis: Inspect the top 2 modules and the connectivity of the GWAS genes with other genes in the network</b>
+					<li><span class="round-bullet"></span><b>Coexpression network analysis: Inspect the top 2 modules and the connectivity of the GWAS genes with other genes in the network</b>
 						<ul>
 							<li><b class="timestamp">2:39 </b>Using the "Coexpression Network Analysis" tool</li>
 							<li><b class="timestamp">3:05 </b>Inspecting the output of the Coexpression analysis tool</li>
@@ -591,26 +591,26 @@ strong {
 							<li><b class="timestamp">4:09 </b>Inspecting the connection of the 2 genes from the region to other genes in the network</li>
 						</ul>						
 					</li>
-					<li><b>Regulatory feature enrichment tool use and inspection of the output</b>
+					<li><span class="round-bullet"></span><b>Regulatory feature enrichment tool use and inspection of the output</b>
 						<ul>
 							<li><b class="timestamp">4:25 </b>Using the "Regulatory Feature Enrichment" tool</li>
 							<li><b class="timestamp">4:45 </b>Inspecting the output of the Regulatory feature enrichment tool</li>
 						</ul>
 					</li>
-					<li><b>Epigenomic information tool, inspect the output for 2 QTLs, note the active and inactive regions based on the results in the genome browser</b>
+					<li><span class="round-bullet"></span><b>Epigenomic information tool, inspect the output for 2 QTLs, note the active and inactive regions based on the results in the genome browser</b>
 						<ul>
 							<li><b class="timestamp">5:01 </b> Using the "epigenomic information" tool</li>
 							<li><b class="timestamp">5:33</b> Inspecting the output of the epigenomic information tool (1st interval) - with inactive regions </li>
 							<li><b class="timestamp">5:46 </b>Inspecting the output of the epigenomic information tool (2nd interval) - no inactive region</li>
 						</ul>
 					</li>
-					<li><b>Generate the Summary output of the analyses, explore the output table.</b>
+					<li><span class="round-bullet"></span><b>Generate the Summary output of the analyses, explore the output table.</b>
 						<ul>
 							<li><b class="timestamp">6:14</b>  Generating the summary output of all tools</li>
 							<li><b class="timestamp">6:30 </b> Inspecting the gene list from the summary output</li>
 						</ul>
 					</li>
-					<li><b>Inspecting the gene list from the summary output</b>
+					<li><span class="round-bullet"></span><b>Inspecting the gene list from the summary output</b>
 						<ul>
 							<li><b class="timestamp">7:01</b> Reset all analyses before running a fresh one.</li>
 						</ul>
@@ -638,12 +638,12 @@ strong {
 			<h2><u>References</u></h2>
 			<p>
 				<ul class="reference-list">
-					<li> <span class="round-bullet"></span> The 3,000 rice genomes project. https://doi.org/10.1186/2047-217X-3-7</li>
-					<li> <span class="round-bullet"></span>Genomic variation in 3,010 diverse accessions of Asian cultivated rice. https://doi.org/10.1038/s41586-018-0063-9</li>
-					<li><span class="round-bullet"></span>Varshney, R. K., Graner, A., & Sorrells, M. E. (2006). Genic microsatellite markers in plants: features and applications. Trends in Biotechnology, 24(2), 71-81.</li>
-					<li><span class="round-bullet"></span>Rice SNP-Seek database update: new SNPs, indels, and queries. https://doi.org/10.1093/nar/gkz1020</li>
-					<li><span class="round-bullet"></span>Rice Galaxy: an open resource for plant science. https://doi.org/10.1093/gigascience/giz028</li>
-					<li><span class="round-bullet"></span>RicePilaf: a web-based post-GWAS/QTL application for functional insights into rice QTLs and GWAS regions. https://doi.org/10.1093/gigascience/giae013</li>
+					<li> <span class="round-bullet"></span> The 3,000 rice genomes project. <a href="https://doi.org/10.1186/2047-217X-3-7" target="_blank">https://doi.org/10.1186/2047-217X-3-7</a></li>
+					<li> <span class="round-bullet"></span>Genomic variation in 3,010 diverse accessions of Asian cultivated rice.<a href="https://doi.org/10.1038/s41586-018-0063-9" target="_blank">https://doi.org/10.1038/s41586-018-0063-9</a> </li>
+					<li><span class="round-bullet"></span>Varshney, R. K., Graner, A., & Sorrells, M. E. (2006). Genic microsatellite markers in plants: features and applications. Trends in Biotechnology, 24(2), 71-81. <a href="https://doi.org/10.1016/j.tibtech.2004.11.005" target="_blank">https://doi.org/10.1016/j.tibtech.2004.11.005</a></li>
+					<li><span class="round-bullet"></span>Rice SNP-Seek database update: new SNPs, indels, and queries. <a href=" https://doi.org/10.1093/nar/gkw1135" target="_blank"> https://doi.org/10.1093/nar/gkw1135</a> </li>
+					<li><span class="round-bullet"></span>Rice Galaxy: an open resource for plant science. <a href="https://doi.org/10.1093/gigascience/giz028" target="_blank">https://doi.org/10.1093/gigascience/giz028</a></li>
+					<li><span class="round-bullet"></span>RicePilaf: a web-based post-GWAS/QTL application for functional insights into rice QTLs and GWAS regions.<a href="https://doi.org/10.1093/gigascience/giae013" target="_blank">https://doi.org/10.1093/gigascience/giae013</a> </li>
 				</ul>
 			</p>
 		</section>
