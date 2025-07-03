@@ -425,35 +425,50 @@ strong {
 		</section>
 
 		<section id="section-3">
-			<h2><u>Candidate Gene (CG) Analysis</u></h2>
-			<p><h3>Assuming you have significant GWAS peaks, the next step would be to identify candidate genes responsible for your trait of interest. </h3>Candidate gene analysis focuses on investigating specific genes that are believed to be biologically relevant to the trait or disease under study (an example in Figure 3.1).
-			</p>
-			<p style="text-align:left;">
-				<img src="images/figure_3_1.png" alt="Information Flow (Figure 3.1)" style="max-width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
-				<br>
-				<em><b>Figure 3.1. </b> Information flow from GWAS study, identified GWAS QTL, genes under GWAS QTL, leading to post-GWAS analysis (using days to 80% heading as trait from the 3K Rice Genomes project).</em>
-			</p>
-			<br>
-			<ul>
-				<li>
-					<strong>Candidate gene </strong>- a gene that has been identified as related to a particular trait such as phenotype, disease, or condition, <a href="https://www.researchgate.net/publication/7478744_Varshney_RK_Graner_A_Sorrells_ME_Genomics-assisted_breeding_for_crop_improvement_Trends_Plant_Sci_10_621-630" target="_blank">(Varshney, 2006)</a>.
-				</li>
-				<li>
-					<strong>Analysis framework for post-GWAS analysis:</strong>
-					<ol>
-						<li><a href="https://www.ndsu.edu/pubweb/~mcclean/plsc411/Lecture%205.%20forward%20genetics_XL2018Sep.pdf" target="_blank">Forward Genetics </a>: </li>
-						<p>
-							<i>“I have a QTL from a GWAS study, mapped using markers from the rice reference (Nipponbare) genome, how does the QTL *look* like in another genome of a variety that’s more closely related to my material?”</i>
-						</p>
+		<h2><u>Molecular Docking</u></h2>
+		<h3>Exploring Ligand-Protein Interactions: Docking a Specific Ligand to a Target Protein</h3>
+			<p style="text-align: justify;">	
+				The Molecular Docking project focuses on simulating and analyzing the interactions between ligands (small molecules) and target proteins. 
+				Through docking, we can determine both the optimal binding orientation—how the ligand fits into the active site—and the binding affinity, 
+				which reveals the strength of the interaction. This critical information aids in understanding protein function, advancing drug design, 
+				and exploring agrochemical interactions with biological targets. 
+			</p> <br>
 
-						<p>Rice varieties, especially those in different sub-populations, may contain sets of genes that are distinct from each	other. QTL regions, when inspected in a particular genome (e.g. japonica Nipponbare) may be lacking some genes in the equivalent QTL region when inspected in another variety’s genome (e.g. aus N22), and vice-versa.</p>
-						<li><a href="https://en.wikipedia.org/wiki/Gene_set_enrichment_analysis" target="_blank">Enriched/over-represented biological theme(s)</a> from a selected list of genes</li>
-						 <i>“I have a list of genes from a small QTL from GWAS, and I wish to know more of the biology behind this gene list.”</i>
-						 <p>The set of CGs in the QTL may have a particular biological theme  (e.g. metabolic pathway/process, a particular gene function, or a component of a cellular or organ structure) over-represented in this subset, that may be important to the trait of interest. </p>
-					</ol>
+		<h3 style="margin-top: 0; padding-top: 0;">Research Objective</h3>
+			<p style="text-align: justify;">
+				The general objective is to characterize the potential binding sites of ligands on the target protein using molecular docking. Specifically, this involves 
+				identifying the most favorable binding location for the ligand based on its predicted binding affinity and pinpointing the key amino acid residues that are
+				crucial for the protein-ligand interaction.
+			</p> <br>
+
+		<h3 style="margin-top: 0; padding-top: 0;">Data Selection</h3>
+			<ul style="list-style: disc;">
+				<li><strong>Option 1: Using Provided Dataset</strong></li>
+					<ul><li>In this option, you will be given a dataset to work with. This typically includes pre-selected protein structures and small molecules that you will use in your docking studies.</li></ul>
+				<br>
+				<li><strong>Option 2: Using Own Data</strong></li>
+					<ul><li>In this option, you will use your own data, which could be a protein structure you've studied or a small molecule you've developed. You’ll need to ensure your data is in the proper format for docking studies.</li></ul>
+			</ul> <br>
+
+		<h3 style="margin-top: 0; padding-top: 0;">Tools</h3> 
+			<ul style="list-style: disc; text-align: justify;">
+				<li>
+					<strong>Pyrx</strong>, a virtual screening software for molecular docking and drug discovery, which will be used for running docking simulations and evaluating binding interactions.
 				</li>
-				
-			</ul>
+
+				<li>
+					<strong>BIOVIA Discovery Studio Visualizer</strong>, a comprehensive suite for molecular modeling, simulations, 
+					and cheminformatics, will assist in protein preparation, visualizing protein-ligand interactions, and analyzing docking results
+				</li>
+
+				<li>
+					<strong>Open Babel</strong>, a chemical toolbox for converting between different chemical file formats and managing molecular data, will facilitate file format conversion and data 
+					preparation, simplifying the overall workflow.
+				</li>
+			</ul> <br>
+
+			<strong>For the three-minute presentation, summarize the results, highlighting the binding affinity and key residue interactions from your docking study.</strong>
+
 		</section>
 
 		<section id="section-4">	
