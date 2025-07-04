@@ -785,6 +785,98 @@ strong {
 			</p>
 		</section>
 		-->
+
+		<section id="section-7">
+			<h2><u>AI-enhanced BioInformatics Web Apps Usage with RAG and Function-calling</u></h2>
+			<h3>Enhance the usability and convenience of existing webapps with AI-powered messaging</h3>
+			<p style="text-align: justify;">
+				To further assist users of <strong>Rice SNPSeek</strong>, <strong>RicePilaf</strong>, and
+				<strong>CropGalaxy</strong>, an automated messaging facility can be integrated using AI APIs. This facility
+				leverages Retrieval-Augmented Generation (RAG) and function calling to provide intelligent, context-aware
+				assistance and expose platform functionalities programmatically.
+			</p>
+			<h3>Key Features</h3>
+			<ul class="reference-list">
+				<li>
+					<span class="round-bullet"></span>
+					<strong>Conversational Interface:</strong> Users interact with a chatbot embedded in the web application,
+					asking questions about data, workflows, or tool usage.
+				</li>
+				<li>
+					<span class="round-bullet"></span>
+					<strong>Retrieval-Augmented Generation (RAG):</strong> The chatbot retrieves relevant documentation, FAQs,
+					or dataset information from the platform’s knowledge base to provide accurate, up-to-date answers.
+				</li>
+				<li>
+					<span class="round-bullet"></span>
+					<strong>Function Calling:</strong> The AI can trigger specific platform functions (e.g., run a genotype
+					query, fetch gene annotations, visualize results) by calling backend APIs, streamlining user workflows.
+				</li>
+				<li>
+					<span class="round-bullet"></span>
+					<strong>Personalized Guidance:</strong> The assistant can guide users step-by-step through complex analyses,
+					recommend tools, or troubleshoot errors based on user input.
+				</li>
+			</ul>
+			<h3>Example Workflow</h3>
+			<ol>
+				<li>User opens the messaging widget in RicePilaf and asks, “How do I perform an analysis of
+					Chr01:100000-200000?”</li>
+				<li>The AI retrieves relevant documentation and provides a summary with direct links to the tool.</li>
+				<li>If function calling is enabled and the relevant APIs are exposed by the web app, the user can instruct the
+					assistant to run the analysis, and the AI triggers the corresponding backend function via API.</li>
+				<li>Results and further guidance are delivered either via a new page with chat inputs as the payload, or if
+					sufficiently concise, responses via the chat interface.</li>
+			</ol>
+			<h3>Technical Overview</h3>
+			<ul class="reference-list">
+				<li>
+					<span class="round-bullet"></span>
+					<strong>Frontend:</strong> Depending on the application selected, integrate a module/extension/plugin that
+					shows a chat window that users can interact with. The chosen module/extension/plugin must support
+					integration with a backend that can make API calls to generate responses.
+				</li>
+				<li>
+					<span class="round-bullet"></span>
+					<strong>Backend:</strong> NodeJS, Python, or other similar server application acting as a bridge between the
+					chat widget, AI API, and other internal APIs as needed by the web application.
+				</li>
+				<li>
+					<span class="round-bullet"></span>
+					<strong>RAG Pipeline:</strong> Prepare and feed relevant documentation to the AI platform: technical
+					documentation, user guides, and dataset metadata for context-aware responses. Furthermore, refine and/or
+					direct behavior of the AI model to ensure it provides accurate and relevant information based on the context
+					of the web application.
+				</li>
+				<li>
+					<span class="round-bullet"></span>
+					<strong>Function Calling:</strong> function calling capability to map user intents to specific API endpoints
+					(e.g., fetch SNP data, annotate markers, analyze chromosomes).
+				</li>
+				<li>
+					<span class="round-bullet"></span>
+					<strong>Example Architecture Diagram:</strong>
+					<br>
+					<img src="images/figure_5d.png" alt="AI-enhanced Bioinformatics Web App Workflow"
+						style="max-width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-top:10px;">
+				</li>
+			</ul>
+			<h3>References</h3>
+			<ul class="reference-list">
+				<li>
+					<span class="round-bullet"></span>
+					OpenAI. (2023). Function calling and other API features. <a
+						href="https://platform.openai.com/docs/guides/function-calling"
+						target="_blank">https://platform.openai.com/docs/guides/function-calling</a>
+				</li>
+				<li>
+					<span class="round-bullet"></span>
+					OpenAI. (2024). Tools for the Assistants API. <a href="https://platform.openai.com/docs/assistants/tools"
+						target="_blank">https://platform.openai.com/docs/assistants/tools</a>
+				</li>
+			</ul>
+		</section>
+
 		</br> </br> </br>
 	</main>
 	
